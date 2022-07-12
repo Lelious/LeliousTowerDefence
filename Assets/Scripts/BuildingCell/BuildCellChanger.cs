@@ -58,7 +58,7 @@ public class BuildCellChanger : MonoBehaviour
                         if (_buildingCell != null)
                         {
                             _selectedFrame.SetActive(true);
-                            _selectedFrame.transform.position = new Vector3(Selected.transform.position.x, 0.61f, Selected.transform.position.z);
+                            _selectedFrame.transform.position = new Vector3(Selected.transform.position.x, 1.047f, Selected.transform.position.z);
 
                             if (_buildingCell._isEmpty)
                             {
