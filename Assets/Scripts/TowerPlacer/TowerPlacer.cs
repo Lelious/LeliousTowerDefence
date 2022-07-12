@@ -7,7 +7,13 @@ public class TowerPlacer : MonoBehaviour
 	private Transform _towerPlace;
 	private BuildCellChanger _buildCellChanger;
 	private BuildingCell _buildingCell;
+	private GameManager _gameManager;
 	private Camera _camera => Camera.main;
+
+	private protected void Awake()
+	{
+		_gameManager = FindObjectOfType<GameManager>();
+	}
 
 	public void PlaceTower()
 	{
@@ -17,12 +23,22 @@ public class TowerPlacer : MonoBehaviour
 		if (tower != null)
 		{
 			_buildingCell = buildingCellObject.GetComponent<BuildingCell>();			
-			_buildingCell._isEmpty = false;
 			var newTower = Instantiate(tower, new Vector3(_towerPlace.position.x, _towerPlace.position.y - 1f, _towerPlace.position.z), Quaternion.identity);
 			_buildingCell.placedTower = newTower.GetComponent<Tower>();
+
+			if (_gameManager.CheckForGoldAvalability(_buildingCell.placedTower.GetCost()))
+			{
+				_buildingCell._isEmpty = false;				
+				_buildingCell.placedTower.TowerBuild();
+				_buildingCell.UpgradeInfo();
+			}
+
+			else
+			{
+				Destroy(newTower);
+			}
+
 			_buildCellChanger.DidsbleSelectFrame();
-			_buildingCell.placedTower.TowerBuild();
-			_buildingCell.UpgradeInfo();
 		}
 	}
 }

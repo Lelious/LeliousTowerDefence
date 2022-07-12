@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using Lean.Touch;
 
 public class BuildCellChanger : MonoBehaviour
 {
@@ -11,16 +12,20 @@ public class BuildCellChanger : MonoBehaviour
     [SerializeField] private BuildingCell _buildingCell;
     [SerializeField] private List<GameObject> _towersList = new List<GameObject>();
     [SerializeField] private List<Button> _emptyButtons = new List<Button>();
-    [SerializeField] private float _touchDelay = 0.2f;
-   
+    [SerializeField] private float _touchDelay = 0.5f;
+    [SerializeField] private float _touchInMs;
+    [SerializeField] private float _distance;
+
     private Tower _towerScript;
+    private Enemy _enemyScript;
     private Camera _camera;
     private GameBottomPanel _gameBottomPanel;
     private int _count;
     private bool _isTouched;
-    [SerializeField] private float _touchInMs;
+    private Vector2 _tapDownPosition;
+    private Vector2 _tapUpPosition;
     private protected void Awake()
-    {
+    {       
         _touchInMs = _touchDelay;
         _count = _towersList.Count;
         _gameBottomPanel = GetComponent<GameBottomPanel>();
@@ -31,17 +36,11 @@ public class BuildCellChanger : MonoBehaviour
 
     private protected void Update()
     {
-        if (Input.touchCount > 0)
-        {
-            if (_touchInMs >= 0)
-            {
-                _touchInMs -= Time.deltaTime;
-            }
-        }
-
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            if (_touchInMs > 0)
+            _tapUpPosition = Input.mousePosition;
+            _isTouched = false;
+            if (_touchInMs > 0 || Vector2.Distance(_tapDownPosition, _tapUpPosition) < 100f)
             {
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
@@ -55,7 +54,6 @@ public class BuildCellChanger : MonoBehaviour
                     {
                         Selected = hit.collider.gameObject;
                         _buildingCell = hit.collider.gameObject.GetComponent<BuildingCell>();
-                        _selectedFrame.transform.position = new Vector3(Selected.transform.position.x, 0.61f, Selected.transform.position.z);
 
                         if (_buildingCell != null)
                         {
@@ -65,25 +63,58 @@ public class BuildCellChanger : MonoBehaviour
                             if (_buildingCell._isEmpty)
                             {
                                 _gameBottomPanel.ShowEmptyCellMenu();
-                                _gameBottomPanel.HideGameMenu();
                                 InitializeCell();
                             }
                             else
                             {
-                                _gameBottomPanel.HideEmptyCellMenu();
                                 _gameBottomPanel.ShowGameMenu();
                                 _buildingCell.UpgradeInfo();
                             }
+                            DisableEnemy();
                         }
                         else
                         {
                             _selectedFrame.SetActive(false);
-                            _gameBottomPanel.HideGameMenu();
-                            _gameBottomPanel.HideEmptyCellMenu();
+
+                            if (Selected.layer == 3)
+                            {
+                                DisableEnemy();
+                                _gameBottomPanel.ShowGameMenu();
+                                _enemyScript = Selected.GetComponent<Enemy>();
+                                _enemyScript.EnableSelectFrame();
+                                _enemyScript.UpgradeInformation();
+                            }
+
+                            else
+                            {
+                                _selectedFrame.SetActive(false);                               
+                                _gameBottomPanel.HideEmptyCellMenu();
+                                _gameBottomPanel.HideGameMenu();
+
+                                Selected = null;
+                                DisableEnemy();
+                            }
                         }
                     }
                 }
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            _tapDownPosition = Input.mousePosition;
+            _isTouched = true;
+        }
+
+        if (_isTouched)
+        {
+            if (_touchInMs >= 0)
+            {
+                _touchInMs -= Time.deltaTime;
+            }
+        }
+        else
+        {            
             _touchInMs = _touchDelay;
         }
     }
@@ -91,6 +122,16 @@ public class BuildCellChanger : MonoBehaviour
     public void DidsbleSelectFrame()
     {
         _selectedFrame.SetActive(false);
+        Selected = null;
+    }
+
+    private void DisableEnemy()
+    {
+        if (_enemyScript != null)
+        {
+            _enemyScript.DisableSelectFrame();
+            _enemyScript = null;
+        }
     }
 
     private void InitializeCell()
@@ -99,8 +140,10 @@ public class BuildCellChanger : MonoBehaviour
         {
             _towerScript = _towersList[i].GetComponent<Tower>();
             _emptyButtons[i].gameObject.SetActive(true);
-            _emptyButtons[i].image.sprite = _towerScript.mainImage;
-            _emptyButtons[i].GetComponentInChildren<Text>().text = _towerScript.towerName;
+            var towerName = _towerScript.GetTowerName();
+            var towerImage = _towerScript.GetTowerImage();
+            _emptyButtons[i].image.sprite = towerImage;
+            _emptyButtons[i].GetComponentInChildren<Text>().text = towerName.Remove(towerName.Length - 1);
 
             var button = _emptyButtons[i].GetComponent<TowerPlacer>();
 

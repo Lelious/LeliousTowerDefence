@@ -8,14 +8,15 @@ public class GameBottomPanel : MonoBehaviour
 {
 	[SerializeField] private RectTransform _emptyCellMenu;
 	[SerializeField] private RectTransform _gameMenu;
-	[SerializeField, Range(0, 500)]
+	[SerializeField, Range(0, 1000)]
 	private float _emptyCellMenuHeight;
-	[SerializeField, Range(0, 500)]
+	[SerializeField, Range(0, 1000)]
 	private float _emptyGameMenuHeight;
 
 	public void ShowEmptyCellMenu()
 	{
 		_emptyCellMenu.DOAnchorPos(Vector2.zero, 0.25f);
+		HideGameMenu();
 	}
 
 	public void HideEmptyCellMenu()
@@ -26,6 +27,7 @@ public class GameBottomPanel : MonoBehaviour
 	public void ShowGameMenu()
 	{
 		_gameMenu.DOAnchorPos(Vector2.zero, 0.25f);
+		HideEmptyCellMenu();
 	}
 
 	public void HideGameMenu()
