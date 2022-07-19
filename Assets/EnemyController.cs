@@ -1,13 +1,11 @@
 using UnityEngine;
-using UnityEngine.AI;
+using DG.Tweening;
 
 public class EnemyController : MonoBehaviour
 {
-	private NavMeshAgent _navMeshAgent;
-	[SerializeField] private Transform _point;
-	private protected void Awake()
+	[SerializeField, Range(0, 100f)] private float _speed;
+	public void InitializePath(Vector3[] newPath)
 	{
-		_navMeshAgent = GetComponent<NavMeshAgent>();
-		_navMeshAgent.SetDestination(_point.position);
+		transform.DOPath(newPath, _speed, PathType.Linear).SetLookAt(0.01f).SetLoops(-1).SetSpeedBased();
 	}
 }

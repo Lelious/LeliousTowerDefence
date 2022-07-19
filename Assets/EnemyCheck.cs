@@ -3,36 +3,34 @@ using UnityEngine;
 
 public class EnemyCheck : MonoBehaviour
 {
-	[SerializeField] private List<GameObject> _enemiesList = new List<GameObject>();
+	private List<EnemyHealth> _enemiesList = new List<EnemyHealth>();
 
-	public List<GameObject> GetEnemies()
+	public List<EnemyHealth> EnemiesList
 	{
-		return _enemiesList;
+		get { return _enemiesList; }
+		set { _enemiesList.RemoveAll(x => x.gameObject == null); }
 	}
 
 	private protected void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.layer == 3 && !_enemiesList.Contains(other.gameObject))
+		if (other.TryGetComponent<EnemyHealth>(out var source))
 		{
-			_enemiesList.Add(other.gameObject);
-
-			if (_enemiesList.Count > 0)
+			if (!EnemiesList.Contains(source) && source != null)
 			{
-				var enemy = _enemiesList[0];
-				if (enemy == null)
-				{
-					_enemiesList.Remove(enemy);
-				}
+				EnemiesList.Add(source);
+				Debug.Log(source);
 			}
-
-		}
+		}		
 	}
 
 	private protected void OnTriggerExit(Collider other)
 	{
-		if (other.gameObject.layer == 3)
+		if (other.TryGetComponent<EnemyHealth>(out var source))
 		{
-			_enemiesList.Remove(other.gameObject);
+			if (EnemiesList.Contains(source))
+			{
+				EnemiesList.Remove(source);
+			}
 		}
 	}
 }

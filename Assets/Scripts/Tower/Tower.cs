@@ -33,7 +33,7 @@ public class Tower : MonoBehaviour
 		_buildingProgress.maxValue = _buildingTime;
 		_fill.color = _gradient.Evaluate(1f);
 		_endPosition = _tower.position;
-		_endPosition.y += 1.5f;
+		_endPosition.y += 2.8f;
 		_dustParticles.Stop();
 		var main = _dustParticles.main;
 		main.duration = _buildingTime;

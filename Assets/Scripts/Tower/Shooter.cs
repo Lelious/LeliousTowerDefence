@@ -8,9 +8,8 @@ public class Shooter : MonoBehaviour, IShoot
     [SerializeField] private Tower _tower;
     [SerializeField] private EnemyCheck _enemyChecker;
 
+    private IDamagable _damagable;
     private int _minDamage, _maxDamage;
-    private List<GameObject> _enemy;
-    private Transform _target;
     private float _delayBetweenShoots;
 
     private protected void Awake()
@@ -23,23 +22,26 @@ public class Shooter : MonoBehaviour, IShoot
     }
     public void DetectEnemy()
     {
-        _enemy = _enemyChecker.GetEnemies();
-
-        for (int i = 0; i < _enemy.Count; i++)
+        if (_enemyChecker.EnemiesList.Count > 0)
         {
-            if (_enemy[i] != null)
+            var actualTarget = _enemyChecker.EnemiesList[0];
+
+            if (actualTarget != null)
             {
-                _target = _enemy[i].transform;
-                Shoot();
-                break;
+                actualTarget.TryGetComponent<IDamagable>(out _damagable);
+                Shoot(actualTarget.transform);
             }
-        }
+            else
+            {
+                _enemyChecker.EnemiesList.Remove(actualTarget);
+            }
+        }       
     }
 
-    public void Shoot()
+    public void Shoot(Transform point)
     {
         var newBullet = Instantiate(_bullet, transform.position, Quaternion.identity);
-        newBullet.FlyToTarget(_target, Random.Range(_minDamage, _maxDamage + 1));
+        newBullet.FlyToTarget(point, Random.Range(_minDamage, _maxDamage + 1), _damagable);
     }
 
     public void SpawnBullet()

@@ -1,67 +1,36 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using Zenject;
 
 public class Enemy : MonoBehaviour
 {
-	[SerializeField] private float _health;
-	[SerializeField] private GameObject _hpBar;
-	[SerializeField] private Gradient _gradient;
-	[SerializeField] private Slider _hpBarSlider;
-	[SerializeField] private Image _fill;
-	[SerializeField] private GameObject _ragdoll;
 	[SerializeField] private Sprite _mainImage;
-	[SerializeField] private MenuUpdater _menuUpdater;
 	[SerializeField] private string _name;
 	[SerializeField] private GameObject _selection;
+	[SerializeField] private NavMeshAgent _navMeshAgent;
+	[SerializeField] private Animator _animator;
+	[SerializeField] private float _navMeshSpeedConst = 2f;
 
+	private float _speed = 1f;
+	private readonly int _hashSpeed = Animator.StringToHash("Speed");
+	private MenuUpdater _menuUpdater;
 	private BuildCellChanger _buildCellChanger;
 	private GameBottomPanel _gameBottomPanel;
-	private int _armor;
-	private float _currentHealth;
-	private Animator _anim;
-	private NavMeshAgent _navMeshAgent;
 
-	private protected void Awake()
+	[Inject]
+	private void Construct(GameBottomPanel bottomPanel, BuildCellChanger cellChanger, MenuUpdater menuUpdater)
 	{
-		_gameBottomPanel = FindObjectOfType<GameBottomPanel>();
-		_buildCellChanger = FindObjectOfType<BuildCellChanger>();
-		_menuUpdater = FindObjectOfType<MenuUpdater>();
-		_navMeshAgent = GetComponent<NavMeshAgent>();
-		_anim = GetComponent<Animator>();
-		_anim.Play("Run");
-		_currentHealth = _health;
-		_hpBarSlider.value = 1f;
-		_fill.color = _gradient.Evaluate(_hpBarSlider.normalizedValue);
+		_gameBottomPanel = bottomPanel;
+		_buildCellChanger = cellChanger;
+		_menuUpdater = menuUpdater;
 	}
 
-	public void RecieveDamage(int damage)
+	private protected void LateUpdate()
 	{
-		if (!_hpBar.activeSelf)
-		{
-			_hpBar.SetActive(true);
-		}
-		_currentHealth -= damage;
-		_hpBarSlider.value = _currentHealth / _health;
-		_fill.color = _gradient.Evaluate(_hpBarSlider.normalizedValue);
-
-		if (_buildCellChanger.Selected == gameObject)
-		{
-			UpgradeInformation();
-		}
-
-		if (_currentHealth <= 0)
-		{
-			if (_buildCellChanger.Selected == gameObject)
-			{
-				_gameBottomPanel.HideGameMenu();
-			}
-
-			var rotation = transform.rotation;
-			Instantiate(_ragdoll, transform.position, rotation);
-			Destroy(gameObject);
-		}
-	}
+		_animator.SetFloat(_hashSpeed, _speed);
+		_navMeshAgent.speed = _navMeshSpeedConst * _speed;
+	}	
 
 	public void EnableSelectFrame()
 	{
@@ -75,6 +44,11 @@ public class Enemy : MonoBehaviour
 
 	public void UpgradeInformation()
 	{
-		_menuUpdater.UpgradeInformation(_mainImage, _name, 0, 0, _armor, 0, $"{_currentHealth}/{_health}", _fill.color);
+		//_menuUpdater.UpgradeInformation(_mainImage, _name, 0, 0, _armor, 0, $"{_currentHealth}/{_health}", _fill.color);
+	}
+
+	public void SetPath(Vector3 targetToMove)
+	{
+		_navMeshAgent.SetDestination(targetToMove);
 	}
 }

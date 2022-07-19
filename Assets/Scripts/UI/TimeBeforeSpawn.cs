@@ -9,6 +9,7 @@ public class TimeBeforeSpawn : MonoBehaviour
 
     private float _remainingTime;
     private bool _onSpawning;
+    private int _spawnTimer;
 
     private protected void Awake()
     {
@@ -17,10 +18,11 @@ public class TimeBeforeSpawn : MonoBehaviour
 
     private protected void FixedUpdate()
     {
+
         if (_remainingTime > 0.6f)
         {
-            _remainingTime -= Time.deltaTime;
-            _timeBeforeSpawnText.text = $"Before Spawn : {string.Format("{0:f0}", _remainingTime)}";
+            _spawnTimer = (int)(_remainingTime -= Time.unscaledDeltaTime);
+            _timeBeforeSpawnText.text = $"Before Spawn : {CachedStringValues.cachedStringValues[_spawnTimer]}";
         }
 
         else

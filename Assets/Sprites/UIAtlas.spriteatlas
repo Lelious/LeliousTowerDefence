@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UIAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 47
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: af7251fa131581f4aad39a65cfc4f4c1, type: 3}
+    - {fileID: 102900000, guid: b6d2ec9e3cb585645b861bf4d94c9a04, type: 3}
+    - {fileID: 102900000, guid: ab2ff159076ebf346b9fb7c6a303c8e9, type: 3}
+    - {fileID: 102900000, guid: 3fc7f5831b63877479aa432cecd43443, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 16dee710046b031428e4482f9585fe9a, type: 3}
+  - {fileID: 21300000, guid: 910d21407bb58b14582a847482b00880, type: 3}
+  - {fileID: 21300000, guid: 4be560e07241b4a47b392ffb5d9a861a, type: 3}
+  - {fileID: 21300000, guid: 4f1cf121a9bd56141a3d9d904d03cde8, type: 3}
+  - {fileID: 21300000, guid: eb6b8221262cbeb459474b7e44c4a07f, type: 3}
+  - {fileID: 21300000, guid: 89333eb2a862d3e40a242c70e308d475, type: 3}
+  - {fileID: 21300000, guid: 84e7eaa476e753a469a73379813d308e, type: 3}
+  - {fileID: 21300000, guid: 651495853e9b37949b535cdf45f64e0e, type: 3}
+  - {fileID: 21300000, guid: 6abce3e5418760e4892d57e7f71dc61e, type: 3}
+  - {fileID: 21300000, guid: fcb72086fb9536f41a870e16c36ffe0c, type: 3}
+  - {fileID: 21300000, guid: 7f5f0308ca6b8714ba417788175535cf, type: 3}
+  - {fileID: 21300000, guid: 1fc3b36956940404cb37798e0f8c8500, type: 3}
+  - {fileID: 21300000, guid: 78c7269963dcb404e8aacb032c2cf1f2, type: 3}
+  - {fileID: 21300000, guid: 31ac62a9416345748b3f24e017c34fa0, type: 3}
+  - {fileID: 21300000, guid: cdc7d85a81833554b847a42f3382c432, type: 3}
+  - {fileID: 21300000, guid: 9476052b86778f44caa1b313ea4cb6e9, type: 3}
+  - {fileID: 21300000, guid: 5090eb6c61ca22245a5d58872e4f5746, type: 3}
+  - {fileID: 21300000, guid: 89c8a0fc2f595684b8c0c98c2c6793f5, type: 3}
+  - {fileID: 21300000, guid: 0fbeccdd92dff474a8b3c5abcb36a906, type: 3}
+  - {fileID: 21300000, guid: b89882fdfb70a2a4fa649d3aa010c870, type: 3}
+  - {fileID: 21300000, guid: 81e4d4ee39fe6cd4b97b31f750e9a6ec, type: 3}
+  - {fileID: 21300000, guid: 6ce5440f5c68a6f41a997f70d9f20d91, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - NamePlace1
+  - 1_rabbit_icon
+  - RightLine
+  - UpperLine
+  - Button
+  - Square
+  - ArmorIcon
+  - Square500
+  - AttackSpeed.png
+  - ArrowTower1
+  - BottomLine
+  - ButtonDISS
+  - Square250
+  - EmptyCellMenuLeftUpperDecal
+  - StatusWindow
+  - IMG_0562
+  - HealthIcon
+  - AttackIcon.png
+  - ArrowTower3
+  - ArrowTower2
+  - DISBTNEmpty
+  - LeftLine
+  m_RenderDataMap: {}
+  m_Tag: UIAtlas
+  m_IsVariant: 0

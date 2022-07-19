@@ -4,19 +4,21 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _flyingSpeed = 1f;
 
+    private IDamagable _damagable;
     private Transform _enemyPos;
     private int _damage;
     private bool _onFlying;
     private float _flyingProgress;
     private bool _isTakeDamage;
 
-    public void FlyToTarget(Transform enemyPosition, int damage)
+    public void FlyToTarget(Transform enemyPosition, int damage, IDamagable damagable)
     {
         if (!_onFlying)
         {         
             _enemyPos = enemyPosition;
             _damage = damage;
             _onFlying = !_onFlying;
+            _damagable = damagable;
         }
     }
 
@@ -39,7 +41,7 @@ public class Bullet : MonoBehaviour
                     {
                         _isTakeDamage = !_isTakeDamage;
                         gameObject.transform.SetParent(_enemyPos);
-                        _enemyPos.GetComponent<Enemy>().RecieveDamage(_damage);
+                        _damagable.TakeDamage(_damage);
                         Destroy(gameObject, 1f);
                     }
                 }
