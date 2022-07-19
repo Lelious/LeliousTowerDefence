@@ -59,7 +59,9 @@
     <Compile Include="Assets\Scripts\UI\MenuUpdater.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\Enemy\EnemyFactory.cs" />
     <Compile Include="Assets\EnemyCheck.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IEnemyFactory.cs" />
     <Compile Include="Assets\Scripts\Tower\TowerRangeRotation.cs" />
     <Compile Include="Assets\Scripts\Tower\Tower.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemySpawnService.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Assets\Bullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
+    <Compile Include="Assets\Resources\BootstrapInstaller.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
@@ -96,6 +99,8 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Scripts\Debug\FPSCounter\FPSDisplay.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IDamagable.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyHealth.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Scripts\UI\TimeBeforeSpawn.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
@@ -105,6 +110,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\Scripts\TowerPlacer\TowerPlacer.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
+    <Compile Include="Assets\Scripts\TowerData.cs" />
     <Compile Include="Assets\Scripts\UI\CanvasRotatorToCamera.cs" />
     <Compile Include="Assets\Scripts\StaticData\CachedStringValues.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
@@ -115,11 +121,8 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
-    <Compile Include="Assets\Resources\BootstrapInstaller.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Enemy\EnemyFactory.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IEnemyFactory.cs" />
-    <Compile Include="Assets\Scripts\Enemy\EnemyHealth.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IDamagable.cs" />
+    <Compile Include="Assets\Scripts\Tower\NewTower.cs" />
+    <Compile Include="Assets\Scripts\UI\UIParentCanvas.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
