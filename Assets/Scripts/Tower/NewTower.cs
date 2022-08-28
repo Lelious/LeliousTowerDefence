@@ -11,23 +11,21 @@ public class NewTower : MonoBehaviour
 	private ParticleSystem _dustPatricles;
 	private Slider _buildingProgress;
 	private Image _fill;
-	private GameObject _tower;
 	private UIParentCanvas _uiParentCanvas;
-	private BuildCellChanger _buildCellChanger;
+	private BuildCellInitializer _buildCellChanger;
 	private Vector3 _endPosition;
 	private bool _isBuilded;
 
 	private protected void Awake()
 	{
-		_tower = Instantiate(_towerData.TowerPrefab, transform.position, Quaternion.identity, transform);
-		_uiParentCanvas = Instantiate(_towerData.UIParentCanvas, _tower.transform.position, Quaternion.identity, _tower.transform).
+		_uiParentCanvas = Instantiate(_towerData.UIParentCanvas, transform.position, Quaternion.identity, transform).
 			GetComponent<UIParentCanvas>();
 		_dustPatricles = Instantiate(_towerData.DustParticles, transform.position, Quaternion.identity, transform);
 		_buildingProgress = _uiParentCanvas.BuildingProgressSlider;
 		_fill = _uiParentCanvas.BuildingProgressSliderFill;			
 		_buildingProgress.maxValue = _towerData.BuildingTime;
 		_fill.color = _towerData.GradientColor.Evaluate(1f);
-		_endPosition = _tower.transform.position;
+		_endPosition = transform.position;
 		_endPosition.y += 2.8f;
 		_dustPatricles.Stop();
 		var main = _towerData.DustParticles.main;
@@ -49,7 +47,7 @@ public class NewTower : MonoBehaviour
 			_isBuilded = true;
 		});
 
-		_tower.transform.DOMove(_endPosition, _towerData.BuildingTime);
+		transform.DOMove(_endPosition, _towerData.BuildingTime);
 	}
 	public void ShowRange()
 	{

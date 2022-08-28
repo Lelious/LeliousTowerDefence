@@ -5,7 +5,7 @@ using UnityEngine;
 public class Shooter : MonoBehaviour, IShoot
 {
     [SerializeField] private Bullet _bullet;
-    [SerializeField] private Tower _tower;
+    [SerializeField] private NewTower _tower;
     [SerializeField] private EnemyCheck _enemyChecker;
 
     private IDamagable _damagable;
@@ -28,7 +28,7 @@ public class Shooter : MonoBehaviour, IShoot
 
             if (actualTarget != null)
             {
-                actualTarget.TryGetComponent<IDamagable>(out _damagable);
+                actualTarget.TryGetComponent(out _damagable);
                 Shoot(actualTarget.transform);
             }
             else

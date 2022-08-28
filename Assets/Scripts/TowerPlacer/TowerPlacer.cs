@@ -1,30 +1,31 @@
 using UnityEngine;
+using Zenject;
 
 public class TowerPlacer : MonoBehaviour
 {
 	public GameObject buildingCellObject;
-	public GameObject tower;
+	public NewTower tower;
 	private Transform _towerPlace;
-	private BuildCellChanger _buildCellChanger;
+	private BuildCellInitializer _buildCellInitializer;
 	private BuildingCell _buildingCell;
 	private GameManager _gameManager;
-	private Camera _camera => Camera.main;
 
-	private protected void Awake()
+	[Inject]
+	private void Construct(BuildCellInitializer buildCellInitializer, GameManager gameManager)
 	{
-		_gameManager = FindObjectOfType<GameManager>();
+		_buildCellInitializer = buildCellInitializer;
+		_gameManager = gameManager;
 	}
 
 	public void PlaceTower()
 	{
-		_buildCellChanger = _camera.GetComponent<BuildCellChanger>();
-		_towerPlace = _buildCellChanger.Selected.transform;
+		_towerPlace = _buildCellInitializer.Selected.transform;
 
 		if (tower != null)
 		{
 			_buildingCell = buildingCellObject.GetComponent<BuildingCell>();			
 			var newTower = Instantiate(tower, new Vector3(_towerPlace.position.x, _towerPlace.position.y - 1f, _towerPlace.position.z), Quaternion.identity);
-			_buildingCell.placedTower = newTower.GetComponent<Tower>();
+			_buildingCell.placedTower = newTower.GetComponent<NewTower>();
 
 			if (_gameManager.CheckForGoldAvalability(_buildingCell.placedTower.GetCost()))
 			{
@@ -38,7 +39,7 @@ public class TowerPlacer : MonoBehaviour
 				Destroy(newTower);
 			}
 
-			_buildCellChanger.DidsbleSelectFrame();
+			_buildCellInitializer.DidsbleSelectFrame();
 		}
 	}
 }

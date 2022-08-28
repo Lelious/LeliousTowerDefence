@@ -6,14 +6,24 @@ using Zenject;
 public class BootstrapInstaller : MonoInstaller
 {
     [SerializeField] private GameBottomPanel _bottomPanel;
-    [SerializeField] private BuildCellChanger _cellChanger;
+    [SerializeField] private BuildCellInitializer _cellInitializer;
     [SerializeField] private MenuUpdater _menuUpdater;
+    [SerializeField] private GameManager _gameManager;
     public override void InstallBindings()
     {
         BindEnemyFactory();
         BindBottomGamePanel();
         BindCellChanger();
         BindMenuUpdater();
+        BindGameManager();
+    }
+
+    private void BindGameManager()
+    {
+        Container.
+           Bind<GameManager>().
+           FromInstance(_gameManager).
+           AsSingle();
     }
 
     private void BindMenuUpdater()
@@ -27,8 +37,8 @@ public class BootstrapInstaller : MonoInstaller
     private void BindCellChanger()
     {
         Container.
-            Bind<BuildCellChanger>().
-            FromInstance(_cellChanger).
+            Bind<BuildCellInitializer>().
+            FromInstance(_cellInitializer).
             AsSingle();
     }
 

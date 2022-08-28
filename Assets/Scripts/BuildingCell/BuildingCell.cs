@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BuildingCell : MonoBehaviour
 {
-	public Tower placedTower;
+	public NewTower placedTower;
 	public bool _isEmpty = true;
 
 	[SerializeField] private MenuUpdater _menuUpdater;
@@ -12,13 +12,13 @@ public class BuildingCell : MonoBehaviour
 	[SerializeField] private int _maxDamage;
 	[SerializeField] private float _attackSpeed;
 
-	private BuildCellChanger _buildCellChanger;
+	private BuildCellInitializer _buildCellChanger;
 	private string _towerHealth;
 	private Color _color;
 	private bool _selected;
 	private protected void Awake()
 	{
-		_buildCellChanger = FindObjectOfType<BuildCellChanger>();
+		_buildCellChanger = FindObjectOfType<BuildCellInitializer>();
 	}
 	private protected void FixedUpdate()
 	{

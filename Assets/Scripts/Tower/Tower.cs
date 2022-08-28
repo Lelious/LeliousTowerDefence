@@ -24,7 +24,7 @@ public class Tower : MonoBehaviour
 	[SerializeField] private GameObject _shooter;
 	[SerializeField] private GameObject _rangeBoarder;
 
-	private BuildCellChanger _buildCellChanger;
+	private BuildCellInitializer _buildCellChanger;
 	private Vector3 _endPosition;
 	private bool _isBuilded;
 
