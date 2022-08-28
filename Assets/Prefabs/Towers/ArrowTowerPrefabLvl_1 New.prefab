@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _towerData: {fileID: 11400000, guid: 9e4eefa2a8228f54b9fe3f4888430952, type: 2}
   _shooter: {fileID: 5324208402193513569}
-  _rangeBoarder: {fileID: 1451092056289971091}
+  _rangeBoarder: {fileID: 2378375234745993522}
 --- !u!1001 &2671348227273854365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -156,6 +156,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2455164268452172662, guid: 727d776442af66448b538a71897e39b7, type: 3}
     - target: {fileID: 3068066088214703098, guid: 763d7f046803eb6478634599d01c8264, type: 3}
+      propertyPath: _poolSize
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3068066088214703098, guid: 763d7f046803eb6478634599d01c8264, type: 3}
       propertyPath: _enemyChecker
       value: 
       objectReference: {fileID: 802082141023648557}
@@ -169,7 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6376961992920358827, guid: 763d7f046803eb6478634599d01c8264, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.22
+      value: -1.054
       objectReference: {fileID: 0}
     - target: {fileID: 6376961992920358827, guid: 763d7f046803eb6478634599d01c8264, type: 3}
       propertyPath: m_LocalPosition.z

@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ad8396f759d8540b0f63308703a087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShootPoint: {fileID: 2766501245561460037}
   _health: 10
   _hpBar: {fileID: 9109614704483753409}
   _gradient:
@@ -153,6 +154,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   _hpBarSlider: {fileID: 9109614704901600220}
   _fill: {fileID: 9109614705196012676}
+  _animator: {fileID: 1391775828882208817}
+  _agent: {fileID: 8414750130296390207}
 --- !u!1 &9109614704483753409
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,6 +1122,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: -1206874426333947015, guid: 08a2a55dc98da26409882ce3d532a175, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 660d8882b6308ed4e927c8c97a0e54f0, type: 2}
     - target: {fileID: -1051221087558559318, guid: 08a2a55dc98da26409882ce3d532a175, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -1592,6 +1599,11 @@ PrefabInstance:
 --- !u!95 &1391775828882208817 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 08a2a55dc98da26409882ce3d532a175, type: 3}
+  m_PrefabInstance: {fileID: 4772127957554496928}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2766501245561460037 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7232384276919144677, guid: 08a2a55dc98da26409882ce3d532a175, type: 3}
   m_PrefabInstance: {fileID: 4772127957554496928}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5021716352239559243 stripped

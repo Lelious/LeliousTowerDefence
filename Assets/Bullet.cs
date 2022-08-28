@@ -1,9 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float _flyingSpeed = 1f;
-
+    [SerializeField, Range(0, 5)] private float _timeBeforeReturning;
+    private Shooter _shooter;
     private IDamagable _damagable;
     private Transform _enemyPos;
     private int _damage;
@@ -11,14 +13,18 @@ public class Bullet : MonoBehaviour
     private float _flyingProgress;
     private bool _isTakeDamage;
 
-    public void FlyToTarget(Transform enemyPosition, int damage, IDamagable damagable)
+    public void FlyToTarget(Transform enemyPosition, int damage, IDamagable damagable, Shooter shooter)
     {
+        _shooter = shooter;
+
         if (!_onFlying)
-        {         
+        {
+            _flyingProgress = 0f;
             _enemyPos = enemyPosition;
             _damage = damage;
-            _onFlying = !_onFlying;
+            _onFlying = true;
             _damagable = damagable;
+            _isTakeDamage = false;
         }
     }
 
@@ -30,7 +36,7 @@ public class Bullet : MonoBehaviour
             {
                 transform.LookAt(_enemyPos);
 
-                if (Vector3.Distance(transform.position, _enemyPos.position) > 0.2f)
+                if (Vector3.Distance(transform.position, _enemyPos.position) > 0.5f)
                 {
                     transform.position = Vector3.Lerp(transform.position, _enemyPos.position, _flyingProgress);
                     _flyingProgress += _flyingSpeed;
@@ -40,16 +46,31 @@ public class Bullet : MonoBehaviour
                     if (!_isTakeDamage)
                     {
                         _isTakeDamage = !_isTakeDamage;
-                        gameObject.transform.SetParent(_enemyPos);
                         _damagable.TakeDamage(_damage);
-                        Destroy(gameObject, 1f);
+                        _damagable.ApplyBullet(this);
+                        transform.SetParent(_enemyPos);
+                        _onFlying = false;
+                        StartCoroutine(ReturnToPoolRoutine());
                     }
                 }
             }
-            else
-            {
-                Destroy(gameObject);
-            }
         }
+    }
+
+    public void ReturnBullet()
+    {
+        _shooter.ReturnToPool(this);        
+    }
+
+    private IEnumerator ReturnToPoolRoutine()
+    {
+        yield return new WaitForSeconds(_timeBeforeReturning);
+
+        if (_damagable != null)
+        {
+            _damagable.RemoveBullet(this);
+            _damagable = null;
+        }
+        _shooter.ReturnToPool(this);
     }
 }

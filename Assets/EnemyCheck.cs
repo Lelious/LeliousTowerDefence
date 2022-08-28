@@ -18,7 +18,6 @@ public class EnemyCheck : MonoBehaviour
 			if (!EnemiesList.Contains(source) && source != null)
 			{
 				EnemiesList.Add(source);
-				Debug.Log(source);
 			}
 		}		
 	}
