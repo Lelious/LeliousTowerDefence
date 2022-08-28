@@ -143,11 +143,11 @@ public class BuildCellInitializer : MonoBehaviour
             var towerName = _towerScript.GetTowerName();
             var towerImage = _towerScript.GetTowerImage();
             _emptyButtons[i].image.sprite = towerImage;
-            _emptyButtons[i].GetComponentInChildren<Text>().text = towerName.Remove(towerName.Length - 1);
+            _emptyButtons[i].GetComponentInChildren<Text>().text = towerName;
 
             var button = _emptyButtons[i].GetComponent<TowerPlacer>();
 
-            button.tower = _towersList[i];
+            button.Tower = _towersList[i];
             button.buildingCellObject = Selected;
         }
     }

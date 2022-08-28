@@ -9,6 +9,8 @@ public class BootstrapInstaller : MonoInstaller
     [SerializeField] private BuildCellInitializer _cellInitializer;
     [SerializeField] private MenuUpdater _menuUpdater;
     [SerializeField] private GameManager _gameManager;
+    [SerializeField] private TowerBuilder _towerBuilder;
+
     public override void InstallBindings()
     {
         BindEnemyFactory();
@@ -16,6 +18,15 @@ public class BootstrapInstaller : MonoInstaller
         BindCellChanger();
         BindMenuUpdater();
         BindGameManager();
+        BindTowerBuilder();
+    }
+
+    private void BindTowerBuilder()
+    {
+        Container.
+           Bind<TowerBuilder>().
+           FromInstance(_towerBuilder).
+           AsSingle();
     }
 
     private void BindGameManager()

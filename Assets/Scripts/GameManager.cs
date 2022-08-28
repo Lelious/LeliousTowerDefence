@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log(_playerGold);
             _playerGold -= cost;
             return true;           
         }

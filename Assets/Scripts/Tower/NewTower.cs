@@ -18,11 +18,16 @@ public class NewTower : MonoBehaviour
 
 	private protected void Awake()
 	{
+		TowerBuild();
+	}
+
+	private void TowerBuild()
+	{
 		_uiParentCanvas = Instantiate(_towerData.UIParentCanvas, transform.position, Quaternion.identity, transform).
 			GetComponent<UIParentCanvas>();
 		_dustPatricles = Instantiate(_towerData.DustParticles, transform.position, Quaternion.identity, transform);
 		_buildingProgress = _uiParentCanvas.BuildingProgressSlider;
-		_fill = _uiParentCanvas.BuildingProgressSliderFill;			
+		_fill = _uiParentCanvas.BuildingProgressSliderFill;
 		_buildingProgress.maxValue = _towerData.BuildingTime;
 		_fill.color = _towerData.GradientColor.Evaluate(1f);
 		_endPosition = transform.position;
@@ -30,10 +35,6 @@ public class NewTower : MonoBehaviour
 		_dustPatricles.Stop();
 		var main = _towerData.DustParticles.main;
 		main.duration = _towerData.BuildingTime;
-	}
-
-	public void TowerBuild()
-	{
 		_towerData.UIParentCanvas.SetActive(true);
 		_towerData.DustParticles.Play();
 		_buildingProgress.DOValue(_towerData.BuildingTime, _towerData.BuildingTime).SetEase(Ease.Linear).OnUpdate(() =>

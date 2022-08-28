@@ -1383,7 +1383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingCellObject: {fileID: 0}
-  tower: {fileID: 0}
+  Tower: {fileID: 0}
 --- !u!1001 &116636518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1505,7 +1505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -3159,7 +3159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5500,7 +5500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -7414,7 +7414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -8129,7 +8129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -12834,7 +12834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -13782,7 +13782,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingCellObject: {fileID: 0}
-  tower: {fileID: 0}
+  Tower: {fileID: 0}
 --- !u!4 &1336517059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4803071536995143673, guid: fc1f014a57e96264f849b2a04a672a26, type: 3}
@@ -14211,7 +14211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingCellObject: {fileID: 0}
-  tower: {fileID: 0}
+  Tower: {fileID: 0}
 --- !u!4 &1366210108 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4803071536995143673, guid: fc1f014a57e96264f849b2a04a672a26, type: 3}
@@ -15730,7 +15730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingCellObject: {fileID: 0}
-  tower: {fileID: 0}
+  Tower: {fileID: 0}
 --- !u!4 &1528673563 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4803071536995143673, guid: fc1f014a57e96264f849b2a04a672a26, type: 3}
@@ -15788,7 +15788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -17128,7 +17128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingCellObject: {fileID: 0}
-  tower: {fileID: 0}
+  Tower: {fileID: 0}
 --- !u!1001 &1615549719
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18431,7 +18431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -19904,7 +19904,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -21365,7 +21365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -22307,6 +22307,7 @@ MonoBehaviour:
   _cellInitializer: {fileID: 963194229}
   _menuUpdater: {fileID: 1843332095}
   _gameManager: {fileID: 1349687203}
+  _towerBuilder: {fileID: 758598863}
 --- !u!114 &2114392371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22663,7 +22664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingCellObject: {fileID: 0}
-  tower: {fileID: 0}
+  Tower: {fileID: 0}
 --- !u!4 &2143190405 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4803071536995143673, guid: fc1f014a57e96264f849b2a04a672a26, type: 3}
