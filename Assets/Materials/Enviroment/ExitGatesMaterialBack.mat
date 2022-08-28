@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GatesMaterialInnerGlow
+  m_Name: ExitGatesMaterialBack
   m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
   m_ValidKeywords: []
   m_InvalidKeywords:
@@ -325,5 +325,5 @@ Material:
     - _SpecColor: {r: 0.3207547, g: 0.3207547, b: 0.3207547, a: 0.078125}
     - _SpecularColor: {r: 0.75, g: 0.75, b: 0.75, a: 1}
     - _SubsurfaceColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TintColor: {r: 0, g: 0.08180917, b: 0.6039216, a: 1}
+    - _TintColor: {r: 1, g: 0.9481132, b: 0.9481132, a: 1}
   m_BuildTextureStacks: []
