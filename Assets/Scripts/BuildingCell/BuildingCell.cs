@@ -5,7 +5,7 @@ public class BuildingCell : MonoBehaviour
 	public NewTower placedTower;
 	public bool _isEmpty = true;
 
-	[SerializeField] private MenuUpdater _menuUpdater;
+	[SerializeField] private BottomMenuInformator _menuUpdater;
 	[SerializeField] private Sprite _image;
 	[SerializeField] private string _name;
 	[SerializeField] private int _minDamage;

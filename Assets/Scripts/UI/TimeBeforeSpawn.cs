@@ -19,7 +19,7 @@ public class TimeBeforeSpawn : MonoBehaviour
     private protected void FixedUpdate()
     {
 
-        if (_remainingTime > 0.6f)
+        if (_remainingTime > 1f)
         {
             _spawnTimer = (int)(_remainingTime -= Time.unscaledDeltaTime);
             _timeBeforeSpawnText.text = $"Before Spawn : {CachedStringValues.cachedStringValues[_spawnTimer]}";

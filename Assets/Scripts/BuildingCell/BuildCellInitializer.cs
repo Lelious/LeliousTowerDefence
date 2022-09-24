@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using Lean.Touch;
+using Zenject;
 
 public class BuildCellInitializer : MonoBehaviour
 {
     public GameObject Selected;
 
-    [SerializeField] private GameObject _selectedFrame;
     [SerializeField] private BuildingCell _buildingCell;
     [SerializeField] private List<NewTower> _towersList = new List<NewTower>();
     [SerializeField] private List<Button> _emptyButtons = new List<Button>();
@@ -16,21 +16,27 @@ public class BuildCellInitializer : MonoBehaviour
     [SerializeField] private float _touchInMs;
     [SerializeField] private float _distance;
 
+    private SelectedFrame _selectedFrame;
     private NewTower _towerScript;
     private Enemy _enemyScript;
     private Camera _camera;
-    private GameBottomPanel _gameBottomPanel;
+    private BottomBuildingMenu _gameBottomPanel;
     private int _count;
     private bool _isTouched;
     private Vector2 _tapDownPosition;
     private Vector2 _tapUpPosition;
+
+    [Inject]
+    private void Construct(SelectedFrame selectedFrame)
+    {
+        _selectedFrame = selectedFrame;
+    }
     private protected void Awake()
     {       
         _touchInMs = _touchDelay;
         _count = _towersList.Count;
-        _gameBottomPanel = GetComponent<GameBottomPanel>();
+        _gameBottomPanel = GetComponent<BottomBuildingMenu>();
         _camera = Camera.main;
-        _selectedFrame.SetActive(false);
         InitializeCell();
     }
 
@@ -57,7 +63,7 @@ public class BuildCellInitializer : MonoBehaviour
 
                         if (_buildingCell != null)
                         {
-                            _selectedFrame.SetActive(true);
+                            _selectedFrame.EnableFrame();
                             _selectedFrame.transform.position = Selected.transform.position;
 
                             if (_buildingCell._isEmpty)
@@ -74,7 +80,7 @@ public class BuildCellInitializer : MonoBehaviour
                         }
                         else
                         {
-                            _selectedFrame.SetActive(false);
+                            _selectedFrame.DisableFrame();
 
                             if (Selected.layer == 3)
                             {
@@ -87,7 +93,7 @@ public class BuildCellInitializer : MonoBehaviour
 
                             else
                             {
-                                _selectedFrame.SetActive(false);                               
+                                _selectedFrame.DisableFrame();                               
                                 _gameBottomPanel.HideEmptyCellMenu();
                                 _gameBottomPanel.HideGameMenu();
 
@@ -121,7 +127,7 @@ public class BuildCellInitializer : MonoBehaviour
 
     public void DidsbleSelectFrame()
     {
-        _selectedFrame.SetActive(false);
+        _selectedFrame.DisableFrame();
         Selected = null;
     }
 

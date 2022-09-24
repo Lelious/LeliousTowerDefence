@@ -14,12 +14,12 @@ public class Enemy : MonoBehaviour
 
 	private float _speed = 1f;
 	private readonly int _hashSpeed = Animator.StringToHash("Speed");
-	private MenuUpdater _menuUpdater;
+	private BottomMenuInformator _menuUpdater;
 	private BuildCellInitializer _buildCellChanger;
-	private GameBottomPanel _gameBottomPanel;
+	private BottomBuildingMenu _gameBottomPanel;
 
 	[Inject]
-	private void Construct(GameBottomPanel bottomPanel, BuildCellInitializer cellChanger, MenuUpdater menuUpdater)
+	private void Construct(BottomBuildingMenu bottomPanel, BuildCellInitializer cellChanger, BottomMenuInformator menuUpdater)
 	{
 		_gameBottomPanel = bottomPanel;
 		_buildCellChanger = cellChanger;

@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        _moneyCountText.text = CachedStringValues.cachedStringValues[_playerGold];
-        _waveCountText.text = CachedStringValues.cachedStringValues[_enemySpawnService.GetWaveCount()];
+        //_moneyCountText.text = CachedStringValues.cachedStringValues[_playerGold];
+        //_waveCountText.text = CachedStringValues.cachedStringValues[_enemySpawnService.GetWaveCount()];
     }
 
     public bool CheckForGoldAvalability(int cost)

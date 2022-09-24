@@ -56,7 +56,7 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\UI\MenuUpdater.cs" />
+    <Compile Include="Assets\Scripts\UI\BottomMenuInformator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Enemy\EnemyFactory.cs" />
@@ -69,14 +69,14 @@
     <Compile Include="Assets\Bullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
-    <Compile Include="Assets\Resources\BootstrapInstaller.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\BootstrapInstaller.cs" />
     <Compile Include="Assets\Scripts\UI\UIParentCanvas.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\Scripts\BuildingCell\BuildCellInitializer.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
-    <Compile Include="Assets\Scripts\UI\GameBottomPanel.cs" />
+    <Compile Include="Assets\Scripts\UI\BottomBuildingMenu.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\Scripts\Debug\Gizmo.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
@@ -91,9 +91,10 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
+    <Compile Include="Assets\Scripts\TowerBuilder.cs" />
     <Compile Include="Assets\Teleportation.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
-    <Compile Include="Assets\Scripts\UI\CanvasScript.cs" />
+    <Compile Include="Assets\Scripts\UI\TopMenuInformator.cs" />
     <Compile Include="Assets\Scripts\Debug\FPSCounter\FPSCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\Scripts\Tower\TowerType.cs" />
@@ -123,7 +124,23 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
-    <Compile Include="Assets\Scripts\TowerBuilder.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\StateMachine\GameLoopStateMachine.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\StateMachine\State.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\StateMachine\IState.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\StateMachine\IControllFromState.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\StateMachine\IResettable.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameLoadState.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameState.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameLooseState.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameWinState.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameResetState.cs" />
+    <Compile Include="Assets\Scripts\StaticData\Extentions.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\GameBootstrapper.cs" />
+    <Compile Include="Assets\Scripts\StaticData\AssetPath.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\UiInstaller.cs" />
+    <Compile Include="Assets\Scripts\UI\SelectedFrame.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\Services\InputService.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IInputService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -880,6 +897,12 @@
     <Reference Include="Unity.Recorder">
       <HintPath>Library\ScriptAssemblies\Unity.Recorder.dll</HintPath>
     </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
@@ -929,6 +952,10 @@
     <ProjectReference Include="LeanCommon.csproj">
       <Project>{2FA46F99-C6D8-C330-21B0-27EA326F3619}</Project>
       <Name>LeanCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniRx.csproj">
+      <Project>{71C4E152-1959-E320-CB59-92F5646A6C74}</Project>
+      <Name>UniRx</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

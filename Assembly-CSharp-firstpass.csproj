@@ -66,6 +66,7 @@
     <Compile Include="Assets\Plugins\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Plugins\UniRx\ReadMe.txt" />
     <None Include="Assets\Plugins\Demigiant\DOTween\DOTween.XML" />
     <None Include="Assets\Plugins\Demigiant\DOTween\DOTween.dll" />
     <None Include="Assets\Plugins\Demigiant\DOTween\readme.txt" />
@@ -791,6 +792,12 @@
     <Reference Include="Unity.Recorder">
       <HintPath>Library\ScriptAssemblies\Unity.Recorder.dll</HintPath>
     </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="LeanTouch.csproj">
@@ -836,6 +843,10 @@
     <ProjectReference Include="LeanCommon.csproj">
       <Project>{2FA46F99-C6D8-C330-21B0-27EA326F3619}</Project>
       <Name>LeanCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniRx.csproj">
+      <Project>{71C4E152-1959-E320-CB59-92F5646A6C74}</Project>
+      <Name>UniRx</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
