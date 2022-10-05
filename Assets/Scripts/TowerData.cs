@@ -5,7 +5,7 @@ using UnityEngine;
 public class TowerData : ScriptableObject
 {
 	[Header("Tower")]
-	public GameObject TowerPrefab;
+	public NewTower TowerPrefab;
 	public ParticleSystem DustParticles;
 	public Sprite MainImage;
 

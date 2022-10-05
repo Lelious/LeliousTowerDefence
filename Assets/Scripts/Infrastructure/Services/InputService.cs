@@ -1,57 +1,88 @@
 using Infrastructure.Services.Input;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class InputService : MonoBehaviour, IInputService
-{
-    private Vector3 _touchStart, _touchSecond;
+{   
+    private GameInformationMenu _gameInformationMenu;
+    private SelectedFrame _selectedFrame;
     private ParentedCamera _cameraParent;
     private Camera _camera;
-    private float groundZ = 0;
-    private float _startingDistance;
-    private int _touchCount = 1;
-    private float _sensibility = 0.3f;
+    private ITouchable _touchedObj;
+    private Vector3 _touchStart;
+    private float _sensibility = 0.1f;
+    private float _groundZ = 0;
+    private float _touchTime = 0.25f;
+    private float _touchTimeTimer;
+    private bool _canTouch = true;
+    private int _touchCount = 0;
+
+    [Inject]
+    private void Construct(GameInformationMenu gameInformationMenu, SelectedFrame selectedFrame)
+    {
+        _gameInformationMenu = gameInformationMenu;
+        _selectedFrame = selectedFrame;
+    }
 
     private void Awake()
     {
+        _gameInformationMenu = FindObjectOfType<GameInformationMenu>();
         _cameraParent = FindObjectOfType<ParentedCamera>();
         _camera = Camera.main;
     }
-    void Update()
+
+    private void Update()
     {
-        _touchCount = Input.touchCount;
-
-        if (Input.GetMouseButtonDown(0))
+        if (_canTouch)
         {
-            _touchStart = GetWorldPosition(groundZ);
-        }
+            _touchCount = Input.touchCount;
 
-        if (Input.GetMouseButton(0))
-        {
-            if (_touchCount < 2)
+            if (Input.GetMouseButtonDown(0))
             {
-                Vector3 direction = _touchStart - GetWorldPosition(groundZ);
-                _cameraParent.transform.position += direction;
-            }                     
-        }
+                _touchStart = GetMovementDirection(_groundZ);
+                _touchTimeTimer = _touchTime;
+            }
 
-        if (_touchCount >= 2)
-        {
-            Touch touch0 = Input.GetTouch(0);
-            Touch touch1 = Input.GetTouch(1);
-            Vector2 touchZeroPrevPos = touch0.position - touch0.deltaPosition;
-            Vector2 touchOnePrevPos = touch1.position - touch1.deltaPosition;
+            if (Input.GetMouseButton(0))
+            {
+                if (_touchTimeTimer >= 0)
+                    _touchTimeTimer -= Time.deltaTime;
 
-            float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
-            float touchDeltaMag = (touch0.position - touch1.position).magnitude;
-            float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
+                if (_touchCount < 2)
+                {
+                    Vector3 direction = _touchStart - GetMovementDirection(_groundZ);
+                    _cameraParent.transform.position += direction;
+                }
+            }
 
-            _cameraParent.transform.position += new Vector3(_cameraParent.transform.position.x, _cameraParent.transform.position.y + deltaMagnitudeDiff * _sensibility, _cameraParent.transform.position.z);
-        }
+            if (_touchCount >= 2)
+            {
+                Touch touch0 = Input.GetTouch(0);
+                Touch touch1 = Input.GetTouch(1);
+                Vector2 touchZeroPrevPos = touch0.position - touch0.deltaPosition;
+                Vector2 touchOnePrevPos = touch1.position - touch1.deltaPosition;
+
+                float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+                float touchDeltaMag = (touch0.position - touch1.position).magnitude;
+                float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
+
+                _cameraParent.transform.position += new Vector3(0, deltaMagnitudeDiff * _sensibility, 0);
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                var currentMousePos = Input.mousePosition;
+                if (_touchTimeTimer > 0)
+                    RegisterTap(currentMousePos);
+            }
+        }       
     }
 
-    private Vector3 GetWorldPosition(float z)
+    public ITouchable GetCurrentTouchable() => _touchedObj;
+    public void Enable() => _canTouch = true;
+    public void Disable() => _canTouch = false;
+
+    public Vector3 GetMovementDirection(float z)
     {
         Ray mousePos = _camera.ScreenPointToRay(Input.mousePosition);
         Plane ground = new Plane(Vector3.up, new Vector3(0, 0, z));
@@ -60,23 +91,29 @@ public class InputService : MonoBehaviour, IInputService
         return mousePos.GetPoint(distance);
     }
 
-    private float GetDistanceBetweenTouches()
+    private void RegisterTap(Vector3 mousePosition)
     {
-        return Vector3.Distance(_touchStart, _touchSecond);
-    }
+        Ray ray = _camera.ScreenPointToRay(mousePosition);
 
-    public Vector3 GetMovementDirection()
-    {
-        throw new System.NotImplementedException();
-    }
+        if (Physics.Raycast(ray, out var hit))
+        {
+            _touchedObj?.Untouch();
 
-    public void Enable()
-    {
-        throw new System.NotImplementedException();
-    }
+            hit.collider.gameObject.TryGetComponent(out _touchedObj);
 
-    public void Disable()
-    {
-        throw new System.NotImplementedException();
+            if (_touchedObj != null)
+            {
+                _touchedObj.Touch();
+                _selectedFrame.EnableFrame();
+                _selectedFrame.transform.position = _touchedObj.GetPosition();
+            }
+        }
+        else
+        {
+            _touchedObj?.Untouch();
+            _selectedFrame.DisableFrame();
+            _gameInformationMenu.HideEmptyCellMenu();
+            _gameInformationMenu.HideGameMenu();           
+        }
     }
 }

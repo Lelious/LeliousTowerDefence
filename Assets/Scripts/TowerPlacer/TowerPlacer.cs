@@ -46,18 +46,18 @@ public class TowerPlacer : MonoBehaviour
 		//	_buildCellInitializer.DidsbleSelectFrame();
 		//}
 
-		_towerPlace = _buildCellInitializer.Selected.transform;
+		//_towerPlace = _buildCellInitializer.Selected.transform;
 
-		if (Tower != null)
-		{
-			_buildingCell = buildingCellObject.GetComponent<BuildingCell>();
+		//if (Tower != null)
+		//{
+		//	_buildingCell = buildingCellObject.GetComponent<BuildingCell>();
 
-			if (_gameManager.CheckForGoldAvalability(Tower.GetCost()))
-			{
-				_buildingCell._isEmpty = false;
-				_buildCellInitializer.DidsbleSelectFrame();
-				_towerBuilder.BuildTower(Tower, _towerPlace, _buildingCell);
-			}
-		}
+		//	if (_gameManager.CheckForGoldAvalability(Tower.GetCost()))
+		//	{
+		//		//_buildingCell._isEmpty = false;
+		//		_buildCellInitializer.DidsbleSelectFrame();
+		//		_towerBuilder.BuildTower(Tower, _towerPlace, _buildingCell);
+		//	}
+		//}
 	}
 }

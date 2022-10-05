@@ -5,6 +5,6 @@ namespace Infrastructure.Services.Input
 {
     public interface IInputService : IControlFromState
     {
-        Vector3 GetMovementDirection();
+        Vector3 GetMovementDirection(float z);
     }
 }

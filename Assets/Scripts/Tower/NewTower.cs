@@ -57,7 +57,7 @@ public class NewTower : MonoBehaviour
 			_rangeBoarder.SetActive(true);
 		}
 	}
-	public void DisableRange()
+	public void HideRange()
 	{
 		_rangeBoarder.SetActive(false);
 	}
@@ -98,5 +98,17 @@ public class NewTower : MonoBehaviour
 	public bool GetBuildStatus()
 	{
 		return _isBuilded;
+	}
+
+	public TowerData GetTowerData()	=> _towerData;
+
+	public Vector3 GetPosition()
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public void Touch()
+	{
+		throw new System.NotImplementedException();
 	}
 }

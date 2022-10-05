@@ -66,17 +66,17 @@ public class BuildCellInitializer : MonoBehaviour
                             _selectedFrame.EnableFrame();
                             _selectedFrame.transform.position = Selected.transform.position;
 
-                            if (_buildingCell._isEmpty)
-                            {
-                                _gameBottomPanel.ShowEmptyCellMenu();
-                                InitializeCell();
-                            }
-                            else
-                            {
-                                _gameBottomPanel.ShowGameMenu();
-                                _buildingCell.UpgradeInfo();
-                            }
-                            DisableEnemy();
+                            //if (_buildingCell._isEmpty)
+                            //{
+                            //    _gameBottomPanel.ShowEmptyCellMenu();
+                            //    InitializeCell();
+                            //}
+                            //else
+                            //{
+                            //    _gameBottomPanel.ShowGameMenu();
+                            //    _buildingCell.UpgradeInfo();
+                            //}
+                            //DisableEnemy();
                         }
                         else
                         {

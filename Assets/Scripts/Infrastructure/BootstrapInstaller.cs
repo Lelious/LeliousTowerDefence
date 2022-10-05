@@ -6,14 +6,11 @@ using Zenject;
 
 public class BootstrapInstaller : MonoInstaller
 {
-    [SerializeField] private BuildCellInitializer _cellInitializer;
-    [SerializeField] private GameManager _gameManager;
     [SerializeField] private TowerBuilder _towerBuilder;
 
     public override void InstallBindings()
     {
         BindEnemyFactory();
-        BindCellChanger();
         BindGameManager();
         BindTowerBuilder();
         BindStateMachine();
@@ -36,18 +33,10 @@ public class BootstrapInstaller : MonoInstaller
 
     private void BindGameManager()
     {
-        Container.
-           Bind<GameManager>().
-           FromInstance(_gameManager).
-           AsSingle();
-    }
-
-    private void BindCellChanger()
-    {
-        Container.
-            Bind<BuildCellInitializer>().
-            FromInstance(_cellInitializer).
-            AsSingle();
+        Container.Bind<GameManager>()
+            .FromComponentInNewPrefabResource(AssetPath.GameManager)
+            .AsSingle()
+            .NonLazy();
     }
 
     private void BindEnemyFactory()

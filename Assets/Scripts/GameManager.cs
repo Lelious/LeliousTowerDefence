@@ -1,30 +1,38 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private int _playerGold;
-    [SerializeField] private Text _moneyCountText;
-    [SerializeField] private Text _waveCountText;
-    [SerializeField] private EnemySpawnService _enemySpawnService;
+    private int _playerGold = 20;
+    private TopMenuInformator _topMenuInformator;
+    private EnemySpawnService _enemySpawnService;
 
-    private void Update()
+    [Inject]
+    private void Construct(TopMenuInformator topMenuInformator)
     {
-        //_moneyCountText.text = CachedStringValues.cachedStringValues[_playerGold];
-        //_waveCountText.text = CachedStringValues.cachedStringValues[_enemySpawnService.GetWaveCount()];
+        _topMenuInformator = topMenuInformator;
+        _topMenuInformator.SetMoney(_playerGold);
     }
 
     public bool CheckForGoldAvalability(int cost)
     {
         if (cost > _playerGold)
         {
+            NotEnoughGold();
             return false;
         }
         else
         {
             _playerGold -= cost;
+            _topMenuInformator.SetMoney(_playerGold);
             return true;           
         }
+    }
+
+    public void NotEnoughGold()
+    {
+
     }
 }

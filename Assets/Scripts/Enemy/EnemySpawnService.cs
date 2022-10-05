@@ -19,7 +19,7 @@ public class EnemySpawnService : MonoBehaviour
 	private protected void Awake()
 	{
 		InitializeEnemyPool();
-		StartCoroutine(ShootingRoutine());
+		//StartCoroutine(ShootingRoutine());
 	}
 
 	public int GetWaveCount()
@@ -41,13 +41,13 @@ public class EnemySpawnService : MonoBehaviour
 
 	private void InitializeEnemyPool()
 	{
-		_enemyFactory.Initialize();
+		//_enemyFactory.Initialize();
 
-		for (int i = 0; i < 30; i++)
-		{
-			var enemy = _enemyFactory.CreateEnemy(_startPoint.position);
-			enemy.gameObject.SetActive(false);
-			_enemyPoolList.Add(enemy);
-		}
+		//for (int i = 0; i < 30; i++)
+		//{
+		//	var enemy = _enemyFactory.CreateEnemy(_startPoint.position);
+		//	enemy.gameObject.SetActive(false);
+		//	_enemyPoolList.Add(enemy);
+		//}
 	}
 }

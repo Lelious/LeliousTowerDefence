@@ -1,8 +1,9 @@
 public static class AssetPath
 {
-    public const string BottomMenuInformator = "UI/BottomMenuInformator";
+    public const string GameInformationMenu = "UI/GameInformationMenu";
     public const string TopMenuInformator = "UI/TopMenuInformator";
-    public const string BottomBuildingMenu = "UI/BottomBuildingMenu";
+    public const string BottomBuildingMenu = "UI/BottomBuildMenuCanvas";
     public const string SelectedFrame = "UI/SelectedFrame";
     public const string InputService = "UI/InputService";
+    public const string GameManager = "UI/GameManager";
 }

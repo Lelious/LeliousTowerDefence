@@ -2,9 +2,9 @@ using UnityEngine;
 
 public sealed class TowerBuilder : MonoBehaviour
 {
-    public void BuildTower(NewTower tower, Transform point, BuildingCell buildingCell)
+    public void BuildTower(NewTower tower, Vector3 point, BuildingCell buildingCell)
     {
-        buildingCell.placedTower = Instantiate(tower, point.position, Quaternion.identity);
-        buildingCell.UpgradeInfo();
+        var newTower = Instantiate(tower, point, Quaternion.identity);
+        buildingCell.UpgradeInfo(newTower);
     }
 }

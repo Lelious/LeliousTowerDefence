@@ -85,9 +85,11 @@
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameResetState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\Interfaces\ITouchable.cs" />
     <Compile Include="Assets\Scripts\Tower\NewTower.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IShoot.cs" />
+    <Compile Include="Assets\Scripts\Input\ParentedCamera.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IInputService.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
@@ -109,6 +111,7 @@
     <Compile Include="Assets\Scripts\Infrastructure\Services\InputService.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameWinState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+    <Compile Include="Assets\Scripts\UI\GameInformationMenu.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Scripts\Debug\FPSCounter\FPSDisplay.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IDamagable.cs" />
@@ -120,6 +123,7 @@
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\BuildingCell\BuildingCell.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\Services\TowerContainerService.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\Scripts\TowerPlacer\TowerPlacer.cs" />
@@ -141,7 +145,8 @@
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\IState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\IControllFromState.cs" />
-    <Compile Include="Assets\Scripts\Input\ParentedCamera.cs" />
+    <Compile Include="Assets\Scripts\UI\UIButton.cs" />
+    <Compile Include="Assets\Scripts\UI\GameButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

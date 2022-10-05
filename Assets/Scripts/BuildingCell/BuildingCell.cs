@@ -1,66 +1,82 @@
+using System;
 using UnityEngine;
+using Zenject;
 
-public class BuildingCell : MonoBehaviour
+public class BuildingCell : MonoBehaviour, ITouchable
 {
-	public NewTower placedTower;
-	public bool _isEmpty = true;
+	private GameInformationMenu _gameInformationMenu;
+	private NewTower _placedTower;	
 
-	[SerializeField] private BottomMenuInformator _menuUpdater;
-	[SerializeField] private Sprite _image;
-	[SerializeField] private string _name;
-	[SerializeField] private int _minDamage;
-	[SerializeField] private int _maxDamage;
-	[SerializeField] private float _attackSpeed;
-
-	private BuildCellInitializer _buildCellChanger;
-	private string _towerHealth;
-	private Color _color;
-	private bool _selected;
-	private protected void Awake()
+	[Inject]
+	private void Construct(GameInformationMenu gameInformationMenu)
 	{
-		_buildCellChanger = FindObjectOfType<BuildCellInitializer>();
+		_gameInformationMenu = gameInformationMenu;
 	}
+
 	private protected void FixedUpdate()
 	{
-		if (!_isEmpty)
-		{
-			if (_buildCellChanger.Selected == gameObject)
-			{
-				if (!placedTower.GetBuildStatus())
-				{
-					UpgradeHealth();
-				}
+		//if (!_isEmpty)
+		//{
+		//	if (_buildCellChanger.Selected == gameObject)
+		//	{
+		//		if (!_placedTower.GetBuildStatus())
+		//		{
+		//			UpgradeHealth();
+		//		}
 
-				_selected = true;
-				placedTower.ShowRange();
-				UpgradeHealth();
-			}
-			else
-			{
-				if (_selected)
-				{
-					_selected = false;
-					placedTower.DisableRange();
-				}
-			}
+		//		_selected = true;
+		//		_placedTower.ShowRange();
+		//		UpgradeHealth();
+		//	}
+		//	else
+		//	{
+		//		if (_selected)
+		//		{
+		//			_selected = false;
+		//			_placedTower.DisableRange();
+		//		}
+		//	}
+		//}
+	}
+
+	public void UpgradeInfo(NewTower tower)
+	{
+		_placedTower = tower;
+		//_attackSpeed = _placedTower.GetAttackSpeed();
+		//_minDamage = _placedTower.GetMinDamage();
+		//_maxDamage = _placedTower.GetMaxDamage();
+		//_image = _placedTower.GetTowerImage();
+		//_name = _placedTower.GetTowerName();
+		//_towerHealth = _placedTower.GetHealth();
+		//_color = _placedTower.GetHealthColor();
+		//_menuUpdater.UpgradeInformation(_image, _name, _minDamage, _maxDamage, 0, _attackSpeed, _towerHealth, _color);
+	}
+	//private void UpgradeHealth()
+	//{
+	//	_towerHealth = _placedTower.GetHealth();
+	//	_color = _placedTower.GetHealthColor();
+	//	_menuUpdater.UpgradeInformation(_image, _name, _minDamage, _maxDamage, 0, _attackSpeed, _towerHealth, _color);
+	//}
+
+	public void Touch()
+	{
+		if (_placedTower)		
+			_placedTower.ShowRange();		
+		else
+		{
+			_gameInformationMenu.ShowEmptyCellMenu();
+			_gameInformationMenu.SetBuildingCell(this);
 		}
 	}
 
-	public void UpgradeInfo()
+	public void Untouch()
 	{
-		_attackSpeed = placedTower.GetAttackSpeed();
-		_minDamage = placedTower.GetMinDamage();
-		_maxDamage = placedTower.GetMaxDamage();
-		_image = placedTower.GetTowerImage();
-		_name = placedTower.GetTowerName();
-		_towerHealth = placedTower.GetHealth();
-		_color = placedTower.GetHealthColor();
-		_menuUpdater.UpgradeInformation(_image, _name, _minDamage, _maxDamage, 0,  _attackSpeed, _towerHealth, _color);
+		if (_placedTower)				
+			_placedTower.HideRange();
 	}
-	private void UpgradeHealth()
+
+	public Vector3 GetPosition()
 	{
-		_towerHealth = placedTower.GetHealth();
-		_color = placedTower.GetHealthColor();
-		_menuUpdater.UpgradeInformation(_image, _name, _minDamage, _maxDamage, 0, _attackSpeed, _towerHealth, _color);
-	}
+		return transform.position;
+	}	
 }
