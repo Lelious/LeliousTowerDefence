@@ -12,33 +12,29 @@ public class GameInformationMenu : MonoBehaviour
 	[SerializeField] private List<TowerData> _startingTowers = new List<TowerData>();
 
 	private GameManager _gameManager;
-	private TowerBuilder _towerBuilder;
-	private InputService _inputService;
 	private BuildingCell _buildingCell;
 	private float _emptyCellMenuHeight;
 	private float _gameMenuHeight;
 
-	//[Inject]
-	//private void Construct(GameManager gameManager, TowerBuilder towerBuilder, InputService inputService)
-	//{
-	//	_gameManager = gameManager;
-	//	_towerBuilder = towerBuilder;
-	//	_inputService = inputService;
-	//}
+	[Inject]
+	private void Construct(GameManager gameManager) =>	
+		_gameManager = gameManager;
 
 	private protected void Awake()
 	{
 		_emptyCellMenuHeight = _emptyCellMenuRect.rect.height;
 		_gameMenuHeight = _gameMenuRect.rect.height;
-		_inputService = FindObjectOfType<InputService>();
-		_gameManager = FindObjectOfType<GameManager>();
-		_towerBuilder = FindObjectOfType<TowerBuilder>();
+
 		InitializeEmptyBuildButtons();
+
+		InputService.OnEmptyTapRegistered += HideGameMenu;
+		InputService.OnEmptyTapRegistered += HideEmptyCellMenu;
 	}
 
 	public void ShowEmptyCellMenu()
 	{
 		_emptyCellMenuRect.DOAnchorPos(Vector2.zero, 0.25f);
+
 		HideGameMenu();
 	}
 
@@ -50,6 +46,7 @@ public class GameInformationMenu : MonoBehaviour
 	public void ShowGameMenu()
 	{
 		_gameMenuRect.DOAnchorPos(Vector2.zero, 0.25f);
+
 		HideEmptyCellMenu();
 	}
 
@@ -66,7 +63,13 @@ public class GameInformationMenu : MonoBehaviour
 	{
 		for (int i = 0; i < _emptyButtons.Count; i++)
 		{
-			_emptyButtons[i].SetButton(_startingTowers[i],_towerBuilder, _inputService, _gameManager, this);
+			_emptyButtons[i].SetButton(_startingTowers[i], _gameManager, this);
 		}
+	}
+
+	private void OnDestroy()
+	{
+		InputService.OnEmptyTapRegistered -= HideGameMenu;
+		InputService.OnEmptyTapRegistered -= HideEmptyCellMenu;
 	}
 }

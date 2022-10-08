@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -12,18 +13,14 @@ public class Enemy : MonoBehaviour
 	[SerializeField] private Animator _animator;
 	[SerializeField] private float _navMeshSpeedConst = 2f;
 
+	private EnemyPool _enemyPool;
 	private float _speed = 1f;
 	private readonly int _hashSpeed = Animator.StringToHash("Speed");
-	private BottomMenuInformator _menuUpdater;
-	private BuildCellInitializer _buildCellChanger;
-	private BottomBuildingMenu _gameBottomPanel;
 
 	[Inject]
-	private void Construct(BottomBuildingMenu bottomPanel, BuildCellInitializer cellChanger, BottomMenuInformator menuUpdater)
+	private void Construct(EnemyPool enemyPool)
 	{
-		_gameBottomPanel = bottomPanel;
-		_buildCellChanger = cellChanger;
-		_menuUpdater = menuUpdater;
+		_enemyPool = enemyPool;
 	}
 
 	private protected void LateUpdate()
@@ -50,5 +47,18 @@ public class Enemy : MonoBehaviour
 	public void SetPath(Vector3 targetToMove)
 	{
 		_navMeshAgent.SetDestination(targetToMove);
+	}
+
+	public void SetPool(EnemyPool pool) => _enemyPool = pool;
+	public void ReturnToEnemyPool()
+	{
+		_enemyPool.ReturnToPool(this);
+		StartCoroutine(DelayedDisableRoutine());
+	}
+
+	private IEnumerator DelayedDisableRoutine()
+	{
+		yield return new WaitForSeconds(2f);
+		gameObject.SetActive(false);
 	}
 }

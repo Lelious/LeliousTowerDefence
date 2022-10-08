@@ -5,12 +5,15 @@ using Zenject;
 public class BuildingCell : MonoBehaviour, ITouchable
 {
 	private GameInformationMenu _gameInformationMenu;
-	private NewTower _placedTower;	
+	private TowerFactory _towerFactory;
+	private NewTower _placedTower;
+	private TowerData _towerData;
 
 	[Inject]
-	private void Construct(GameInformationMenu gameInformationMenu)
+	private void Construct(GameInformationMenu gameInformationMenu, TowerFactory towerFactory)
 	{
 		_gameInformationMenu = gameInformationMenu;
+		_towerFactory = towerFactory;
 	}
 
 	private protected void FixedUpdate()
@@ -39,9 +42,8 @@ public class BuildingCell : MonoBehaviour, ITouchable
 		//}
 	}
 
-	public void UpgradeInfo(NewTower tower)
+	private void UpgradeInfo()
 	{
-		_placedTower = tower;
 		//_attackSpeed = _placedTower.GetAttackSpeed();
 		//_minDamage = _placedTower.GetMinDamage();
 		//_maxDamage = _placedTower.GetMaxDamage();
@@ -60,13 +62,22 @@ public class BuildingCell : MonoBehaviour, ITouchable
 
 	public void Touch()
 	{
-		if (_placedTower)		
-			_placedTower.ShowRange();		
+		if (_placedTower)
+		{
+			_placedTower.ShowRange();
+			_gameInformationMenu.ShowGameMenu();
+		}
 		else
 		{
 			_gameInformationMenu.ShowEmptyCellMenu();
 			_gameInformationMenu.SetBuildingCell(this);
 		}
+	}
+
+	public void BuildTowerOnPlace(TowerData data)
+	{
+		_placedTower = _towerFactory.CreateNewTower(data, transform.position);
+		_towerData = _placedTower.GetTowerData();
 	}
 
 	public void Untouch()

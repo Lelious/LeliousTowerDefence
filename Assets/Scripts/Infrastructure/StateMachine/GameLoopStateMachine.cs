@@ -21,11 +21,13 @@ namespace Infrastructure.StateMachine
         {
             _states = new Dictionary<Type, IState>
         {
-          { typeof(GameLoadState), new GameLoadState(this) },         
-          { typeof(GameState), new GameState(this) },
-          { typeof(GameWinState), new GameWinState(this) },
-          { typeof(GameLooseState), new GameLooseState(this) },
-          { typeof(GameResetState), new GameResetState(this) }
+            { typeof(GameLoadState), new GameLoadState(this) },         
+            { typeof(GameState), new GameState(this) },
+            { typeof(GameWinState), new GameWinState(this) },
+            { typeof(GameLooseState), new GameLooseState(this) },
+            { typeof(GameResetState), new GameResetState(this) },
+            { typeof(GameSpawnState), new GameSpawnState(this) },
+            { typeof (GameBuildingState), new GameBuildingState(this)}
         };
             _states.ForEach(x => _diContainer.Inject(x.Value));
         }

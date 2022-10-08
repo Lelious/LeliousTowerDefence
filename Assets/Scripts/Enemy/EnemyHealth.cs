@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,11 +18,13 @@ public class EnemyHealth : MonoBehaviour, IDamagable
 	[SerializeField] private NavMeshAgent _agent;
 
 	private List<Bullet> _bulletsList = new List<Bullet>();
+	private Enemy _enemy;
 	private float _currentHealth;
 	private bool _isDead;
 
 	private protected void Awake()
 	{
+		_enemy = GetComponent<Enemy>();
 		_currentHealth = _health;
 		_hpBarSlider.value = 1f;
 		_fill.color = _gradient.Evaluate(_hpBarSlider.normalizedValue);
@@ -54,9 +58,8 @@ public class EnemyHealth : MonoBehaviour, IDamagable
 				_isDead = true;
 				_hpBar.gameObject.SetActive(false);
 				ReturnAllBullets();
+				_enemy.ReturnToEnemyPool();
 			}
-
-			Destroy(gameObject, 2f);
 		}
 	}
 

@@ -6,29 +6,54 @@ using Zenject;
 
 public class BootstrapInstaller : MonoInstaller
 {
-    [SerializeField] private TowerBuilder _towerBuilder;
+    [SerializeField] private StartPoint _startPoint;
+    [SerializeField] private EndPoint _endPoint;
 
     public override void InstallBindings()
     {
         BindEnemyFactory();
         BindGameManager();
-        BindTowerBuilder();
         BindStateMachine();
+        BindTowerFactory();
+        BindStartPoint();
+        BindEndPoint();
+        BindEnemyPool();
+    }
+
+    private void BindEnemyPool()
+    {
+        Container
+            .BindInterfacesAndSelfTo<EnemyPool>()
+            .AsSingle();
+    }
+
+    private void BindStartPoint()
+    {
+        Container
+            .Bind<StartPoint>()
+            .FromInstance(_startPoint)
+            .AsSingle();
+    }
+    private void BindEndPoint()
+    {
+        Container
+            .Bind<EndPoint>()
+            .FromInstance(_endPoint)
+            .AsSingle();
+    }
+
+    private void BindTowerFactory()
+    {
+        Container
+            .BindInterfacesAndSelfTo<TowerFactory>()
+            .AsSingle();
     }
 
     private void BindStateMachine()
     {
-        Container.
-            BindInterfacesAndSelfTo<GameLoopStateMachine>().
-            AsSingle();
-    }
-
-    private void BindTowerBuilder()
-    {
-        Container.
-           Bind<TowerBuilder>().
-           FromInstance(_towerBuilder).
-           AsSingle();
+        Container
+            .BindInterfacesAndSelfTo<GameLoopStateMachine>()
+            .AsSingle();
     }
 
     private void BindGameManager()

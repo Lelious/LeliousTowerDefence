@@ -12,7 +12,6 @@ public class NewTower : MonoBehaviour
 	private Slider _buildingProgress;
 	private Image _fill;
 	private UIParentCanvas _uiParentCanvas;
-	private BuildCellInitializer _buildCellChanger;
 	private Vector3 _endPosition;
 	private bool _isBuilded;
 

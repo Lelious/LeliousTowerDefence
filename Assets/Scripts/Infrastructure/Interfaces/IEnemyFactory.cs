@@ -4,7 +4,8 @@ using UnityEngine;
 
 public interface IEnemyFactory
 {
-    public Enemy CreateEnemy(Vector3 position, Transform parent = null);
+    public void CreateEnemy(int count = 1, Transform parent = null);
+    public Enemy GetEnemy();
     public void LoadNextEnemyPrefab();
 
 }

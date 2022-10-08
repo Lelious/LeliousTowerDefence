@@ -1,10 +1,13 @@
 using Infrastructure.Services.Input;
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Zenject;
 
 public class InputService : MonoBehaviour, IInputService
-{   
-    private GameInformationMenu _gameInformationMenu;
+{
+    public static Action OnEmptyTapRegistered;
+
     private SelectedFrame _selectedFrame;
     private ParentedCamera _cameraParent;
     private Camera _camera;
@@ -12,23 +15,23 @@ public class InputService : MonoBehaviour, IInputService
     private Vector3 _touchStart;
     private float _sensibility = 0.1f;
     private float _groundZ = 0;
-    private float _touchTime = 0.25f;
+    private float _touchTime = 0.5f;
     private float _touchTimeTimer;
     private bool _canTouch = true;
     private int _touchCount = 0;
+    private int _layerMask = 1 << 10;
 
     [Inject]
-    private void Construct(GameInformationMenu gameInformationMenu, SelectedFrame selectedFrame)
+    private void Construct(SelectedFrame selectedFrame)
     {
-        _gameInformationMenu = gameInformationMenu;
         _selectedFrame = selectedFrame;
     }
 
     private void Awake()
     {
-        _gameInformationMenu = FindObjectOfType<GameInformationMenu>();
         _cameraParent = FindObjectOfType<ParentedCamera>();
         _camera = Camera.main;
+        _layerMask = ~_layerMask;
     }
 
     private void Update()
@@ -95,8 +98,9 @@ public class InputService : MonoBehaviour, IInputService
     {
         Ray ray = _camera.ScreenPointToRay(mousePosition);
 
-        if (Physics.Raycast(ray, out var hit))
+        if (Physics.Raycast(_camera.transform.position, ray.direction, out var hit, Mathf.Infinity, _layerMask))
         {
+            Debug.Log(hit.collider.name);
             _touchedObj?.Untouch();
 
             hit.collider.gameObject.TryGetComponent(out _touchedObj);
@@ -107,13 +111,17 @@ public class InputService : MonoBehaviour, IInputService
                 _selectedFrame.EnableFrame();
                 _selectedFrame.transform.position = _touchedObj.GetPosition();
             }
+            else
+            {
+                _selectedFrame.DisableFrame();
+                OnEmptyTapRegistered?.Invoke();
+            }
         }
         else
         {
             _touchedObj?.Untouch();
             _selectedFrame.DisableFrame();
-            _gameInformationMenu.HideEmptyCellMenu();
-            _gameInformationMenu.HideGameMenu();           
+            OnEmptyTapRegistered?.Invoke();
         }
     }
 }

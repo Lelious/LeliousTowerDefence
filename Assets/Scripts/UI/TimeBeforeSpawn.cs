@@ -1,5 +1,7 @@
+using Infrastructure.StateMachine;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class TimeBeforeSpawn : MonoBehaviour
 {
@@ -7,9 +9,16 @@ public class TimeBeforeSpawn : MonoBehaviour
     [SerializeField] private float _timeBeforeSpawn;
     [SerializeField] private Button _spawnNowButton;
 
+    private GameLoopStateMachine _stateMachine;
     private float _remainingTime;
     private bool _onSpawning;
     private int _spawnTimer;
+
+    [Inject]
+    private void Construct(GameLoopStateMachine gameLoopStateMachine)
+    {
+        _stateMachine = gameLoopStateMachine;
+    }
 
     private protected void Awake()
     {
@@ -29,17 +38,18 @@ public class TimeBeforeSpawn : MonoBehaviour
         {
             if (!_onSpawning)
             {
-                _onSpawning = !_onSpawning;
                 SpawnNow();
-                _timeBeforeSpawnText.text = $"Spawning Enemy!";
             }
         }
     }
 
     public void SpawnNow()
     {
+        _stateMachine.Enter<GameSpawnState>();
+        _onSpawning = true;
         _remainingTime = 0f;
         _spawnNowButton.interactable = false;
+        _timeBeforeSpawnText.text = $"Spawning Enemy!";
     }
 
     public void ResetSpawnTime()
