@@ -4,6 +4,7 @@ using Zenject;
 public sealed class EnemyFactory : IInitializable, IEnemyFactory
 {
     private StartPoint _startPoint;
+    private EndPoint _endPoint;
     private EnemyPool _enemyPool;
     private Object _enemyPrefab;
     private string _prefabPath;
@@ -13,10 +14,11 @@ public sealed class EnemyFactory : IInitializable, IEnemyFactory
     readonly DiContainer _container = null;
 
     [Inject]
-    private void Construct(EnemyPool enemyPool, StartPoint startPoint)
+    private void Construct(EnemyPool enemyPool, StartPoint startPoint, EndPoint endPoint)
     {
         _enemyPool = enemyPool;
         _startPoint = startPoint;
+        _endPoint = endPoint;
     }
     
     public DiContainer Container
@@ -28,7 +30,7 @@ public sealed class EnemyFactory : IInitializable, IEnemyFactory
     {
         for (int i = 0; i < count; i++)
         {
-            var enemy = _container.InstantiatePrefabForComponent<Enemy>(_enemyPrefab, _startPoint.transform.position, Quaternion.identity, parent);
+            var enemy = _container.InstantiatePrefabForComponent<EnemyEntity>(_enemyPrefab, _startPoint.transform.position, Quaternion.identity, parent);
             enemy.gameObject.SetActive(false);
             _enemyPool.AddEnemyToPool(enemy);
         }    
@@ -36,7 +38,7 @@ public sealed class EnemyFactory : IInitializable, IEnemyFactory
 
     public void LoadNextEnemyPrefab()
     {
-        _prefabPath = $"Waves/Wave{_counter}";
+        _prefabPath = $"Waves/Wave/Wave{_counter}";
         _enemyPrefab = Resources.Load(_prefabPath);
 
         if (_prefabPath == null)
@@ -46,7 +48,7 @@ public sealed class EnemyFactory : IInitializable, IEnemyFactory
         }
     }
 
-    public Enemy GetEnemy() => _enemyPool.GetEnemyFromPool();
+    public EnemyEntity GetEnemy() => _enemyPool.GetEnemyFromPool();
     public void Initialize() => LoadNextEnemyPrefab();
     public void IncreaceCounter() => _counter++;
 }

@@ -1,7 +1,6 @@
 using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 public class GameInformationMenu : MonoBehaviour
@@ -11,14 +10,18 @@ public class GameInformationMenu : MonoBehaviour
 	[SerializeField] private List<UIButton> _emptyButtons = new List<UIButton>();
 	[SerializeField] private List<TowerData> _startingTowers = new List<TowerData>();
 
+	private TapRegistrator _tapRegistrator;
 	private GameManager _gameManager;
 	private BuildingCell _buildingCell;
 	private float _emptyCellMenuHeight;
 	private float _gameMenuHeight;
 
 	[Inject]
-	private void Construct(GameManager gameManager) =>	
+	private void Construct(GameManager gameManager, TapRegistrator tapRegistrator)
+	{	
 		_gameManager = gameManager;
+		_tapRegistrator = tapRegistrator;
+	}
 
 	private protected void Awake()
 	{
@@ -27,8 +30,8 @@ public class GameInformationMenu : MonoBehaviour
 
 		InitializeEmptyBuildButtons();
 
-		InputService.OnEmptyTapRegistered += HideGameMenu;
-		InputService.OnEmptyTapRegistered += HideEmptyCellMenu;
+		TapRegistrator.OnEmptyTapRegistered += HideGameMenu;
+		TapRegistrator.OnEmptyTapRegistered += HideEmptyCellMenu;
 	}
 
 	public void ShowEmptyCellMenu()
@@ -55,6 +58,11 @@ public class GameInformationMenu : MonoBehaviour
 		_gameMenuRect.DOAnchorPos(new Vector2(0f, -_gameMenuHeight), 0.25f);
 	}
 
+	public void RegisterTapOnUI()
+	{
+		_tapRegistrator.RegisterUITap();
+	}
+
 	public void SetBuildingCell(BuildingCell cell) => _buildingCell = cell;
 	public BuildingCell GetLastTouchedBuildingCell() => _buildingCell;
 
@@ -63,13 +71,13 @@ public class GameInformationMenu : MonoBehaviour
 	{
 		for (int i = 0; i < _emptyButtons.Count; i++)
 		{
-			_emptyButtons[i].SetButton(_startingTowers[i], _gameManager, this);
+			_emptyButtons[i].SetButton(_startingTowers[i], _gameManager, this, _tapRegistrator);
 		}
 	}
 
 	private void OnDestroy()
 	{
-		InputService.OnEmptyTapRegistered -= HideGameMenu;
-		InputService.OnEmptyTapRegistered -= HideEmptyCellMenu;
+		TapRegistrator.OnEmptyTapRegistered -= HideGameMenu;
+		TapRegistrator.OnEmptyTapRegistered -= HideEmptyCellMenu;
 	}
 }

@@ -58,19 +58,24 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\BottomMenuInformator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameBuildingState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Factories\EnemyFactory.cs" />
     <Compile Include="Assets\EnemyCheck.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyData\EnemyData.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameState.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IEnemyFactory.cs" />
     <Compile Include="Assets\Scripts\Tower\TowerRangeRotation.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemySpawnService.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyEntity.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
-    <Compile Include="Assets\Bullet.cs" />
+    <Compile Include="Assets\Scripts\Tower\Bullets\Bullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\Scripts\UI\GameButton.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\BootstrapInstaller.cs" />
+    <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
+    <Compile Include="Assets\Scripts\UI\UITapRegistrator.cs" />
     <Compile Include="Assets\Scripts\UI\UIParentCanvas.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
@@ -78,6 +83,7 @@
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameLooseState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\UI\BottomBuildingMenu.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\Scripts\Debug\Gizmo.cs" />
@@ -87,7 +93,7 @@
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\ITouchable.cs" />
     <Compile Include="Assets\Scripts\Tower\NewTower.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\IShoot.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IShoot.cs" />
     <Compile Include="Assets\Scripts\Input\ParentedCamera.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IInputService.cs" />
@@ -98,7 +104,9 @@
     <Compile Include="Assets\RagdollDelayedDeath.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameLoadState.cs" />
+    <Compile Include="Assets\Scripts\Input\CameraFrustrumChecker.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\Services\TapRegistrator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Teleportation.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
@@ -113,6 +121,7 @@
     <Compile Include="Assets\Scripts\UI\GameInformationMenu.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Scripts\Debug\FPSCounter\FPSDisplay.cs" />
+    <Compile Include="Assets\Scripts\Input\CameraLimiter.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IDamagable.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameSpawnState.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyHealth.cs" />
@@ -128,9 +137,9 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
-    <Compile Include="Assets\Scripts\TowerData.cs" />
+    <Compile Include="Assets\Scripts\Tower\TowerData.cs" />
     <Compile Include="Assets\Scripts\StaticData\EndPoint.cs" />
-    <Compile Include="Assets\Scripts\UI\CanvasRotatorToCamera.cs" />
+    <Compile Include="Assets\Scripts\UI\HealthBarRotatorToCamera.cs" />
     <Compile Include="Assets\Scripts\UI\SelectedFrame.cs" />
     <Compile Include="Assets\Scripts\StaticData\CachedStringValues.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\GameBootstrapper.cs" />
@@ -147,7 +156,11 @@
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IControllFromState.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameBuildingState.cs" />
+    <Compile Include="Assets\Scripts\Tower\BulletPool.cs" />
+    <Compile Include="Assets\Scripts\Tower\Bullets\ArrowBullet.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IBullet.cs" />
+    <Compile Include="Assets\Scripts\Tower\Bullets\BulletData.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyHitPoint.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -169,6 +182,7 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\BrokenVector\LowPolyShaders\Shaders\LowPolyUnlitShader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\Shaders\HealthBarShader.shader" />
     <None Include="Assets\BrokenVector\LowPolyShaders\Shaders\LowPolyPBRShader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />

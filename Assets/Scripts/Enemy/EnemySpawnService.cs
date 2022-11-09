@@ -7,7 +7,7 @@ public class EnemySpawnService : MonoBehaviour
 {
 	[SerializeField] private Transform _startPoint, _endPoint;
 
-	private List<Enemy> _enemyPoolList = new List<Enemy>();
+	private List<EnemyEntity> _enemyPoolList = new List<EnemyEntity>();
 	private EnemyFactory _enemyFactory;
 
 
@@ -33,9 +33,8 @@ public class EnemySpawnService : MonoBehaviour
 		{
 			yield return new WaitForSeconds(2f);
 			_enemyPoolList.RemoveAll(x => x == null);
-			var enemy = _enemyPoolList.Find(x => x.gameObject.activeInHierarchy == false);
-			enemy.gameObject.SetActive(true);
-			enemy.SetPath(_endPoint.position);
+			var enemyEntity = _enemyPoolList.Find(x => x.gameObject.activeInHierarchy == false);
+			enemyEntity.gameObject.SetActive(true);
 		}
 	}
 

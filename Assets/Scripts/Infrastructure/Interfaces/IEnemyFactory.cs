@@ -5,7 +5,7 @@ using UnityEngine;
 public interface IEnemyFactory
 {
     public void CreateEnemy(int count = 1, Transform parent = null);
-    public Enemy GetEnemy();
+    public EnemyEntity GetEnemy();
     public void LoadNextEnemyPrefab();
 
 }

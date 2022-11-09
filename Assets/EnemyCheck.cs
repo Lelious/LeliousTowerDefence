@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class EnemyCheck : MonoBehaviour
 {
-	private List<EnemyHealth> _enemiesList = new List<EnemyHealth>();
+	private List<IDamagable> _enemiesList = new List<IDamagable>();
 
-	public List<EnemyHealth> EnemiesList
+	public List<IDamagable> EnemiesList
 	{
 		get { return _enemiesList; }
-		set { _enemiesList.RemoveAll(x => x.gameObject == null); }
+		set { _enemiesList.RemoveAll(x => x.CanBeAttacked() == false);}
 	}
 
 	private protected void OnTriggerEnter(Collider other)
 	{
-		if (other.TryGetComponent<EnemyHealth>(out var source))
+		if (other.TryGetComponent(out IDamagable source))
 		{
 			if (!EnemiesList.Contains(source) && source != null)
 			{
@@ -24,7 +24,7 @@ public class EnemyCheck : MonoBehaviour
 
 	private protected void OnTriggerExit(Collider other)
 	{
-		if (other.TryGetComponent<EnemyHealth>(out var source))
+		if (other.TryGetComponent(out IDamagable source))
 		{
 			if (EnemiesList.Contains(source))
 			{

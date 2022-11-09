@@ -10,6 +10,10 @@ public class TowerData : ScriptableObject
 	public Sprite MainImage;
 
 	[Space]
+	[Header("Tower bullet")]
+	public Bullet BulletPrefab;
+
+	[Space]
 	[Header("Tower parameters")]
 
 	public string Name;
@@ -18,11 +22,8 @@ public class TowerData : ScriptableObject
 	public int MinimalDamage;
 	public int MaximumDamage;
 	public float AttackSpeed;
-
-	[Space]
-	[Header("UI parameters")]
-	public GameObject UIParentCanvas;
-	public Gradient GradientColor;
+	public float ProjectileSpeed;
+	public float ProjectileParentingTime;
 
 	[Space]
 	[Header("Upgradables")]

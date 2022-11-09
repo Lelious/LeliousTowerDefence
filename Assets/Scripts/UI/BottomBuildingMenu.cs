@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.UI;
 
 public class BottomBuildingMenu : MonoBehaviour
 {
+	[SerializeField] private GameInformationMenu _gameInformationMenu;
 	[SerializeField] private RectTransform _emptyCellMenu;
 	[SerializeField] private RectTransform _gameMenu;
 	[SerializeField, Range(0, 1000)]

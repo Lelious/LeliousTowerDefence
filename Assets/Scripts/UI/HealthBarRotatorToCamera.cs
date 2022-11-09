@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class CanvasRotatorToCamera : MonoBehaviour
+public class HealthBarRotatorToCamera : MonoBehaviour
 {
-    [SerializeField] private GameObject _slider;
+    [SerializeField] private GameObject _quad;
     private Transform _camera;
 
     private void Awake()
@@ -12,7 +12,7 @@ public class CanvasRotatorToCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        if (_slider.activeSelf)
+        if (_quad.activeInHierarchy)
         {
             transform.LookAt(transform.position + _camera.forward);
         }

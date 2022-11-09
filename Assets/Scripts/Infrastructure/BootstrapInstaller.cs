@@ -18,6 +18,14 @@ public class BootstrapInstaller : MonoInstaller
         BindStartPoint();
         BindEndPoint();
         BindEnemyPool();
+        BindTapRegistrator();
+    }
+
+    private void BindTapRegistrator()
+    {
+        Container
+            .BindInterfacesAndSelfTo<TapRegistrator>()
+            .AsSingle();
     }
 
     private void BindEnemyPool()

@@ -6,27 +6,29 @@ using Zenject;
 
 public class Enemy : MonoBehaviour
 {
-	[SerializeField] private Sprite _mainImage;
-	[SerializeField] private string _name;
-	[SerializeField] private GameObject _selection;
-	[SerializeField] private NavMeshAgent _navMeshAgent;
+	[SerializeField] private EnemyData _enemyData;
 	[SerializeField] private Animator _animator;
-	[SerializeField] private float _navMeshSpeedConst = 2f;
+	[SerializeField] private NavMeshAgent _navMeshAgent;
+	[SerializeField] private GameObject _selection;
+	[SerializeField] private HealthBar _hpBar;
 
+	private GameManager _gameManager;
 	private EnemyPool _enemyPool;
-	private float _speed = 1f;
+	private const float _navMeshSpeedConst = 2f;
 	private readonly int _hashSpeed = Animator.StringToHash("Speed");
 
-	[Inject]
-	private void Construct(EnemyPool enemyPool)
-	{
-		_enemyPool = enemyPool;
-	}
+	//[Inject]
+	//private void Construct(EnemyPool enemyPool, GameManager gameManager)
+	//{
+	//	_enemyPool = enemyPool;
+	//	_gameManager = gameManager;
+	//	_hpBar.SetHealth(_enemyData.Hp);
+	//}
 
 	private protected void LateUpdate()
 	{
-		_animator.SetFloat(_hashSpeed, _speed);
-		_navMeshAgent.speed = _navMeshSpeedConst * _speed;
+		_animator.SetFloat(_hashSpeed, _enemyData.Speed);
+		_navMeshAgent.speed = _navMeshSpeedConst * _enemyData.Speed;
 	}	
 
 	public void EnableSelectFrame()
@@ -50,9 +52,11 @@ public class Enemy : MonoBehaviour
 	}
 
 	public void SetPool(EnemyPool pool) => _enemyPool = pool;
+
 	public void ReturnToEnemyPool()
 	{
-		_enemyPool.ReturnToPool(this);
+		//_enemyPool.ReturnToPool(this);
+		_gameManager.AddGold(_enemyData.Worth);
 		StartCoroutine(DelayedDisableRoutine());
 	}
 

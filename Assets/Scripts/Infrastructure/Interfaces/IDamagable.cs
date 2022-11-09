@@ -2,8 +2,7 @@ using UnityEngine;
 
 public interface IDamagable
 {
-    public void TakeDamage(int damage);
+    public void TakeDamage(float damage);
     public bool CanBeAttacked();
-    public void ApplyBullet(Bullet bullet);
-    public void RemoveBullet(Bullet bullet);
+    EnemyHitPoint HitPoint();
 }

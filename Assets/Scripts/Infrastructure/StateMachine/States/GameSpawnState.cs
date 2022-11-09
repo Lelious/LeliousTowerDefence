@@ -9,14 +9,12 @@ public class GameSpawnState : State
 	private readonly CompositeDisposable _disposables = new CompositeDisposable();
 	private EnemyFactory _enemyFactory;
 	private EnemyPool _enemyPool;
-	private EndPoint _endPoint;
 
 	[Inject]
-	private void Construct(EnemyFactory enemyFactory, EnemyPool enemyPool, EndPoint endPoint)
+	private void Construct(EnemyFactory enemyFactory, EnemyPool enemyPool)
 	{
 		_enemyFactory = enemyFactory;
 		_enemyPool = enemyPool;
-		_endPoint = endPoint;
 	}
 
 	public GameSpawnState(GameLoopStateMachine gameLoopStateMachine) : base(gameLoopStateMachine) { }
@@ -46,7 +44,6 @@ public class GameSpawnState : State
 		{
 			var enemy = _enemyPool.GetEnemyFromPool();
 			enemy.gameObject.SetActive(true);
-			enemy.SetPath(_endPoint.transform.position);
 			iterator++;
 			yield return new WaitForSeconds(1.5f);
 		}

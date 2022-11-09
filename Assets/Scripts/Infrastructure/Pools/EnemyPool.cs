@@ -11,9 +11,9 @@ public class EnemyPool : IInitializable
     public const int PoolCapasity = 30;
 
     private GameLoopStateMachine _gameLoopStateMachine;
-    private Enemy _lastDefeatedEnemy;
-    private List<Enemy> _enemyList = new List<Enemy>();
-    private List<Enemy> _defeatedEnemiesList = new List<Enemy>();
+    private EnemyEntity _lastDefeatedEnemy;
+    private List<EnemyEntity> _enemyList = new List<EnemyEntity>();
+    private List<EnemyEntity> _defeatedEnemiesList = new List<EnemyEntity>();
 
     [Inject]
     private void Construct(GameLoopStateMachine gameLoopStateMachine) 
@@ -21,18 +21,18 @@ public class EnemyPool : IInitializable
         _gameLoopStateMachine = gameLoopStateMachine;
     }
 
-    public void AddEnemyToPool(Enemy enemy)
+    public void AddEnemyToPool(EnemyEntity enemy)
     {
         _enemyList.Add(enemy);
         EnemiesWaveCount.Value = _enemyList.Count();
     }
 
-    public Enemy GetEnemyFromPool()
+    public EnemyEntity GetEnemyFromPool()
     {
         return _enemyList.Where(x => x.gameObject.activeInHierarchy == false).FirstOrDefault();
     }  
 
-    public void ReturnToPool(Enemy enemy)
+    public void ReturnToPool(EnemyEntity enemy)
     {
         _lastDefeatedEnemy = enemy;
         _enemyList.Remove(enemy);
@@ -60,20 +60,15 @@ public class EnemyPool : IInitializable
 
     private void ClearEnemyPool()
     {
-        for (int i = 0; i < _enemyList.Count; i++)
-            Object.Destroy(_enemyList[i]?.gameObject);
-
-        _enemyList.Clear();
-
         for (int i = 0; i < _defeatedEnemiesList.Count; i++)
         {
-            if (_defeatedEnemiesList[i] != _lastDefeatedEnemy)          
+            if (_defeatedEnemiesList[i] != _lastDefeatedEnemy)
                 Object.Destroy(_defeatedEnemiesList[i]?.gameObject);
-            
-            else           
-                Object.Destroy(_lastDefeatedEnemy, 2f);           
+            else
+                Object.Destroy(_lastDefeatedEnemy.gameObject, 2f);
         }
 
+        _enemyList.Clear();
         _defeatedEnemiesList.Clear();
         EnemiesWaveCount.Value = _enemyList.Count();
     }

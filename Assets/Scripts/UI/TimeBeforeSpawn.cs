@@ -31,7 +31,11 @@ public class TimeBeforeSpawn : MonoBehaviour
         if (_remainingTime > 1f)
         {
             _spawnTimer = (int)(_remainingTime -= Time.unscaledDeltaTime);
-            _timeBeforeSpawnText.text = $"Before Spawn : {CachedStringValues.cachedStringValues[_spawnTimer]}";
+
+            if (_spawnTimer >= 0 && _spawnTimer <= 99)
+            {
+                _timeBeforeSpawnText.text = $"Wave in : {CachedStringValues.cachedStringValues[_spawnTimer]}";
+            }
         }
 
         else

@@ -5,9 +5,11 @@ using Zenject;
 
 public class GameManager : MonoBehaviour
 {
-    private int _playerGold = 20;
+    [SerializeField] private Transform _startPoint, _endPoint;
+
     private TopMenuInformator _topMenuInformator;
     private EnemySpawnService _enemySpawnService;
+    private int _playerGold = 10;
 
     [Inject]
     private void Construct(TopMenuInformator topMenuInformator)
@@ -31,7 +33,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void NotEnoughGold()
+    public void AddGold(int amount)
+    {
+        _playerGold += amount;
+        _topMenuInformator.SetMoney(_playerGold);
+    }
+
+    private void NotEnoughGold()
     {
 
     }

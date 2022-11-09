@@ -42,11 +42,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 995370452927894893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8d1579e0d5081f47b0b03f8f0267ff2, type: 3}
+  m_Script: {fileID: 11500000, guid: 052889bc40f7a9d4bb50f03fab5ec5be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flyingSpeed: 0.008
-  _timeBeforeReturning: 2
 --- !u!1001 &8532742386842312920
 PrefabInstance:
   m_ObjectHideFlags: 0
