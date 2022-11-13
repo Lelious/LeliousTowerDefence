@@ -970,6 +970,7 @@ MonoBehaviour:
   _waveInTexts: {fileID: 2252617959971787091}
   _spawningText: {fileID: 1328157024192480977}
   _spawnNowButton: {fileID: 4708961612076567349}
+  _beforeSpawn: {fileID: 4708961611749295843}
 --- !u!225 &4708961612924700145
 CanvasGroup:
   m_ObjectHideFlags: 0

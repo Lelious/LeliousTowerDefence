@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour, IDamagable
@@ -8,35 +8,36 @@ public class EnemyHealth : MonoBehaviour, IDamagable
 	[SerializeField] private EnemyData _enemyData;
 	[SerializeField] private HealthBar _hpBar;
 
-	private float _health;
+	private FloatReactiveProperty _health = new FloatReactiveProperty();
 
 	private protected void Awake()
 	{
-		_health = _enemyData.Hp;
-		_hpBar.SetMaxHealth(_health);
-		_hpBar.SetHealth(_health);
+		_health.Value = _enemyData.Hp;
+		_hpBar.SetMaxHealth(_health.Value);
+		_hpBar.SetHealth(_health.Value);
 		_hpBar.Hide();
 	}
 
-	public void TakeDamage(float damage)
+	public void TakeDamage(int damage)
 	{
 		_hpBar.Show();
 
-		if (damage >= _health)
+		if (damage >= _health.Value)
 		{
-			_health = 0;
-			_hpBar.SetHealth(_health);
+			_health.Value = 0;
+			_hpBar.SetHealth(_health.Value);
 			_hpBar.Hide();
 			_enemyMovement.EnemyDeath();
 		}
 		else
 		{
-			_health -= damage;
-			_hpBar.SetHealth(_health);
+			_health.Value -= damage;
+			_hpBar.SetHealth(_health.Value);
 		}
 	}
 
-	public bool CanBeAttacked() => _health > 0 ? true : false;	
+	public FloatReactiveProperty GetReactiveHealthProperty() => _health;	
+	public bool CanBeAttacked() => _health.Value > 0 ? true : false;	
 	public EnemyHitPoint HitPoint() => _hitPoint;
 
 	private protected void OnDisable()

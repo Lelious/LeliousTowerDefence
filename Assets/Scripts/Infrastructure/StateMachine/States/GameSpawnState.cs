@@ -7,6 +7,7 @@ using Zenject;
 public class GameSpawnState : State
 {
 	private readonly CompositeDisposable _disposables = new CompositeDisposable();
+	private System.IDisposable _disposableEntity;
 	private EnemyFactory _enemyFactory;
 	private EnemyPool _enemyPool;
 
@@ -21,9 +22,10 @@ public class GameSpawnState : State
 
 	public override void Enter()
 	{
+		_disposableEntity?.Dispose();
 		_enemyFactory.CreateEnemy(EnemyPool.PoolCapasity);
 
-		Observable
+		_disposableEntity = Observable
 			.FromCoroutine(SpawningRoutine)
 			.Subscribe()
 			.AddTo(_disposables);

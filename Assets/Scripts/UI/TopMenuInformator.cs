@@ -11,7 +11,7 @@ public class TopMenuInformator : MonoBehaviour
 	[SerializeField] private Text _timeBeforeSpawn;
 	[SerializeField] private GameObject _waveInTexts, _spawningText;
 	[SerializeField] private Button _spawnNowButton;
-
+	[SerializeField] private TimeBeforeSpawn _beforeSpawn;
 	private GameLoopStateMachine _gameLoopStateMachine;
 	private EnemyPool _enemyPool;
 
@@ -35,7 +35,7 @@ public class TopMenuInformator : MonoBehaviour
 		if (value > 0)
 			_timeBeforeSpawn.text = CachedStringValues.cachedStringValues[value];
 		else
-			EnterSpawnState();
+			_timeBeforeSpawn.text = CachedStringValues.cachedStringValues[0];
 	}
 
 	public void EnableDisableCounter()
@@ -52,7 +52,7 @@ public class TopMenuInformator : MonoBehaviour
 
 	public void EnterSpawnState()
 	{
-		_gameLoopStateMachine.Enter<GameSpawnState>();
+		_beforeSpawn.StartSpawn();
 	}
 
 	private void SetEnemiesValue(int value)

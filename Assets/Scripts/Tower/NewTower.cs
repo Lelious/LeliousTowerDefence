@@ -1,8 +1,11 @@
 using UnityEngine;
 using DG.Tweening;
+using UniRx;
 
 public class NewTower : MonoBehaviour
 {
+	public FloatReactiveProperty Health = new FloatReactiveProperty();
+
 	[SerializeField] private TowerData _towerData;
 	[SerializeField] private Shooter _shooter;
 	[SerializeField] private GameObject _rangeBoarder;
@@ -31,6 +34,7 @@ public class NewTower : MonoBehaviour
 		DOTween.To(() => _buildProgress, x => _buildProgress = x, _towerData.BuildingTime, _towerData.BuildingTime)
 			.OnUpdate(() =>
 			{
+				Health.Value = _buildProgress;
 				_buildingProgress.SetHealth(_buildProgress);
 			}).OnComplete(() =>
 				{
@@ -53,52 +57,7 @@ public class NewTower : MonoBehaviour
 	public void HideRange()
 	{
 		_rangeBoarder.SetActive(false);
-	}
-
-	public string GetTowerName()
-	{
-		return _towerData.Name;
-	}
-	public Sprite GetTowerImage()
-	{
-		return _towerData.MainImage;
-	}
-	public int GetMinDamage()
-	{
-		return _towerData.MinimalDamage;
-	}
-	public int GetMaxDamage()
-	{
-		return _towerData.MaximumDamage;
-	}
-	public float GetAttackSpeed()
-	{
-		return _towerData.AttackSpeed;
-	}
-	public string GetHealth()
-	{
-		return $"{string.Format("{0:f0}", _buildProgress)}/{_towerData.BuildingTime}";
-	}
-
-	public int GetCost()
-	{
-		return _towerData.Cost;
-	}
-
-	public bool GetBuildStatus()
-	{
-		return _isBuilded;
-	}
+	}	
 
 	public TowerData GetTowerData()	=> _towerData;
-
-	public Vector3 GetPosition()
-	{
-		throw new System.NotImplementedException();
-	}
-
-	public void Touch()
-	{
-		throw new System.NotImplementedException();
-	}
 }

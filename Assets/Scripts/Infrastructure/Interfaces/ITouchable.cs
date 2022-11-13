@@ -1,9 +1,6 @@
-using System;
-using UnityEngine;
-
 public interface ITouchable
 {
-    public Vector3 GetPosition();
+    public bool IsTouched();
     public void Touch();
     public void Untouch();
 }

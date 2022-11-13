@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Enemy", menuName = "ScriptableObjects/EnemyData", order = 1)]
@@ -16,9 +15,4 @@ public class EnemyData : ScriptableObject
 	public int Armor;
 	public int Hp;
 	public float Speed;
-
-	[Space]
-	[Header("UI parameters")]
-	public GameObject UIParentCanvas;
-	public Gradient GradientColor;
 }

@@ -9,6 +9,7 @@ public class GameInformationMenu : MonoBehaviour
 	[SerializeField] private RectTransform _gameMenuRect;
 	[SerializeField] private List<UIButton> _emptyButtons = new List<UIButton>();
 	[SerializeField] private List<TowerData> _startingTowers = new List<TowerData>();
+	[SerializeField] private BottomMenuInformator _bottomMenuInformator;
 
 	private TapRegistrator _tapRegistrator;
 	private GameManager _gameManager;
@@ -65,6 +66,7 @@ public class GameInformationMenu : MonoBehaviour
 
 	public void SetBuildingCell(BuildingCell cell) => _buildingCell = cell;
 	public BuildingCell GetLastTouchedBuildingCell() => _buildingCell;
+	public BottomMenuInformator GetBottomMenuInformator() => _bottomMenuInformator;
 
 
 	private void InitializeEmptyBuildButtons()

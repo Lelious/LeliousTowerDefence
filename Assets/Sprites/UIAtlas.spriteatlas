@@ -54,10 +54,10 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 16dee710046b031428e4482f9585fe9a, type: 3}
-  - {fileID: 21300000, guid: 910d21407bb58b14582a847482b00880, type: 3}
   - {fileID: 21300000, guid: 4be560e07241b4a47b392ffb5d9a861a, type: 3}
   - {fileID: 21300000, guid: 4f1cf121a9bd56141a3d9d904d03cde8, type: 3}
   - {fileID: 21300000, guid: eb6b8221262cbeb459474b7e44c4a07f, type: 3}
+  - {fileID: 21300000, guid: dd8c88222c88bec429aa5c2afea8d6be, type: 3}
   - {fileID: 21300000, guid: 89333eb2a862d3e40a242c70e308d475, type: 3}
   - {fileID: 21300000, guid: 84e7eaa476e753a469a73379813d308e, type: 3}
   - {fileID: 21300000, guid: 651495853e9b37949b535cdf45f64e0e, type: 3}
@@ -78,10 +78,10 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6ce5440f5c68a6f41a997f70d9f20d91, type: 3}
   m_PackedSpriteNamesToIndex:
   - NamePlace1
-  - 1_rabbit_icon
   - RightLine
   - UpperLine
   - Button
+  - Skeleton
   - Square
   - ArmorIcon
   - Square500

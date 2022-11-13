@@ -28,6 +28,7 @@ public sealed class EnemyFactory : IInitializable, IEnemyFactory
 
     public void CreateEnemy(int count = 1, Transform parent = null)
     {
+        Debug.Log($"Creating Enemies, count to create : {count}");
         for (int i = 0; i < count; i++)
         {
             var enemy = _container.InstantiatePrefabForComponent<EnemyEntity>(_enemyPrefab, _startPoint.transform.position, Quaternion.identity, parent);

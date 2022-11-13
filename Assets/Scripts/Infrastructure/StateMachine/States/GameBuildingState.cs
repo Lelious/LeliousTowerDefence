@@ -1,13 +1,12 @@
 using Infrastructure.StateMachine;
 using System.Collections;
-using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
 public class GameBuildingState : State
 {
-	private readonly CompositeDisposable _disposables = new CompositeDisposable();
+	private readonly CompositeDisposable _disposables = new CompositeDisposable();	
 	private TopMenuInformator _topMenuInformator;
 	private System.IDisposable _timerRoutine;
 	private const int _timerTime = 30;
@@ -23,15 +22,19 @@ public class GameBuildingState : State
 
 	public override void Enter()
 	{
+		Debug.Log("Enter GameBuildState");
 		_topMenuInformator.EnableDisableCounter();
 		_timerRoutine = Observable
 							.FromCoroutine(TimerBeforeSpawnRoutine)
 							.Subscribe()
 							.AddTo(_disposables);
+
+
 	}
 
 	public override void Exit()
 	{
+		Debug.Log("Exit GameBuildState");
 		_timerRoutine.Dispose();
 		_topMenuInformator.EnableDisableCounter();
 	}

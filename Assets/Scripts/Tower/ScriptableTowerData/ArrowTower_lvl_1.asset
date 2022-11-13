@@ -21,7 +21,7 @@ MonoBehaviour:
   BuildingTime: 3
   MinimalDamage: 1
   MaximumDamage: 3
-  AttackSpeed: 0.1
+  AttackSpeed: 1
   ProjectileSpeed: 0.005
   ProjectileParentingTime: 2
   UpgradablesList:

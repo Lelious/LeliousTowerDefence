@@ -30,8 +30,6 @@ public class TapRegistrator : IInputService
 
             if (Physics.Raycast(_camera.transform.position, ray.direction, out var hit, Mathf.Infinity, _layerMask))
             {
-                Debug.Log("WorldTapRegistered");
-                Debug.Log(hit.collider.name);
                 _touchedObj?.Untouch();
 
                 hit.collider.gameObject.TryGetComponent(out _touchedObj);
@@ -39,8 +37,6 @@ public class TapRegistrator : IInputService
                 if (_touchedObj != null)
                 {
                     _touchedObj.Touch();
-                    _selectedFrame.EnableFrame();
-                    _selectedFrame.transform.position = _touchedObj.GetPosition();
                 }
                 else
                 {

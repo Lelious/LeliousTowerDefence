@@ -25,6 +25,7 @@ public class EnemyPool : IInitializable
     {
         _enemyList.Add(enemy);
         EnemiesWaveCount.Value = _enemyList.Count();
+        Debug.Log("AddingEnemyToPool");
     }
 
     public EnemyEntity GetEnemyFromPool()
@@ -39,6 +40,7 @@ public class EnemyPool : IInitializable
         _defeatedEnemiesList.Add(enemy);
         EnemiesWaveCount.Value = _enemyList.Count();
         CheckForEmptyPool();
+        Debug.Log("AddingEnemyToDefeatedPool");
     }
 
     public void Initialize()
@@ -49,8 +51,7 @@ public class EnemyPool : IInitializable
     {
         if (_enemyList.Count == 0)
         {
-            ClearEnemyPool();
-            _gameLoopStateMachine.Enter<GameBuildingState>();
+            ClearEnemyPool();            
             return true;
         }
 
@@ -60,10 +61,12 @@ public class EnemyPool : IInitializable
 
     private void ClearEnemyPool()
     {
+        Debug.Log($"Clearing Pool, EnemiesInEnemyList:{_enemyList.Count}");
+        Debug.Log($"Clearing Pool, EnemiesInDefeatedList:{_defeatedEnemiesList.Count}");
         for (int i = 0; i < _defeatedEnemiesList.Count; i++)
         {
             if (_defeatedEnemiesList[i] != _lastDefeatedEnemy)
-                Object.Destroy(_defeatedEnemiesList[i]?.gameObject);
+                Object.Destroy(_defeatedEnemiesList[i].gameObject);
             else
                 Object.Destroy(_lastDefeatedEnemy.gameObject, 2f);
         }
@@ -71,5 +74,7 @@ public class EnemyPool : IInitializable
         _enemyList.Clear();
         _defeatedEnemiesList.Clear();
         EnemiesWaveCount.Value = _enemyList.Count();
+        Debug.Log($"Pool cleared, EnemiesInEnemyList:{_enemyList.Count}, {_defeatedEnemiesList.Count}");
+        _gameLoopStateMachine.Enter<GameBuildingState>();
     }
 }

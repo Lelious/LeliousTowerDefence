@@ -42,12 +42,12 @@ public class TimeBeforeSpawn : MonoBehaviour
         {
             if (!_onSpawning)
             {
-                SpawnNow();
+                StartSpawn();
             }
         }
     }
 
-    public void SpawnNow()
+    public void StartSpawn()
     {
         _stateMachine.Enter<GameSpawnState>();
         _onSpawning = true;
