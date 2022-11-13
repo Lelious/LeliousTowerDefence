@@ -19,63 +19,74 @@ public class BootstrapInstaller : MonoInstaller
         BindEndPoint();
         BindEnemyPool();
         BindTapRegistrator();
+        BindSelectedFrame();
     }
 
     private void BindTapRegistrator()
     {
-        Container
-            .BindInterfacesAndSelfTo<TapRegistrator>()
-            .AsSingle();
+        Container.
+            BindInterfacesAndSelfTo<TapRegisterService>().
+            AsSingle();
     }
 
     private void BindEnemyPool()
     {
-        Container
-            .BindInterfacesAndSelfTo<EnemyPool>()
-            .AsSingle();
+        Container.
+            BindInterfacesAndSelfTo<EnemyPool>().
+            AsSingle();
     }
 
     private void BindStartPoint()
     {
-        Container
-            .Bind<StartPoint>()
-            .FromInstance(_startPoint)
-            .AsSingle();
+        Container.
+            Bind<StartPoint>().
+            FromInstance(_startPoint).
+            AsSingle();
     }
     private void BindEndPoint()
     {
-        Container
-            .Bind<EndPoint>()
-            .FromInstance(_endPoint)
-            .AsSingle();
+        Container.
+            Bind<EndPoint>().
+            FromInstance(_endPoint).
+            AsSingle();
     }
 
     private void BindTowerFactory()
     {
-        Container
-            .BindInterfacesAndSelfTo<TowerFactory>()
-            .AsSingle();
+        Container.
+            BindInterfacesAndSelfTo<TowerFactory>().
+            AsSingle();
     }
 
     private void BindStateMachine()
     {
-        Container
-            .BindInterfacesAndSelfTo<GameLoopStateMachine>()
-            .AsSingle();
+        Container.
+            BindInterfacesAndSelfTo<GameLoopStateMachine>().
+            AsSingle();
     }
 
     private void BindGameManager()
     {
-        Container.Bind<GameManager>()
-            .FromComponentInNewPrefabResource(AssetPath.GameManager)
-            .AsSingle()
-            .NonLazy();
+        Container.
+            Bind<GameManager>().
+            FromComponentInNewPrefabResource(AssetPath.GameManager).
+            AsSingle().
+            NonLazy();
     }
 
     private void BindEnemyFactory()
     {
-        Container
-            .BindInterfacesAndSelfTo<EnemyFactory>()
-            .AsSingle();
+        Container.
+            BindInterfacesAndSelfTo<EnemyFactory>().
+            AsSingle();
+    }
+
+    private void BindSelectedFrame()
+    {
+        Container.
+            Bind<SelectedFrame>().
+            FromComponentInNewPrefabResource(AssetPath.SelectedFrame).
+            AsSingle().
+            NonLazy();
     }
 }

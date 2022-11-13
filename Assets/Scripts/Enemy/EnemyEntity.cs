@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UniRx;
 using UnityEngine;
@@ -11,8 +12,9 @@ public class EnemyEntity : MonoBehaviour, ITouchable
     [SerializeField] private EnemyData _enemyData;
     [SerializeField] private GameObject _selection;
 
-    private GameInformationMenu _gameInformationMenu;
-    private BottomMenuInformator _bottomMenuInformator;
+    private GamePannelUdaterInfoContainer _containerInfo;
+    private GameUIService _gameInformationMenu;
+    private BottomGameMenu _bottomMenuInformator;
     private SelectedFrame _selectedFrame;
     private GameManager _gameManager;
     private EnemyPool _enemyPool;
@@ -20,17 +22,19 @@ public class EnemyEntity : MonoBehaviour, ITouchable
 
   
     [Inject]
-    private void Construct(EnemyPool enemyPool, GameManager gameManager, GameInformationMenu gameInformationMenu, SelectedFrame selectedFrame)
+    private void Construct(EnemyPool enemyPool, GameManager gameManager, GameUIService gameInformationMenu, SelectedFrame selectedFrame)
     {
         _enemyPool = enemyPool;
         _gameManager = gameManager;
         _gameInformationMenu = gameInformationMenu;
         _bottomMenuInformator = _gameInformationMenu.GetBottomMenuInformator();
-        _selectedFrame = selectedFrame;
+        _selectedFrame = selectedFrame;       
     }
+
     private void Awake()
     {
         Health = _enemyHealth.GetReactiveHealthProperty();
+        InitializeInfoContainer();
     }
 
     public void ReturnToEnemyPool()
@@ -41,17 +45,11 @@ public class EnemyEntity : MonoBehaviour, ITouchable
         StartCoroutine(DelayedDisableRoutine());
     }
 
-    private IEnumerator DelayedDisableRoutine()
-    {
-        yield return new WaitForSeconds(2f);
-        gameObject.SetActive(false);
-    }
-
     public void Touch()
     {
         _isTouched = true;
         _gameInformationMenu.ShowGameMenu();
-        _bottomMenuInformator.SetEntityToPannelUpdate(this, _enemyData.MainImage, Health, _enemyData.Name, _enemyData.Hp, 0, 0, _enemyData.Armor, 0);
+        _bottomMenuInformator.SetEntityToPannelUpdate(_containerInfo);
         _selectedFrame.DisableFrame();
         _selection.SetActive(true);
     }
@@ -62,10 +60,27 @@ public class EnemyEntity : MonoBehaviour, ITouchable
         _selection.SetActive(false);
     }
 
-    public Vector3 GetPosition()
+    public Vector3 GetPosition() => transform.position;
+    public bool IsTouched() => _isTouched;
+
+    private IEnumerator DelayedDisableRoutine()
     {
-        throw new System.NotImplementedException();
+        yield return new WaitForSeconds(2f);
+        gameObject.SetActive(false);
     }
 
-    public bool IsTouched() => _isTouched;
+    private void InitializeInfoContainer()
+    {
+        _containerInfo = new GamePannelUdaterInfoContainer();
+
+        _containerInfo.Touchable = this;
+        _containerInfo.PreviewImage = _enemyData.MainImage;
+        _containerInfo.CurrentHealth = Health;
+        _containerInfo.Name = _enemyData.Name;
+        _containerInfo.MaxHealth = _enemyData.Hp;
+        _containerInfo.MinDamage = 0;
+        _containerInfo.MaxDamage = 0;
+        _containerInfo.Armor = _enemyData.Armor;
+        _containerInfo.AttackSpeed = 0;
+    }
 }

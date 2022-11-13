@@ -7,12 +7,12 @@ public class UIButton : MonoBehaviour
 	[SerializeField] private Image _image;
 	[SerializeField] private Text _name;
 
-	private GameInformationMenu _gameInformationMenu;
-	private TapRegistrator _tapRegistrator;
+	private GameUIService _gameInformationMenu;
+	private TapRegisterService _tapRegistrator;
 	private GameManager _gameManager;
 	private TowerData _towerData;	
 
-	public void SetButton(TowerData data, GameManager gameManager, GameInformationMenu gameInformationMenu, TapRegistrator tapRegistrator)
+	public void SetButton(TowerData data, GameManager gameManager, GameUIService gameInformationMenu, TapRegisterService tapRegistrator)
 	{
 		_towerData = data;
 		_gameManager = gameManager;

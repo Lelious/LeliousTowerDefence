@@ -1,10 +1,10 @@
 using UnityEngine;
 using Zenject;
 
-public class InputService : MonoBehaviour
-{   
+public sealed class InputService : MonoBehaviour
+{
+    private TapRegisterService _tapRegisterService;
     private ParentedCamera _cameraParent;
-    private TapRegistrator _tapRegistrator;
     private Vector3 _touchStart;
     private float _sensibility = 0.1f;
     private float _groundZ = 0;
@@ -14,9 +14,9 @@ public class InputService : MonoBehaviour
     private int _touchCount = 0;
 
     [Inject]
-    private void Construct(TapRegistrator tapRegistrator)
+    private void Construct(TapRegisterService tapRegistrator)
     {
-        _tapRegistrator = tapRegistrator;
+        _tapRegisterService = tapRegistrator;
     }
 
     private void Awake()
@@ -32,7 +32,7 @@ public class InputService : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                _touchStart = _tapRegistrator.GetMovementDirection(_groundZ);
+                _touchStart = _tapRegisterService.GetMovementDirection(_groundZ);
                 _touchTimeTimer = _touchTime;
             }
 
@@ -43,7 +43,7 @@ public class InputService : MonoBehaviour
 
                 if (_touchCount < 2)
                 {
-                    Vector3 direction = _touchStart - _tapRegistrator.GetMovementDirection(_groundZ);
+                    Vector3 direction = _touchStart - _tapRegisterService.GetMovementDirection(_groundZ);
                     _cameraParent.MoveCamera(direction);
                 }
             }
@@ -66,7 +66,7 @@ public class InputService : MonoBehaviour
             {
                 var currentMousePos = Input.mousePosition;
                 if (_touchTimeTimer > 0)
-                    _tapRegistrator.RegisterWorldTap(currentMousePos);
+                    _tapRegisterService.RegisterWorldTap(currentMousePos);
             }
         }       
     }

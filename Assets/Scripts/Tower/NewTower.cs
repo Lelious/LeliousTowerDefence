@@ -12,18 +12,15 @@ public class NewTower : MonoBehaviour
 	[SerializeField] private HealthBar _buildingProgress;
 	[SerializeField] private Transform _towerObject;
 
-	private ParticleSystem _dustPatricles;	
+	private ParticleSystem _dustPatricles;
+	private BuildingCell _buildingCell;
 	private float _endYPosition = -0.6f;
 	private bool _isBuilded;
 	private float _buildProgress = 0.01f;
 
-	private protected void Awake()
+	public void TowerBuild(BuildingCell cell)
 	{
-		TowerBuild();
-	}
-
-	private void TowerBuild()
-	{
+		_buildingCell = cell;
 		_buildingProgress.SetMaxHealth(_towerData.BuildingTime);
 		_buildingProgress.SetHealth(0.01f);
 		_dustPatricles = Instantiate(_towerData.DustParticles, transform.position, Quaternion.identity, transform);
@@ -42,6 +39,10 @@ public class NewTower : MonoBehaviour
 					_buildingProgress.Hide();
 					_shooter.gameObject.SetActive(true);
 					_isBuilded = true;
+
+					if (_buildingCell.IsTouched())
+						ShowRange();
+
 				}).SetEase(Ease.Linear);
 		_towerObject.DOLocalMoveY(_endYPosition, _towerData.BuildingTime);
 	}
