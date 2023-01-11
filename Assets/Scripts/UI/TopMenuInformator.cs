@@ -11,15 +11,16 @@ public class TopMenuInformator : MonoBehaviour
 	[SerializeField] private Text _timeBeforeSpawn;
 	[SerializeField] private GameObject _waveInTexts, _spawningText;
 	[SerializeField] private Button _spawnNowButton;
-	[SerializeField] private TimeBeforeSpawn _beforeSpawn;
+	[SerializeField] private GameObject _disabledSpawnButton;
 	private GameLoopStateMachine _gameLoopStateMachine;
 	private EnemyPool _enemyPool;
+	private bool _isSpawning = false;
 
 	[Inject]
-	private void Construct(EnemyPool enemyPool, GameLoopStateMachine gameLoopStateMachine)
+	private void Construct(EnemyPool enemyPool, GameLoopStateMachine stateMachine)
 	{
-		_gameLoopStateMachine = gameLoopStateMachine;
-		_enemyPool = enemyPool;
+		_gameLoopStateMachine = stateMachine;
+        _enemyPool = enemyPool;
 	}
 
 	private void Awake()
@@ -33,17 +34,18 @@ public class TopMenuInformator : MonoBehaviour
 	public void SetSpawnTime(int value)
 	{
 		if (value > 0)
-			_timeBeforeSpawn.text = CachedStringValues.cachedStringValues[value];
+			_timeBeforeSpawn.text = $"Wave in : {CachedStringValues.cachedStringValues[value]}";
 		else
-			_timeBeforeSpawn.text = CachedStringValues.cachedStringValues[0];
-	}
+			EnterSpawnState();
+    }
 
 	public void EnableDisableCounter()
 	{
 		_waveInTexts.SetActive(!_waveInTexts.activeInHierarchy);
 		_spawningText.SetActive(!_spawningText.activeInHierarchy);
-		_spawnNowButton.interactable = !_spawnNowButton.interactable;
-	}
+        _disabledSpawnButton.SetActive(!_disabledSpawnButton.activeInHierarchy);
+        _spawnNowButton.interactable = !_spawnNowButton.interactable;
+    }
 
 	public void SetMoney(int amount)
 	{
@@ -52,8 +54,11 @@ public class TopMenuInformator : MonoBehaviour
 
 	public void EnterSpawnState()
 	{
-		_beforeSpawn.StartSpawn();
-	}
+        _gameLoopStateMachine.Enter<GameSpawnState>();
+		_isSpawning = true;
+        _spawnNowButton.interactable = false;
+        _timeBeforeSpawn.text = $"Spawning Enemy!";
+    }
 
 	private void SetEnemiesValue(int value)
 	{

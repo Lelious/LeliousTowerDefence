@@ -1,19 +1,29 @@
 using System.Collections;
 using UnityEngine;
+using DG.Tweening;
+using Zenject;
 
 public class Shooter : MonoBehaviour, IShoot
 {
-    [SerializeField] private BulletPool _bulletPool;
     [SerializeField] private TowerData _towerData;
     [SerializeField] private EnemyCheck _enemyChecker;
-    [SerializeField, Range(1, 10)] private int _poolSize;
-
+    [SerializeField, Range(1, 100)] private int _poolSize;
+    [SerializeField] private Transform _shootingPoint;
+    [SerializeField] private Transform _cannonToRotate;
+    [Inject] private PoolService _poolService;
     private float _delayBetweenShoots;
 
     private protected void Awake()
     {
+        if (_shootingPoint == null)      
+            _shootingPoint = transform;       
         _delayBetweenShoots = _towerData.AttackSpeed;
-        _bulletPool.InitializePool(_towerData.BulletPrefab, _poolSize);
+        _enemyChecker.SetAttackRange(_towerData.AttackRadius);
+        for (int i = 0; i < _poolSize; i++)
+        {
+            var bullet = CreateBullet();
+            bullet.SetBulletPool(_poolService);
+        }       
 
         StartCoroutine(ShootingRoutine());
     }
@@ -25,6 +35,12 @@ public class Shooter : MonoBehaviour, IShoot
             if (_enemyChecker.EnemiesList[i] != null && _enemyChecker.EnemiesList[i].CanBeAttacked())
             {
                 Shoot(_enemyChecker.EnemiesList[i]);
+
+                if (_cannonToRotate != null)
+                {
+                    var originPoint = _enemyChecker.EnemiesList[i].GetOrigin().position;
+                    _cannonToRotate.DOLookAt(new Vector3(originPoint.x, _cannonToRotate.position.y, originPoint.z), 0.1f);
+                }
                 return true;
             }
         }
@@ -33,14 +49,18 @@ public class Shooter : MonoBehaviour, IShoot
 
     public void Shoot(IDamagable damagable)
     {
-        var bullet = _bulletPool.GetBulletFromPool();
+        var bullet = _poolService.GetBulletFromPool(_towerData.BulletPrefab.GetType());
 
-        bullet.SetActive();
-        bullet.GetBullet().SetBulletParameters(_towerData);
-        bullet.Transform().position = transform.position;
+        if (bullet == null)
+        {
+            bullet = CreateBullet();
+            bullet.SetBulletPool(_poolService, false);
+        }
+
+        bullet.SetBulletParameters(_towerData, _shootingPoint.position);
         bullet.SetTarget(damagable);
-        bullet.GetBullet().FlyOnTarget();
-    }   
+        bullet.FlyOnTarget();
+    }       
 
     private IEnumerator ShootingRoutine()
     {
@@ -53,4 +73,6 @@ public class Shooter : MonoBehaviour, IShoot
             yield return new WaitForSeconds(_delayBetweenShoots/2);
         }
     }
+
+    private Bullet CreateBullet() => Instantiate(_towerData.BulletPrefab);
 }

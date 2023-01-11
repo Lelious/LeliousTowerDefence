@@ -18,12 +18,14 @@ public class TowerData : ScriptableObject
 
 	public string Name;
 	public int Cost;
-	public float BuildingTime;
+	public int BuildingTime;
 	public int MinimalDamage;
 	public int MaximumDamage;
 	public float AttackSpeed;
 	public float ProjectileSpeed;
 	public float ProjectileParentingTime;
+	public float ExplosionRadius;
+	public float AttackRadius;
 
 	[Space]
 	[Header("Upgradables")]

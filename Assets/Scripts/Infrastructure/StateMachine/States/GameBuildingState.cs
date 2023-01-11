@@ -22,19 +22,15 @@ public class GameBuildingState : State
 
 	public override void Enter()
 	{
-		Debug.Log("Enter GameBuildState");
 		_topMenuInformator.EnableDisableCounter();
 		_timerRoutine = Observable
 							.FromCoroutine(TimerBeforeSpawnRoutine)
 							.Subscribe()
 							.AddTo(_disposables);
-
-
 	}
 
 	public override void Exit()
 	{
-		Debug.Log("Exit GameBuildState");
 		_timerRoutine.Dispose();
 		_topMenuInformator.EnableDisableCounter();
 	}
@@ -42,6 +38,7 @@ public class GameBuildingState : State
 	private IEnumerator TimerBeforeSpawnRoutine()
 	{
 		_timerValue = _timerTime;
+		Debug.Log($"SettingTimerValue: {_timerValue}");
 
 		while (_timerValue >= 0)
 		{
@@ -50,5 +47,6 @@ public class GameBuildingState : State
 
 			yield return new WaitForSeconds(1f);
 		}
-	}
+		_topMenuInformator.EnterSpawnState();
+    }
 }

@@ -20,6 +20,7 @@ public class BootstrapInstaller : MonoInstaller
         BindEnemyPool();
         BindTapRegistrator();
         BindSelectedFrame();
+        BindPool();
     }
 
     private void BindTapRegistrator()
@@ -88,5 +89,13 @@ public class BootstrapInstaller : MonoInstaller
             FromComponentInNewPrefabResource(AssetPath.SelectedFrame).
             AsSingle().
             NonLazy();
+    }
+
+    private void BindPool()
+    {
+        Container.
+             BindInterfacesAndSelfTo<PoolService>().
+             AsSingle().
+             NonLazy();
     }
 }

@@ -47,7 +47,7 @@ public class GameSpawnState : State
 			var enemy = _enemyPool.GetEnemyFromPool();
 			enemy.gameObject.SetActive(true);
 			iterator++;
-			yield return new WaitForSeconds(1.5f);
+			yield return new WaitForSeconds(0.7f);
 		}
 	}
 }

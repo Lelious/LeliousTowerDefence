@@ -2,10 +2,15 @@ using System.Collections;
 using UnityEngine;
 
 public class ArrowBullet : Bullet, IPoollableBullet
-{  
-    private BulletPool _bulletPool;
+{
+    [SerializeField] private GameObject _impactOnHitPrefab;
+
+    private IPoollableBullet _iPoollable;
     private IDamagable _damagable;
     private EnemyHitPoint _enemyHitPoint;
+    private PoolService _poolService;
+    private GameObject _impactOnHit;
+    private Transform _hitPointTransform;
     private float _flyingProgress;
     private float _returningTime;
     private float _flyingSpeed;
@@ -13,38 +18,51 @@ public class ArrowBullet : Bullet, IPoollableBullet
     private bool _onFlying;
     private bool _isDealDamage;
 
-    public void SetPool(BulletPool pool) => _bulletPool = pool;
+    public override void FlyOnTarget() => StartCoroutine(ArrowFlyingRoutine());
+    public override void ReturnBulletToPool() => ReturnToPool();
     public void SetInnactive() => gameObject.SetActive(false);
-    public bool IsFree() => !gameObject.activeInHierarchy;
     public void SetActive() => gameObject.SetActive(true);
-    public Transform Transform() => transform;
-    public Bullet GetBullet() => this;
+    public Bullet GetBulletType() => this;
 
-    public override void SetBulletParameters(TowerData data)
+    public override void SetBulletPool(PoolService pool, bool addToPool = true)
+    {
+        _poolService = pool;
+        _iPoollable = GetComponent<IPoollableBullet>();
+
+        if (addToPool)       
+            ReturnToPool();       
+    }
+
+    public override void SetBulletParameters(TowerData data, Vector3 startPosition)
     {
         _damage = Random.Range(data.MinimalDamage, data.MaximumDamage + 1);
         _flyingSpeed = data.ProjectileSpeed;
         _returningTime = data.ProjectileParentingTime;
-    }
+        transform.position = startPosition;
 
-    public override void FlyOnTarget()
-    {       
-        StartCoroutine(ArrowFlyingRoutine());
-    }
+        if (_impactOnHitPrefab == null)       
+            return;       
+        if (_impactOnHit != null)       
+            return;        
+        _impactOnHit = Instantiate(_impactOnHitPrefab);
+        _impactOnHit.SetActive(false);
+    }     
 
     public void ReturnToPool()
     {
         StopAllCoroutines();
-        _bulletPool.Return(this);
+        transform.SetParent(null);
+        _poolService.AddBulletToPool(typeof(ArrowBullet), _iPoollable);
         _isDealDamage = false;
         _flyingProgress = 0f;
         _onFlying = false;
     }
 
-    public void SetTarget(IDamagable damagable)
+    public override void SetTarget(IDamagable damagable)
     {
         _damagable = damagable;
         _enemyHitPoint = _damagable.HitPoint();
+        _hitPointTransform = _enemyHitPoint.transform;
     }
 
     private IEnumerator ArrowFlyingRoutine()
@@ -61,6 +79,7 @@ public class ArrowBullet : Bullet, IPoollableBullet
                 {
                     transform.position = Vector3.Lerp(transform.position, _enemyHitPoint.transform.position, _flyingProgress);
                     _flyingProgress += _flyingSpeed;
+                    _flyingSpeed += 0.0001f;
                 }
                 else
                 {
@@ -69,12 +88,16 @@ public class ArrowBullet : Bullet, IPoollableBullet
                         _isDealDamage = true;
                         _damagable.TakeDamage(_damage);
                         _damagable.HitPoint().AttachBulletToHitPoint(this);
+                        if (_impactOnHit != null)
+                        {
+                            _impactOnHit.transform.position = _hitPointTransform.position;
+                            _impactOnHit.SetActive(true);
+                        }
                         _onFlying = false;
                         StartCoroutine(ReturnToPoolRoutine());
                     }
                 }
             }
-
             yield return null;
         }
     }
@@ -84,10 +107,5 @@ public class ArrowBullet : Bullet, IPoollableBullet
         yield return new WaitForSeconds(_returningTime);
         _enemyHitPoint.RemoveAttachedBulletFromHitPoint(this);
         ReturnToPool();
-    }
-
-    public override void SetHitPoint(EnemyHitPoint point)
-    {
-        throw new System.NotImplementedException();
-    }
+    }   
 }

@@ -11,10 +11,10 @@ public class NewTower : MonoBehaviour
 	[SerializeField] private GameObject _rangeBoarder;
 	[SerializeField] private HealthBar _buildingProgress;
 	[SerializeField] private Transform _towerObject;
+	[SerializeField] private float _endOffsetY = -0.6f;
 
 	private ParticleSystem _dustPatricles;
 	private BuildingCell _buildingCell;
-	private float _endYPosition = -0.6f;
 	private bool _isBuilded;
 	private float _buildProgress = 0.01f;
 
@@ -44,7 +44,7 @@ public class NewTower : MonoBehaviour
 						ShowRange();
 
 				}).SetEase(Ease.Linear);
-		_towerObject.DOLocalMoveY(_endYPosition, _towerData.BuildingTime);
+		_towerObject.DOLocalMoveY(_endOffsetY, _towerData.BuildingTime);
 	}
 
 	public void ShowRange()

@@ -1,8 +1,6 @@
-
-
 public static class CachedStringValues
 {
-    public static string[] cachedStringValues = 
+    public static string[] cachedStringValues = new string[] 
         { 
             "0", "1", "2", "3", "4", "5",
             "6", "7", "8", "9", "10", "11",

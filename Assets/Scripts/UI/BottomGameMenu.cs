@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
@@ -28,7 +29,8 @@ public class BottomGameMenu : MonoBehaviour
         _previewImage.sprite = infoContainer.PreviewImage;
         _name.text = infoContainer.Name;
         _damage.text = $"{infoContainer.MinDamage} - {infoContainer.MaxDamage}";
-        _attackSpeed.text = $"{infoContainer.AttackSpeed}/sec";
+        string trim = string.Format("{0:f2}", 1 / infoContainer.AttackSpeed);
+        _attackSpeed.text = $"{trim}/sec";
         _armor.text = $"{infoContainer.Armor}";
 
         if (infoContainer.MinDamage == 0f || infoContainer.MaxDamage == 0f)       

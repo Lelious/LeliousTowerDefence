@@ -3,30 +3,30 @@ using UnityEngine;
 
 public class EnemyHitPoint : MonoBehaviour
 {
-    private List<IPoollableBullet> _attachedBullets = new List<IPoollableBullet>();
+    private List<Bullet> _attachedBullets = new List<Bullet>();
 
-    public void AttachBulletToHitPoint(IPoollableBullet bullet)
+    public void AttachBulletToHitPoint(Bullet bullet)
     {
-        bullet.Transform().SetParent(transform);
+        bullet.transform.SetParent(transform);
         _attachedBullets.Add(bullet);
     }
 
-    public void RemoveAttachedBulletFromHitPoint(IPoollableBullet bullet)
+    public void RemoveAttachedBulletFromHitPoint(Bullet bullet)
     {
-        bullet.Transform().SetParent(null);
-        bullet.ReturnToPool();
-
+        bullet.transform.SetParent(null);
         _attachedBullets.Remove(bullet);
     }
 
     public void ReturnAttachedBulletsToPool()
     {
+        if (_attachedBullets.Count < 1)     
+            return;
+        
         foreach (var bullet in _attachedBullets)
         {
-            bullet.Transform().SetParent(null);
-            bullet.ReturnToPool();
+            bullet.transform.SetParent(null);
+            bullet.ReturnBulletToPool();
         }
-
         _attachedBullets.Clear();
-    }
+    }    
 }
