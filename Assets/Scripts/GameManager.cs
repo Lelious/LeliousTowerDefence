@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 
     private TopMenuInformator _topMenuInformator;
     private EnemySpawnService _enemySpawnService;
-    private int _playerGold = 10;
+    private int _playerGold = 50;
 
     [Inject]
     private void Construct(TopMenuInformator topMenuInformator)

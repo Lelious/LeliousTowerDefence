@@ -323,7 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6698113, g: 0.6698113, b: 0.6698113, a: 1}
+  m_Color: {r: 0.67058825, g: 0.67058825, b: 0.67058825, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -343,7 +343,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Attack Speed : <color=#F5E14B>1</color> p/s'
+  m_Text: 'Attack Speed : <color=#FF0000>1</color> p/s'
 --- !u!1 &1188871925873777116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,11 +1217,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _image: {fileID: 3185569950903126921}
   _name: {fileID: 3185569951644808197}
-  _attackDamage: {fileID: 0}
-  _attackRange: {fileID: 0}
-  _attackSpeed: {fileID: 0}
-  _buildingTime: {fileID: 0}
-  _goldCost: {fileID: 0}
+  _attackDamage: {fileID: 7960824120119091489}
+  _attackRange: {fileID: 8215774800147648431}
+  _attackSpeed: {fileID: 1906582987953117213}
+  _buildingTime: {fileID: 2373657750402853464}
+  _goldCost: {fileID: 4297235331015420511}
 --- !u!1 &3185569951092368184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1324,7 +1324,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3185569951169385423}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1540,11 +1540,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _image: {fileID: 3185569951174917472}
   _name: {fileID: 3185569951777043876}
-  _attackDamage: {fileID: 0}
-  _attackRange: {fileID: 0}
-  _attackSpeed: {fileID: 0}
-  _buildingTime: {fileID: 0}
-  _goldCost: {fileID: 0}
+  _attackDamage: {fileID: 547720880576729253}
+  _attackRange: {fileID: 1753463529236452168}
+  _attackSpeed: {fileID: 8009023901691577780}
+  _buildingTime: {fileID: 2550124537429402528}
+  _goldCost: {fileID: 3240495082976007987}
 --- !u!1 &3185569951506288169
 GameObject:
   m_ObjectHideFlags: 0
@@ -1696,11 +1696,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _image: {fileID: 3185569951506288170}
   _name: {fileID: 3185569951729581714}
-  _attackDamage: {fileID: 0}
-  _attackRange: {fileID: 0}
-  _attackSpeed: {fileID: 0}
-  _buildingTime: {fileID: 0}
-  _goldCost: {fileID: 0}
+  _attackDamage: {fileID: 4933347519523488322}
+  _attackRange: {fileID: 3911707761176081199}
+  _attackSpeed: {fileID: 1948304806674973596}
+  _buildingTime: {fileID: 3010516568120478682}
+  _goldCost: {fileID: 70102242329426816}
 --- !u!1 &3185569951644808195
 GameObject:
   m_ObjectHideFlags: 0
@@ -3175,7 +3175,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 40.52002, y: -0.00010681152}
+  m_AnchoredPosition: {x: 40.52014, y: -0.00010681152}
   m_SizeDelta: {x: 41, y: 46.52}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &3607678700571225204
