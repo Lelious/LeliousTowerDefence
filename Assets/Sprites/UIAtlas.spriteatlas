@@ -54,24 +54,24 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: dd8c88222c88bec429aa5c2afea8d6be, type: 3}
-  - {fileID: 21300000, guid: 1b200de27bc518946888ce8afa61d03d, type: 3}
+  - {fileID: 21300000, guid: 307e099458d81e04e9f7b4e0479a1afa, type: 3}
   - {fileID: 21300000, guid: 84e7eaa476e753a469a73379813d308e, type: 3}
   - {fileID: 21300000, guid: 6abce3e5418760e4892d57e7f71dc61e, type: 3}
+  - {fileID: 21300000, guid: e6e082784941ead41aa07eae30cc3356, type: 3}
+  - {fileID: 21300000, guid: 8e08b2e8ebd64784290342dc3b468f04, type: 3}
   - {fileID: 21300000, guid: 9476052b86778f44caa1b313ea4cb6e9, type: 3}
-  - {fileID: 21300000, guid: 3ad3954c30753ff4292e1b76c43187e9, type: 3}
   - {fileID: 21300000, guid: 5090eb6c61ca22245a5d58872e4f5746, type: 3}
-  - {fileID: 21300000, guid: 31f915ec99c086e42b3f822bca323176, type: 3}
   - {fileID: 21300000, guid: 89c8a0fc2f595684b8c0c98c2c6793f5, type: 3}
   - {fileID: 21300000, guid: d601c15d33916b6488cebc02a7050a24, type: 3}
   m_PackedSpriteNamesToIndex:
   - Skeleton
-  - CannonTower
+  - MagicTower
   - ArmorIcon
   - AttackSpeed.png
-  - IMG_0562
+  - CannonTower
   - ArrowTower
+  - IMG_0562
   - HealthIcon
-  - MagicTower
   - AttackIcon.png
   - HpBar
   m_RenderDataMap: {}

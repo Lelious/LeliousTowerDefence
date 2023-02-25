@@ -10,6 +10,8 @@ public class GameUIService : MonoBehaviour
 	[SerializeField] private List<UIButton> _emptyButtons = new List<UIButton>();
 	[SerializeField] private List<TowerData> _startingTowers = new List<TowerData>();
 	[SerializeField] private BottomGameMenu _bottomMenuInformator;
+	[SerializeField] private GameObject _bottomBuildMenu;
+	[SerializeField] private GameObject _bottomGameMenu;
 
 	private TapRegisterService _tapRegisterService;
 	private GameManager _gameManager;
@@ -37,6 +39,7 @@ public class GameUIService : MonoBehaviour
 
 	public void ShowEmptyCellMenu()
 	{
+		_bottomBuildMenu.SetActive(true);
 		_emptyCellMenuRect.DOAnchorPos(Vector2.zero, 0.25f);
 
 		HideGameMenu();
@@ -44,11 +47,12 @@ public class GameUIService : MonoBehaviour
 
 	public void HideEmptyCellMenu()
 	{
-		_emptyCellMenuRect.DOAnchorPos(new Vector2(0f, -_emptyCellMenuHeight), 0.25f);
+		_emptyCellMenuRect.DOAnchorPos(new Vector2(0f, -_emptyCellMenuHeight), 0.25f).OnComplete(() => _bottomBuildMenu.SetActive(false));
 	}
 
 	public void ShowGameMenu()
 	{
+		_bottomGameMenu.SetActive(true);
 		_gameMenuRect.DOAnchorPos(Vector2.zero, 0.25f);
 
 		HideEmptyCellMenu();
@@ -56,7 +60,7 @@ public class GameUIService : MonoBehaviour
 
 	public void HideGameMenu()
 	{
-		_gameMenuRect.DOAnchorPos(new Vector2(0f, -_gameMenuHeight), 0.25f);
+		_gameMenuRect.DOAnchorPos(new Vector2(0f, -_gameMenuHeight), 0.25f).OnComplete(() => _bottomGameMenu.SetActive(false));
 	}
 
 	public void RegisterTapOnUI()

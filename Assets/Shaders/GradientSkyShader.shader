@@ -1,40 +1,74 @@
 Shader "Lelious/HorizontalGradientSky"
 {
+
     Properties
     {
         _Color ("Top Color", Color) = (1,1,1,1)
         _Color1 ("Bottom Color Color", Color) = (1,1,1,1)
-        _MainTex ("Albedo (RGB)", 2D) = "white" {}
+        _Texture ("Albedo (RGB)", 2D) = "white" {}
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
-        LOD 200
-
-        CGPROGRAM
-
-        #pragma surface surf Standard Lambert
-
-        #pragma target 3.0
-
-        sampler2D _MainTex;
-        fixed4 _Color;
-        fixed4 _Color1;
-
-        struct Input
+        Tags 
         {
-            float2 uv_MainTex;
-            float4 screenPos;
-        };
-
-        void surf (Input IN, inout SurfaceOutputStandard o)
-        {
-            float2 screenUV = IN.screenPos.xy / IN.screenPos.w;
-            fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * lerp(_Color, _Color1, screenUV.y);
-            o.Albedo = c.rgb;
-            o.Alpha = c.a;
+            "RenderType"="Opaque" 
         }
-        ENDCG
+        Pass
+        {
+            HLSLPROGRAM
+
+            #pragma vertex vertexProgram
+            #pragma fragment fragmentProgram
+            #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
+            struct vertexInput
+            {                
+                float4 positionOS : POSITION;
+            };
+
+            struct fragmentInput
+            {                
+                float4 positionCS : SV_POSITION;
+                float2 uv : TEXCOORD2;
+            };
+
+            struct fragmentOutput
+            {                
+                float4 color : SV_Target;
+            };
+           
+            float4 _Color;
+            float4 _Color1;
+            TEXTURE2D(_Texture);
+            SAMPLER(sampler_Texture);
+            float4 _Texture_ST;
+
+            fragmentInput vertexProgram(vertexInput data)
+            {
+                fragmentInput output;
+                output.positionCS = TransformObjectToHClip(data.positionOS);
+                return output;
+            }
+
+            fragmentOutput fragmentProgram(fragmentInput input)
+            {
+
+                float2 screenUV = input.positionCS.xy / input.positionCS.w;
+                //fixed4 c = tex2D (_MainTex, input.uv_MainTex) * lerp(_Color, _Color1, screenUV.y);
+                fragmentOutput output;
+                output.color = lerp(_Color, _Color1, screenUV.y);
+                //o.Albedo = c.rgb;
+                //o.Alpha = c.a;
+                return output;
+            }
+
+            //void surf (Input IN, inout SurfaceOutputStandard o)
+            //{
+                
+            //}
+        
+            ENDHLSL
+        }        
     }
     FallBack "VertexLit"
 }
