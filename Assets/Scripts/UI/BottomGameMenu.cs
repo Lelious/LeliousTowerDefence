@@ -13,9 +13,9 @@ public class BottomGameMenu : MonoBehaviour
     [SerializeField] private Text _attackSpeed;
     [SerializeField] private Text _armor;
     [SerializeField] private Text _hitPoints;
-    [SerializeField] private Image _upgradeImage1, _upgradeImage2, _upgradeImage3;
     [SerializeField] private Gradient _hpColorGradient;
-
+    [SerializeField] private List<UIButton> _upgradesList = new List<UIButton>();
+    [SerializeField] private List<GameObject> _visualizedButtons = new List<GameObject>();
     [Inject] private GameUIService _gameInformationMenu;
 
     private System.IDisposable _disposableEntity;
@@ -27,11 +27,7 @@ public class BottomGameMenu : MonoBehaviour
         _disposableEntity?.Dispose();
         _unusedIconsList.Clear();
         _previewImage.sprite = infoContainer.PreviewImage;
-        //Debug
-        _upgradeImage1.sprite = infoContainer.PreviewImage;
-        _upgradeImage2.sprite = infoContainer.PreviewImage;
-        _upgradeImage3.sprite = infoContainer.PreviewImage;
-        //Debug
+
         _name.text = infoContainer.Name;
         _damage.text = $"{infoContainer.MinDamage} - {infoContainer.MaxDamage}";
         string trim = string.Format("{0:f2}", 1 / infoContainer.AttackSpeed);
@@ -40,7 +36,7 @@ public class BottomGameMenu : MonoBehaviour
 
         if (infoContainer.MinDamage == 0f || infoContainer.MaxDamage == 0f)       
             _unusedIconsList.Add(UIMenuIcons.Damage);        
-        if (infoContainer.Armor == 0)       
+        if (infoContainer.Armor == null)       
             _unusedIconsList.Add(UIMenuIcons.Armor);
         if (infoContainer.AttackSpeed == 0)       
             _unusedIconsList.Add(UIMenuIcons.AttackSpeed);
@@ -56,6 +52,20 @@ public class BottomGameMenu : MonoBehaviour
                 }
                 SetHpColor(health, infoContainer.MaxHealth);
             }).AddTo(_disposable);
+
+        foreach (var item in _visualizedButtons)
+        {
+            item.SetActive(false);
+        }
+
+        if (infoContainer.UpgradesList != null)
+        {
+            for (int i = 0; i < infoContainer.UpgradesList.Count; i++)
+            {
+                _visualizedButtons[i].SetActive(true);
+                _upgradesList[i].SetButton(infoContainer.UpgradesList[i]);
+            }
+        }
     }
 
     private void SetHpColor(float currentHealth, float maxHealth)

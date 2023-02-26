@@ -170,6 +170,8 @@
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IControllFromState.cs" />
+    <Compile Include="Assets\Scripts\Tower\Bullets\MagicBullet.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\Interfaces\TouchableType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

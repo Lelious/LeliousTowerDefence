@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 5651312862137143487}
   - component: {fileID: 2309339353198230905}
   m_Layer: 5
-  m_Name: UpgradeButton (1)
+  m_Name: UpgradeButton2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,12 +114,12 @@ RectTransform:
   m_Children:
   - {fileID: 8306712688230382089}
   - {fileID: 7574559658389251720}
-  m_Father: {fileID: 5284416838141807771}
-  m_RootOrder: 2
+  m_Father: {fileID: 8470402796970475326}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 572.72046, y: -127}
+  m_AnchoredPosition: {x: 577, y: 23}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &9199412478955148309
@@ -1034,6 +1034,43 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: asd
+--- !u!1 &2453474602839815671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7347664729993493034}
+  m_Layer: 5
+  m_Name: Button3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7347664729993493034
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2453474602839815671}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4304440896857154489}
+  m_Father: {fileID: 5284416838141807771}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2461834399736676080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,7 +1245,7 @@ GameObject:
   - component: {fileID: 4591197591446161886}
   - component: {fileID: 5329569031071528614}
   m_Layer: 5
-  m_Name: UpgradeButton (2)
+  m_Name: UpgradeButton3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1228,12 +1265,12 @@ RectTransform:
   m_Children:
   - {fileID: 8754466714979832151}
   - {fileID: 7738475040542543598}
-  m_Father: {fileID: 5284416838141807771}
-  m_RootOrder: 3
+  m_Father: {fileID: 7347664729993493034}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1015, y: -127}
+  m_AnchoredPosition: {x: 360.15015, y: 23}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &2080650624989071333
@@ -1586,6 +1623,43 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4156448774724650511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3197747654042355157}
+  m_Layer: 5
+  m_Name: Button1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3197747654042355157
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4156448774724650511}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 9168939767544693754}
+  m_Father: {fileID: 5284416838141807771}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4720479362580212165
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,9 +1693,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8748185855399345260}
-  - {fileID: 9168939767544693754}
-  - {fileID: 8449873575459720863}
-  - {fileID: 4304440896857154489}
+  - {fileID: 3197747654042355157}
+  - {fileID: 8470402796970475326}
+  - {fileID: 7347664729993493034}
   m_Father: {fileID: 9002137614040726788}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1692,6 +1766,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 446eda99067a4b242a5ef1e2d5622786, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4903275762786839459
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8470402796970475326}
+  m_Layer: 5
+  m_Name: Button2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8470402796970475326
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4903275762786839459}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8449873575459720863}
+  m_Father: {fileID: 5284416838141807771}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5051862402447820870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1866,7 +1977,7 @@ GameObject:
   - component: {fileID: 7834326667064655628}
   - component: {fileID: 5008755378707309549}
   m_Layer: 5
-  m_Name: UpgradeButton
+  m_Name: UpgradeButton1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1886,12 +1997,12 @@ RectTransform:
   m_Children:
   - {fileID: 2531676106667573187}
   - {fileID: 275804601262598704}
-  m_Father: {fileID: 5284416838141807771}
-  m_RootOrder: 1
+  m_Father: {fileID: 3197747654042355157}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 139, y: -127}
+  m_AnchoredPosition: {x: -515.84985, y: 23}
   m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &4281474328132937540
@@ -2584,6 +2695,14 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
+  _upgradesList:
+  - {fileID: 5008755378707309549}
+  - {fileID: 2309339353198230905}
+  - {fileID: 5329569031071528614}
+  _visualizedButtons:
+  - {fileID: 4156448774724650511}
+  - {fileID: 4903275762786839459}
+  - {fileID: 2453474602839815671}
 --- !u!114 &9003805230797608777
 MonoBehaviour:
   m_ObjectHideFlags: 0

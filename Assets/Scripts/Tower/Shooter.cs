@@ -4,13 +4,14 @@ using DG.Tweening;
 using Zenject;
 
 public class Shooter : MonoBehaviour, IShoot
-{
-    [SerializeField] private TowerData _towerData;
+{    
     [SerializeField] private EnemyCheck _enemyChecker;
     [SerializeField, Range(1, 100)] private int _poolSize;
     [SerializeField] private Transform _shootingPoint;
     [SerializeField] private Transform _cannonToRotate;
     [Inject] private PoolService _poolService;
+
+    private TowerData _towerData;
     private float _delayBetweenShoots;
 
     private protected void Awake()
@@ -27,6 +28,8 @@ public class Shooter : MonoBehaviour, IShoot
 
         StartCoroutine(ShootingRoutine());
     }
+
+    public void SetTowerData(TowerData data) => _towerData = data;
 
     public bool DetectEnemy()
     {
@@ -70,7 +73,7 @@ public class Shooter : MonoBehaviour, IShoot
             {
                 yield return new WaitForSeconds(_delayBetweenShoots);
             }
-            yield return new WaitForSeconds(_delayBetweenShoots/2);
+            yield return new WaitForSeconds(_delayBetweenShoots/5);
         }
     }
 

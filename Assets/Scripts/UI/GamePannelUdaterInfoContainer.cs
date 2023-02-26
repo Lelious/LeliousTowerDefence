@@ -1,5 +1,6 @@
 using UniRx;
 using UnityEngine;
+using System.Collections.Generic;
 
 public struct GamePannelUdaterInfoContainer
 {
@@ -10,6 +11,7 @@ public struct GamePannelUdaterInfoContainer
     public float MaxHealth;
     public float MinDamage;
     public float MaxDamage;
-    public float Armor;
+    public float? Armor;
     public float AttackSpeed;
+    public List<TowerData> UpgradesList;
 }

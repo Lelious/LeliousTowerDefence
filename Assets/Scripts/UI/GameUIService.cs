@@ -8,6 +8,7 @@ public class GameUIService : MonoBehaviour
 	[SerializeField] private RectTransform _emptyCellMenuRect;
 	[SerializeField] private RectTransform _gameMenuRect;
 	[SerializeField] private List<UIButton> _emptyButtons = new List<UIButton>();
+	[SerializeField] private List<UIButton> _upgradablesButtons = new List<UIButton>();
 	[SerializeField] private List<TowerData> _startingTowers = new List<TowerData>();
 	[SerializeField] private BottomGameMenu _bottomMenuInformator;
 	[SerializeField] private GameObject _bottomBuildMenu;
@@ -50,7 +51,7 @@ public class GameUIService : MonoBehaviour
 		_emptyCellMenuRect.DOAnchorPos(new Vector2(0f, -_emptyCellMenuHeight), 0.25f).OnComplete(() => _bottomBuildMenu.SetActive(false));
 	}
 
-	public void ShowGameMenu()
+	public void ShowGameMenu(TowerData data = null)
 	{
 		_bottomGameMenu.SetActive(true);
 		_gameMenuRect.DOAnchorPos(Vector2.zero, 0.25f);
@@ -77,7 +78,7 @@ public class GameUIService : MonoBehaviour
 	{
 		for (int i = 0; i < _emptyButtons.Count; i++)
 		{
-			_emptyButtons[i].SetButton(_startingTowers[i], _gameManager, this, _tapRegisterService);
+			_emptyButtons[i].SetButton(_startingTowers[i]);
 		}
 	}
 

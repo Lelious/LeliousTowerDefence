@@ -1,6 +1,7 @@
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class UIButton : MonoBehaviour
 {
@@ -13,21 +14,18 @@ public class UIButton : MonoBehaviour
     [SerializeField] private Text _attackRange;
     [SerializeField] private Text _attackSpeed;
     [SerializeField] private Text _buildingTime;
-    [SerializeField] private Text _goldCost;
+    [SerializeField] private Text _goldCost;	
 
-	private StringBuilder _stringBuilder = new StringBuilder();
-    private GameUIService _gameInformationMenu;
-	private TapRegisterService _tapRegistrator;
-	private GameManager _gameManager;
-	private TowerData _towerData;
+    [Inject] private GameUIService _gameInformationMenu;
+    [Inject] private GameManager _gameManager;
+    [Inject] private TapRegisterService _tapRegistrator;
+    private StringBuilder _stringBuilder = new StringBuilder();
+    [SerializeField] private TowerData _towerData;
 	private string[] _preparedColors = new string[3] { "#28F533", "#F5E14B", "#FF0000" };
 
-	public void SetButton(TowerData data, GameManager gameManager, GameUIService gameInformationMenu, TapRegisterService tapRegistrator)
+	public void SetButton(TowerData data)
 	{
 		_towerData = data;
-		_gameManager = gameManager;
-		_gameInformationMenu = gameInformationMenu;
-		_tapRegistrator = tapRegistrator;
 		_name.text = _towerData.Name;
 		_image.sprite = _towerData.MainImage;
 
@@ -48,6 +46,7 @@ public class UIButton : MonoBehaviour
 
 			if (buildingCell)
 				buildingCell.BuildTowerOnPlace(_towerData);
+
 			_gameInformationMenu.HideEmptyCellMenu();
 			_gameInformationMenu.HideGameMenu();
 			_tapRegistrator.DisableSelectedFrame();

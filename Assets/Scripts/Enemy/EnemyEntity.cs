@@ -67,20 +67,25 @@ public class EnemyEntity : MonoBehaviour, ITouchable
     {
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
+        gameObject.layer = 2;
     }
 
     private void InitializeInfoContainer()
     {
-        _containerInfo = new GamePannelUdaterInfoContainer();
-
-        _containerInfo.Touchable = this;
-        _containerInfo.PreviewImage = _enemyData.MainImage;
-        _containerInfo.CurrentHealth = Health;
-        _containerInfo.Name = _enemyData.Name;
-        _containerInfo.MaxHealth = _enemyData.Hp;
-        _containerInfo.MinDamage = 0;
-        _containerInfo.MaxDamage = 0;
-        _containerInfo.Armor = _enemyData.Armor;
-        _containerInfo.AttackSpeed = 0;
+        _containerInfo = new GamePannelUdaterInfoContainer
+        {
+            Touchable = this,
+            PreviewImage = _enemyData.MainImage,
+            CurrentHealth = Health,
+            Name = _enemyData.Name,
+            MaxHealth = _enemyData.Hp,
+            MinDamage = 0,
+            MaxDamage = 0,
+            Armor = _enemyData.Armor,
+            AttackSpeed = 0,
+            UpgradesList = null
+        };
     }
+
+    public TouchableType GetTouchableType() => TouchableType.Enemy;
 }

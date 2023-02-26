@@ -24,13 +24,17 @@ public class TapRegisterService : IInputService
 
    public void RegisterWorldTap(Vector3 mousePosition)
    {
+
         if (_canRegisterWorldTap)
         {
             Ray ray = _camera.ScreenPointToRay(mousePosition);
 
             if (Physics.Raycast(_camera.transform.position, ray.direction, out var hit, Mathf.Infinity, _layerMask))
             {
-                _touchedObj?.Untouch();
+                if (_touchedObj?.GetTouchableType() == TouchableType.Tower)
+                {
+                    _touchedObj.Untouch();
+                }
 
                 hit.collider.gameObject.TryGetComponent(out _touchedObj);
 
@@ -38,12 +42,14 @@ public class TapRegisterService : IInputService
                 {
                     _touchedObj.Touch();
                 }
+
                 else
                 {
                     _selectedFrame.DisableFrame();
                     OnEmptyTapRegistered?.Invoke();
                 }
             }
+
             else
             {
                 _touchedObj?.Untouch();

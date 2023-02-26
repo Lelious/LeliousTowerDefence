@@ -26,6 +26,7 @@ public class BuildingCell : MonoBehaviour, ITouchable
 		_isTouched = true;
 		_selectedFrame.EnableFrame();
 		_selectedFrame.transform.position = transform.position;
+		_gameInformationMenu.SetBuildingCell(this);
 
 		if (_placedTower)
 		{
@@ -35,42 +36,65 @@ public class BuildingCell : MonoBehaviour, ITouchable
 		}
 		else
 		{
-			_gameInformationMenu.ShowEmptyCellMenu();
-			_gameInformationMenu.SetBuildingCell(this);
+			_gameInformationMenu.ShowEmptyCellMenu();			
 		}
 	}
 
 	public void BuildTowerOnPlace(TowerData data)
 	{
+		_towerData = data;
+
+        if (_placedTower != null)
+        {
+			Destroy(_placedTower.gameObject);
+        }
+
 		_placedTower = _towerFactory.CreateNewTower(data, transform.position);
+		_placedTower.SetTowerData(data);
 		_placedTower.TowerBuild(this);
-		_towerData = _placedTower.GetTowerData();
 
 		InitializeInfoContainer();
+	}
+
+	public void EnableUpgrades()
+    {
+		InitializeInfoContainer(true);
+
+		if (_isTouched)
+        {
+			_bottomMenuInformator.SetEntityToPannelUpdate(_containerInfo);
+		}
 	}
 
 	public void Untouch()
 	{
 		_isTouched = false;
-
-		if (_placedTower)				
+		Debug.Log("Untouch");
+		if (_placedTower != null)
 			_placedTower.HideRange();
 	}
 
 	public bool IsTouched() => _isTouched;
-	private void InitializeInfoContainer()
+	private void InitializeInfoContainer(bool _isNeedUpgrades = false)
 	{
-        _containerInfo = new GamePannelUdaterInfoContainer
+		_containerInfo = new GamePannelUdaterInfoContainer
+		{
+			Touchable = this,
+			PreviewImage = _towerData.MainImage,
+			CurrentHealth = _placedTower.Health,
+			Name = _towerData.Name,
+			MaxHealth = _towerData.BuildingTime,
+			MinDamage = _towerData.MinimalDamage,
+			MaxDamage = _towerData.MaximumDamage,
+			Armor = null,
+			AttackSpeed = _towerData.AttackSpeed,
+		};
+
+        if (_isNeedUpgrades)
         {
-            Touchable = this,
-            PreviewImage = _towerData.MainImage,
-            CurrentHealth = _placedTower.Health,
-            Name = _towerData.Name,
-            MaxHealth = _towerData.BuildingTime,
-            MinDamage = _towerData.MinimalDamage,
-            MaxDamage = _towerData.MaximumDamage,
-            Armor = 0,
-            AttackSpeed = _towerData.AttackSpeed
-        };
+			_containerInfo.UpgradesList = _towerData.UpgradablesList;
+		}
     }
+
+	public TouchableType GetTouchableType() => TouchableType.Tower;
 }

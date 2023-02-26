@@ -6,16 +6,15 @@ public class NewTower : MonoBehaviour
 {
 	public FloatReactiveProperty Health = new FloatReactiveProperty();
 
-	[SerializeField] private TowerData _towerData;
 	[SerializeField] private Shooter _shooter;
 	[SerializeField] private GameObject _rangeBoarder;
 	[SerializeField] private HealthBar _buildingProgress;
 	[SerializeField] private Transform _towerObject;
 	[SerializeField] private float _endOffsetY = -0.6f;
 
+	private TowerData _towerData;
 	private ParticleSystem _dustPatricles;
 	private BuildingCell _buildingCell;
-	private bool _isBuilded;
 	private float _buildProgress = 0.01f;
 
 	public void TowerBuild(BuildingCell cell)
@@ -25,9 +24,12 @@ public class NewTower : MonoBehaviour
 		_buildingProgress.SetHealth(0.01f);
 		_dustPatricles = Instantiate(_towerData.DustParticles, transform.position, Quaternion.identity, transform);
 		_dustPatricles.Stop();
+		_shooter.SetTowerData(_towerData);
 		var main = _towerData.DustParticles.main;
 		main.duration = _towerData.BuildingTime;
 		_towerData.DustParticles.Play();
+		_buildingCell.Untouch();
+
 		DOTween.To(() => _buildProgress, x => _buildProgress = x, _towerData.BuildingTime, _towerData.BuildingTime)
 			.OnUpdate(() =>
 			{
@@ -38,12 +40,14 @@ public class NewTower : MonoBehaviour
 					_dustPatricles.Clear();
 					_buildingProgress.Hide();
 					_shooter.gameObject.SetActive(true);
-					_isBuilded = true;
+					_buildingCell.EnableUpgrades();
 
 					if (_buildingCell.IsTouched())
-						ShowRange();
+                    {
+						ShowRange();						
+					}
 
-				}).SetEase(Ease.Linear);
+                }).SetEase(Ease.Linear);
 		_towerObject.DOLocalMoveY(_endOffsetY, _towerData.BuildingTime);
 	}
 
@@ -60,5 +64,5 @@ public class NewTower : MonoBehaviour
 		_rangeBoarder.SetActive(false);
 	}	
 
-	public TowerData GetTowerData()	=> _towerData;
+	public void SetTowerData(TowerData data) => _towerData = data;
 }
