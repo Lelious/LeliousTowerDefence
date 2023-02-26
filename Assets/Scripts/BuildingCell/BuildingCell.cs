@@ -60,16 +60,17 @@ public class BuildingCell : MonoBehaviour, ITouchable
 	public bool IsTouched() => _isTouched;
 	private void InitializeInfoContainer()
 	{
-		_containerInfo = new GamePannelUdaterInfoContainer();
-
-		_containerInfo.Touchable = this;
-		_containerInfo.PreviewImage = _towerData.MainImage;
-		_containerInfo.CurrentHealth = _placedTower.Health;
-		_containerInfo.Name = _towerData.Name;
-		_containerInfo.MaxHealth = _towerData.BuildingTime;
-		_containerInfo.MinDamage = _towerData.MinimalDamage;
-		_containerInfo.MaxDamage = _towerData.MaximumDamage;
-		_containerInfo.Armor = 0;
-		_containerInfo.AttackSpeed = _towerData.AttackSpeed;
-	}
+        _containerInfo = new GamePannelUdaterInfoContainer
+        {
+            Touchable = this,
+            PreviewImage = _towerData.MainImage,
+            CurrentHealth = _placedTower.Health,
+            Name = _towerData.Name,
+            MaxHealth = _towerData.BuildingTime,
+            MinDamage = _towerData.MinimalDamage,
+            MaxDamage = _towerData.MaximumDamage,
+            Armor = 0,
+            AttackSpeed = _towerData.AttackSpeed
+        };
+    }
 }

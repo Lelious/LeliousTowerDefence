@@ -13,6 +13,7 @@ public class BottomGameMenu : MonoBehaviour
     [SerializeField] private Text _attackSpeed;
     [SerializeField] private Text _armor;
     [SerializeField] private Text _hitPoints;
+    [SerializeField] private Image _upgradeImage1, _upgradeImage2, _upgradeImage3;
     [SerializeField] private Gradient _hpColorGradient;
 
     [Inject] private GameUIService _gameInformationMenu;
@@ -26,6 +27,11 @@ public class BottomGameMenu : MonoBehaviour
         _disposableEntity?.Dispose();
         _unusedIconsList.Clear();
         _previewImage.sprite = infoContainer.PreviewImage;
+        //Debug
+        _upgradeImage1.sprite = infoContainer.PreviewImage;
+        _upgradeImage2.sprite = infoContainer.PreviewImage;
+        _upgradeImage3.sprite = infoContainer.PreviewImage;
+        //Debug
         _name.text = infoContainer.Name;
         _damage.text = $"{infoContainer.MinDamage} - {infoContainer.MaxDamage}";
         string trim = string.Format("{0:f2}", 1 / infoContainer.AttackSpeed);
