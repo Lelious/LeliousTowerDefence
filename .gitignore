@@ -74,3 +74,5 @@ Assets/Plugins/Android/proguard-user.txt
 Assets/Plugins/Zenject/OptionalExtras/ReflectionBaking/Zenject-ReflectionBaking.csproj.meta
 Assets/Plugins/Zenject/OptionalExtras/Signals/Zenject-Signals.csproj.meta
 Assets/Plugins/Zenject/Source/Zenject.csproj.meta
+Library/SourceAssetDB
+UserSettings/Layouts/default-2021.dwlt
