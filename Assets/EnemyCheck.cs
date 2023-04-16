@@ -6,16 +6,18 @@ public class EnemyCheck : MonoBehaviour
 	[SerializeField] private CapsuleCollider _collider;
 	[SerializeField] private Transform _selection;
 
-	private List<IDamagable> _enemiesList = new List<IDamagable>();
+	public List<IDamagable> _enemiesList = new List<IDamagable>();
 
-	public List<IDamagable> EnemiesList
+	public List<IDamagable> GetEnemies()
 	{
-		get { return _enemiesList; }
-		set { _enemiesList.RemoveAll(x => x.CanBeAttacked() == false);}
+		_enemiesList.RemoveAll(x => x.CanBeAttacked() == false);
+		return _enemiesList;
 	}
 
 	public void SetAttackRange(float value)
 	{
+		_enemiesList.Clear();
+		_collider.radius = 0.01f;
 		_collider.radius = value;
 		_selection.localScale = Vector3.one * value;
     }
@@ -24,9 +26,9 @@ public class EnemyCheck : MonoBehaviour
 	{
 		if (other.TryGetComponent(out IDamagable source))
 		{
-			if (!EnemiesList.Contains(source) && source != null)
+			if (!_enemiesList.Contains(source) && source != null)
 			{
-				EnemiesList.Add(source);
+				_enemiesList.Add(source);
 			}
 		}		
 	}
@@ -35,9 +37,9 @@ public class EnemyCheck : MonoBehaviour
 	{
 		if (other.TryGetComponent(out IDamagable source))
 		{
-			if (EnemiesList.Contains(source))
+			if (_enemiesList.Contains(source))
 			{
-				EnemiesList.Remove(source);
+				_enemiesList.Remove(source);
 			}
 		}
 	}

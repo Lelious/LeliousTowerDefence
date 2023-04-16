@@ -5,9 +5,11 @@ using UnityEngine;
 public class TowerData : ScriptableObject
 {
 	[Header("Tower")]
+	public TowerType Type;
 	public NewTower TowerPrefab;
 	public ParticleSystem DustParticles;
 	public Sprite MainImage;
+	public int UpgradeNumber;
 
 	[Space]
 	[Header("Tower bullet")]
@@ -26,6 +28,7 @@ public class TowerData : ScriptableObject
 	public float ProjectileParentingTime;
 	public float ExplosionRadius;
 	public float AttackRadius;
+	public int TargetsCount;
 
 	[Space]
 	[Header("Upgradables")]

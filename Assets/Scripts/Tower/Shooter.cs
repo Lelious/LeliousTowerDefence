@@ -4,44 +4,46 @@ using DG.Tweening;
 using Zenject;
 
 public class Shooter : MonoBehaviour, IShoot
-{    
+{
+    public GameObject CurrentTarget;
     [SerializeField] private EnemyCheck _enemyChecker;
     [SerializeField, Range(1, 100)] private int _poolSize;
     [SerializeField] private Transform _shootingPoint;
     [SerializeField] private Transform _cannonToRotate;
     [Inject] private PoolService _poolService;
 
+    private bool _isPoolCreated;
     private TowerData _towerData;
     private float _delayBetweenShoots;
-
-    private protected void Awake()
-    {
-        if (_shootingPoint == null)      
-            _shootingPoint = transform;       
-        _delayBetweenShoots = _towerData.AttackSpeed;
-        _enemyChecker.SetAttackRange(_towerData.AttackRadius);
-        for (int i = 0; i < _poolSize; i++)
-        {
-            var bullet = CreateBullet();
-            bullet.SetBulletPool(_poolService);
-        }       
-
-        StartCoroutine(ShootingRoutine());
-    }
 
     public void SetTowerData(TowerData data) => _towerData = data;
 
     public bool DetectEnemy()
     {
-        for (int i = 0; i < _enemyChecker.EnemiesList.Count; i++)
+        var enemies = _enemyChecker.GetEnemies();
+
+        for (int i = 0; i < enemies.Count; i++)
         {
-            if (_enemyChecker.EnemiesList[i] != null && _enemyChecker.EnemiesList[i].CanBeAttacked())
+            if (enemies[i] != null)
             {
-                Shoot(_enemyChecker.EnemiesList[i]);
+                for (int j = 0; j < _towerData.TargetsCount; j++)
+                {
+                    if (enemies.Count >= _towerData.TargetsCount)
+                    {
+                        Shoot(enemies[j]);
+                    }
+                    else
+                    {
+                        if (j < enemies.Count)
+                        {
+                            Shoot(enemies[j]);
+                        }
+                    }
+                }               
 
                 if (_cannonToRotate != null)
                 {
-                    var originPoint = _enemyChecker.EnemiesList[i].GetOrigin().position;
+                    var originPoint = enemies[i].GetOrigin().position;
                     _cannonToRotate.DOLookAt(new Vector3(originPoint.x, _cannonToRotate.position.y, originPoint.z), 0.1f);
                 }
                 return true;
@@ -52,8 +54,8 @@ public class Shooter : MonoBehaviour, IShoot
 
     public void Shoot(IDamagable damagable)
     {
+        CurrentTarget = damagable.GetOrigin().gameObject;
         var bullet = _poolService.GetBulletFromPool(_towerData.BulletPrefab.GetType());
-
         if (bullet == null)
         {
             bullet = CreateBullet();
@@ -78,4 +80,29 @@ public class Shooter : MonoBehaviour, IShoot
     }
 
     private Bullet CreateBullet() => Instantiate(_towerData.BulletPrefab);
+
+    private protected void OnEnable()
+    {
+        if (_shootingPoint == null)
+            _shootingPoint = transform;
+        _delayBetweenShoots = _towerData.AttackSpeed;
+        _enemyChecker.SetAttackRange(_towerData.AttackRadius);
+
+        if (!_isPoolCreated)
+        {
+            for (int i = 0; i < _poolSize; i++)
+            {
+                var bullet = CreateBullet();
+                bullet.SetBulletPool(_poolService);
+            }
+            _isPoolCreated = !_isPoolCreated;
+        }
+
+        StartCoroutine(ShootingRoutine());
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
 }

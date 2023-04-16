@@ -23,7 +23,7 @@ public class CannonBullet : Bullet, IPoollableBullet
     public void SetInnactive() => gameObject.SetActive(false);
     public void SetActive() => gameObject.SetActive(true);
     public Transform Transform() => transform;
-    public Bullet GetBulletType() => this;
+    public override Bullet GetBulletType() => this;
 
     public override void FlyOnTarget()
     {

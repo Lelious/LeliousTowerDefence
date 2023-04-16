@@ -11,6 +11,7 @@ public class BuildingCell : MonoBehaviour, ITouchable
 	private NewTower _placedTower;
 	private TowerData _towerData;
 	private bool _isTouched;
+	private TowerType _type;
 
 	[Inject]
 	private void Construct(GameUIService gameInformationMenu, TowerFactory towerFactory, SelectedFrame selectedFrame)
@@ -46,12 +47,27 @@ public class BuildingCell : MonoBehaviour, ITouchable
 
         if (_placedTower != null)
         {
-			Destroy(_placedTower.gameObject);
+            if (_type != _towerData.Type)
+            {
+				Destroy(_placedTower.gameObject);
+				_placedTower = _towerFactory.CreateNewTower(data, transform.position);
+				_placedTower.SetTowerData(data);
+				_placedTower.TowerBuild(this);
+			}
+            else
+            {
+				_placedTower.SetTowerData(data);
+				_placedTower.RebuildTower();
+				_placedTower.TowerBuild(this);
+			}
+		}
+        else
+        {
+			_placedTower = _towerFactory.CreateNewTower(data, transform.position);
+			_placedTower.SetTowerData(data);
+			_placedTower.TowerBuild(this);
+			_type = data.Type;
         }
-
-		_placedTower = _towerFactory.CreateNewTower(data, transform.position);
-		_placedTower.SetTowerData(data);
-		_placedTower.TowerBuild(this);
 
 		InitializeInfoContainer();
 	}
@@ -75,6 +91,7 @@ public class BuildingCell : MonoBehaviour, ITouchable
 	}
 
 	public bool IsTouched() => _isTouched;
+
 	private void InitializeInfoContainer(bool _isNeedUpgrades = false)
 	{
 		_containerInfo = new GamePannelUdaterInfoContainer

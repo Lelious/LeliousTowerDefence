@@ -7,4 +7,5 @@ public abstract class Bullet : MonoBehaviour
     public abstract void SetTarget(IDamagable damagable);
     public abstract void ReturnBulletToPool();
     public abstract void FlyOnTarget();
+    public abstract Bullet GetBulletType();
 }

@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Enemy\EnemyEntity.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Tower\Bullets\CannonBullet.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\Interfaces\TouchableType.cs" />
     <Compile Include="Assets\Scripts\Tower\Bullets\Bullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\Scripts\UI\GameButton.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\UiInstaller.cs" />
+    <Compile Include="Assets\Scripts\Tower\MagicTowerCircleRotator.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameLooseState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
@@ -135,6 +137,7 @@
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameSpawnState.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\State.cs" />
+    <Compile Include="Assets\Scripts\Tower\Bullets\MagicBullet.cs" />
     <Compile Include="Assets\Scripts\UI\UIButton.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Scripts\UI\TimeBeforeSpawn.cs" />
@@ -170,8 +173,6 @@
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IControllFromState.cs" />
-    <Compile Include="Assets\Scripts\Tower\Bullets\MagicBullet.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Interfaces\TouchableType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -184,6 +185,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Lean\READ ME.txt" />
+    <None Include="Assets\Shaders\FlagShader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />

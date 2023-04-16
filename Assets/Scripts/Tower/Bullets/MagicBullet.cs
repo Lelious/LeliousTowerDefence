@@ -22,7 +22,7 @@ public class MagicBullet : Bullet, IPoollableBullet
     public override void ReturnBulletToPool() => ReturnToPool();
     public void SetInnactive() => gameObject.SetActive(false);
     public void SetActive() => gameObject.SetActive(true);
-    public Bullet GetBulletType() => this;
+    public override Bullet GetBulletType() => this;
 
     public override void SetBulletPool(PoolService pool, bool addToPool = true)
     {
@@ -52,7 +52,7 @@ public class MagicBullet : Bullet, IPoollableBullet
     {
         StopAllCoroutines();
         transform.SetParent(null);
-        _poolService.AddBulletToPool(typeof(ArrowBullet), _iPoollable);
+        _poolService.AddBulletToPool(typeof(MagicBullet), _iPoollable);
         _isDealDamage = false;
         _flyingProgress = 0f;
         _onFlying = false;

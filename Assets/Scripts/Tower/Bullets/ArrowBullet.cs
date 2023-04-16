@@ -11,6 +11,8 @@ public class ArrowBullet : Bullet, IPoollableBullet
     private PoolService _poolService;
     private GameObject _impactOnHit;
     private Transform _hitPointTransform;
+    private Vector3 _offset;
+    private Quaternion _rotation;
     private float _flyingProgress;
     private float _returningTime;
     private float _flyingSpeed;
@@ -22,7 +24,8 @@ public class ArrowBullet : Bullet, IPoollableBullet
     public override void ReturnBulletToPool() => ReturnToPool();
     public void SetInnactive() => gameObject.SetActive(false);
     public void SetActive() => gameObject.SetActive(true);
-    public Bullet GetBulletType() => this;
+    public override Bullet GetBulletType() => this;
+
 
     public override void SetBulletPool(PoolService pool, bool addToPool = true)
     {
@@ -51,11 +54,13 @@ public class ArrowBullet : Bullet, IPoollableBullet
     public void ReturnToPool()
     {
         StopAllCoroutines();
-        transform.SetParent(null);
-        _poolService.AddBulletToPool(typeof(ArrowBullet), _iPoollable);
+
+        _damagable = null;
+        _enemyHitPoint = null;
         _isDealDamage = false;
         _flyingProgress = 0f;
         _onFlying = false;
+        _poolService.AddBulletToPool(typeof(ArrowBullet), _iPoollable);
     }
 
     public override void SetTarget(IDamagable damagable)
@@ -81,6 +86,7 @@ public class ArrowBullet : Bullet, IPoollableBullet
                     _flyingProgress += _flyingSpeed;
                     _flyingSpeed += 0.0001f;
                 }
+
                 else
                 {
                     if (!_isDealDamage)
@@ -88,17 +94,33 @@ public class ArrowBullet : Bullet, IPoollableBullet
                         _isDealDamage = true;
                         _damagable.TakeDamage(_damage);
                         _damagable.HitPoint().AttachBulletToHitPoint(this);
+
                         if (_impactOnHit != null)
                         {
                             _impactOnHit.transform.position = _hitPointTransform.position;
                             _impactOnHit.SetActive(true);
                         }
+
                         _onFlying = false;
                         StartCoroutine(ReturnToPoolRoutine());
                     }
                 }
             }
             yield return null;
+        }
+
+        if (_hitPointTransform != null)
+        {
+            _offset = _hitPointTransform.position - transform.position;
+            _rotation = transform.rotation;
+
+            while (_hitPointTransform != null)
+            {
+                transform.position = _hitPointTransform.position - _offset;
+                transform.rotation = _hitPointTransform.rotation * _rotation;
+
+                yield return null;
+            }
         }
     }
 
@@ -107,5 +129,5 @@ public class ArrowBullet : Bullet, IPoollableBullet
         yield return new WaitForSeconds(_returningTime);
         _enemyHitPoint.RemoveAttachedBulletFromHitPoint(this);
         ReturnToPool();
-    }   
+    }
 }

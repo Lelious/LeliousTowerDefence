@@ -29,6 +29,7 @@ public class EnemyHealth : MonoBehaviour, IDamagable
 			_hpBar.SetHealth(_health.Value);
 			_hpBar.Hide();
 			_enemyMovement.EnemyDeath();
+			_hitPoint.ReturnAttachedBulletsToPool();
 		}
 		else
 		{
@@ -41,8 +42,4 @@ public class EnemyHealth : MonoBehaviour, IDamagable
 	public bool CanBeAttacked() => _health.Value > 0 ? true : false;	
 	public EnemyHitPoint HitPoint() => _hitPoint;
     public Transform GetOrigin() => _origin;
-
-    private protected void OnDisable() => _hitPoint.ReturnAttachedBulletsToPool();	
-    private protected void OnDestroy() => _hitPoint.ReturnAttachedBulletsToPool();
-   
 }

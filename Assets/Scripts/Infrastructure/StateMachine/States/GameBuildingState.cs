@@ -38,7 +38,6 @@ public class GameBuildingState : State
 	private IEnumerator TimerBeforeSpawnRoutine()
 	{
 		_timerValue = _timerTime;
-		Debug.Log($"SettingTimerValue: {_timerValue}");
 
 		while (_timerValue >= 0)
 		{

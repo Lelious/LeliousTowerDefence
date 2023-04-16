@@ -11,6 +11,7 @@ public class EnemyEntity : MonoBehaviour, ITouchable
     [SerializeField] private EnemyHealth _enemyHealth;
     [SerializeField] private EnemyData _enemyData;
     [SerializeField] private GameObject _selection;
+    [SerializeField] private EnemyHitPoint _hitPoint;
 
     private GamePannelUdaterInfoContainer _containerInfo;
     private GameUIService _gameInformationMenu;
@@ -65,7 +66,9 @@ public class EnemyEntity : MonoBehaviour, ITouchable
 
     private IEnumerator DelayedDisableRoutine()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+        //_hitPoint.ReturnAttachedBulletsToPool();
+        yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
         gameObject.layer = 2;
     }
