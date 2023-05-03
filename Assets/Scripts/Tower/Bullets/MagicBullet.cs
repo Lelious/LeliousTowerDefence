@@ -33,7 +33,7 @@ public class MagicBullet : Bullet, IPoollableBullet
             ReturnToPool();
     }
 
-    public override void SetBulletParameters(TowerData data, Vector3 startPosition)
+    public override void SetBulletParameters(TowerData data, EnemyPool enemyPool, Vector3 startPosition)
     {
         _damage = Random.Range(data.MinimalDamage, data.MaximumDamage + 1);
         _flyingSpeed = data.ProjectileSpeed;

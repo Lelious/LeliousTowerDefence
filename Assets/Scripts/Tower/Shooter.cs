@@ -11,7 +11,7 @@ public class Shooter : MonoBehaviour, IShoot
     [SerializeField] private Transform _shootingPoint;
     [SerializeField] private Transform _cannonToRotate;
     [Inject] private PoolService _poolService;
-
+    [Inject] private EnemyPool _enemyPool;
     private bool _isPoolCreated;
     private TowerData _towerData;
     private float _delayBetweenShoots;
@@ -62,7 +62,7 @@ public class Shooter : MonoBehaviour, IShoot
             bullet.SetBulletPool(_poolService, false);
         }
 
-        bullet.SetBulletParameters(_towerData, _shootingPoint.position);
+        bullet.SetBulletParameters(_towerData, _enemyPool, _shootingPoint.position);
         bullet.SetTarget(damagable);
         bullet.FlyOnTarget();
     }       

@@ -14,6 +14,8 @@ public class EnemyPool : IInitializable
     private EnemyEntity _lastDefeatedEnemy;
     private List<EnemyEntity> _enemyList = new List<EnemyEntity>();
     private List<EnemyEntity> _defeatedEnemiesList = new List<EnemyEntity>();
+    private List<IDamagable> _damageables = new List<IDamagable>();
+    private Dictionary<IDamagable, float> _entities = new Dictionary<IDamagable, float>();
 
     [Inject]
     private void Construct(GameLoopStateMachine gameLoopStateMachine) 
@@ -24,8 +26,8 @@ public class EnemyPool : IInitializable
     public void AddEnemyToPool(EnemyEntity enemy)
     {
         _enemyList.Add(enemy);
+        _damageables.Add(enemy.gameObject.GetComponent<IDamagable>());
         EnemiesWaveCount.Value = _enemyList.Count();
-        Debug.Log("AddingEnemyToPool");
     }
 
     public EnemyEntity GetEnemyFromPool()
@@ -33,14 +35,48 @@ public class EnemyPool : IInitializable
         return _enemyList.Where(x => x.gameObject.activeInHierarchy == false).FirstOrDefault();
     }  
 
+    public IDamagable GetEnemyFromDistance(Transform pos, float distance, IDamagable damagable)
+    {
+        _entities.Clear();
+
+        var enemies = new List<IDamagable>();
+
+        for (int i = 0; i < _damageables.Count; i++)
+        {
+            int j = 0;
+            var position = _damageables[i].GetOrigin().position;
+            if (Vector3.Distance(pos.position, position) <= distance && _damageables[i] != damagable)
+            {
+                var directionToTarget = position - damagable.GetOrigin().position;
+                _entities.Add(_damageables[i], Vector3.Angle(position - damagable.GetOrigin().position, directionToTarget));
+                j++;
+
+                if (j >= 2)              
+                    continue;                
+            }
+        }
+
+        enemies.Remove(damagable);
+
+        if (_entities.Count == 0)
+        {
+            return null;
+        }
+        else
+        {
+            _entities.OrderBy(x => x.Value);
+            return _entities.FirstOrDefault().Key;
+        }      
+    }
+
     public void ReturnToPool(EnemyEntity enemy)
     {
         _lastDefeatedEnemy = enemy;
         _enemyList.Remove(enemy);
+        _damageables.Remove(enemy.gameObject.GetComponent<IDamagable>());
         _defeatedEnemiesList.Add(enemy);
         EnemiesWaveCount.Value = _enemyList.Count();
         CheckForEmptyPool();
-        Debug.Log("AddingEnemyToDefeatedPool");
     }
 
     public void Initialize()
@@ -61,8 +97,6 @@ public class EnemyPool : IInitializable
 
     private void ClearEnemyPool()
     {
-        Debug.Log($"Clearing Pool, EnemiesInEnemyList:{_enemyList.Count}");
-        Debug.Log($"Clearing Pool, EnemiesInDefeatedList:{_defeatedEnemiesList.Count}");
         for (int i = 0; i < _defeatedEnemiesList.Count; i++)
         {
             if (_defeatedEnemiesList[i] != _lastDefeatedEnemy)
@@ -72,9 +106,9 @@ public class EnemyPool : IInitializable
         }
 
         _enemyList.Clear();
+        _damageables.Clear();
         _defeatedEnemiesList.Clear();
         EnemiesWaveCount.Value = _enemyList.Count();
-        Debug.Log($"Pool cleared, EnemiesInEnemyList:{_enemyList.Count}, {_defeatedEnemiesList.Count}");
         _gameLoopStateMachine.Enter<GameBuildingState>();
     }
 }

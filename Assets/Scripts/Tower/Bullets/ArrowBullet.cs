@@ -36,7 +36,7 @@ public class ArrowBullet : Bullet, IPoollableBullet
             ReturnToPool();       
     }
 
-    public override void SetBulletParameters(TowerData data, Vector3 startPosition)
+    public override void SetBulletParameters(TowerData data, EnemyPool enemyPool, Vector3 startPosition)
     {
         _damage = Random.Range(data.MinimalDamage, data.MaximumDamage + 1);
         _flyingSpeed = data.ProjectileSpeed;
@@ -111,12 +111,12 @@ public class ArrowBullet : Bullet, IPoollableBullet
 
         if (_hitPointTransform != null)
         {
-            _offset = _hitPointTransform.position - transform.position;
-            _rotation = transform.rotation;
+            _offset = transform.position - _hitPointTransform.position;
+            _rotation = Quaternion.Euler(_hitPointTransform.rotation.x - transform.rotation.x, _hitPointTransform.rotation.y - transform.rotation.y, _hitPointTransform.rotation.z - transform.rotation.z);
 
             while (_hitPointTransform != null)
             {
-                transform.position = _hitPointTransform.position - _offset;
+                transform.position = _hitPointTransform.position;
                 transform.rotation = _hitPointTransform.rotation * _rotation;
 
                 yield return null;

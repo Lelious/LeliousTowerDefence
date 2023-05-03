@@ -29,6 +29,7 @@ public class TowerData : ScriptableObject
 	public float ExplosionRadius;
 	public float AttackRadius;
 	public int TargetsCount;
+	public int RicochetteCount;
 
 	[Space]
 	[Header("Upgradables")]
