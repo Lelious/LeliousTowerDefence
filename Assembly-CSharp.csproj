@@ -84,6 +84,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\UiInstaller.cs" />
+    <Compile Include="Assets\Scripts\Tower\Bullets\ShurikenRotator.cs" />
     <Compile Include="Assets\Scripts\Tower\MagicTowerCircleRotator.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameLooseState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />

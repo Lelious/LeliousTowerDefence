@@ -1,11 +1,14 @@
 using DG.Tweening;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
 public class ShurikenBullet : Bullet, IPoollableBullet
 {
     [SerializeField] private GameObject _impactOnHitPrefab;
+    [SerializeField] private List<IDamagable> _hittedTargets = new List<IDamagable>();
 
     private EnemyPool _enemyPool;
     private IPoollableBullet _iPoollable;
@@ -14,7 +17,8 @@ public class ShurikenBullet : Bullet, IPoollableBullet
     private PoolService _poolService;
     private GameObject _impactOnHit;
     private Transform _hitPointTransform;
-    private Quaternion _rotation;
+    private Vector3 _direction;
+    private float _distance;
     private float _flyingProgress;
     private float _returningTime;
     private float _flyingSpeed;
@@ -69,6 +73,7 @@ public class ShurikenBullet : Bullet, IPoollableBullet
         _flyingProgress = 0f;
         _onFlying = false;
         _currentTarget = 0;
+        _hittedTargets.Clear();
         _poolService.AddBulletToPool(typeof(ShurikenBullet), _iPoollable);
     }
 
@@ -89,13 +94,14 @@ public class ShurikenBullet : Bullet, IPoollableBullet
         {
             if (_enemyHitPoint != null)
             {
-                transform.LookAt(_enemyHitPoint.transform);
+                _direction = _enemyHitPoint.transform.position - transform.position;
+                _distance = _direction.magnitude;
 
-                if (Vector3.Distance(transform.position, _enemyHitPoint.transform.position) > 0.1f)
+                if (_distance > 0.5f)
                 {
-                    transform.position = Vector3.Lerp(transform.position, _enemyHitPoint.transform.position, _flyingProgress);
+                    transform.Translate((_direction / _distance) * _flyingProgress, Space.Self);
                     _flyingProgress += _flyingSpeed;
-                    _flyingSpeed += 0.0001f;                   
+                    _flyingSpeed += 0.0003f;                   
                 }
 
                 else
@@ -105,6 +111,11 @@ public class ShurikenBullet : Bullet, IPoollableBullet
                         _isDealDamage = true;
                         _damagable.TakeDamage(_damage);
 
+                        if (!_hittedTargets.Contains(_damagable))
+                        {
+                            _hittedTargets.Add(_damagable);
+                        }
+
                         if (_impactOnHit != null)
                         {
                             _impactOnHit.transform.position = _hitPointTransform.position;
@@ -113,15 +124,18 @@ public class ShurikenBullet : Bullet, IPoollableBullet
 
                         if (_currentTarget < _targetsCount)
                         {
-                            Debug.Log("Yes asdasd");
                             var nextDamagable = FindNextTarget();
 
                             if (nextDamagable != null)
                             {
                                 SetTarget(nextDamagable);
                                 _currentTarget++;
-                                //var nextDmg = _damage * 0.7f;
+                                var nextDmg = _damage * 0.7f;
                                 _damage = (int)nextDmg < 0 ? _damage = 1 : _damage = (int)nextDmg;
+                            }
+                            else
+                            {
+                                StartCoroutine(ReturnToPoolRoutine());
                             }
                         }
                         else
@@ -142,7 +156,35 @@ public class ShurikenBullet : Bullet, IPoollableBullet
 
     private IDamagable FindNextTarget()
     {
-        return _enemyPool.GetEnemyFromDistance(transform, 2f, _damagable);
+        var availableTargets = _enemyPool.GetEnemiesFromDistance(transform, 5f, _damagable);
+        List<IDamagable> correctTargets = new List<IDamagable>();
+
+        if (availableTargets.Count == 0)
+        {
+            return null;
+        }
+
+        else
+        {
+            foreach (var target in availableTargets)
+            {
+                if (!_hittedTargets.Contains(target))
+                {
+                    correctTargets.Add(target);
+                }
+            }
+
+            if (correctTargets.Count > 0)
+            {
+                correctTargets = correctTargets.OrderBy((x) => (x.GetOrigin().position - transform.position).sqrMagnitude).ToList();
+                return correctTargets[0];
+            }
+
+            else
+            {
+                return availableTargets.FirstOrDefault();
+            }
+        }    
     }
 
     private IEnumerator ReturnToPoolRoutine()

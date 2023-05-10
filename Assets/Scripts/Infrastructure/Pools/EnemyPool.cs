@@ -35,38 +35,21 @@ public class EnemyPool : IInitializable
         return _enemyList.Where(x => x.gameObject.activeInHierarchy == false).FirstOrDefault();
     }  
 
-    public IDamagable GetEnemyFromDistance(Transform pos, float distance, IDamagable damagable)
+    public List<IDamagable> GetEnemiesFromDistance(Transform pos, float distance, IDamagable current)
     {
-        _entities.Clear();
-
         var enemies = new List<IDamagable>();
 
         for (int i = 0; i < _damageables.Count; i++)
         {
-            int j = 0;
-            var position = _damageables[i].GetOrigin().position;
-            if (Vector3.Distance(pos.position, position) <= distance && _damageables[i] != damagable)
+            if (Vector3.Distance(pos.position, _damageables[i].GetOrigin().position) <= distance)
             {
-                var directionToTarget = position - damagable.GetOrigin().position;
-                _entities.Add(_damageables[i], Vector3.Angle(position - damagable.GetOrigin().position, directionToTarget));
-                j++;
-
-                if (j >= 2)              
-                    continue;                
+                enemies.Add(_damageables[i]);       
             }
         }
 
-        enemies.Remove(damagable);
+        enemies.Remove(current);
 
-        if (_entities.Count == 0)
-        {
-            return null;
-        }
-        else
-        {
-            _entities.OrderBy(x => x.Value);
-            return _entities.FirstOrDefault().Key;
-        }      
+        return enemies;
     }
 
     public void ReturnToPool(EnemyEntity enemy)

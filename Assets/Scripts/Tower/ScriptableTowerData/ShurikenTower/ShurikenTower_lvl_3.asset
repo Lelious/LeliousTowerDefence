@@ -24,10 +24,11 @@ MonoBehaviour:
   MinimalDamage: 1
   MaximumDamage: 3
   AttackSpeed: 1
-  ProjectileSpeed: 0.005
+  ProjectileSpeed: 0.007
   ProjectileParentingTime: 0
   ExplosionRadius: 0
   AttackRadius: 5.4
   TargetsCount: 1
+  RicochetteCount: 3
   UpgradablesList:
   - {fileID: 11400000, guid: fa142254ef79f704fb2b41c6675f231f, type: 2}
