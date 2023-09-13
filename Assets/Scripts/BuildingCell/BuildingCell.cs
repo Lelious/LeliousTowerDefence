@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-public class BuildingCell : MonoBehaviour, ITouchable
+public class BuildingCell : MonoBehaviour, ITouchable	
 {
 	private GamePannelUdaterInfoContainer _containerInfo;
 	private BottomGameMenu _bottomMenuInformator;
@@ -13,7 +13,9 @@ public class BuildingCell : MonoBehaviour, ITouchable
 	private bool _isTouched;
 	private TowerType _type;
 
-	[Inject]
+    GameObject ITouchable.gameObject { get => gameObject;}
+
+    [Inject]
 	private void Construct(GameUIService gameInformationMenu, TowerFactory towerFactory, SelectedFrame selectedFrame)
 	{
 		_gameInformationMenu = gameInformationMenu;
@@ -49,6 +51,7 @@ public class BuildingCell : MonoBehaviour, ITouchable
         {
             if (_type != _towerData.Type)
             {
+				_placedTower.ClearAllUnusedBullets();
 				Destroy(_placedTower.gameObject);
 				_placedTower = _towerFactory.CreateNewTower(data, transform.position);
 				_placedTower.SetTowerData(data);
@@ -112,6 +115,4 @@ public class BuildingCell : MonoBehaviour, ITouchable
 			_containerInfo.UpgradesList = _towerData.UpgradablesList;
 		}
     }
-
-	public TouchableType GetTouchableType() => TouchableType.Tower;
 }

@@ -21,6 +21,23 @@ public class PoolService : IInitializable
             InitializeNewKeyValuePair(type, bullet);      
     }
 
+    public void RemoveBulletsFromPool(Type type, int count)
+    {
+        if (Validate(type))
+        {
+            var queue = _pool[type];
+
+            for (int i = 0; i < count; i++)
+            {
+                if (queue.Count > 0)
+                {
+                    var bullet = queue.Dequeue();
+                    bullet.DestroyBullet();
+                }
+            }            
+        }
+    }
+
     public Bullet GetBulletFromPool(Type type)
     {
         if (Validate(type))

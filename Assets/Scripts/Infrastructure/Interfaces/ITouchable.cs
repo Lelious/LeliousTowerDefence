@@ -3,5 +3,5 @@ public interface ITouchable
     public bool IsTouched();
     public void Touch();
     public void Untouch();
-    public TouchableType GetTouchableType();
+    public UnityEngine.GameObject gameObject { get; }
 }

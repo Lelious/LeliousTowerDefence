@@ -22,6 +22,7 @@ public class MagicBullet : Bullet, IPoollableBullet
     public override void ReturnBulletToPool() => ReturnToPool();
     public void SetInnactive() => gameObject.SetActive(false);
     public void SetActive() => gameObject.SetActive(true);
+    public void DestroyBullet() => Destroy(this);
     public override Bullet GetBulletType() => this;
 
     public override void SetBulletPool(PoolService pool, bool addToPool = true)

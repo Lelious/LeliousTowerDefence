@@ -18,6 +18,7 @@ public class ShurikenBullet : Bullet, IPoollableBullet
     private GameObject _impactOnHit;
     private Transform _hitPointTransform;
     private Vector3 _direction;
+    private Vector3 _endPoint;
     private float _distance;
     private float _flyingProgress;
     private float _returningTime;
@@ -32,6 +33,7 @@ public class ShurikenBullet : Bullet, IPoollableBullet
     public override void ReturnBulletToPool() => ReturnToPool();
     public void SetInnactive() => gameObject.SetActive(false);
     public void SetActive() => gameObject.SetActive(true);
+    public void DestroyBullet() => Destroy(this);
     public override Bullet GetBulletType() => this;
 
 
@@ -92,7 +94,7 @@ public class ShurikenBullet : Bullet, IPoollableBullet
 
         while (_onFlying)
         {
-            if (_enemyHitPoint != null)
+            if (_enemyHitPoint != null && _damagable != null && _damagable.CanBeAttacked())
             {
                 _direction = _enemyHitPoint.transform.position - transform.position;
                 _distance = _direction.magnitude;
@@ -147,10 +149,15 @@ public class ShurikenBullet : Bullet, IPoollableBullet
             }
             else
             {
-                StartCoroutine(ReturnToPoolRoutine());
+                _damagable = FindNextTarget();
+
+                if (_damagable == null)
+                {
+                    StartCoroutine(ReturnToPoolRoutine());
+                }
             }
 
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
     }
 

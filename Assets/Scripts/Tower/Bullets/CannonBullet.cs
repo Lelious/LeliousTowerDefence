@@ -22,6 +22,7 @@ public class CannonBullet : Bullet, IPoollableBullet
     public override void ReturnBulletToPool() => ReturnToPool();
     public void SetInnactive() => gameObject.SetActive(false);
     public void SetActive() => gameObject.SetActive(true);
+    public void DestroyBullet() => Destroy(this);
     public Transform Transform() => transform;
     public override Bullet GetBulletType() => this;
 

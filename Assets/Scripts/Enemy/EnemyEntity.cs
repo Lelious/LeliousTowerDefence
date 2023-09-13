@@ -21,7 +21,8 @@ public class EnemyEntity : MonoBehaviour, ITouchable
     private EnemyPool _enemyPool;
     private bool _isTouched;
 
-  
+    GameObject ITouchable.gameObject { get => gameObject; }
+
     [Inject]
     private void Construct(EnemyPool enemyPool, GameManager gameManager, GameUIService gameInformationMenu, SelectedFrame selectedFrame)
     {
@@ -52,13 +53,13 @@ public class EnemyEntity : MonoBehaviour, ITouchable
         _gameInformationMenu.ShowGameMenu();
         _bottomMenuInformator.SetEntityToPannelUpdate(_containerInfo);
         _selectedFrame.DisableFrame();
-        _selection.SetActive(true);
+        _selection.SetActive(_isTouched);
     }
 
     public void Untouch()
     {
         _isTouched = false;
-        _selection.SetActive(false);
+        _selection.SetActive(_isTouched);
     }
 
     public Vector3 GetPosition() => transform.position;
@@ -89,6 +90,4 @@ public class EnemyEntity : MonoBehaviour, ITouchable
             UpgradesList = null
         };
     }
-
-    public TouchableType GetTouchableType() => TouchableType.Enemy;
 }

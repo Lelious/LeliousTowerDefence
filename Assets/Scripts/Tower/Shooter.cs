@@ -17,6 +17,7 @@ public class Shooter : MonoBehaviour, IShoot
     private float _delayBetweenShoots;
 
     public void SetTowerData(TowerData data) => _towerData = data;
+    public void ClearAmmo() => _poolService.RemoveBulletsFromPool(_towerData.BulletPrefab.GetType(), _poolSize);  
 
     public bool DetectEnemy()
     {

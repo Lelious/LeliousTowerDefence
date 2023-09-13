@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemyCheck : MonoBehaviour
@@ -10,8 +11,8 @@ public class EnemyCheck : MonoBehaviour
 
 	public List<IDamagable> GetEnemies()
 	{
-		_enemiesList.RemoveAll(x => x.CanBeAttacked() == false);
-		return _enemiesList;
+		_enemiesList.RemoveAll(x => x.CanBeAttacked() == false);		
+		return _enemiesList.OrderBy(x => Vector3.Distance(transform.position, x.GetOrigin().position)).ToList();
 	}
 
 	public void SetAttackRange(float value)

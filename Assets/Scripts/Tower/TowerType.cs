@@ -4,5 +4,11 @@ public enum TowerType
     CannonTower,
     MagicTower,
     BallistaTower,
-    ShurikenTower
+    ShurikenTower,
+    FireTower,
+    IceTower,
+    RapidTower,
+    SnipeTower,
+    DecayTower,
+    IceSpireTower
 }

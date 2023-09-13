@@ -6,4 +6,5 @@ public interface IPoollableBullet
     public void ReturnToPool();
     public void SetInnactive();
     public void SetActive();
+    public void DestroyBullet();
 }

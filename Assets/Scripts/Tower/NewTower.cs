@@ -59,6 +59,8 @@ public class NewTower : MonoBehaviour
 		CheckUpgrades();
 	}
 
+	public void ClearAllUnusedBullets() => _shooter.ClearAmmo();
+    
 	public void RebuildTower()
     {
 		_towerObject.position = new Vector3(_towerObject.position.x, _startOffsetY, _towerObject.position.z);

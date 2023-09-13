@@ -48,6 +48,7 @@ public class BottomGameMenu : MonoBehaviour
             {
                 if (health <= 0 && infoContainer.Touchable.IsTouched())
                 {
+                    infoContainer.Touchable.Untouch();
                     _gameInformationMenu.HideGameMenu();
                 }
                 SetHpColor(health, infoContainer.MaxHealth);

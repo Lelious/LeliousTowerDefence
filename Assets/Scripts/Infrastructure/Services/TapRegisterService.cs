@@ -29,9 +29,9 @@ public class TapRegisterService : IInputService
         {
             Ray ray = _camera.ScreenPointToRay(mousePosition);
 
-            if (Physics.Raycast(_camera.transform.position, ray.direction, out var hit, Mathf.Infinity, _layerMask))
+            if (Physics.Raycast(_camera.transform.position, ray.direction, out var hit, 100f, _layerMask))
             {
-                if (_touchedObj?.GetTouchableType() == TouchableType.Tower)
+                if (_touchedObj != null && _touchedObj.gameObject != null)
                 {
                     _touchedObj.Untouch();
                 }

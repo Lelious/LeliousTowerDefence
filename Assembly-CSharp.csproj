@@ -99,6 +99,7 @@
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\ITouchable.cs" />
     <Compile Include="Assets\Scripts\Tower\NewTower.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\Tower\Bullets\IceBullet.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IShoot.cs" />
     <Compile Include="Assets\Scripts\Input\ParentedCamera.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Assets\Scripts\Debug\FPSCounter\FPSCounter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\Scripts\Tower\TowerType.cs" />
+    <Compile Include="Assets\Scripts\Tower\Bullets\FireBullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\Scripts\UI\BottomMenuIconsContainer.cs" />
     <Compile Include="Assets\Scripts\Tower\Effects\IPoollableEffect.cs" />
@@ -148,12 +150,15 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Factories\TowerFactory.cs" />
     <Compile Include="Assets\Scripts\BuildingCell\BuildingCell.cs" />
+    <Compile Include="Assets\Scripts\Tower\Test\YRotator.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IPoollableBullet.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Services\TapRegisterService.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
+    <Compile Include="Assets\Scripts\Tower\Bullets\SnipeBullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\Scripts\UI\GamePannelUdaterInfoContainer.cs" />
+    <Compile Include="Assets\Scripts\Tower\Test\TilingY.cs" />
     <Compile Include="Assets\Scripts\Tower\TowerData.cs" />
     <Compile Include="Assets\Scripts\StaticData\EndPoint.cs" />
     <Compile Include="Assets\Scripts\UI\HealthBarRotatorToCamera.cs" />
@@ -174,6 +179,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
+    <Compile Include="Assets\Scripts\Tower\Test\FlagShaderRandomizer.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IControllFromState.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +187,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Shaders\GradientSkyShader.shader" />
+    <None Include="Assets\Shaders\TransparentTilingShader.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
@@ -199,6 +206,7 @@
     <None Include="Assets\Shaders\HealthBarShader.shader" />
     <None Include="Assets\Shaders\LowPolyPBRShader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\Shaders\NewSinShader.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />

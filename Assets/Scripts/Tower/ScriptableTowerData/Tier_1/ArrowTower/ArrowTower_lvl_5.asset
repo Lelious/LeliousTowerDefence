@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cbe5f664bcf3d041b09b5aef00ca40f, type: 3}
+  m_Name: ArrowTower_lvl_5
+  m_EditorClassIdentifier: 
+  Type: 0
+  TowerPrefab: {fileID: 2828531714194891516, guid: cd2f054e622ca6845af29ff1f7930283, type: 3}
+  DustParticles: {fileID: 981165095458120534, guid: e4e3c5a9592da834b974a88d9bd14b18, type: 3}
+  MainImage: {fileID: 21300000, guid: 8e08b2e8ebd64784290342dc3b468f04, type: 3}
+  UpgradeNumber: 3
+  BulletPrefab: {fileID: 2455164268452172662, guid: 727d776442af66448b538a71897e39b7, type: 3}
+  Name: Arrow Tower lvl 5
+  Cost: 12
+  BuildingTime: 8
+  MinimalDamage: 12
+  MaximumDamage: 17
+  AttackSpeed: 0.8
+  ProjectileSpeed: 0.005
+  ProjectileParentingTime: 2
+  ExplosionRadius: 0
+  AttackRadius: 11.15
+  TargetsCount: 1
+  RicochetteCount: 0
+  UpgradablesList:
+  - {fileID: 11400000, guid: 604c3ba4ba31d344486778821c48cd62, type: 2}
+  - {fileID: 11400000, guid: 450082006c1f7314fa151fbd4452e2cd, type: 2}
+  - {fileID: 11400000, guid: 21fca117dfbced2478f92f1a402ec592, type: 2}

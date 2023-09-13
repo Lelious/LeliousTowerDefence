@@ -11,6 +11,7 @@ public class ArrowBullet : Bullet, IPoollableBullet
     private PoolService _poolService;
     private GameObject _impactOnHit;
     private Transform _hitPointTransform;
+    private Vector3 _endPoint;
     private Vector3 _offset;
     private Quaternion _rotation;
     private float _flyingProgress;
@@ -24,6 +25,7 @@ public class ArrowBullet : Bullet, IPoollableBullet
     public override void ReturnBulletToPool() => ReturnToPool();
     public void SetInnactive() => gameObject.SetActive(false);
     public void SetActive() => gameObject.SetActive(true);
+    public void DestroyBullet() => Destroy(this);
     public override Bullet GetBulletType() => this;
 
 
@@ -78,49 +80,44 @@ public class ArrowBullet : Bullet, IPoollableBullet
         {
             if (_enemyHitPoint != null)
             {
-                transform.LookAt(_enemyHitPoint.transform);
+                _endPoint = _enemyHitPoint.transform.position;
 
-                if (Vector3.Distance(transform.position, _enemyHitPoint.transform.position) > 0.5f)
+                if (_enemyHitPoint.gameObject.activeInHierarchy)
                 {
-                    transform.position = Vector3.Lerp(transform.position, _enemyHitPoint.transform.position, _flyingProgress);
-                    _flyingProgress += _flyingSpeed;
-                    _flyingSpeed += 0.0001f;
-                }
+                    transform.LookAt(_enemyHitPoint.transform);
 
-                else
-                {
-                    if (!_isDealDamage)
+                    if (Vector3.Distance(transform.position, _endPoint) > 0.5f)
                     {
-                        _isDealDamage = true;
-                        _damagable.TakeDamage(_damage);
-                        _damagable.HitPoint().AttachBulletToHitPoint(this);
+                        transform.position = Vector3.Lerp(transform.position, _enemyHitPoint.transform.position, _flyingProgress);
+                        _flyingProgress += _flyingSpeed;
+                        _flyingSpeed += 0.0001f;
+                    }
 
-                        if (_impactOnHit != null)
+                    else
+                    {
+                        if (!_isDealDamage)
                         {
-                            _impactOnHit.transform.position = _hitPointTransform.position;
-                            _impactOnHit.SetActive(true);
-                        }
+                            _isDealDamage = true;
+                            _damagable.TakeDamage(_damage);
+                            _damagable.HitPoint().AttachBulletToHitPoint(this);
 
-                        _onFlying = false;
-                        StartCoroutine(ReturnToPoolRoutine());
+                            if (_impactOnHit != null)
+                            {
+                                _impactOnHit.transform.position = _hitPointTransform.position;
+                                _impactOnHit.SetActive(true);
+                            }
+
+                            _onFlying = false;
+                            StartCoroutine(ReturnToPoolRoutine());
+                        }
                     }
                 }
-            }
-            yield return null;
-        }
-
-        if (_hitPointTransform != null)
-        {
-            _offset = transform.position - _hitPointTransform.position;
-            _rotation = Quaternion.Euler(_hitPointTransform.rotation.x - transform.rotation.x, _hitPointTransform.rotation.y - transform.rotation.y, _hitPointTransform.rotation.z - transform.rotation.z);
-
-            while (_hitPointTransform != null)
-            {
-                transform.position = _hitPointTransform.position;
-                transform.rotation = _hitPointTransform.rotation * _rotation;
-
-                yield return null;
-            }
+                else
+                {
+                    StartCoroutine(ReturnToPoolRoutine());
+                }
+            }           
+            yield return new WaitForFixedUpdate();
         }
     }
 
