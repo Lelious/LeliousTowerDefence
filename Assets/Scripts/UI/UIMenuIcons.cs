@@ -2,5 +2,6 @@ public enum UIMenuIcons
 {
 	Damage,
 	Armor,
-	AttackSpeed
+	AttackSpeed,
+	BonusAttackPower
 }

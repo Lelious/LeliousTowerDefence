@@ -10,13 +10,14 @@ public class BottomGameMenu : MonoBehaviour
     [SerializeField] private Image _previewImage;
     [SerializeField] private Text _name;
     [SerializeField] private Text _damage;
+    [SerializeField] private Text _bonusDamage;
     [SerializeField] private Text _attackSpeed;
     [SerializeField] private Text _armor;
     [SerializeField] private Text _hitPoints;
     [SerializeField] private Gradient _hpColorGradient;
     [SerializeField] private List<UIButton> _upgradesList = new List<UIButton>();
     [SerializeField] private List<GameObject> _visualizedButtons = new List<GameObject>();
-    [Inject] private GameUIService _gameInformationMenu;
+    //[Inject] private GameUIService _gameInformationMenu;
 
     private System.IDisposable _disposableEntity;
     private CompositeDisposable _disposable = new CompositeDisposable();
@@ -26,34 +27,12 @@ public class BottomGameMenu : MonoBehaviour
     {
         _disposableEntity?.Dispose();
         _unusedIconsList.Clear();
-        _previewImage.sprite = infoContainer.PreviewImage;
 
-        _name.text = infoContainer.Name;
-        _damage.text = $"{infoContainer.MinDamage} - {infoContainer.MaxDamage}";
-        string trim = string.Format("{0:f2}", 1 / infoContainer.AttackSpeed);
-        _attackSpeed.text = $"{trim}/sec";
-        _armor.text = $"{infoContainer.Armor}";
+        ValidateContainerValues(infoContainer);
+    }
 
-        if (infoContainer.MinDamage == 0f || infoContainer.MaxDamage == 0f)       
-            _unusedIconsList.Add(UIMenuIcons.Damage);        
-        if (infoContainer.Armor == null)       
-            _unusedIconsList.Add(UIMenuIcons.Armor);
-        if (infoContainer.AttackSpeed == 0)       
-            _unusedIconsList.Add(UIMenuIcons.AttackSpeed);
-
-        _bottomMenuIconsContainer.RemoveUnusedIcons(_unusedIconsList);
-
-        _disposableEntity = infoContainer.CurrentHealth
-            .Subscribe(health =>
-            {
-                if (health <= 0 && infoContainer.Touchable.IsTouched())
-                {
-                    infoContainer.Touchable.Untouch();
-                    _gameInformationMenu.HideGameMenu();
-                }
-                SetHpColor(health, infoContainer.MaxHealth);
-            }).AddTo(_disposable);
-
+    public void UpdateUpgradesInfo(GamePannelUdaterInfoContainer infoContainer)
+    {
         foreach (var item in _visualizedButtons)
         {
             item.SetActive(false);
@@ -69,7 +48,97 @@ public class BottomGameMenu : MonoBehaviour
         }
     }
 
-    private void SetHpColor(float currentHealth, float maxHealth)
+    private void ValidateContainerValues(GamePannelUdaterInfoContainer infoContainer)
+    {
+        _previewImage.sprite = infoContainer.PreviewImage;
+        _name.text = infoContainer.Name;
+        _damage.text = $"{infoContainer.MinDamage} - {infoContainer.MaxDamage}";
+
+        if (infoContainer.MinDamage == -1f)
+            _unusedIconsList.Add(UIMenuIcons.Damage);
+        if (infoContainer.UpgradableStats.TryGetValue(StatType.Armor, out var armorReactiveValue))
+        {
+            _disposableEntity = armorReactiveValue
+            .Subscribe(armor =>
+            {
+                SetArmor(armor);
+            }).AddTo(_disposable);
+        }
+        else
+        {
+            _unusedIconsList.Add(UIMenuIcons.Armor);
+        }
+
+        if (infoContainer.UpgradableStats.TryGetValue(StatType.BonusAttackPower, out var bonusAttackReactiveValue))
+        {
+            _disposableEntity = bonusAttackReactiveValue
+                .Subscribe(attackBonus =>
+                {
+                    SetAttackBonus((int)attackBonus);
+                }).AddTo(_disposable);
+        }
+        else
+        {
+            _unusedIconsList.Add(UIMenuIcons.BonusAttackPower);
+        }
+
+        if (infoContainer.UpgradableStats.TryGetValue(StatType.BonusAttackSpeed, out var bonusAttackSpeedReactiveValue))
+        {
+            _disposableEntity = bonusAttackSpeedReactiveValue
+                .Subscribe(attackSpeed =>
+                {
+                    SetAttackSpeed(attackSpeed);
+                }).AddTo(_disposable);
+        }
+        else
+        {
+            _unusedIconsList.Add(UIMenuIcons.AttackSpeed);
+        }
+
+        if (infoContainer.UpgradableStats.TryGetValue(StatType.Health, out var healthReactiveValue))
+        {
+            _disposableEntity = healthReactiveValue
+                .Subscribe(health =>
+                {
+                    SetHp(health, infoContainer.MaxHealth);
+                }).AddTo(_disposable);
+        }
+
+        foreach (var item in _visualizedButtons)
+        {
+            item.SetActive(false);
+        }
+
+        if (infoContainer.UpgradesList != null)
+        {
+            for (int i = 0; i < infoContainer.UpgradesList.Count; i++)
+            {
+                _visualizedButtons[i].SetActive(true);
+                _upgradesList[i].SetButton(infoContainer.UpgradesList[i]);
+            }
+        }
+
+        _bottomMenuIconsContainer.RemoveUnusedIcons(_unusedIconsList);
+    }
+
+    private void SetArmor(float value)
+    {
+        _armor.text = $"{(int)value}";
+    }
+
+    private void SetAttackBonus(int value)
+    {
+        _bonusDamage.text = value > 0 ? $"+ {value}" : "";
+    }
+
+    private void SetAttackSpeed(float value)
+    {
+        Debug.Log($"AttackSpeed = {value}");
+        string trim = string.Format("{0:f2}", 1 / (value / 100));
+        _attackSpeed.text = $"{trim}/sec";
+    }
+
+    private void SetHp(float currentHealth, float maxHealth)
     {
         float clampHealth = currentHealth / maxHealth;
 

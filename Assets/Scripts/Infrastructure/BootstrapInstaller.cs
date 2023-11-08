@@ -11,6 +11,7 @@ public class BootstrapInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
+        BindEnemyPrefabLoader();
         BindEnemyFactory();
         BindGameManager();
         BindStateMachine();
@@ -21,6 +22,7 @@ public class BootstrapInstaller : MonoInstaller
         BindTapRegistrator();
         BindSelectedFrame();
         BindPool();
+        BindBuffService();
     }
 
     private void BindTapRegistrator()
@@ -97,5 +99,18 @@ public class BootstrapInstaller : MonoInstaller
              BindInterfacesAndSelfTo<PoolService>().
              AsSingle().
              NonLazy();
+    }
+
+    private void BindBuffService()
+    {
+        Container.
+            BindInterfacesAndSelfTo<BuffService>().
+            AsSingle();
+    }
+    private void BindEnemyPrefabLoader()
+    {
+        Container.
+            Bind<EnemyLoadService>().
+            AsSingle();
     }
 }

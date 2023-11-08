@@ -5,16 +5,15 @@ public class EnemyHealth : MonoBehaviour, IDamagable
 {
 	[SerializeField] private EnemyMovement _enemyMovement;
 	[SerializeField] private EnemyHitPoint _hitPoint;	
-	[SerializeField] private EnemyData _enemyData;
 	[SerializeField] private HealthBar _hpBar;
 	[SerializeField] private Transform _origin;
 
-	private FloatReactiveProperty _health = new FloatReactiveProperty();
+	private FloatReactiveProperty _health;
 
-	private protected void Awake()
-	{
-		_health.Value = _enemyData.Hp;
-		_hpBar.SetMaxHealth(_health.Value);
+	public void InitializeHealth(float maxHP, FloatReactiveProperty currentHp)
+    {
+		_hpBar.SetMaxHealth(maxHP);
+		_health = currentHp;
 		_hpBar.SetHealth(_health.Value);
 		_hpBar.Hide();
 	}

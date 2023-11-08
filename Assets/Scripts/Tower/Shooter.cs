@@ -5,65 +5,87 @@ using Zenject;
 
 public class Shooter : MonoBehaviour, IShoot
 {
-    public GameObject CurrentTarget;
     [SerializeField] private EnemyCheck _enemyChecker;
     [SerializeField, Range(1, 100)] private int _poolSize;
     [SerializeField] private Transform _shootingPoint;
     [SerializeField] private Transform _cannonToRotate;
     [Inject] private PoolService _poolService;
     [Inject] private EnemyPool _enemyPool;
+    [SerializeField] private TowerStats _towerStats;
     private bool _isPoolCreated;
-    private TowerData _towerData;
-    private float _delayBetweenShoots;
 
-    public void SetTowerData(TowerData data) => _towerData = data;
-    public void ClearAmmo() => _poolService.RemoveBulletsFromPool(_towerData.BulletPrefab.GetType(), _poolSize);  
+    public void SetTowerData(TowerStats stats)
+    {
+        _towerStats = stats;
+    }
+
+    public void ClearAmmo() => _poolService.RemoveBulletsFromPool(_towerStats.BulletPrefab.GetType(), _poolSize);  
 
     public bool DetectEnemy()
     {
         var enemies = _enemyChecker.GetEnemies();
 
         for (int i = 0; i < enemies.Count; i++)
-        {
-            if (enemies[i] != null)
-            {
-                for (int j = 0; j < _towerData.TargetsCount; j++)
-                {
-                    if (enemies.Count >= _towerData.TargetsCount)
-                    {
-                        Shoot(enemies[j]);
-                    }
-                    else
-                    {
-                        if (j < enemies.Count)
-                        {
-                            Shoot(enemies[j]);
-                        }
-                    }
-                }               
-
+        {                
                 if (_cannonToRotate != null)
                 {
                     var originPoint = enemies[i].GetOrigin().position;
-                    _cannonToRotate.DOLookAt(new Vector3(originPoint.x, _cannonToRotate.position.y, originPoint.z), 0.1f);
+                    _cannonToRotate.DOLookAt(new Vector3(originPoint.x, _cannonToRotate.position.y, originPoint.z), 0.1f).OnComplete(()=>
+                    {
+                        if (enemies[i] != null)
+                        {
+                            for (int j = 0; j < _towerStats.TargetsCount; j++)
+                            {
+                                if (enemies.Count >= _towerStats.TargetsCount)
+                                {
+                                    Shoot(enemies[j]);
+                                }
+                                else
+                                {
+                                    if (j < enemies.Count)
+                                    {
+                                        Shoot(enemies[j]);
+                                    }
+                                }
+                            }
+                        }
+                    });
                 }
-                return true;
+            else
+            {
+                if (enemies[i] != null)
+                {
+                    for (int j = 0; j < _towerStats.TargetsCount; j++)
+                    {
+                        if (enemies.Count >= _towerStats.TargetsCount)
+                        {
+                            Shoot(enemies[j]);
+                        }
+                        else
+                        {
+                            if (j < enemies.Count)
+                            {
+                                Shoot(enemies[j]);
+                            }
+                        }
+                    }
+                }
             }
+                return true;          
         }
         return false;       
     }
 
     public void Shoot(IDamagable damagable)
     {
-        CurrentTarget = damagable.GetOrigin().gameObject;
-        var bullet = _poolService.GetBulletFromPool(_towerData.BulletPrefab.GetType());
+        var bullet = _poolService.GetBulletFromPool(_towerStats.BulletPrefab.GetType());
         if (bullet == null)
         {
             bullet = CreateBullet();
             bullet.SetBulletPool(_poolService, false);
         }
 
-        bullet.SetBulletParameters(_towerData, _enemyPool, _shootingPoint.position);
+        bullet.SetBulletParameters(_towerStats, _enemyPool, _shootingPoint.position);
         bullet.SetTarget(damagable);
         bullet.FlyOnTarget();
     }       
@@ -72,22 +94,24 @@ public class Shooter : MonoBehaviour, IShoot
     {
         while (true)
         {
+            float waitTime = (_towerStats.BonusAttackSpeed.Value + _towerStats.BonusAttackSpeed.Value) / 100;
+
             while (DetectEnemy())
             {
-                yield return new WaitForSeconds(_delayBetweenShoots);
+                yield return new WaitForSeconds(1 / waitTime);
             }
-            yield return new WaitForSeconds(_delayBetweenShoots/5);
+
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
-    private Bullet CreateBullet() => Instantiate(_towerData.BulletPrefab);
+    private Bullet CreateBullet() => Instantiate(_towerStats.BulletPrefab);
 
     private protected void OnEnable()
     {
         if (_shootingPoint == null)
             _shootingPoint = transform;
-        _delayBetweenShoots = _towerData.AttackSpeed;
-        _enemyChecker.SetAttackRange(_towerData.AttackRadius);
+        _enemyChecker.SetAttackRange(_towerStats.AttackRadius);
 
         if (!_isPoolCreated)
         {

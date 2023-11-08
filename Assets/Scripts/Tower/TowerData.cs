@@ -2,13 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/TowerData", order = 1)]
-public class TowerData : ScriptableObject
+public class TowerData : Data
 {
 	[Header("Tower")]
 	public TowerType Type;
 	public NewTower TowerPrefab;
 	public ParticleSystem DustParticles;
-	public Sprite MainImage;
 	public int UpgradeNumber;
 
 	[Space]
@@ -18,14 +17,9 @@ public class TowerData : ScriptableObject
 	[Space]
 	[Header("Tower parameters")]
 
-	public string Name;
 	public int Cost;
-	public int BuildingTime;
-	public int MinimalDamage;
-	public int MaximumDamage;
 	public float AttackSpeed;
 	public float ProjectileSpeed;
-	public float ProjectileParentingTime;
 	public float ExplosionRadius;
 	public float AttackRadius;
 	public int TargetsCount;

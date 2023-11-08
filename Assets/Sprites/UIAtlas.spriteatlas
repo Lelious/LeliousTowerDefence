@@ -62,6 +62,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1ad6c63906168054b8e88b7ac6f777f1, type: 3}
   - {fileID: 21300000, guid: 3a92951a01844864e8cfd91cf16bf115, type: 3}
   - {fileID: 21300000, guid: 9476052b86778f44caa1b313ea4cb6e9, type: 3}
+  - {fileID: 21300000, guid: 5d2e9d5b79b75e2489dabb8849561636, type: 3}
   - {fileID: 21300000, guid: 446239dbcd79ebe4b9c69fa57626a7c2, type: 3}
   - {fileID: 21300000, guid: 5090eb6c61ca22245a5d58872e4f5746, type: 3}
   - {fileID: 21300000, guid: 89c8a0fc2f595684b8c0c98c2c6793f5, type: 3}
@@ -76,6 +77,7 @@ SpriteAtlas:
   - runned_words_whiteSingle
   - GlowLineFixed
   - IMG_0562
+  - Screenshot_16
   - Runned_words_another
   - HealthIcon
   - AttackIcon.png

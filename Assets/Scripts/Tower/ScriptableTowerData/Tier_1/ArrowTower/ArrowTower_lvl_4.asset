@@ -12,20 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cbe5f664bcf3d041b09b5aef00ca40f, type: 3}
   m_Name: ArrowTower_lvl_4
   m_EditorClassIdentifier: 
+  MainImage: {fileID: 21300000, guid: 8e08b2e8ebd64784290342dc3b468f04, type: 3}
+  Name: Arrow Tower lvl 4
+  MaxHP: 9
+  MinimalDamage: 8
+  MaximumDamage: 14
   Type: 0
   TowerPrefab: {fileID: 2828531714194891516, guid: cd2f054e622ca6845af29ff1f7930283, type: 3}
   DustParticles: {fileID: 981165095458120534, guid: e4e3c5a9592da834b974a88d9bd14b18, type: 3}
-  MainImage: {fileID: 21300000, guid: 8e08b2e8ebd64784290342dc3b468f04, type: 3}
   UpgradeNumber: 2
   BulletPrefab: {fileID: 2455164268452172662, guid: 727d776442af66448b538a71897e39b7, type: 3}
-  Name: Arrow Tower lvl 4
   Cost: 10
-  BuildingTime: 7
-  MinimalDamage: 8
-  MaximumDamage: 14
-  AttackSpeed: 0.85
+  AttackSpeed: 115
   ProjectileSpeed: 0.005
-  ProjectileParentingTime: 2
   ExplosionRadius: 0
   AttackRadius: 11.05
   TargetsCount: 1

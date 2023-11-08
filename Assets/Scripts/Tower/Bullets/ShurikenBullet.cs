@@ -18,10 +18,8 @@ public class ShurikenBullet : Bullet, IPoollableBullet
     private GameObject _impactOnHit;
     private Transform _hitPointTransform;
     private Vector3 _direction;
-    private Vector3 _endPoint;
     private float _distance;
     private float _flyingProgress;
-    private float _returningTime;
     private float _flyingSpeed;
     private int _targetsCount;
     private int _currentTarget;
@@ -46,12 +44,11 @@ public class ShurikenBullet : Bullet, IPoollableBullet
             ReturnToPool();       
     }
 
-    public override void SetBulletParameters(TowerData data, EnemyPool enemyPool, Vector3 startPosition)
+    public override void SetBulletParameters(TowerStats data, EnemyPool enemyPool, Vector3 startPosition)
     {
         _damage = Random.Range(data.MinimalDamage, data.MaximumDamage + 1);
         _flyingSpeed = data.ProjectileSpeed;
-        _returningTime = data.ProjectileParentingTime;
-        _targetsCount = data.RicochetteCount;
+        _targetsCount = 5;
         _currentTarget = 0;
         _enemyPool = enemyPool;
 
@@ -137,12 +134,12 @@ public class ShurikenBullet : Bullet, IPoollableBullet
                             }
                             else
                             {
-                                StartCoroutine(ReturnToPoolRoutine());
+                                ReturnToPool();
                             }
                         }
                         else
                         {
-                            StartCoroutine(ReturnToPoolRoutine());
+                            ReturnToPool();
                         }
                     }
                 }
@@ -153,7 +150,7 @@ public class ShurikenBullet : Bullet, IPoollableBullet
 
                 if (_damagable == null)
                 {
-                    StartCoroutine(ReturnToPoolRoutine());
+                    ReturnToPool();
                 }
             }
 
@@ -192,12 +189,5 @@ public class ShurikenBullet : Bullet, IPoollableBullet
                 return availableTargets.FirstOrDefault();
             }
         }    
-    }
-
-    private IEnumerator ReturnToPoolRoutine()
-    {
-        yield return new WaitForSeconds(_returningTime);
-        _enemyHitPoint.RemoveAttachedBulletFromHitPoint(this);
-        ReturnToPool();
     }
 }

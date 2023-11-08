@@ -12,7 +12,6 @@ public class FireBullet : Bullet, IPoollableBullet
     private GameObject _impactOnHit;
     private Transform _hitPointTransform;
     private float _flyingProgress;
-    private float _returningTime;
     private float _flyingSpeed;
     private int _damage;
     private bool _onFlying;
@@ -34,11 +33,10 @@ public class FireBullet : Bullet, IPoollableBullet
             ReturnToPool();
     }
 
-    public override void SetBulletParameters(TowerData data, EnemyPool enemyPool, Vector3 startPosition)
+    public override void SetBulletParameters(TowerStats data, EnemyPool enemyPool, Vector3 startPosition)
     {
         _damage = Random.Range(data.MinimalDamage, data.MaximumDamage + 1);
         _flyingSpeed = data.ProjectileSpeed;
-        _returningTime = data.ProjectileParentingTime;
         transform.position = startPosition;
 
         if (_impactOnHitPrefab == null)
@@ -88,25 +86,12 @@ public class FireBullet : Bullet, IPoollableBullet
                     {
                         _isDealDamage = true;
                         _damagable.TakeDamage(_damage);
-                        _damagable.HitPoint().AttachBulletToHitPoint(this);
-                        if (_impactOnHit != null)
-                        {
-                            _impactOnHit.transform.position = _hitPointTransform.position;
-                            _impactOnHit.SetActive(true);
-                        }
                         _onFlying = false;
-                        StartCoroutine(ReturnToPoolRoutine());
+                        ReturnToPool();
                     }
                 }
             }
             yield return null;
         }
-    }
-
-    private IEnumerator ReturnToPoolRoutine()
-    {
-        yield return new WaitForSeconds(_returningTime);
-        _enemyHitPoint.RemoveAttachedBulletFromHitPoint(this);
-        ReturnToPool();
     }
 }

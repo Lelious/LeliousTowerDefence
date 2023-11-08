@@ -6,13 +6,11 @@ using Zenject;
 
 public class EnemyEntity : MonoBehaviour, ITouchable
 {
-    public FloatReactiveProperty Health = new FloatReactiveProperty();
-
     [SerializeField] private EnemyHealth _enemyHealth;
     [SerializeField] private EnemyData _enemyData;
     [SerializeField] private GameObject _selection;
-    [SerializeField] private EnemyHitPoint _hitPoint;
 
+    private EnemyStats _enemyStats;
     private GamePannelUdaterInfoContainer _containerInfo;
     private GameUIService _gameInformationMenu;
     private BottomGameMenu _bottomMenuInformator;
@@ -30,13 +28,15 @@ public class EnemyEntity : MonoBehaviour, ITouchable
         _gameManager = gameManager;
         _gameInformationMenu = gameInformationMenu;
         _bottomMenuInformator = _gameInformationMenu.GetBottomMenuInformator();
-        _selectedFrame = selectedFrame;       
+        _selectedFrame = selectedFrame;
     }
 
-    private void Awake()
+    public void InitializeEnemy()
     {
-        Health = _enemyHealth.GetReactiveHealthProperty();
-        InitializeInfoContainer();
+        _enemyStats = new EnemyStats();
+        _enemyStats.InitializeStats(_enemyData);
+        _containerInfo = _enemyStats.GetContainer();
+        _enemyHealth.InitializeHealth(_enemyStats.MaxHealth, _enemyStats.Health);
     }
 
     public void ReturnToEnemyPool()
@@ -68,26 +68,7 @@ public class EnemyEntity : MonoBehaviour, ITouchable
     private IEnumerator DelayedDisableRoutine()
     {
         yield return new WaitForSeconds(1f);
-        //_hitPoint.ReturnAttachedBulletsToPool();
-        yield return new WaitForSeconds(1f);
         gameObject.SetActive(false);
         gameObject.layer = 2;
-    }
-
-    private void InitializeInfoContainer()
-    {
-        _containerInfo = new GamePannelUdaterInfoContainer
-        {
-            Touchable = this,
-            PreviewImage = _enemyData.MainImage,
-            CurrentHealth = Health,
-            Name = _enemyData.Name,
-            MaxHealth = _enemyData.Hp,
-            MinDamage = 0,
-            MaxDamage = 0,
-            Armor = _enemyData.Armor,
-            AttackSpeed = 0,
-            UpgradesList = null
-        };
     }
 }

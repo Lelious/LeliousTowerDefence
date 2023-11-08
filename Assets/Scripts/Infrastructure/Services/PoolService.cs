@@ -6,10 +6,7 @@ public class PoolService : IInitializable
 {
     private Dictionary<Type, Queue<IPoollableBullet>> _pool;
 
-    public void Initialize()
-    {
-        _pool = new Dictionary<Type, Queue<IPoollableBullet>>();
-    }
+    public void Initialize() => _pool = new Dictionary<Type, Queue<IPoollableBullet>>();
 
     public void AddBulletToPool(Type type, IPoollableBullet bullet)
     {
@@ -64,8 +61,5 @@ public class PoolService : IInitializable
         _pool.Add(type, queue);
     }
 
-    private bool Validate(Type type)
-    {
-        return _pool.ContainsKey(type);
-    }
+    private bool Validate(Type type) => _pool.ContainsKey(type);
 }

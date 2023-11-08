@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cbe5f664bcf3d041b09b5aef00ca40f, type: 3}
+  m_Name: IceSpireTower_lvl_8
+  m_EditorClassIdentifier: 
+  Type: 10
+  TowerPrefab: {fileID: 7333680334631108486, guid: 760e1d38dfc490a4dbe67f600fd71041, type: 3}
+  DustParticles: {fileID: 981165095458120534, guid: e4e3c5a9592da834b974a88d9bd14b18, type: 3}
+  MainImage: {fileID: 21300000, guid: 5090eb6c61ca22245a5d58872e4f5746, type: 3}
+  UpgradeNumber: 6
+  BulletPrefab: {fileID: 7222963477668431056, guid: ee846afcc2e5c0b46981145fef66b488, type: 3}
+  Name: Ice Spire Tower lvl 8
+  Cost: 1
+  BuildingTime: 5
+  MinimalDamage: 5
+  MaximumDamage: 8
+  AttackSpeed: 1
+  ProjectileSpeed: 0.002
+  ProjectileParentingTime: 0
+  ExplosionRadius: 0
+  AttackRadius: 10
+  TargetsCount: 1
+  RicochetteCount: 0
+  UpgradablesList: []

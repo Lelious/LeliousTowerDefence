@@ -3,18 +3,19 @@ using DG.Tweening;
 using UniRx;
 using System.Collections.Generic;
 
-public class NewTower : MonoBehaviour
+public class NewTower : MonoBehaviour, IEffectable
 {
-	public FloatReactiveProperty Health = new FloatReactiveProperty();
-
+	[SerializeField] private Transform _sphere;
 	[SerializeField] private Shooter _shooter;
 	[SerializeField] private GameObject _rangeBoarder;
 	[SerializeField] private HealthBar _buildingProgress;
 	[SerializeField] private Transform _towerObject;
 	[SerializeField] private float _endOffsetY = -0.6f;
-	[SerializeField] private List<GameObject> _upgradablesList = new List<GameObject>();
+	[SerializeField] private List<GameObject> _upgradablesList = new();	
+	[SerializeField] private TowerStats _stats;
+	[SerializeField] private ObjectInstanceFromNull _fireBuff, _waterBuff;
 
-	private TowerData _towerData;
+	private List<IEffect> _effects = new();
 	private ParticleSystem _dustPatricles;
 	private BuildingCell _buildingCell;
 	private float _buildProgress = 0.01f;
@@ -25,28 +26,27 @@ public class NewTower : MonoBehaviour
     public void TowerBuild(BuildingCell cell)
 	{
 		_buildingCell = cell;
-		_buildingProgress.SetMaxHealth(_towerData.BuildingTime);
+		_buildingProgress.SetMaxHealth(_stats.MaxHealth);
 		_buildingProgress.SetHealth(0.01f);
 		//_dustPatricles = Instantiate(_towerData.DustParticles, transform.position, Quaternion.identity, transform);
 		//_dustPatricles.Stop();
-		_shooter.SetTowerData(_towerData);
-		var main = _towerData.DustParticles.main;
-		main.duration = _towerData.BuildingTime;
-		_towerData.DustParticles.Play();
-		_buildingCell.Untouch();
+
+		//var main = _stats.DustParticles.main;
+		//main.duration = _towerData.BuildingTime;
+		//_towerData.DustParticles.Play();
 		_buildingProgress.Show();
 
-		DOTween.To(() => _buildProgress, x => _buildProgress = x, _towerData.BuildingTime, _towerData.BuildingTime)
+		DOTween.To(() => _buildProgress, x => _buildProgress = x, _stats.MaxHealth, _stats.MaxHealth)
 			.OnUpdate(() =>
 			{
-				Health.Value = _buildProgress;
+				_stats.Health.Value = _buildProgress;
 				_buildingProgress.SetHealth(_buildProgress);
 			}).OnComplete(() =>
 				{
 					//_dustPatricles.Clear();
 					_buildingProgress.Hide();
 					_shooter.gameObject.SetActive(true);
-					_buildingCell.EnableUpgrades();
+					_buildingCell.EnableUpgrades(_stats.UpgradablesList);
 
 					if (_buildingCell.IsTouched())
                     {
@@ -54,9 +54,13 @@ public class NewTower : MonoBehaviour
 					}
 
                 }).SetEase(Ease.Linear);
-		_towerObject.DOLocalMoveY(_endOffsetY, _towerData.BuildingTime);
+		_towerObject.DOLocalMoveY(_endOffsetY, _stats.MaxHealth);
+	}
 
-		CheckUpgrades();
+	public void SetStats(TowerStats stats)
+	{
+		_stats = stats;
+		_shooter.SetTowerData(stats);
 	}
 
 	public void ClearAllUnusedBullets() => _shooter.ClearAmmo();
@@ -79,18 +83,69 @@ public class NewTower : MonoBehaviour
 	public void HideRange()
 	{
 		_rangeBoarder.SetActive(false);
-	}	
+	}
 
-	public void SetTowerData(TowerData data) => _towerData = data;
-
-	private void CheckUpgrades()
+	private void RecalculateStats()
     {
-        if (_upgradablesList.Count > 0 && _towerData.UpgradeNumber > -1)
+        foreach (var effect in _effects)
         {
-			for (int i = 0; i <= _towerData.UpgradeNumber; i++)
-			{
-				_upgradablesList[i].SetActive(true);
-			}
+			var bonus = effect.GetPercentage();
+
+			switch (effect.GetEffectType())
+            {				
+                case EffectType.IncreaceAttackPower:
+					_stats.UpgradeStat(StatType.BonusAttackPower, bonus);
+					break;
+                case EffectType.IncreaceAttackSpeed:
+					_stats.UpgradeStat(StatType.BonusAttackSpeed, bonus);
+					break;
+            }         
+        }
+	}
+
+	public List<IEffect> GetTickableEffects() => _effects.FindAll(x => x.IsTickable());
+	public Transform GetOrigin() => transform;
+	public List<IEffect> GetEffects() => _effects;
+
+	public void ApplyEffect(IEffect effect)
+    {
+        if (effect.GetEffectType() == EffectType.IncreaceAttackPower)
+        {
+			_waterBuff.EnableEffect();
+        }
+
+        if (effect.GetEffectType() == EffectType.IncreaceAttackSpeed)
+        {
+			_fireBuff.EnableEffect();
+        }
+
+		_effects.Add(effect);
+		RecalculateStats();
+	}
+
+    public void RemoveEffect(IEffect effect)
+    {
+		if (effect.GetEffectType() == EffectType.IncreaceAttackPower)
+		{
+			_waterBuff.DisableEffect();
 		}
+
+		if (effect.GetEffectType() == EffectType.IncreaceAttackSpeed)
+		{
+			_fireBuff.DisableEffect();
+		}
+
+		_effects.Remove(effect);
+		RecalculateStats();
+	}
+
+	public void TickAction()
+    {
+		Debug.Log("Tick");
+    }
+
+    public void RefreshEffectValues()
+    {
+		RecalculateStats();
 	}
 }

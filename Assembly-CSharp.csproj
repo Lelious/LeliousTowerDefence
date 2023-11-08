@@ -58,7 +58,9 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\BottomGameMenu.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
+    <Compile Include="Assets\Scripts\Data.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameBuildingState.cs" />
+    <Compile Include="Assets\Scripts\Test\IStats.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Factories\EnemyFactory.cs" />
     <Compile Include="Assets\Scripts\UI\UIMenuIcons.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Assets\Scripts\Tower\Bullets\Bullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\Scripts\UI\GameButton.cs" />
+    <Compile Include="Assets\Scripts\Test\EffectType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\BootstrapInstaller.cs" />
     <Compile Include="Assets\Scripts\UI\HealthBar.cs" />
@@ -88,9 +91,11 @@
     <Compile Include="Assets\Scripts\Tower\MagicTowerCircleRotator.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameLooseState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
+    <Compile Include="Assets\Scripts\Test\TowerBuffer.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\UI\BottomBuildingMenu.cs" />
+    <Compile Include="Assets\Scripts\Test\StatType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\Scripts\Debug\Gizmo.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameResetState.cs" />
@@ -101,22 +106,25 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Tower\Bullets\IceBullet.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IShoot.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IEffectable.cs" />
     <Compile Include="Assets\Scripts\Input\ParentedCamera.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyHitPoint.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IInputService.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\Services\BuffService.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\GameLoopStateMachine.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
     <Compile Include="Assets\RagdollDelayedDeath.cs" />
     <Compile Include="Assets\Scripts\StaticData\StartPoint.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameLoadState.cs" />
-    <Compile Include="Assets\Scripts\Tower\Effects\EffectsPool.cs" />
+    <Compile Include="Assets\Scripts\Tower\VisualEffects\EffectsPool.cs" />
     <Compile Include="Assets\Scripts\Input\CameraFrustrumChecker.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\Scripts\Tower\Bullets\BulletData.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\Services\EnemyLoadService.cs" />
     <Compile Include="Assets\Teleportation.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Services\BulletType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
@@ -127,7 +135,7 @@
     <Compile Include="Assets\Scripts\Tower\Bullets\FireBullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\Scripts\UI\BottomMenuIconsContainer.cs" />
-    <Compile Include="Assets\Scripts\Tower\Effects\IPoollableEffect.cs" />
+    <Compile Include="Assets\Scripts\Tower\VisualEffects\IPoollableEffect.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Services\InputService.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameWinState.cs" />
     <Compile Include="Assets\Scripts\Tower\Bullets\ShurikenBullet.cs" />
@@ -135,6 +143,7 @@
     <Compile Include="Assets\Scripts\UI\GameUIService.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Scripts\Debug\FPSCounter\FPSDisplay.cs" />
+    <Compile Include="Assets\Scripts\BuffDebuff\Effect.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Services\PoolService.cs" />
     <Compile Include="Assets\Scripts\Input\CameraLimiter.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IDamagable.cs" />
@@ -142,27 +151,32 @@
     <Compile Include="Assets\Scripts\Enemy\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\State.cs" />
     <Compile Include="Assets\Scripts\Tower\Bullets\MagicBullet.cs" />
+    <Compile Include="Assets\Scripts\Test\ObjectInstanceFromNull.cs" />
     <Compile Include="Assets\Scripts\UI\UIButton.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Scripts\UI\TimeBeforeSpawn.cs" />
     <Compile Include="Assets\Scripts\StaticData\Extentions.cs" />
+    <Compile Include="Assets\Scripts\Test\TowerStats.cs" />
+    <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IEffect.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Factories\TowerFactory.cs" />
     <Compile Include="Assets\Scripts\BuildingCell\BuildingCell.cs" />
-    <Compile Include="Assets\Scripts\Tower\Test\YRotator.cs" />
+    <Compile Include="Assets\Scripts\Test\YRotator.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IPoollableBullet.cs" />
+    <Compile Include="Assets\Scripts\BuffDebuff\StatData.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Services\TapRegisterService.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\Scripts\Tower\Bullets\SnipeBullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\Scripts\UI\GamePannelUdaterInfoContainer.cs" />
-    <Compile Include="Assets\Scripts\Tower\Test\TilingY.cs" />
+    <Compile Include="Assets\Scripts\Enemy\EnemyStats.cs" />
+    <Compile Include="Assets\Scripts\Test\TilingY.cs" />
     <Compile Include="Assets\Scripts\Tower\TowerData.cs" />
     <Compile Include="Assets\Scripts\StaticData\EndPoint.cs" />
     <Compile Include="Assets\Scripts\UI\HealthBarRotatorToCamera.cs" />
-    <Compile Include="Assets\Scripts\Tower\Test\ScullRotator.cs" />
+    <Compile Include="Assets\Scripts\Test\ScullRotator.cs" />
     <Compile Include="Assets\Scripts\UI\SelectedFrame.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\GameBootstrapper.cs" />
     <Compile Include="Assets\Scripts\StaticData\CachedStringValues.cs" />
@@ -170,6 +184,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\EnemyController.cs" />
+    <Compile Include="Assets\Scripts\Test\TestBuff.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\Scripts\UI\UIIconsKeyValuePair.cs" />
     <Compile Include="Assets\Scripts\Tower\Shooter.cs" />
@@ -179,8 +194,9 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
-    <Compile Include="Assets\Scripts\Tower\Test\FlagShaderRandomizer.cs" />
+    <Compile Include="Assets\Scripts\Test\FlagShaderRandomizer.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IControllFromState.cs" />
+    <Compile Include="Assets\Scripts\UI\UICustomIcon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -195,6 +211,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Lean\READ ME.txt" />
     <None Include="Assets\Shaders\FlagShader.shader" />
+    <None Include="Assets\Shaders\BuffDisplacement.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />

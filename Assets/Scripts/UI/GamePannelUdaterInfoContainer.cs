@@ -2,16 +2,29 @@ using UniRx;
 using UnityEngine;
 using System.Collections.Generic;
 
-public struct GamePannelUdaterInfoContainer
+public class GamePannelUdaterInfoContainer
 {
     public ITouchable Touchable;
-    public Sprite PreviewImage;
-    public FloatReactiveProperty CurrentHealth;
-    public string Name;
-    public float MaxHealth;
-    public float MinDamage;
-    public float MaxDamage;
-    public float? Armor;
-    public float AttackSpeed;
+    public Sprite PreviewImage { get; private set; }
+    public string Name { get; private set; }
+    public int MaxHealth { get; private set; }
+    public float MinDamage { get; private set; }
+    public float MaxDamage { get; private set; }
+
+    public Dictionary<StatType, FloatReactiveProperty> UpgradableStats = new Dictionary<StatType, FloatReactiveProperty>();
     public List<TowerData> UpgradesList;
+
+    public GamePannelUdaterInfoContainer(Sprite previewImage, 
+                                         string name, int maxHealth, 
+                                         float minDamage, 
+                                         float maxDamage, 
+                                         Dictionary<StatType, FloatReactiveProperty> upgradableStats)
+    {
+        PreviewImage = previewImage;
+        Name = name;
+        MaxHealth = maxHealth;
+        MinDamage = minDamage;
+        MaxDamage = maxDamage;
+        UpgradableStats = upgradableStats;
+    }
 }

@@ -39,6 +39,7 @@ public class GameBuildingState : State
 	{
 		_timerValue = _timerTime;
 
+
 		while (_timerValue >= 0)
 		{
 			_topMenuInformator.SetSpawnTime(_timerValue);

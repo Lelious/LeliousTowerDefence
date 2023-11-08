@@ -12,8 +12,6 @@ public class SnipeBullet : Bullet, IPoollableBullet
     private GameObject _impactOnHit;
     private Transform _hitPointTransform;
     private Vector3 _endPoint;
-    private Vector3 _offset;
-    private Quaternion _rotation;
     private float _flyingProgress;
     private float _returningTime;
     private float _flyingSpeed;
@@ -38,11 +36,10 @@ public class SnipeBullet : Bullet, IPoollableBullet
             ReturnToPool();       
     }
 
-    public override void SetBulletParameters(TowerData data, EnemyPool enemyPool, Vector3 startPosition)
+    public override void SetBulletParameters(TowerStats data, EnemyPool enemyPool, Vector3 startPosition)
     {
         _damage = Random.Range(data.MinimalDamage, data.MaximumDamage + 1);
         _flyingSpeed = data.ProjectileSpeed;
-        _returningTime = data.ProjectileParentingTime;
         transform.position = startPosition;
 
         if (_impactOnHitPrefab == null)       
@@ -108,23 +105,16 @@ public class SnipeBullet : Bullet, IPoollableBullet
                             }
 
                             _onFlying = false;
-                            StartCoroutine(ReturnToPoolRoutine());
+                            ReturnToPool();
                         }
                     }
                 }
                 else
                 {
-                    StartCoroutine(ReturnToPoolRoutine());
+                    ReturnToPool();
                 }
             }           
             yield return new WaitForFixedUpdate();
         }
-    }
-
-    private IEnumerator ReturnToPoolRoutine()
-    {
-        yield return new WaitForSeconds(_returningTime);
-        _enemyHitPoint.RemoveAttachedBulletFromHitPoint(this);
-        ReturnToPool();
     }
 }

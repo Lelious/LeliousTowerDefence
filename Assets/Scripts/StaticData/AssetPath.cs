@@ -6,4 +6,5 @@ public static class AssetPath
     public const string SelectedFrame = "UI/SelectedFrame";
     public const string InputService = "UI/InputService";
     public const string GameManager = "UI/GameManager";
+    public const string EnemyPrefabPath = "Waves/Wave/Wave";
 }

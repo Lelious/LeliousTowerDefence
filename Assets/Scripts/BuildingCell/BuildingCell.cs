@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -10,6 +12,7 @@ public class BuildingCell : MonoBehaviour, ITouchable
 	private TowerFactory _towerFactory;
 	private NewTower _placedTower;
 	private TowerData _towerData;
+	private TowerStats _towerStats;
 	private bool _isTouched;
 	private TowerType _type;
 
@@ -45,21 +48,22 @@ public class BuildingCell : MonoBehaviour, ITouchable
 
 	public void BuildTowerOnPlace(TowerData data)
 	{
-		_towerData = data;
+		_towerStats = new TowerStats();
+		_towerStats.InitializeStats(data);
 
-        if (_placedTower != null)
+		if (_placedTower != null)
         {
             if (_type != _towerData.Type)
             {
 				_placedTower.ClearAllUnusedBullets();
 				Destroy(_placedTower.gameObject);
 				_placedTower = _towerFactory.CreateNewTower(data, transform.position);
-				_placedTower.SetTowerData(data);
+				_placedTower.SetStats(_towerStats);
 				_placedTower.TowerBuild(this);
 			}
             else
             {
-				_placedTower.SetTowerData(data);
+				_placedTower.SetStats(_towerStats);
 				_placedTower.RebuildTower();
 				_placedTower.TowerBuild(this);
 			}
@@ -67,52 +71,38 @@ public class BuildingCell : MonoBehaviour, ITouchable
         else
         {
 			_placedTower = _towerFactory.CreateNewTower(data, transform.position);
-			_placedTower.SetTowerData(data);
+			_placedTower.SetStats(_towerStats);
 			_placedTower.TowerBuild(this);
 			_type = data.Type;
         }
 
 		InitializeInfoContainer();
+		Untouch();
 	}
 
-	public void EnableUpgrades()
+	public void EnableUpgrades(List<TowerData> towerUpgrades)
     {
-		InitializeInfoContainer(true);
-
 		if (_isTouched)
         {
-			_bottomMenuInformator.SetEntityToPannelUpdate(_containerInfo);
+			_containerInfo.UpgradesList = towerUpgrades;
+			_bottomMenuInformator.UpdateUpgradesInfo(_containerInfo);
 		}
 	}
 
 	public void Untouch()
 	{
 		_isTouched = false;
-		Debug.Log("Untouch");
+
 		if (_placedTower != null)
 			_placedTower.HideRange();
 	}
 
 	public bool IsTouched() => _isTouched;
 
-	private void InitializeInfoContainer(bool _isNeedUpgrades = false)
+	private void InitializeInfoContainer()
 	{
-		_containerInfo = new GamePannelUdaterInfoContainer
-		{
-			Touchable = this,
-			PreviewImage = _towerData.MainImage,
-			CurrentHealth = _placedTower.Health,
-			Name = _towerData.Name,
-			MaxHealth = _towerData.BuildingTime,
-			MinDamage = _towerData.MinimalDamage,
-			MaxDamage = _towerData.MaximumDamage,
-			Armor = null,
-			AttackSpeed = _towerData.AttackSpeed,
-		};
-
-        if (_isNeedUpgrades)
-        {
-			_containerInfo.UpgradesList = _towerData.UpgradablesList;
-		}
+		_towerStats.InitializeInfoContainer();
+		_containerInfo = _towerStats.GetContainer();
+		_containerInfo.Touchable = this;
     }
 }

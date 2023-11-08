@@ -42,10 +42,10 @@ public class CannonBullet : Bullet, IPoollableBullet
             _tween = transform.DOJump(_targetTransform.position, 5f, 1, (_targetTransform.position - transform.position).magnitude / 8f).OnComplete(()=> Explode()).SetEase(Ease.Linear);       
     }
 
-    public override void SetBulletParameters(TowerData data, EnemyPool enemyPool, Vector3 startPosition)
+    public override void SetBulletParameters(TowerStats data, EnemyPool enemyPool, Vector3 startPosition)
     {
-        _damage = Random.Range(data.MinimalDamage, data.MaximumDamage + 1);
-        _explosionRadius = data.ExplosionRadius;
+        //_damage = Random.Range(data.MinAttack, data.MaxAttack + 1);
+        //_explosionRadius = data.ExplosionRadius;
         _explosionPrefab.transform.localScale = Vector3.one * _explosionRadius;
         transform.position = startPosition;
     }

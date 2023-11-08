@@ -32,7 +32,7 @@ public class UIButton : MonoBehaviour
 		ValidateDamage(data.MinimalDamage, data.MaximumDamage);
         ValidateAttackRange(data.AttackRadius * 100);
 		ValidateAttackSpeed(1 / data.AttackSpeed);
-		ValidateBuildingTime(data.BuildingTime);
+		ValidateBuildingTime(data.MaxHP);
 		ValidateCost(data.Cost);
     }
 
