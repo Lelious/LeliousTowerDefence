@@ -3177,7 +3177,7 @@ MonoBehaviour:
   _duration: 5
   _tick: 0.5
   _periodical: 0
-  _percentage: 0.5
+  _percentage: 2
   _buffRadius: 100
   _fireBuffOrb: {fileID: 995370452927894893, guid: c32f9e4a0e738aa4ab7af5e7894c8cf2, type: 3}
   _waterBuffOrb: {fileID: 995370452927894893, guid: ee846afcc2e5c0b46981145fef66b488, type: 3}

@@ -36,7 +36,7 @@ public class ArrowBullet : Bullet, IPoollableBullet
 
     public override void SetBulletParameters(TowerStats data, EnemyPool enemyPool, Vector3 startPosition)
     {
-        _damage = Random.Range(data.MinimalDamage, data.MaximumDamage + 1);
+        _damage = (int)Random.Range(data.MinimalDamage + data.BonusAttackPower.Value, data.MaximumDamage + data.BonusAttackPower.Value);
         _flyingSpeed = data.ProjectileSpeed;
         transform.position = startPosition;
 

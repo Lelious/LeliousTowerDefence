@@ -6,7 +6,7 @@ public class TowerData : Data
 {
 	[Header("Tower")]
 	public TowerType Type;
-	public NewTower TowerPrefab;
+	public Tower TowerPrefab;
 	public ParticleSystem DustParticles;
 	public int UpgradeNumber;
 

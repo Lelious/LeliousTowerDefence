@@ -17,8 +17,9 @@ public class EnemyStats : StatData
         Armor.Value = data.Armor;
         MinimalDamage = data.MinimalDamage;
         MaximumDamage = data.MaximumDamage;
+        Health.Value = MaxHealth;
 
-        InitializeUpgradableStats();
+        InitializeUpgradableStats();      
     }
 
     public override void InitializeInfoContainer()
@@ -30,6 +31,7 @@ public class EnemyStats : StatData
                 MaxHealth,
                 MinimalDamage,
                 MaximumDamage,
+                AttackSpeed,
                 UpgradableStats
             );
     }

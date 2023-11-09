@@ -92,12 +92,13 @@ public class Shooter : MonoBehaviour, IShoot
 
     private IEnumerator ShootingRoutine()
     {
+        float waitTime;
+
         while (true)
         {
-            float waitTime = (_towerStats.BonusAttackSpeed.Value + _towerStats.BonusAttackSpeed.Value) / 100;
-
             while (DetectEnemy())
             {
+                waitTime = (_towerStats.AttackSpeed + _towerStats.BonusAttackSpeed.Value) / 100;
                 yield return new WaitForSeconds(1 / waitTime);
             }
 

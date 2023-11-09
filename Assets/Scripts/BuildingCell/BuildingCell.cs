@@ -10,7 +10,7 @@ public class BuildingCell : MonoBehaviour, ITouchable
 	private GameUIService _gameInformationMenu;
 	private SelectedFrame _selectedFrame;
 	private TowerFactory _towerFactory;
-	private NewTower _placedTower;
+	private Tower _placedTower;
 	private TowerData _towerData;
 	private TowerStats _towerStats;
 	private bool _isTouched;
@@ -82,9 +82,10 @@ public class BuildingCell : MonoBehaviour, ITouchable
 
 	public void EnableUpgrades(List<TowerData> towerUpgrades)
     {
+		_containerInfo.UpgradesList = towerUpgrades;
+
 		if (_isTouched)
         {
-			_containerInfo.UpgradesList = towerUpgrades;
 			_bottomMenuInformator.UpdateUpgradesInfo(_containerInfo);
 		}
 	}

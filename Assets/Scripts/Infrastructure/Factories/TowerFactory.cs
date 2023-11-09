@@ -4,7 +4,7 @@ using Zenject;
 
 public class TowerFactory : IInitializable
 {
-	private List<NewTower> _towers = new List<NewTower>();
+	private List<Tower> _towers = new List<Tower>();
 
 	[Inject]
 	readonly DiContainer _container = null;
@@ -19,11 +19,11 @@ public class TowerFactory : IInitializable
 		
 	}
 
-	public NewTower CreateNewTower(TowerData data, Vector3 position, Transform parent = null)
+	public Tower CreateNewTower(TowerData data, Vector3 position, Transform parent = null)
 	{
 		var newTower = 
 			_container
-			.InstantiatePrefabForComponent<NewTower>(data.TowerPrefab, position, Quaternion.identity, parent);
+			.InstantiatePrefabForComponent<Tower>(data.TowerPrefab, position, Quaternion.identity, parent);
 
 		_towers.Add(newTower);
 

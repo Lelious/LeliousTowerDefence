@@ -35,6 +35,7 @@ public class EnemyEntity : MonoBehaviour, ITouchable
     {
         _enemyStats = new EnemyStats();
         _enemyStats.InitializeStats(_enemyData);
+        _enemyStats.InitializeInfoContainer();
         _containerInfo = _enemyStats.GetContainer();
         _enemyHealth.InitializeHealth(_enemyStats.MaxHealth, _enemyStats.Health);
     }

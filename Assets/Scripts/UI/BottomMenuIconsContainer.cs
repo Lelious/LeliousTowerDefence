@@ -3,22 +3,21 @@ using UnityEngine;
 
 public class BottomMenuIconsContainer : MonoBehaviour
 {
-	[SerializeField] private List<UIIconsKeyValuePair> _pairsList = new List<UIIconsKeyValuePair>();
+	[SerializeField] private List<UIIconsKeyValuePair> _pairsList = new();
 
 	private Dictionary<UIMenuIcons, GameObject> _menuIconsDictionary;
 
-	private void Awake()
+	public void Initialize()
 	{
 		_menuIconsDictionary = new Dictionary<UIMenuIcons, GameObject>();
 
-		foreach (var kvp in _pairsList)		
-			_menuIconsDictionary[kvp.Key] = kvp.Value;		
+		foreach (var kvp in _pairsList)
+			_menuIconsDictionary.Add(kvp.Key, kvp.Value);
 	}
 
 	public void RemoveUnusedIcons(List<UIMenuIcons> unusedTypesList)
 	{
 		EnableAllIcons();
-
 		foreach (var item in unusedTypesList)
 		{
 			_menuIconsDictionary.TryGetValue(item, out var unusedType);

@@ -48,10 +48,10 @@ public class TowerStats : StatData
         switch (type)
         {
             case StatType.BonusAttackPower:
-                BonusAttackPower.Value = value > 0 ? Mathf.Clamp(Mathf.FloorToInt((MinimalDamage + MaximumDamage) / 2 * value), 1, Mathf.Infinity) : 0;
+                BonusAttackPower.Value = value > 0 ? Mathf.FloorToInt((MinimalDamage + MaximumDamage) / 2 * value) : 0;
                 break;
-            case StatType.AttackSpeed:
-                BonusAttackSpeed.Value = AttackSpeed * value - AttackSpeed;
+            case StatType.BonusAttackSpeed:
+                BonusAttackSpeed.Value = AttackSpeed * value;
                 break;
         }
     }
@@ -65,6 +65,7 @@ public class TowerStats : StatData
                 MaxHealth,
                 MinimalDamage,
                 MaximumDamage,
+                AttackSpeed,
                 UpgradableStats
             );
     }

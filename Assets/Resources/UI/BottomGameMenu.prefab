@@ -2806,6 +2806,8 @@ MonoBehaviour:
     Value: {fileID: 9002137613691950972}
   - Key: 2
     Value: {fileID: 9002137612363838317}
+  - Key: 3
+    Value: {fileID: 3097030416081652532}
 --- !u!1 &9002137612270857822
 GameObject:
   m_ObjectHideFlags: 0

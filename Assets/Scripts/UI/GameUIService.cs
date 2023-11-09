@@ -51,7 +51,7 @@ public class GameUIService : MonoBehaviour
 		_emptyCellMenuRect.DOAnchorPos(new Vector2(0f, -_emptyCellMenuHeight), 0.25f).OnComplete(() => _bottomBuildMenu.SetActive(false));
 	}
 
-	public void ShowGameMenu(TowerData data = null)
+	public void ShowGameMenu()
 	{
 		_bottomGameMenu.SetActive(true);
 		_gameMenuRect.DOAnchorPos(Vector2.zero, 0.25f);
@@ -72,7 +72,6 @@ public class GameUIService : MonoBehaviour
 	public void SetBuildingCell(BuildingCell cell) => _buildingCell = cell;
 	public BuildingCell GetLastTouchedBuildingCell() => _buildingCell;
 	public BottomGameMenu GetBottomMenuInformator() => _bottomMenuInformator;
-
 
 	private void InitializeEmptyBuildButtons()
 	{

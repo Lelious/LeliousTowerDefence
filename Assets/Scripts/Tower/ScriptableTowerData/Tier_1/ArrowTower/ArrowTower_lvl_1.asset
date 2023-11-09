@@ -23,7 +23,7 @@ MonoBehaviour:
   UpgradeNumber: -1
   BulletPrefab: {fileID: 2455164268452172662, guid: 727d776442af66448b538a71897e39b7, type: 3}
   Cost: 3
-  AttackSpeed: 30
+  AttackSpeed: 100
   ProjectileSpeed: 0.005
   ExplosionRadius: 0
   AttackRadius: 10.25

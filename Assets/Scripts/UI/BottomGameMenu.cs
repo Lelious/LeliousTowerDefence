@@ -17,11 +17,16 @@ public class BottomGameMenu : MonoBehaviour
     [SerializeField] private Gradient _hpColorGradient;
     [SerializeField] private List<UIButton> _upgradesList = new List<UIButton>();
     [SerializeField] private List<GameObject> _visualizedButtons = new List<GameObject>();
-    //[Inject] private GameUIService _gameInformationMenu;
+    [Inject] private GameUIService _gameInformationMenu;
 
     private System.IDisposable _disposableEntity;
     private CompositeDisposable _disposable = new CompositeDisposable();
     private List<UIMenuIcons> _unusedIconsList = new List<UIMenuIcons>();
+
+    private void Awake()
+    {
+        _bottomMenuIconsContainer.Initialize();
+    }
 
     public void SetEntityToPannelUpdate(GamePannelUdaterInfoContainer infoContainer)
     {
@@ -54,7 +59,7 @@ public class BottomGameMenu : MonoBehaviour
         _name.text = infoContainer.Name;
         _damage.text = $"{infoContainer.MinDamage} - {infoContainer.MaxDamage}";
 
-        if (infoContainer.MinDamage == -1f)
+        if (infoContainer.MinDamage < 0f)
             _unusedIconsList.Add(UIMenuIcons.Damage);
         if (infoContainer.UpgradableStats.TryGetValue(StatType.Armor, out var armorReactiveValue))
         {
@@ -87,7 +92,7 @@ public class BottomGameMenu : MonoBehaviour
             _disposableEntity = bonusAttackSpeedReactiveValue
                 .Subscribe(attackSpeed =>
                 {
-                    SetAttackSpeed(attackSpeed);
+                    SetAttackSpeed(infoContainer.AttackSpeed + attackSpeed);
                 }).AddTo(_disposable);
         }
         else
@@ -134,7 +139,7 @@ public class BottomGameMenu : MonoBehaviour
     private void SetAttackSpeed(float value)
     {
         Debug.Log($"AttackSpeed = {value}");
-        string trim = string.Format("{0:f2}", 1 / (value / 100));
+        string trim = string.Format("{0:f2}", 1f / (value / 100f));
         _attackSpeed.text = $"{trim}/sec";
     }
 
