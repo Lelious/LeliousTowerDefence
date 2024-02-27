@@ -20,11 +20,16 @@ MonoBehaviour:
   Type: 0
   TowerPrefab: {fileID: 2828531714194891516, guid: cd2f054e622ca6845af29ff1f7930283, type: 3}
   DustParticles: {fileID: 981165095458120534, guid: e4e3c5a9592da834b974a88d9bd14b18, type: 3}
-  UpgradeNumber: 0
-  BulletPrefab: {fileID: 2455164268452172662, guid: 727d776442af66448b538a71897e39b7, type: 3}
+  UpgradeNumber: 1
+  BulletType: 0
+  BulletPrefab: {fileID: 8678665231522438485, guid: 727d776442af66448b538a71897e39b7, type: 3}
+  FlyCurvature: 0.05
+  OnTarget: 1
+  ImpactOnHit: {fileID: 3461587258431744119, guid: e9fa4051eb76bf140bd0f89e81af09b7, type: 3}
   Cost: 5
   AttackSpeed: 105
-  ProjectileSpeed: 0.005
+  ProjectileSpeed: 0.01
+  ProjectileSpeedIncreacement: 0.001
   ExplosionRadius: 0
   AttackRadius: 10.65
   TargetsCount: 1

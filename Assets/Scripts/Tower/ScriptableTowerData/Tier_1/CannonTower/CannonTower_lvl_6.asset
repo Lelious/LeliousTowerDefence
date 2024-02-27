@@ -12,21 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cbe5f664bcf3d041b09b5aef00ca40f, type: 3}
   m_Name: CannonTower_lvl_6
   m_EditorClassIdentifier: 
+  MainImage: {fileID: 21300000, guid: e6e082784941ead41aa07eae30cc3356, type: 3}
+  Name: Cannon Tower lvl 6
+  MaxHP: 10
+  MinimalDamage: 20
+  MaximumDamage: 30
   Type: 1
   TowerPrefab: {fileID: 3024634697342539241, guid: 0f02c7c6f7d3f4d4484e51c11b31a485, type: 3}
   DustParticles: {fileID: 981165095458120534, guid: e4e3c5a9592da834b974a88d9bd14b18, type: 3}
-  MainImage: {fileID: 21300000, guid: e6e082784941ead41aa07eae30cc3356, type: 3}
-  UpgradeNumber: 4
-  BulletPrefab: {fileID: 9117971766126228334, guid: af90cc5a3b793f94bb11672bb693dfaa, type: 3}
-  Name: Cannon Tower lvl 6
+  UpgradeNumber: 5
+  BulletType: 1
+  BulletPrefab: {fileID: 2132188868434894339, guid: af90cc5a3b793f94bb11672bb693dfaa, type: 3}
+  FlyCurvature: 0.1
+  OnTarget: 0
+  ImpactOnHit: {fileID: 8397522090878695327, guid: 8369998fb847f4f4dbf250a09c88f86e, type: 3}
   Cost: 15
-  BuildingTime: 9
-  MinimalDamage: 20
-  MaximumDamage: 30
-  AttackSpeed: 1.7
-  ProjectileSpeed: 0.005
-  ProjectileParentingTime: 2
-  ExplosionRadius: 2
+  AttackSpeed: 95
+  ProjectileSpeed: 0.012
+  ProjectileSpeedIncreacement: 0.0001
+  ExplosionRadius: 1.5
   AttackRadius: 7.2
   TargetsCount: 1
   RicochetteCount: 0

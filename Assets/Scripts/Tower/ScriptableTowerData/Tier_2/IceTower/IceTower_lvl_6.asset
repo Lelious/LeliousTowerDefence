@@ -12,20 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cbe5f664bcf3d041b09b5aef00ca40f, type: 3}
   m_Name: IceTower_lvl_6
   m_EditorClassIdentifier: 
+  MainImage: {fileID: 21300000, guid: 01572980309e9634dbf5229f440ccaf6, type: 3}
+  Name: Ice Tower lvl 6
+  MaxHP: 22
+  MinimalDamage: 37
+  MaximumDamage: 42
   Type: 6
   TowerPrefab: {fileID: 6579304019551623766, guid: 63c3c4c64496111498765511d16b0609, type: 3}
   DustParticles: {fileID: 981165095458120534, guid: e4e3c5a9592da834b974a88d9bd14b18, type: 3}
-  MainImage: {fileID: 21300000, guid: 01572980309e9634dbf5229f440ccaf6, type: 3}
-  UpgradeNumber: 4
-  BulletPrefab: {fileID: 7222963477668431056, guid: ee846afcc2e5c0b46981145fef66b488, type: 3}
-  Name: Ice Tower lvl 6
+  UpgradeNumber: 5
+  BulletType: 3
+  BulletPrefab: {fileID: 6028559954757904407, guid: ee846afcc2e5c0b46981145fef66b488, type: 3}
+  FlyCurvature: 0.03
+  OnTarget: 1
+  ImpactOnHit: {fileID: 3461587258431744119, guid: e9fa4051eb76bf140bd0f89e81af09b7, type: 3}
   Cost: 25
-  BuildingTime: 10
-  MinimalDamage: 37
-  MaximumDamage: 42
-  AttackSpeed: 0.66
-  ProjectileSpeed: 0.004
-  ProjectileParentingTime: 0
+  AttackSpeed: 105
+  ProjectileSpeed: 0.02
+  ProjectileSpeedIncreacement: 0.002
   ExplosionRadius: 0
   AttackRadius: 11.5
   TargetsCount: 1
@@ -33,3 +37,4 @@ MonoBehaviour:
   UpgradablesList:
   - {fileID: 11400000, guid: b1f97da3bf5c0d24c9dbcb0d4c067dcc, type: 2}
   - {fileID: 11400000, guid: 29b1042822f5849428e96520dcfb9506, type: 2}
+  - {fileID: 11400000, guid: 0ec2d216fc40eb04492f85dc677d42d7, type: 2}

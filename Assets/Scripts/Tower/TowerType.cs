@@ -10,5 +10,6 @@ public enum TowerType
     RapidTower,
     SnipeTower,
     DecayTower,
-    IceSpireTower
+    IceSpireTower,
+    IceCastleTower
 }

@@ -12,20 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cbe5f664bcf3d041b09b5aef00ca40f, type: 3}
   m_Name: ShurikenTower_lvl_6
   m_EditorClassIdentifier: 
+  MainImage: {fileID: 21300000, guid: 6abce3e5418760e4892d57e7f71dc61e, type: 3}
+  Name: Shuriken Tower lvl 6
+  MaxHP: 35
+  MinimalDamage: 35
+  MaximumDamage: 45
   Type: 4
   TowerPrefab: {fileID: 2828531714194891516, guid: 80ee3ad9736b4e8458da2104f3221965, type: 3}
   DustParticles: {fileID: 981165095458120534, guid: e4e3c5a9592da834b974a88d9bd14b18, type: 3}
-  MainImage: {fileID: 21300000, guid: 6abce3e5418760e4892d57e7f71dc61e, type: 3}
-  UpgradeNumber: 4
-  BulletPrefab: {fileID: 115023586514153931, guid: 692364029fd027e4e83e9e286276029f, type: 3}
-  Name: Shuriken Tower lvl 6
+  UpgradeNumber: 5
+  BulletType: 5
+  BulletPrefab: {fileID: 1099683810759626692, guid: 692364029fd027e4e83e9e286276029f, type: 3}
+  FlyCurvature: 0.01
+  OnTarget: 1
+  ImpactOnHit: {fileID: 3461587258431744119, guid: fd1ef8e92071acc408be346fc33356f9, type: 3}
   Cost: 25
-  BuildingTime: 3
-  MinimalDamage: 12
-  MaximumDamage: 20
-  AttackSpeed: 1
-  ProjectileSpeed: 0.002
-  ProjectileParentingTime: 0
+  AttackSpeed: 95
+  ProjectileSpeed: 0.02
+  ProjectileSpeedIncreacement: 0.002
   ExplosionRadius: 0
   AttackRadius: 6.5
   TargetsCount: 1

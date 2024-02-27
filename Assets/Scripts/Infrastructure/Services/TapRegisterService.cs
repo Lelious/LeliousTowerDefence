@@ -31,7 +31,7 @@ public class TapRegisterService : IInputService
 
             if (Physics.Raycast(_camera.transform.position, ray.direction, out var hit, 100f, _layerMask))
             {
-                if (_touchedObj != null && _touchedObj.gameObject != null)
+                if ((Component)_touchedObj != null)
                 {
                     _touchedObj.Untouch();
                 }
@@ -52,7 +52,10 @@ public class TapRegisterService : IInputService
 
             else
             {
-                _touchedObj?.Untouch();
+                if ((Component)_touchedObj != null)
+                {
+                    _touchedObj.Untouch();
+                }
                 _selectedFrame.DisableFrame();
                 OnEmptyTapRegistered?.Invoke();
             }

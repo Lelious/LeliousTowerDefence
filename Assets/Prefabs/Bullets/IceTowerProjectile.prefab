@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2305619074675963410}
-  - component: {fileID: 7222963477668431056}
+  - component: {fileID: 6028559954757904407}
   m_Layer: 0
   m_Name: IceTowerProjectile
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7222963477668431056
+--- !u!114 &6028559954757904407
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fda4926a05327f4eac23a681aa94639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _impactOnHitPrefab: {fileID: 9196933333363548125, guid: ab4cb3b272d0f204d9910e19963a8b75, type: 3}
+  _trail: {fileID: 2429728191601181056}
 --- !u!1 &2429728191601181056
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2089482739951264095
 Transform:
   m_ObjectHideFlags: 0

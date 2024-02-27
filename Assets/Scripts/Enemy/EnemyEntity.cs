@@ -12,6 +12,7 @@ public class EnemyEntity : MonoBehaviour, ITouchable
 
     private EnemyStats _enemyStats;
     private GamePannelUdaterInfoContainer _containerInfo;
+    private FloatingTextService _floatingTextService;
     private GameUIService _gameInformationMenu;
     private BottomGameMenu _bottomMenuInformator;
     private SelectedFrame _selectedFrame;
@@ -22,13 +23,15 @@ public class EnemyEntity : MonoBehaviour, ITouchable
     GameObject ITouchable.gameObject { get => gameObject; }
 
     [Inject]
-    private void Construct(EnemyPool enemyPool, GameManager gameManager, GameUIService gameInformationMenu, SelectedFrame selectedFrame)
+    private void Construct(EnemyPool enemyPool, GameManager gameManager, GameUIService gameInformationMenu, SelectedFrame selectedFrame, FloatingTextService floatingTextService)
     {
         _enemyPool = enemyPool;
         _gameManager = gameManager;
         _gameInformationMenu = gameInformationMenu;
         _bottomMenuInformator = _gameInformationMenu.GetBottomMenuInformator();
+        _floatingTextService = floatingTextService;
         _selectedFrame = selectedFrame;
+        _enemyHealth.SetFloatingTextService(_floatingTextService);
     }
 
     public void InitializeEnemy()
@@ -42,6 +45,12 @@ public class EnemyEntity : MonoBehaviour, ITouchable
 
     public void ReturnToEnemyPool()
     {
+        if (_isTouched)
+        {
+            _gameInformationMenu.HideGameMenu();
+            Untouch();
+        }
+
         _enemyPool.ReturnToPool(this);
         _gameManager.AddGold(_enemyData.Worth);
 

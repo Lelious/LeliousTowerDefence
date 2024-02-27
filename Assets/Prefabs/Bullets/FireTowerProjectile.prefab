@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2305619074675963410}
-  - component: {fileID: -8905174063044226708}
+  - component: {fileID: 3826345802432163221}
   m_Layer: 0
   m_Name: FireTowerProjectile
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-8905174063044226708
+--- !u!114 &3826345802432163221
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bf0f6b2ee7016f4fb904a8415afa8b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _impactOnHitPrefab: {fileID: 9196933333363548125, guid: ab4cb3b272d0f204d9910e19963a8b75, type: 3}
+  _trail: {fileID: 2429728191601181056}
 --- !u!1 &2429728191601181056
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2089482739951264095
 Transform:
   m_ObjectHideFlags: 0
@@ -331,8 +331,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.3
+      scalar: 0.35
+      minScalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:

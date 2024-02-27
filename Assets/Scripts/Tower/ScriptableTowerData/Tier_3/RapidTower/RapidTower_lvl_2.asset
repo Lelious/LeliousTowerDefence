@@ -12,20 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cbe5f664bcf3d041b09b5aef00ca40f, type: 3}
   m_Name: RapidTower_lvl_2
   m_EditorClassIdentifier: 
+  MainImage: {fileID: 21300000, guid: 5090eb6c61ca22245a5d58872e4f5746, type: 3}
+  Name: Rapid Tower lvl 2
+  MaxHP: 22
+  MinimalDamage: 7
+  MaximumDamage: 11
   Type: 7
   TowerPrefab: {fileID: 1216899176101622800, guid: a8bda8b3fd3ad004f82d9fdc3f4f6ae1, type: 3}
   DustParticles: {fileID: 981165095458120534, guid: e4e3c5a9592da834b974a88d9bd14b18, type: 3}
-  MainImage: {fileID: 21300000, guid: 5090eb6c61ca22245a5d58872e4f5746, type: 3}
-  UpgradeNumber: 0
-  BulletPrefab: {fileID: -8905174063044226708, guid: c32f9e4a0e738aa4ab7af5e7894c8cf2, type: 3}
-  Name: Rapid Tower lvl 2
+  UpgradeNumber: 1
+  BulletType: 8
+  BulletPrefab: {fileID: 6028559954757904407, guid: 3926a4dac4965d74390bf0e4f06712d6, type: 3}
+  FlyCurvature: 0.1
+  OnTarget: 1
+  ImpactOnHit: {fileID: 3461587258431744119, guid: e9fa4051eb76bf140bd0f89e81af09b7, type: 3}
   Cost: 1
-  BuildingTime: 5
-  MinimalDamage: 7
-  MaximumDamage: 11
-  AttackSpeed: 1
-  ProjectileSpeed: 0.0023
-  ProjectileParentingTime: 0
+  AttackSpeed: 100
+  ProjectileSpeed: 0.05
+  ProjectileSpeedIncreacement: 0.002
   ExplosionRadius: 0
   AttackRadius: 10.5
   TargetsCount: 1

@@ -4,7 +4,9 @@ using UnityEngine;
 public class EnemyHitPoint : MonoBehaviour
 {
     private List<Bullet> _attachedBullets = new List<Bullet>();
-
+    private bool _isActivePoint = true;
+    public bool GetActiveStatus() => _isActivePoint;
+    public void SetInnactive() => _isActivePoint = false;
     public void AttachBulletToHitPoint(Bullet bullet)
     {
         _attachedBullets.Add(bullet);
@@ -19,11 +21,7 @@ public class EnemyHitPoint : MonoBehaviour
     {
         if (_attachedBullets.Count < 1)     
             return;
-        
-        foreach (var bullet in _attachedBullets)
-        {
-            bullet.ReturnBulletToPool();
-        }
+               
         _attachedBullets.Clear();
     }    
 }

@@ -12,21 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cbe5f664bcf3d041b09b5aef00ca40f, type: 3}
   m_Name: MagicTower_lvl_4
   m_EditorClassIdentifier: 
+  MainImage: {fileID: 21300000, guid: 307e099458d81e04e9f7b4e0479a1afa, type: 3}
+  Name: Magic Tower lvl 4
+  MaxHP: 6
+  MinimalDamage: 8
+  MaximumDamage: 10
   Type: 2
   TowerPrefab: {fileID: 3024634697342539241, guid: 5b070cd57e08075449dae40eb58e6d3b, type: 3}
   DustParticles: {fileID: 981165095458120534, guid: e4e3c5a9592da834b974a88d9bd14b18, type: 3}
-  MainImage: {fileID: 21300000, guid: 307e099458d81e04e9f7b4e0479a1afa, type: 3}
-  UpgradeNumber: 2
-  BulletPrefab: {fileID: 7342997119644013394, guid: 34865c557ac1ad944a8912d73a5b4ff8, type: 3}
-  Name: Magic Tower lvl 4
+  UpgradeNumber: 3
+  BulletType: 2
+  BulletPrefab: {fileID: 8077957052511560835, guid: 34865c557ac1ad944a8912d73a5b4ff8, type: 3}
+  FlyCurvature: 0.01
+  OnTarget: 1
+  ImpactOnHit: {fileID: 3461587258431744119, guid: e9fa4051eb76bf140bd0f89e81af09b7, type: 3}
   Cost: 9
-  BuildingTime: 10
-  MinimalDamage: 8
-  MaximumDamage: 10
-  AttackSpeed: 0.85
-  ProjectileSpeed: 0.002
-  ProjectileParentingTime: 0
-  ExplosionRadius: 2
+  AttackSpeed: 135
+  ProjectileSpeed: 0.02
+  ProjectileSpeedIncreacement: 0
+  ExplosionRadius: 0
   AttackRadius: 10
   TargetsCount: 1
   RicochetteCount: 0

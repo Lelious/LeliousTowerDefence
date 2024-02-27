@@ -1,14 +1,13 @@
-using System;
 using System.Collections.Generic;
 using Zenject;
 
 public class PoolService : IInitializable
 {
-    private Dictionary<Type, Queue<IPoollableBullet>> _pool;
+    private Dictionary<BulletType, Queue<IPoollableBullet>> _pool;
 
-    public void Initialize() => _pool = new Dictionary<Type, Queue<IPoollableBullet>>();
+    public void Initialize() => _pool = new Dictionary<BulletType, Queue<IPoollableBullet>>();
 
-    public void AddBulletToPool(Type type, IPoollableBullet bullet)
+    public void AddBulletToPool(BulletType type, IPoollableBullet bullet)
     {
         bullet.SetInnactive();
 
@@ -18,7 +17,7 @@ public class PoolService : IInitializable
             InitializeNewKeyValuePair(type, bullet);      
     }
 
-    public void RemoveBulletsFromPool(Type type, int count)
+    public void RemoveBulletsFromPool(BulletType type, int count)
     {
         if (Validate(type))
         {
@@ -35,7 +34,7 @@ public class PoolService : IInitializable
         }
     }
 
-    public Bullet GetBulletFromPool(Type type)
+    public IPoollableBullet GetBulletFromPool(BulletType type)
     {
         if (Validate(type))
         {
@@ -45,7 +44,7 @@ public class PoolService : IInitializable
             {
                 var bullet = queue.Dequeue();
                 bullet.SetActive();
-                return bullet.GetBulletType();
+                return bullet;
             }
             else           
                 return null;            
@@ -54,12 +53,12 @@ public class PoolService : IInitializable
             return null;       
     }
 
-    private void InitializeNewKeyValuePair(Type type, IPoollableBullet bullet)
+    private void InitializeNewKeyValuePair(BulletType type, IPoollableBullet bullet)
     {
         var queue = new Queue<IPoollableBullet>();
         queue.Enqueue(bullet);
         _pool.Add(type, queue);
     }
 
-    private bool Validate(Type type) => _pool.ContainsKey(type);
+    private bool Validate(BulletType type) => _pool.ContainsKey(type);
 }

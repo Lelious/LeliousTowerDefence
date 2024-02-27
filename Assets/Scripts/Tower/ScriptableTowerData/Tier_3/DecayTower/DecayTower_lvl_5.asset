@@ -12,20 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cbe5f664bcf3d041b09b5aef00ca40f, type: 3}
   m_Name: DecayTower_lvl_5
   m_EditorClassIdentifier: 
+  MainImage: {fileID: 21300000, guid: 5090eb6c61ca22245a5d58872e4f5746, type: 3}
+  Name: Decay Tower lvl 5
+  MaxHP: 34
+  MinimalDamage: 5
+  MaximumDamage: 8
   Type: 9
   TowerPrefab: {fileID: 3458159211864150498, guid: fdb414400b15402439b83dc54a9b9e94, type: 3}
   DustParticles: {fileID: 981165095458120534, guid: e4e3c5a9592da834b974a88d9bd14b18, type: 3}
-  MainImage: {fileID: 21300000, guid: 5090eb6c61ca22245a5d58872e4f5746, type: 3}
-  UpgradeNumber: 3
-  BulletPrefab: {fileID: -8905174063044226708, guid: c32f9e4a0e738aa4ab7af5e7894c8cf2, type: 3}
-  Name: Decay Tower lvl 5
+  UpgradeNumber: 4
+  BulletType: 7
+  BulletPrefab: {fileID: 6028559954757904407, guid: fa55e7cb160a2b84b8176942c1b1e541, type: 3}
+  FlyCurvature: 0.01
+  OnTarget: 1
+  ImpactOnHit: {fileID: 3461587258431744119, guid: e9fa4051eb76bf140bd0f89e81af09b7, type: 3}
   Cost: 1
-  BuildingTime: 5
-  MinimalDamage: 5
-  MaximumDamage: 8
-  AttackSpeed: 1
-  ProjectileSpeed: 0.002
-  ProjectileParentingTime: 0
+  AttackSpeed: 100
+  ProjectileSpeed: 0.02
+  ProjectileSpeedIncreacement: 0.002
   ExplosionRadius: 0
   AttackRadius: 10
   TargetsCount: 1

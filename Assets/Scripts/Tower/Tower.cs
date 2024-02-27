@@ -1,11 +1,9 @@
 using UnityEngine;
 using DG.Tweening;
-using UniRx;
 using System.Collections.Generic;
 
 public class Tower : MonoBehaviour, IEffectable
 {
-	[SerializeField] private Transform _sphere;
 	[SerializeField] private Shooter _shooter;
 	[SerializeField] private GameObject _rangeBoarder;
 	[SerializeField] private HealthBar _buildingProgress;
@@ -20,6 +18,7 @@ public class Tower : MonoBehaviour, IEffectable
 	private BuildingCell _buildingCell;
 	private float _buildProgress = 0.01f;
 	private float _startOffsetY;
+	private int _currentUpgrade = 0;
 
     private void Awake() => _startOffsetY = _towerObject.position.y;	
 
@@ -64,12 +63,21 @@ public class Tower : MonoBehaviour, IEffectable
 	}
 
 	public void ClearAllUnusedBullets() => _shooter.ClearAmmo();
-    
+
+    public void SetUpgradeLevel(int level)
+    {
+        for (int i = 0; i < level; i++)
+        {
+			_upgradablesList[i].SetActive(true);
+        }
+    }
+
 	public void RebuildTower()
     {
 		_towerObject.position = new Vector3(_towerObject.position.x, _startOffsetY, _towerObject.position.z);
 		_shooter.gameObject.SetActive(false);
 		_buildProgress = 0.01f;
+
 	}
 
 	public void ShowRange()

@@ -7,7 +7,7 @@ public class EnemyCheck : MonoBehaviour
 	[SerializeField] private CapsuleCollider _collider;
 	[SerializeField] private Transform _selection;
 
-	public List<IDamagable> _enemiesList = new List<IDamagable>();
+	private List<IDamagable> _enemiesList = new List<IDamagable>();
 
 	public List<IDamagable> GetEnemies()
 	{

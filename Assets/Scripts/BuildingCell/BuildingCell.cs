@@ -53,17 +53,20 @@ public class BuildingCell : MonoBehaviour, ITouchable
 
 		if (_placedTower != null)
         {
-            if (_type != _towerData.Type)
+            if (_type != data.Type)
             {
 				_placedTower.ClearAllUnusedBullets();
 				Destroy(_placedTower.gameObject);
 				_placedTower = _towerFactory.CreateNewTower(data, transform.position);
 				_placedTower.SetStats(_towerStats);
 				_placedTower.TowerBuild(this);
+				_placedTower.SetUpgradeLevel(data.UpgradeNumber);
+				_type = data.Type;
 			}
             else
             {
 				_placedTower.SetStats(_towerStats);
+				_placedTower.SetUpgradeLevel(data.UpgradeNumber);
 				_placedTower.RebuildTower();
 				_placedTower.TowerBuild(this);
 			}
@@ -72,6 +75,7 @@ public class BuildingCell : MonoBehaviour, ITouchable
         {
 			_placedTower = _towerFactory.CreateNewTower(data, transform.position);
 			_placedTower.SetStats(_towerStats);
+			_placedTower.SetUpgradeLevel(data.UpgradeNumber);
 			_placedTower.TowerBuild(this);
 			_type = data.Type;
         }

@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UniRx;
 using Zenject;
-using System.Collections;
 
 public sealed class BuffService : ITickable
 {

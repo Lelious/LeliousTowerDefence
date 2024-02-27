@@ -7,6 +7,7 @@ using System.Collections.Generic;
 public class TowerBuffer : MonoBehaviour
 {
     [SerializeField] private EffectType _type;
+    [SerializeField] private bool _isRandomBuff;
     [SerializeField] private float _duration;
     [SerializeField] private float _tick;
     [SerializeField] private bool _periodical;
@@ -69,11 +70,17 @@ public class TowerBuffer : MonoBehaviour
             {
                 case EffectType.IncreaceAttackPower:
                     buffBall = Instantiate(_waterBuffOrb, transform.position, Quaternion.identity);
-                    _type = EffectType.IncreaceAttackSpeed;
+                    if (_isRandomBuff)
+                    {
+                        _type = EffectType.IncreaceAttackSpeed;
+                    }
                     break;
                 case EffectType.IncreaceAttackSpeed:
                     buffBall = Instantiate(_fireBuffOrb, transform.position, Quaternion.identity);
-                    _type = EffectType.IncreaceAttackPower;
+                    if (_isRandomBuff)
+                    {
+                        _type = EffectType.IncreaceAttackPower;
+                    }
                     break;
             }
 

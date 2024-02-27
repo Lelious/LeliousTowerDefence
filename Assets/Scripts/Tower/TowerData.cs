@@ -12,7 +12,11 @@ public class TowerData : Data
 
 	[Space]
 	[Header("Tower bullet")]
+	public BulletType BulletType;
 	public Bullet BulletPrefab;
+	public float FlyCurvature;
+	public bool OnTarget = true;
+	public GameObject ImpactOnHit;
 
 	[Space]
 	[Header("Tower parameters")]
@@ -20,6 +24,7 @@ public class TowerData : Data
 	public int Cost;
 	public float AttackSpeed;
 	public float ProjectileSpeed;
+	public float ProjectileSpeedIncreacement;
 	public float ExplosionRadius;
 	public float AttackRadius;
 	public int TargetsCount;

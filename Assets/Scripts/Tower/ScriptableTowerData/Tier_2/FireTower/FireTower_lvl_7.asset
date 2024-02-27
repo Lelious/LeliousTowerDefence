@@ -12,20 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cbe5f664bcf3d041b09b5aef00ca40f, type: 3}
   m_Name: FireTower_lvl_7
   m_EditorClassIdentifier: 
+  MainImage: {fileID: 21300000, guid: 45b3595108db01842931bf5f4593b679, type: 3}
+  Name: Fire Tower lvl 7
+  MaxHP: 30
+  MinimalDamage: 40
+  MaximumDamage: 50
   Type: 5
   TowerPrefab: {fileID: 6290737699018477984, guid: c1d478e98638f6b4b95d13d88c925611, type: 3}
   DustParticles: {fileID: 981165095458120534, guid: e4e3c5a9592da834b974a88d9bd14b18, type: 3}
-  MainImage: {fileID: 21300000, guid: 45b3595108db01842931bf5f4593b679, type: 3}
-  UpgradeNumber: 5
-  BulletPrefab: {fileID: -8905174063044226708, guid: c32f9e4a0e738aa4ab7af5e7894c8cf2, type: 3}
-  Name: Fire Tower lvl 7
+  UpgradeNumber: 6
+  BulletType: 4
+  BulletPrefab: {fileID: 3826345802432163221, guid: c32f9e4a0e738aa4ab7af5e7894c8cf2, type: 3}
+  FlyCurvature: 0.01
+  OnTarget: 1
+  ImpactOnHit: {fileID: 3461587258431744119, guid: fd1ef8e92071acc408be346fc33356f9, type: 3}
   Cost: 32
-  BuildingTime: 13
-  MinimalDamage: 40
-  MaximumDamage: 50
-  AttackSpeed: 1.43
-  ProjectileSpeed: 0.0037
-  ProjectileParentingTime: 0
+  AttackSpeed: 190
+  ProjectileSpeed: 0.022
+  ProjectileSpeedIncreacement: 0.001
   ExplosionRadius: 0
   AttackRadius: 10
   TargetsCount: 1

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2305619074675963410}
-  - component: {fileID: 2455164268452172662}
+  - component: {fileID: 8678665231522438485}
   m_Layer: 0
   m_Name: ShootingArrow
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2455164268452172662
+--- !u!114 &8678665231522438485
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 052889bc40f7a9d4bb50f03fab5ec5be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _impactOnHitPrefab: {fileID: 0}
+  _bulletView: {fileID: 3499364025489595267}
 --- !u!1 &3499364025489595267
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,7 +72,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3499364025489595267}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0.057385676, y: -0.000000009778887, z: -0.067241505}
+  m_LocalPosition: {x: 0.057385676, y: 0.004, z: -0.218}
   m_LocalScale: {x: -1.73, y: -1.9383726, z: -45.067955}
   m_ConstrainProportionsScale: 1
   m_Children: []

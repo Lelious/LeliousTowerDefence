@@ -7,6 +7,7 @@ public class UiInstaller : MonoInstaller
         BindInputService();
         BindGameUIService();
         BindTopMenuInformator();
+        BindFloatingTextService();
     }
 
     private void BindInputService()
@@ -32,6 +33,15 @@ public class UiInstaller : MonoInstaller
         Container.
             Bind<TopMenuInformator>().
             FromComponentInNewPrefabResource(AssetPath.TopMenuInformator).
+            AsSingle().
+            NonLazy();
+    }
+
+    private void BindFloatingTextService()
+    {
+        Container.
+            Bind<FloatingTextService>().
+            FromComponentInNewPrefabResource(AssetPath.FloatingTextService).
             AsSingle().
             NonLazy();
     }

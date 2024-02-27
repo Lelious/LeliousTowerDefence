@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\Infrastructure\Factories\EnemyFactory.cs" />
     <Compile Include="Assets\Scripts\UI\UIMenuIcons.cs" />
     <Compile Include="Assets\EnemyCheck.cs" />
+    <Compile Include="Assets\Scripts\Test\FloatingTextService.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyData\EnemyData.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameState.cs" />
     <Compile Include="Assets\Scripts\Tower\Bullets\ArrowBullet.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Assets\Scripts\Infrastructure\UiInstaller.cs" />
     <Compile Include="Assets\Scripts\Tower\Bullets\ShurikenRotator.cs" />
     <Compile Include="Assets\Scripts\Tower\MagicTowerCircleRotator.cs" />
+    <Compile Include="Assets\Scripts\StaticData\Bezier.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameLooseState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\Scripts\Test\TowerBuffer.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="Assets\Scripts\UI\TimeBeforeSpawn.cs" />
     <Compile Include="Assets\Scripts\StaticData\Extentions.cs" />
     <Compile Include="Assets\Scripts\Test\TowerStats.cs" />
+    <Compile Include="Assets\Scripts\Tower\Bullets\DecayBullet.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IEffect.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
@@ -196,7 +199,6 @@
     <Compile Include="Assets\Scripts\Test\FlagShaderRandomizer.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IControllFromState.cs" />
     <Compile Include="Assets\Scripts\UI\UICustomIcon.cs" />
-    <Compile Include="Assets\Scripts\StaticData\Bezier.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

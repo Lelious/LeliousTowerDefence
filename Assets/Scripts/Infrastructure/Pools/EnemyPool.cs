@@ -37,17 +37,21 @@ public class EnemyPool : IInitializable
 
     public List<IDamagable> GetEnemiesFromDistance(Transform pos, float distance, IDamagable current)
     {
+        var activeEnemies = _damageables.FindAll(x => x.gameObject.activeInHierarchy == true);
         var enemies = new List<IDamagable>();
 
-        for (int i = 0; i < _damageables.Count; i++)
+        for (int i = 0; i < activeEnemies.Count; i++)
         {
-            if (Vector3.Distance(pos.position, _damageables[i].GetOrigin().position) <= distance)
+            if ((pos.position - _damageables[i].HitPoint().transform.position).sqrMagnitude <= distance * distance)
             {
                 enemies.Add(_damageables[i]);       
             }
         }
 
-        enemies.Remove(current);
+        if ((Component)current != null)
+        {
+            enemies.Remove(current);
+        }
 
         return enemies;
     }

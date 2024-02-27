@@ -14,12 +14,8 @@ public class Shooter : MonoBehaviour, IShoot
     [SerializeField] private TowerStats _towerStats;
     private bool _isPoolCreated;
 
-    public void SetTowerData(TowerStats stats)
-    {
-        _towerStats = stats;
-    }
-
-    public void ClearAmmo() => _poolService.RemoveBulletsFromPool(_towerStats.BulletPrefab.GetType(), _poolSize);  
+    public void SetTowerData(TowerStats stats) => _towerStats = stats;
+    public void ClearAmmo() => _poolService.RemoveBulletsFromPool(_towerStats.BulletType, _poolSize);  
 
     public bool DetectEnemy()
     {
@@ -78,16 +74,18 @@ public class Shooter : MonoBehaviour, IShoot
 
     public void Shoot(IDamagable damagable)
     {
-        var bullet = _poolService.GetBulletFromPool(_towerStats.BulletPrefab.GetType());
+        var bullet = _poolService.GetBulletFromPool(_towerStats.BulletType);
+
         if (bullet == null)
         {
             bullet = CreateBullet();
+            bullet.SetBulletType(_towerStats.BulletType);
             bullet.SetBulletPool(_poolService, false);
         }
 
         bullet.SetBulletParameters(_towerStats, _enemyPool, _shootingPoint.position);
         bullet.SetTarget(damagable);
-        bullet.FlyOnTarget();
+        bullet.SetActive();
     }       
 
     private IEnumerator ShootingRoutine()
@@ -119,7 +117,9 @@ public class Shooter : MonoBehaviour, IShoot
             for (int i = 0; i < _poolSize; i++)
             {
                 var bullet = CreateBullet();
+                bullet.SetBulletType(_towerStats.BulletType);
                 bullet.SetBulletPool(_poolService);
+                _poolService.AddBulletToPool(bullet.GetBulletType(), bullet);
             }
             _isPoolCreated = !_isPoolCreated;
         }
@@ -127,8 +127,5 @@ public class Shooter : MonoBehaviour, IShoot
         StartCoroutine(ShootingRoutine());
     }
 
-    private void OnDisable()
-    {
-        StopAllCoroutines();
-    }
+    private void OnDisable() => StopAllCoroutines();
 }

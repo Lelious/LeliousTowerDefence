@@ -49,7 +49,7 @@ public class TopMenuInformator : MonoBehaviour
 
 	public void SetMoney(int amount)
 	{
-		_money.text = CachedStringValues.cachedStringValues[amount];
+		_money.text = amount < 100 ? CachedStringValues.cachedStringValues[amount] : $"{amount}";
 	}
 
 	public void EnterSpawnState()

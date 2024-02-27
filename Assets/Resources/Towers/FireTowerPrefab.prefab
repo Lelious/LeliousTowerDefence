@@ -4868,8 +4868,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f95393df3d4c9245a6a8bc11a709c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health:
-    value: 0
   _shooter: {fileID: 4174455689701232445}
   _rangeBoarder: {fileID: 7144378438195508868}
   _buildingProgress: {fileID: 3613363063143121988}
@@ -4884,6 +4882,35 @@ MonoBehaviour:
   - {fileID: 7904552790825041416}
   - {fileID: 8209062015785064956}
   - {fileID: 8480291594081538785}
+  _stats:
+    MainImage: {fileID: 0}
+    Name: 
+    MinimalDamage: 0
+    MaximumDamage: 0
+    AttackSpeed: 0
+    MaxHealth: 0
+    BulletType: 0
+    BulletPrefab: {fileID: 0}
+    ImpactOnHit: {fileID: 0}
+    UpgradeNumber: 0
+    BulletYCurvature: 0
+    ProjectileSpeed: 0
+    ProjectileSpeedIncreacement: 0
+    OnTarget: 0
+    ExplosionRadius: 0
+    AttackRadius: 0
+    TargetsCount: 0
+    RicochetteCount: 0
+    IsUpgradesAvailable: 0
+    BonusAttackPower:
+      value: 0
+    BonusAttackSpeed:
+      value: 0
+    Health:
+      value: 0
+    UpgradablesList: []
+  _fireBuff: {fileID: 0}
+  _waterBuff: {fileID: 0}
 --- !u!1 &1632320506445797785
 GameObject:
   m_ObjectHideFlags: 0
@@ -15311,7 +15338,7 @@ PrefabInstance:
     - target: {fileID: 3068066088214703098, guid: 763d7f046803eb6478634599d01c8264, type: 3}
       propertyPath: _shootingPoint
       value: 
-      objectReference: {fileID: 5405117430699326316}
+      objectReference: {fileID: 2558207728975221854}
     - target: {fileID: 3068066088214703098, guid: 763d7f046803eb6478634599d01c8264, type: 3}
       propertyPath: _cannonToRotate
       value: 

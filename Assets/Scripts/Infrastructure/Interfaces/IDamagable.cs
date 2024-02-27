@@ -6,4 +6,5 @@ public interface IDamagable
     public bool CanBeAttacked();
     EnemyHitPoint HitPoint();
     Transform GetOrigin();
+    public GameObject gameObject { get; }
 }

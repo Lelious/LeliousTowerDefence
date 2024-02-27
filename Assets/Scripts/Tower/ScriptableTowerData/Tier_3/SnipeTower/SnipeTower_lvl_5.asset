@@ -12,20 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cbe5f664bcf3d041b09b5aef00ca40f, type: 3}
   m_Name: SnipeTower_lvl_5
   m_EditorClassIdentifier: 
+  MainImage: {fileID: 21300000, guid: 02800fb9cff14da47a04572790384d8b, type: 3}
+  Name: Snipe Tower lvl 5
+  MaxHP: 32
+  MinimalDamage: 1
+  MaximumDamage: 3
   Type: 8
   TowerPrefab: {fileID: 1222006163947428964, guid: cc4d1a05cd684f3469eea10aa313ac50, type: 3}
   DustParticles: {fileID: 981165095458120534, guid: e4e3c5a9592da834b974a88d9bd14b18, type: 3}
-  MainImage: {fileID: 21300000, guid: 02800fb9cff14da47a04572790384d8b, type: 3}
-  UpgradeNumber: 3
-  BulletPrefab: {fileID: 4364390423822773329, guid: 478913d0291c33d49a25f54aeb3641e2, type: 3}
-  Name: Snipe Tower lvl 5
+  UpgradeNumber: 4
+  BulletType: 7
+  BulletPrefab: {fileID: 8640660476876226320, guid: 478913d0291c33d49a25f54aeb3641e2, type: 3}
+  FlyCurvature: 0.05
+  OnTarget: 1
+  ImpactOnHit: {fileID: 3461587258431744119, guid: e9fa4051eb76bf140bd0f89e81af09b7, type: 3}
   Cost: 3
-  BuildingTime: 3
-  MinimalDamage: 1
-  MaximumDamage: 3
-  AttackSpeed: 3
-  ProjectileSpeed: 0.009
-  ProjectileParentingTime: 0
+  AttackSpeed: 60
+  ProjectileSpeed: 0.05
+  ProjectileSpeedIncreacement: 0.002
   ExplosionRadius: 0
   AttackRadius: 20
   TargetsCount: 1

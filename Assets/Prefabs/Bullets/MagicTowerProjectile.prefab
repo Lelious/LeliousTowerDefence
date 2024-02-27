@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2305619074675963410}
-  - component: {fileID: 7342997119644013394}
+  - component: {fileID: 8077957052511560835}
   m_Layer: 0
   m_Name: MagicTowerProjectile
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7342997119644013394
+--- !u!114 &8077957052511560835
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf9a2cb3ca25144a949f826f03aacea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _impactOnHitPrefab: {fileID: 3461587258431744119, guid: e9fa4051eb76bf140bd0f89e81af09b7, type: 3}
+  _trail: {fileID: 2429728191601181056}
 --- !u!1 &2429728191601181056
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,7 +63,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2089482739951264095
 Transform:
   m_ObjectHideFlags: 0

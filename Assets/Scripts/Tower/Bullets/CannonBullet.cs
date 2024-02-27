@@ -1,101 +1,43 @@
 using UnityEngine;
-using DG.Tweening;
 
-public class CannonBullet : Bullet, IPoollableBullet
+public class CannonBullet : Bullet
 {
-    [SerializeField] private GameObject _explosionPrefab;
-    [SerializeField] private AnimationCurve _curve;
-    [SerializeField] private LayerMask _mask;
     [SerializeField] private MeshRenderer _renderer;
-    [SerializeField] private TrailRenderer _trail;
+    [SerializeField] private LayerMask _mask;
 
-    private IPoollableBullet _iPoollable;
-    private PoolService _pool;
-    private GameObject _explosion;
-    private Transform _targetTransform;
     private Collider[] _hits = new Collider[10];
-    private Tween _tween;
-    private IDamagable _damagable;
-    private int _damage;
-    private float _explosionRadius;
 
-    public override void ReturnBulletToPool() => ReturnToPool();
-    public void SetInnactive() => gameObject.SetActive(false);
-    public void SetActive() => gameObject.SetActive(true);
-    public void DestroyBullet() => Destroy(this);
-    public Transform Transform() => transform;
-    public override Bullet GetBulletType() => this;
-
-    public override void FlyOnTarget()
+    public override void BulletReadyToFly() => _trail.SetActive(true);
+    public override void BulletAchieveTarget() => Explode();
+    public override void ApplySpecialEffects()
     {
-        _renderer.enabled = true;
-
-        if (_explosion == null)
-        {
-            _explosion = Instantiate(_explosionPrefab);
-            _explosion.SetActive(false);
-        }
-        else       
-            _explosion.SetActive(false);
-        
-        if (_targetTransform != null)
-            _tween = transform.DOJump(_targetTransform.position, 5f, 1, (_targetTransform.position - transform.position).magnitude / 8f).OnComplete(()=> Explode()).SetEase(Ease.Linear);       
-    }
-
-    public override void SetBulletParameters(TowerStats data, EnemyPool enemyPool, Vector3 startPosition)
-    {
-        //_damage = Random.Range(data.MinAttack, data.MaxAttack + 1);
-        //_explosionRadius = data.ExplosionRadius;
-        _explosionPrefab.transform.localScale = Vector3.one * _explosionRadius;
-        transform.position = startPosition;
-    }
-
-    public override void SetTarget(IDamagable damagable)
-    {
-        _damagable = damagable;
-        _targetTransform = _damagable.GetOrigin();
-    }
-
-    public void ReturnToPool()
-    {
-        _tween.Kill();
-        _pool.AddBulletToPool(typeof(CannonBullet), _iPoollable);
+        throw new System.NotImplementedException();
     }
 
     private void Explode()
     {
         ClearColliders();
-        _renderer.enabled = false;
-        _explosion.transform.position = transform.position;
+
+        _impactOnHit.transform.position = transform.position;
 
         int numColliders = Physics.OverlapSphereNonAlloc(transform.position, _explosionRadius, _hits, _mask);
 
         for (int i = 0; i < numColliders; i++)
         {
-            var damageble = _hits[i].GetComponent<IDamagable>();
+            _damagable = _hits[i].GetComponent<IDamagable>();
 
-            if (damageble != null)
-            {
-                damageble.TakeDamage(_damage);
-            }
+            ApplyDamage();
         }
+        
+        _impactOnHit.SetActive(true);
+
         ReturnToPool();
-        _explosion.SetActive(true);
     }
 
     private void ClearColliders()
     {
-        for (int i = 0; i < _hits.Length - 1; i++)       
-            _hits[i] = null;     
-    }
-
-    public override void SetBulletPool(PoolService pool, bool addToPool = true)
-    {
-        _iPoollable = GetComponent<IPoollableBullet>();
-        _pool = pool;
-
-        if (addToPool)                
-            ReturnToPool();
+        for (int i = 0; i < _hits.Length - 1; i++)
+            _hits[i] = null;
     }
 }
 

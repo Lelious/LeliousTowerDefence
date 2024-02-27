@@ -6,9 +6,14 @@ using UnityEngine;
 [Serializable]
 public class TowerStats : StatData
 {
+    public BulletType BulletType;
     public Bullet BulletPrefab;
+    public GameObject ImpactOnHit;
     public int UpgradeNumber;
+    public float BulletYCurvature;
     public float ProjectileSpeed;
+    public float ProjectileSpeedIncreacement;
+    public bool OnTarget;
     public float ExplosionRadius;
     public float AttackRadius;
     public int TargetsCount;
@@ -29,6 +34,7 @@ public class TowerStats : StatData
     {
         Name = data.Name;
         MainImage = data.MainImage;
+        BulletType = data.BulletType;
         BulletPrefab = data.BulletPrefab;
         AttackSpeed = data.AttackSpeed;
         MinimalDamage = data.MinimalDamage;
@@ -39,6 +45,11 @@ public class TowerStats : StatData
         RicochetteCount = data.RicochetteCount;
         AttackRadius = data.AttackRadius;
         UpgradablesList = data.UpgradablesList;
+        BulletYCurvature = data.FlyCurvature;
+        ImpactOnHit = data.ImpactOnHit;
+        ExplosionRadius = data.ExplosionRadius;
+        ProjectileSpeedIncreacement = data.ProjectileSpeedIncreacement;
+        OnTarget = data.OnTarget;
 
         InitializeUpgradableStats();
     }

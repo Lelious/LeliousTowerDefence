@@ -387,13 +387,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2348968628769466947}
-  m_LocalRotation: {x: -0.7069834, y: -0, z: -0, w: 0.70723015}
-  m_LocalPosition: {x: 0.28, y: 1.514, z: 0.018}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00385}
+  m_LocalScale: {x: 0.009999999, y: 0.009999996, z: 0.010000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 5199272652185319778}
-  m_RootOrder: 9
+  m_Father: {fileID: 6152008217395120341}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2596115275887513274
 GameObject:
@@ -507,6 +507,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5363041194008818935}
+  - {fileID: 963518030683684530}
   m_Father: {fileID: 1944003014860830799}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -44, y: 90, z: 0}
@@ -634,7 +635,6 @@ Transform:
   - {fileID: 3575886117696721941}
   - {fileID: 993322327073577617}
   - {fileID: 6810220653035058934}
-  - {fileID: 963518030683684530}
   m_Father: {fileID: 6721045825629982721}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
@@ -933,8 +933,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f95393df3d4c9245a6a8bc11a709c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health:
-    value: 0
   _shooter: {fileID: 3201693633014399655}
   _rangeBoarder: {fileID: 8549512585637952286}
   _buildingProgress: {fileID: 5517374840360796173}
@@ -950,6 +948,35 @@ MonoBehaviour:
   - {fileID: 1429924664248129547}
   - {fileID: 8045611231683584814}
   - {fileID: 5316180054280986719}
+  _stats:
+    MainImage: {fileID: 0}
+    Name: 
+    MinimalDamage: 0
+    MaximumDamage: 0
+    AttackSpeed: 0
+    MaxHealth: 0
+    BulletType: 0
+    BulletPrefab: {fileID: 0}
+    ImpactOnHit: {fileID: 0}
+    UpgradeNumber: 0
+    BulletYCurvature: 0
+    ProjectileSpeed: 0
+    ProjectileSpeedIncreacement: 0
+    OnTarget: 0
+    ExplosionRadius: 0
+    AttackRadius: 0
+    TargetsCount: 0
+    RicochetteCount: 0
+    IsUpgradesAvailable: 0
+    BonusAttackPower:
+      value: 0
+    BonusAttackSpeed:
+      value: 0
+    Health:
+      value: 0
+    UpgradablesList: []
+  _fireBuff: {fileID: 0}
+  _waterBuff: {fileID: 0}
 --- !u!1 &8718662688312723919
 GameObject:
   m_ObjectHideFlags: 0

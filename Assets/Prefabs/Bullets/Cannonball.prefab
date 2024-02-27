@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2305619074675963410}
-  - component: {fileID: 9117971766126228334}
+  - component: {fileID: 2132188868434894339}
   m_Layer: 10
   m_Name: Cannonball
   m_TagString: Untagged
@@ -29,12 +29,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9079148685159870693}
   - {fileID: 1747480551918459030}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9117971766126228334
+--- !u!114 &2132188868434894339
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,44 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _explosionPrefab: {fileID: 8397522090878695327, guid: 8369998fb847f4f4dbf250a09c88f86e, type: 3}
-  _curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2.746849
-      outSlope: 2.746849
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.1202203
-    - serializedVersion: 3
-      time: 0.09368803
-      value: 0.80723035
-      inSlope: 0.5516731
-      outSlope: 0.5516731
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.19173676
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: -0.10724934
-      outSlope: -0.10724934
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.13194466
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   _mask:
     serializedVersion: 2
     m_Bits: 8
   _renderer: {fileID: 579663152952583161}
-  _trail: {fileID: 0}
+  _trail: {fileID: 5555874156049175724}
 --- !u!1 &1372363002580337196
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,9 +81,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 9.9, y: 9.9, z: 9.9}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 9079148685159870693}
   m_Father: {fileID: 2305619074675963410}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
 --- !u!33 &3454146397128873779
 MeshFilter:
@@ -195,12 +162,12 @@ GameObject:
   - component: {fileID: 3430734068290956254}
   - component: {fileID: 5963802237801612204}
   m_Layer: 10
-  m_Name: Particle System
+  m_Name: CannonBulletTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9079148685159870693
 Transform:
   m_ObjectHideFlags: 0
@@ -208,12 +175,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5555874156049175724}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.64, y: 0.64, z: 0.64}
+  m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 2305619074675963410}
+  m_Father: {fileID: 1747480551918459030}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &3430734068290956254
@@ -1103,7 +1070,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 10
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1546,7 +1513,7 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
+    enabled: 1
     mode: 0
     timeMode: 0
     fps: 30
@@ -1657,8 +1624,8 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     speedRange: {x: 0, y: 1}
-    tilesX: 1
-    tilesY: 1
+    tilesX: 3
+    tilesY: 4
     animationType: 0
     rowIndex: 0
     cycles: 1
@@ -4944,7 +4911,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: eb5315e2f77c540b6bf545720e84d3a5, type: 2}
+  - {fileID: 2100000, guid: 46cd1dc479e04e841a8c7b2f85a8e666, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

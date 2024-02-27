@@ -35,7 +35,7 @@ public class HealthBar : MonoBehaviour
     public bool CanBeAttacked() => _canBeAttacked;
     public float GetHealth() => _currentHealth;
     public void Hide() => _quad.SetActive(false);
-    public void Show() => _quad.SetActive(true);
+    public void Show() => _quad?.SetActive(true);
 
     private void UpdateShaderParams()
     {

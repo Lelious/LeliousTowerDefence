@@ -53,6 +53,7 @@ SpriteAtlas:
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 2bd39c3058e1ffc43b04e28baaccde1e, type: 3}
   - {fileID: 21300000, guid: dd8c88222c88bec429aa5c2afea8d6be, type: 3}
   - {fileID: 21300000, guid: 307e099458d81e04e9f7b4e0479a1afa, type: 3}
   - {fileID: 21300000, guid: 84e7eaa476e753a469a73379813d308e, type: 3}
@@ -68,6 +69,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 89c8a0fc2f595684b8c0c98c2c6793f5, type: 3}
   - {fileID: 21300000, guid: d601c15d33916b6488cebc02a7050a24, type: 3}
   m_PackedSpriteNamesToIndex:
+  - healthbar
   - Skeleton
   - MagicTower
   - ArmorIcon

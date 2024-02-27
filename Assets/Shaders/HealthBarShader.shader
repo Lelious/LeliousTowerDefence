@@ -33,31 +33,28 @@ Shader "Lelious/HealthBarShader" {
             };
 
             sampler2D _MainTex;
-            float4 _MainTex_ST;
 
             UNITY_INSTANCING_BUFFER_START(Props)
-            UNITY_DEFINE_INSTANCED_PROP(float, _Fill)
+            UNITY_DEFINE_INSTANCED_PROP(half, _Fill)
             UNITY_INSTANCING_BUFFER_END(Props)
 
-            v2f vert(appdata v) {
+            v2f vert(appdata v) 
+            {
                 v2f o;
                 UNITY_SETUP_INSTANCE_ID(v);
-
                 float fill = UNITY_ACCESS_INSTANCED_PROP(Props, _Fill);
-
                 o.vertex = UnityObjectToClipPos(v.vertex);
-
                 o.uv = v.uv;
-                o.uv.x += 0.5 - fill;
-                o.uv.y = fill;
                 return o;
             }
 
-            fixed4 frag(v2f i) : SV_Target {
-
-                return tex2D(_MainTex, i.uv);
+            fixed4 frag(v2f i) : SV_Target 
+            {
+                half healthbarMask = _Fill > i.uv.x;
+                half3 healthbarColor = tex2D(_MainTex, half2(_Fill, i.uv.y));
+                return half4(healthbarColor * healthbarMask, 1);
             }
             ENDCG
         }
-        }
+    }
 }
