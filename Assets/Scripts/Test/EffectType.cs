@@ -3,5 +3,7 @@ public enum EffectType
 {
     IncreaceAttackPower,
     IncreaceAttackSpeed,
-    IncreaceSpeed
+    IncreaceSpeed,
+    DecreaceSpeed,
+    DecreaceHP
 }

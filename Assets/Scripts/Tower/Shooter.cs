@@ -1,7 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Zenject;
+using System.Linq;
 
 public class Shooter : MonoBehaviour, IShoot
 {
@@ -11,10 +13,20 @@ public class Shooter : MonoBehaviour, IShoot
     [SerializeField] private Transform _cannonToRotate;
     [Inject] private PoolService _poolService;
     [Inject] private EnemyPool _enemyPool;
+    [Inject] private BuffService _buffService;
+    [Inject] private TowerFactory _towerFactory;
     [SerializeField] private TowerStats _towerStats;
+
+    private TowerAbility _buffAbility;
+    private int _aimCounter;
     private bool _isPoolCreated;
 
-    public void SetTowerData(TowerStats stats) => _towerStats = stats;
+    public void SetTowerData(TowerStats stats)
+    {
+        _towerStats = stats;
+        _buffAbility = _towerStats.Abilities.Find(x => x.AppliedTarget == AppliedTarget.Tower);
+    }
+
     public void ClearAmmo() => _poolService.RemoveBulletsFromPool(_towerStats.BulletType, _poolSize);  
 
     public bool DetectEnemy()
@@ -83,10 +95,44 @@ public class Shooter : MonoBehaviour, IShoot
             bullet.SetBulletPool(_poolService, false);
         }
 
-        bullet.SetBulletParameters(_towerStats, _enemyPool, _shootingPoint.position);
+        bullet.SetBulletParameters(_towerStats, _enemyPool, _buffService, _shootingPoint.position, this, _buffAbility == null ? false : true);
         bullet.SetTarget(damagable);
         bullet.SetActive();
     }       
+
+    public void RegisterAim()
+    {
+        _aimCounter++;
+
+        if (_aimCounter >= _buffAbility.AttacksToTrigger)
+        {
+            _aimCounter = 0;
+            var towers = _towerFactory.GetEffectableTower(transform.position, _buffAbility.MaxDistance);
+
+            if (towers.Count > 0)
+            {
+                List<IEffectable> priorityList = new();
+
+                for (int i = 0; i < towers.Count; i++)
+                {
+                    if (towers[i].GetEffect(_buffAbility.Data.EffectType) == null)
+                    {
+                        _buffService.ApplyEffect(towers[i], new Buff(towers[i], _buffAbility.Data));
+                        return;
+                    }
+                    else
+                    {
+                        priorityList.Add(towers[i]);
+                    }
+                }
+
+                priorityList.OrderBy(x => x.GetEffect(_buffAbility.Data.EffectType).GetDuration());
+                _buffService.ApplyEffect(priorityList[0], new Buff(priorityList[0], _buffAbility.Data));
+
+                return;
+            }
+        }
+    }
 
     private IEnumerator ShootingRoutine()
     {

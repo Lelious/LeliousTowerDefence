@@ -36,3 +36,4 @@ MonoBehaviour:
   RicochetteCount: 0
   UpgradablesList:
   - {fileID: 11400000, guid: d4bb298563e28464b941a617452f77cc, type: 2}
+  Abilities: []

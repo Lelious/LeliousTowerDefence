@@ -56,7 +56,7 @@ public class BuildingCell : MonoBehaviour, ITouchable
             if (_type != data.Type)
             {
 				_placedTower.ClearAllUnusedBullets();
-				Destroy(_placedTower.gameObject);
+				_towerFactory.ClearTowerData(_placedTower);
 				_placedTower = _towerFactory.CreateNewTower(data, transform.position);
 				_placedTower.SetStats(_towerStats);
 				_placedTower.TowerBuild(this);

@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Tower : MonoBehaviour, IEffectable
 {
@@ -114,6 +115,7 @@ public class Tower : MonoBehaviour, IEffectable
 	public List<IEffect> GetTickableEffects() => _effects.FindAll(x => x.IsTickable());
 	public Transform GetOrigin() => transform;
 	public List<IEffect> GetEffects() => _effects;
+	public IEffect GetEffect(EffectType type) => _effects.Find(x => x.GetEffectType() == type);
 
 	public void ApplyEffect(IEffect effect)
     {
@@ -157,4 +159,6 @@ public class Tower : MonoBehaviour, IEffectable
     {
 		RecalculateStats();
 	}
+
+	public void RemoveAllEffects() => _effects.Clear();
 }

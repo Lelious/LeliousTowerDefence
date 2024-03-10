@@ -6,9 +6,8 @@ public class EnemyMovement : MonoBehaviour
 {
 	[SerializeField] private EnemyEntity _enemyEntity;
 	[SerializeField] private NavMeshAgent _navMeshAgent;
-	[SerializeField] private EnemyData _enemyData;
 	[SerializeField] private Animator _animator;
-
+	private EnemyStats _enemyStats;
 	private readonly int _hashSpeed = Animator.StringToHash("Speed");
 	private const float _navMeshSpeedConst = 2f;
 	private EndPoint _endPoint;
@@ -20,16 +19,17 @@ public class EnemyMovement : MonoBehaviour
 		_endPoint = endPoint;
 	}
 
+	public void SetEnemyStats(EnemyStats stats) => _enemyStats = stats;
+
 	private void Start()
 	{
-		UpdateSpeed();
 		SetPath();
 	}
 
 	public void UpdateSpeed()
 	{
-		_animator.SetFloat(_hashSpeed, _enemyData.Speed);
-		_navMeshAgent.speed = _navMeshSpeedConst * _enemyData.Speed;
+		_animator.SetFloat(_hashSpeed, _enemyStats.Speed * _enemyStats.BonusSpeed.Value);
+		_navMeshAgent.speed = _navMeshSpeedConst * _enemyStats.Speed * _enemyStats.BonusSpeed.Value;
 	}
 
 	public void EnemyDeath()

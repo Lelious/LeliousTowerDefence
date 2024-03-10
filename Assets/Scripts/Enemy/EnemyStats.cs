@@ -4,8 +4,9 @@ public class EnemyStats : StatData
 {
     public FloatReactiveProperty Armor = new();
     public FloatReactiveProperty Health = new();
-
+    public FloatReactiveProperty BonusSpeed = new(1f);
     private GamePannelUdaterInfoContainer _container;
+    public float Speed;
 
     public override GamePannelUdaterInfoContainer GetContainer() => _container;
 
@@ -18,7 +19,7 @@ public class EnemyStats : StatData
         MinimalDamage = data.MinimalDamage;
         MaximumDamage = data.MaximumDamage;
         Health.Value = MaxHealth;
-
+        Speed = data.Speed;
         InitializeUpgradableStats();      
     }
 
@@ -38,12 +39,18 @@ public class EnemyStats : StatData
 
     public override void UpgradeStat(StatType type, float value)
     {
-        
+        switch (type)
+        {      
+            case StatType.BonusSpeed:
+                BonusSpeed.Value += value;
+                break;
+        }
     }
 
     private void InitializeUpgradableStats()
     {
         UpgradableStats.Add(StatType.Armor, Armor);
         UpgradableStats.Add(StatType.Health, Health);
+        UpgradableStats.Add(StatType.BonusSpeed, BonusSpeed);
     }
 }

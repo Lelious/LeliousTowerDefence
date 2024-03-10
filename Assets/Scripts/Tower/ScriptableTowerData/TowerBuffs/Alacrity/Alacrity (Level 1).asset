@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91e4b53e136c8f4488b3c707f9aba4f, type: 3}
+  m_Name: Alacrity (Level 1)
+  m_EditorClassIdentifier: 
+  EffectName: Alacrity
+  EffectType: 1
+  EffectDuration: 10
+  Damage: 0
+  DamageSource: 0
+  PercentageValue: 1
+  IsPeriodical: 0
+  TickTime: 0
+  Description: Increace attack speed by {Percentage Value} for {Buff Duration} seconds.

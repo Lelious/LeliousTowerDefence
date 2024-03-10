@@ -125,6 +125,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\Scripts\Tower\Bullets\BulletData.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
+    <Compile Include="Assets\Scripts\UI\FloatingText.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Services\EnemyLoadService.cs" />
     <Compile Include="Assets\Teleportation.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Services\BulletType.cs" />
@@ -141,13 +142,16 @@
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameWinState.cs" />
     <Compile Include="Assets\Scripts\Tower\Bullets\ShurikenBullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+    <Compile Include="Assets\Scripts\Tower\TowerAbilities\TowerAbilitiesData.cs" />
     <Compile Include="Assets\Scripts\UI\GameUIService.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Scripts\Debug\FPSCounter\FPSDisplay.cs" />
     <Compile Include="Assets\Scripts\BuffDebuff\Effect.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Services\PoolService.cs" />
     <Compile Include="Assets\Scripts\Input\CameraLimiter.cs" />
+    <Compile Include="Assets\Scripts\UI\FloatingTextColorPalette.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IDamagable.cs" />
+    <Compile Include="Assets\Scripts\Tower\TowerAbilities\TowerAbility.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameSpawnState.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\State.cs" />
@@ -199,6 +203,10 @@
     <Compile Include="Assets\Scripts\Test\FlagShaderRandomizer.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IControllFromState.cs" />
     <Compile Include="Assets\Scripts\UI\UICustomIcon.cs" />
+    <Compile Include="Assets\Scripts\Tower\ScriptableTowerData\TowerDebuffs\Debuff.cs" />
+    <Compile Include="Assets\Scripts\Tower\ScriptableTowerData\TowerDebuffs\EffectData.cs" />
+    <Compile Include="Assets\Scripts\Tower\ScriptableTowerData\TowerBuffs\Buff.cs" />
+    <Compile Include="Assets\Scripts\Tower\ScriptableTowerData\TowerBuffs\BuffData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

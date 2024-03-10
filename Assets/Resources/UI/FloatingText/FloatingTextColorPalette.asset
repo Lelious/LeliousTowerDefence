@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39334542ae883724c84a9e5f448a341f, type: 3}
+  m_Name: FloatingTextColorPalette
+  m_EditorClassIdentifier: 
+  _colorPalette:
+  - Source: 0
+    Color: {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 1}
+  - Source: 1
+    Color: {r: 0.8490566, g: 0.020024916, b: 0.020024916, a: 1}
+  - Source: 2
+    Color: {r: 0.019607853, g: 0.40265036, b: 0.8509804, a: 1}
+  - Source: 3
+    Color: {r: 0.7924528, g: 0.349463, b: 0, a: 1}
+  - Source: 4
+    Color: {r: 0.3837665, g: 0, b: 0.5283019, a: 1}

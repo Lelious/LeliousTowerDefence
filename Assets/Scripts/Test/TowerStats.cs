@@ -19,6 +19,7 @@ public class TowerStats : StatData
     public int TargetsCount;
     public int RicochetteCount;
     public bool IsUpgradesAvailable;
+    public List<TowerAbility> Abilities = new();
 
     public FloatReactiveProperty BonusAttackPower = new();
     public FloatReactiveProperty BonusAttackSpeed = new();
@@ -50,7 +51,7 @@ public class TowerStats : StatData
         ExplosionRadius = data.ExplosionRadius;
         ProjectileSpeedIncreacement = data.ProjectileSpeedIncreacement;
         OnTarget = data.OnTarget;
-
+        Abilities = data.Abilities;
         InitializeUpgradableStats();
     }
 

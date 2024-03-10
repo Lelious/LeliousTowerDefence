@@ -5,7 +5,7 @@ using System;
 
 public class FloatingTextService : MonoBehaviour
 {
-    [SerializeField] private Transform _trackedObject;
+    [SerializeField] private FloatingTextColorPalette _palette;
     [SerializeField] private TextMeshProUGUI _textPrefab;
     [SerializeField] private int _poolSize;
     [SerializeField] private float _scrollSpeed;
@@ -25,7 +25,7 @@ public class FloatingTextService : MonoBehaviour
         _initialized = true;
     }
 
-    public void AddFloatingText(string value, Vector3 position, Color color)
+    public void AddFloatingText(string value, Vector3 position, DamageSource source)
     {
         var text = _floatingTextPool.Dequeue();
 
@@ -33,10 +33,24 @@ public class FloatingTextService : MonoBehaviour
             text = CreateFloatingText();       
 
         text.Lifetime = _lifeTime;
-        text.CurrentVector = position;
-        text.Text.text = value;
+        text.CurrentVector = position;       
         text.ScrollSpeed = _scrollSpeed;
-        text.Text.color = color;
+        text.Text.color = _palette.GetColor(source);       
+
+        switch (source)
+        {
+            case DamageSource.Normal:
+                text.Object.transform.localScale = Vector3.one;
+                break;
+            case DamageSource.Critical:
+                text.Object.transform.localScale = Vector3.one * 1.2f;
+                value += "!";
+                break;
+            default:
+                text.Object.transform.localScale = Vector3.one * 0.8f;
+                break;
+        };
+        text.Text.text = value;
         float side = UnityEngine.Random.Range(-_horizontalOffset, _horizontalOffset);
         text.OffsetX = side < 0 ? -_horizontalOffset : _horizontalOffset;
         text.ProcessPosition(0f);
@@ -74,34 +88,5 @@ public class FloatingTextService : MonoBehaviour
             }
         }      
 
-    }
-}
-
-[Serializable]
-public class FloatingText
-{
-    public TextMeshProUGUI Text;
-    public Vector3 CurrentVector;
-    public float OffsetX;
-    public Color Color;
-    public float Lifetime;
-    public float ScrollSpeed;
-    public GameObject Object;
-
-    public void ProcessPosition(float delta)
-    {
-        Lifetime -= delta;
-        CurrentVector = new Vector3(CurrentVector.x + OffsetX * 0.2f, CurrentVector.y + delta * ScrollSpeed, CurrentVector.z);
-        if (Mathf.Abs(OffsetX) < delta)
-        {
-            OffsetX = 0;
-        }
-        else
-        {
-            OffsetX = OffsetX > 0 ? OffsetX -= delta * 0.2f : OffsetX += delta * 0.2f;
-        }
-
-        Text.rectTransform.position = Camera.main.WorldToScreenPoint(CurrentVector);
-        Text.color = new Color(Text.color.r, Text.color.g, Text.color.b, Lifetime);
     }
 }

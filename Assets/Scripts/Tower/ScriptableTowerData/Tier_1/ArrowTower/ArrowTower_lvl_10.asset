@@ -35,3 +35,19 @@ MonoBehaviour:
   TargetsCount: 1
   RicochetteCount: 0
   UpgradablesList: []
+  Abilities:
+  - AbilityName: CriticalStrike
+    AttackModifier: 1
+    DamageSource: 1
+    Type: 0
+    Icon: {fileID: 21300000, guid: 6abce3e5418760e4892d57e7f71dc61e, type: 3}
+    Chance: 0.5
+    DamageMultiplier: 2
+    Effect:
+      _effectType: 0
+      _debuffTime: 0
+      _damage: 0
+      _percentageValue: 0
+      _isPeriodical: 0
+      _tickTime: 0
+      _description: 

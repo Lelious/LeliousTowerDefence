@@ -6736,6 +6736,10 @@ PrefabInstance:
       propertyPath: _enemyHealth
       value: 
       objectReference: {fileID: 4814336260258713094}
+    - target: {fileID: 7065961842154010641, guid: 57893f6d58a010e4090504be3d5b9d82, type: 3}
+      propertyPath: _enemyMovement
+      value: 
+      objectReference: {fileID: 3521707233036813606}
     - target: {fileID: 7586592798202810227, guid: 57893f6d58a010e4090504be3d5b9d82, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -6842,6 +6846,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57893f6d58a010e4090504be3d5b9d82, type: 3}
+--- !u!114 &3521707233036813606 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 743944966722409766, guid: 57893f6d58a010e4090504be3d5b9d82, type: 3}
+  m_PrefabInstance: {fileID: 4218914148210741248}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4025652757ff4f34fb18c258965ce6cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4814336260258713094 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8665890240842980870, guid: 57893f6d58a010e4090504be3d5b9d82, type: 3}

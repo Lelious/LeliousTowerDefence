@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class IceBullet : Bullet
 {
     public override void ApplySpecialEffects()

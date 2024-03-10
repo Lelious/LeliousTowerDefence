@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using Assets.Scripts.Tower.TowerAbilities;
 using UnityEngine;
 
 public abstract class Bullet : MonoBehaviour, IPoollableBullet
@@ -13,6 +15,9 @@ public abstract class Bullet : MonoBehaviour, IPoollableBullet
 
     private EnemyHitPoint _enemyHitPoint;
     private PoolService _poolService;
+    private BuffService _buffService;
+    private Shooter _shooter;
+    private bool _callback;
     private IPoollableBullet _iPoollable;
     private BulletType _type;
     private Vector3 _middlePoint;
@@ -24,6 +29,8 @@ public abstract class Bullet : MonoBehaviour, IPoollableBullet
     private float _speedIncreacement;
     private bool _onTarget;
     private bool _onFlying;
+
+    private List<TowerAbility> _abilitiesList;
 
     public void ReturnToPool() => _poolService.AddBulletToPool(_type, _iPoollable);
     public void SetBulletType(BulletType type) => _type = type;
@@ -53,7 +60,7 @@ public abstract class Bullet : MonoBehaviour, IPoollableBullet
         _enemyPoint = _damagable.GetOrigin().position;
     }   
 
-    public void SetBulletParameters(TowerStats data, EnemyPool enemyPool, Vector3 startPosition)
+    public void SetBulletParameters(TowerStats data, EnemyPool enemyPool, BuffService buffService, Vector3 startPosition, Shooter shooter, bool callback)
     {
         _explosionRadius = data.ExplosionRadius;
         _minDamage = (int)(data.MinimalDamage + data.BonusAttackPower.Value);
@@ -64,6 +71,10 @@ public abstract class Bullet : MonoBehaviour, IPoollableBullet
         _onTarget = data.OnTarget;
         _ricoshetteCount = data.RicochetteCount;
         _enemyPool = enemyPool;
+        _shooter = shooter;
+        _callback = callback;
+        _buffService = buffService;
+        _abilitiesList = data.Abilities;
 
         if (_impactOnHit == null)      
             _impactOnHit = Instantiate(data.ImpactOnHit);
@@ -75,13 +86,44 @@ public abstract class Bullet : MonoBehaviour, IPoollableBullet
 
     public void ApplyDamage(int damage = 0)
     {
-        if ((Component)_damagable != null)
+        bool processedDamage = false;
+
+        if (_abilitiesList.Count > 0)
         {
-            _damagable.TakeDamage(damage == 0 ? CalculateDamage() : damage);
+            foreach (var ability in _abilitiesList)
+            {
+                if (ability.Chance > Random.Range(0.0f, 1.0f))
+                {
+                    if (ability.AttackModifier)
+                    {
+                        processedDamage = true;
+
+                        if ((Component)_damagable != null)
+                        {
+                            _damagable.TakeDamage(damage == 0 ? (int)(CalculateDamage() * ability.DamageMultiplier) : damage, ability.DamageSource);
+                        }
+                    }
+                    if (ability.Data != null && ability.AppliedTarget == AppliedTarget.Enemy)
+                    {
+                        var effectable = _damagable.GetEffectable();
+                        _buffService.ApplyEffect(effectable, new Debuff(effectable, ability.Data));
+                    }
+                }
+            }
+        }
+
+        if(!processedDamage)
+        {
+            if ((Component)_damagable != null)
+            {
+                _damagable.TakeDamage(damage == 0 ? CalculateDamage() : damage);
+            }
         }
 
         _impactOnHit.transform.position = transform.position;
-        _impactOnHit.SetActive(true);      
+        _impactOnHit.SetActive(true);
+
+        if (_callback) _shooter.RegisterAim();
     }
 
     public void SetBulletPool(PoolService pool, bool addToPool = true)

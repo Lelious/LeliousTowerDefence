@@ -10,6 +10,7 @@ public enum StatType
     MinAttack,
     MaxAttack,
     Speed,
+    BonusSpeed,
     Armor,
     Health
 }

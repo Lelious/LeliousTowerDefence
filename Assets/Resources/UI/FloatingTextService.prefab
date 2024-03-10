@@ -59,7 +59,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!114 &3565907423952577946
 MonoBehaviour:
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dd015076c1c17a4fbb1cb9eec2cf134, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _trackedObject: {fileID: 0}
+  _palette: {fileID: 11400000, guid: 82f580838e290b042b5c234a5e2dedac, type: 2}
   _textPrefab: {fileID: 8978718496856431133, guid: e79418615534b9a4dae0b943ecd103ed, type: 3}
   _poolSize: 50
   _scrollSpeed: 1

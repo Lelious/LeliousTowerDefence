@@ -33,4 +33,8 @@ public class TowerData : Data
 	[Space]
 	[Header("Upgradables")]
 	public List<TowerData> UpgradablesList;
+
+	[Space]
+	[Header("Upgradables")]
+	public List<TowerAbility> Abilities;
 }

@@ -1,7 +1,7 @@
 
     public class TestBuff : Effect, IEffect
     {
-        public TestBuff(EffectType type, IEffectable effectable, float percentValue, float duration, bool periodical = false) : base(type, effectable, percentValue, duration, periodical = false) 
+        public TestBuff(EffectType type, IEffectable effectable, float percentValue, float duration, bool periodical = false)
         {
             _type = type;
             _effectable = effectable;

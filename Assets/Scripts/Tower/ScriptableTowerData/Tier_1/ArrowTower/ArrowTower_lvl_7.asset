@@ -38,3 +38,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0d4d5306e2ed722468beb1ec495b7d62, type: 2}
   - {fileID: 11400000, guid: 84c4caa08e34be94f9ba2829769fdcde, type: 2}
   - {fileID: 11400000, guid: b1f97da3bf5c0d24c9dbcb0d4c067dcc, type: 2}
+  Abilities:
+  - AbilityName: CriticalStrike
+    AttackModifier: 1
+    DamageSource: 1
+    Type: 0
+    Icon: {fileID: 21300000, guid: 6abce3e5418760e4892d57e7f71dc61e, type: 3}
+    Chance: 0.5
+    DamageMultiplier: 2
+    Effect:
+      _effectType: 0
+      _debuffTime: 0
+      _damage: 0
+      _percentageValue: 0
+      _isPeriodical: 0
+      _tickTime: 0
+      _description: 

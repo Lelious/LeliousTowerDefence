@@ -38,3 +38,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ba80864b3ce65534994a31e621a1512c, type: 2}
   - {fileID: 11400000, guid: 4ecd7ded5aac02747afb933a8d842aa2, type: 2}
   - {fileID: 11400000, guid: d2918a970dd881044824f9af1443502d, type: 2}
+  Abilities:
+  - AbilityName: CriticalStrike
+    AttackModifier: 1
+    DamageSource: 1
+    Type: 0
+    Icon: {fileID: 21300000, guid: 6abce3e5418760e4892d57e7f71dc61e, type: 3}
+    Chance: 0.5
+    DamageMultiplier: 2
+    Data: {fileID: 11400000, guid: 87b7c78114189a1428d9f6dba3d131bd, type: 2}

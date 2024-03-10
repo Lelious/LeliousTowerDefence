@@ -38,3 +38,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ce716afe792d89547b8b9ab07cdb32dc, type: 2}
   - {fileID: 11400000, guid: 91c3fb157ccc7e84eb3db402c96b8d89, type: 2}
   - {fileID: 11400000, guid: 00159148d7684174aad14686a919da04, type: 2}
+  Abilities:
+  - AttackModifier: 0
+    AppliedTarget: 0
+    DamageSource: 0
+    Icon: {fileID: 0}
+    Chance: 0
+    DamageMultiplier: 0
+    Data: {fileID: 11400000, guid: 1c1a6d3b4c72b26468cc986b9d82c3cb, type: 2}
+    AttacksToTrigger: 0
+    MaxDistance: 0

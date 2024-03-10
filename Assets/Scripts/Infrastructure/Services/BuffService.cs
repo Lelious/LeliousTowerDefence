@@ -15,9 +15,8 @@ public sealed class BuffService : ITickable
             _effectableList.Add(effectable);
         }
 
-        var effects = effectable.GetEffects();
         var type = effect.GetEffectType();
-        var sameEffect = effects.Find(x => x.GetEffectType() == type);
+        var sameEffect = effectable.GetEffect(type);
 
         if (sameEffect == null)
         {
