@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public interface IEffect
 {
     public float GetDuration();
@@ -8,4 +10,5 @@ public interface IEffect
     public DamageSource GetDamageSource();
     public float GetPercentage();
     public int GetDamage();
+    public EffectInfo GetEffectInfo();
 }

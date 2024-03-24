@@ -1,26 +1,31 @@
+using System;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+using TMPro;
 
 public class BottomGameMenu : MonoBehaviour
 {
     [SerializeField] private BottomMenuIconsContainer _bottomMenuIconsContainer;
     [SerializeField] private Image _previewImage;
-    [SerializeField] private Text _name;
-    [SerializeField] private Text _damage;
-    [SerializeField] private Text _bonusDamage;
-    [SerializeField] private Text _attackSpeed;
-    [SerializeField] private Text _armor;
-    [SerializeField] private Text _hitPoints;
+    [SerializeField] private TextMeshProUGUI _name,
+                                             _damage,
+                                             _bonusDamage,
+                                             _attackSpeed,
+                                             _armor,
+                                             _hitPoints;
     [SerializeField] private Gradient _hpColorGradient;
     [SerializeField] private List<UIButton> _upgradesList = new List<UIButton>();
-    [SerializeField] private List<GameObject> _visualizedButtons = new List<GameObject>();
+    [SerializeField] private UIEffectsPlacer _effectsPlacer;
+    [SerializeField] private GameObject _upgradesWindow;
+    [SerializeField] private ButtonSpriteSwapper _upgradesButtonAnimation;
+    [SerializeField] private UIInfobox _infoBox;
     [Inject] private GameUIService _gameInformationMenu;
 
-    private System.IDisposable _disposableEntity;
-    private CompositeDisposable _disposable = new CompositeDisposable();
+    private bool _upgradesWindowStatus;
+    private List<IDisposable> _disposables = new List<IDisposable>();
     private List<UIMenuIcons> _unusedIconsList = new List<UIMenuIcons>();
 
     private void Awake()
@@ -28,9 +33,10 @@ public class BottomGameMenu : MonoBehaviour
         _bottomMenuIconsContainer.Initialize();
     }
 
-    public void SetEntityToPannelUpdate(GamePannelUdaterInfoContainer infoContainer)
+    public void SetEntityToPannelUpdate(GamePannelUdaterInfoContainer infoContainer, TouchableType type)
     {
-        _disposableEntity?.Dispose();
+        Dispose();
+
         _unusedIconsList.Clear();
 
         ValidateContainerValues(infoContainer);
@@ -38,36 +44,79 @@ public class BottomGameMenu : MonoBehaviour
 
     public void UpdateUpgradesInfo(GamePannelUdaterInfoContainer infoContainer)
     {
-        foreach (var item in _visualizedButtons)
+        foreach (var item in _upgradesList)
         {
-            item.SetActive(false);
+            item.gameObject.SetActive(false);
         }
 
         if (infoContainer.UpgradesList != null)
         {
             for (int i = 0; i < infoContainer.UpgradesList.Count; i++)
             {
-                _visualizedButtons[i].SetActive(true);
+                _upgradesList[i].gameObject.SetActive(true);
                 _upgradesList[i].SetButton(infoContainer.UpgradesList[i]);
+            }
+
+            if (!_upgradesWindowStatus)
+            {
+                _upgradesButtonAnimation.StartAnimation();
             }
         }
     }
+
+    public void ShowUpgradesWindow()
+    {
+        _upgradesWindowStatus = true;
+        _upgradesWindow.SetActive(_upgradesWindowStatus);
+
+        HideInfoBox();
+    }
+
+    public void HideUpgradesWindow(bool needPlayAnim = true)
+    {
+        _upgradesWindowStatus = false;
+        _upgradesWindow.SetActive(_upgradesWindowStatus);
+        _upgradesButtonAnimation.gameObject.SetActive(true);
+
+        if (needPlayAnim)
+        {
+            _upgradesButtonAnimation.StartAnimation();
+        }
+    }
+
+    public void ShowInfoBox(string name, string description)
+    {
+        _infoBox.gameObject.SetActive(true);
+        _infoBox.SetDescription(name, description);
+    }
+
+    public void HideInfoBox() => _infoBox.gameObject.SetActive(false);
+
+    private void Dispose()
+    {
+        foreach (var disposable in _disposables)
+        {
+            disposable.Dispose();
+        }
+        _disposables.Clear();
+    }    
 
     private void ValidateContainerValues(GamePannelUdaterInfoContainer infoContainer)
     {
         _previewImage.sprite = infoContainer.PreviewImage;
         _name.text = infoContainer.Name;
         _damage.text = $"{infoContainer.MinDamage} - {infoContainer.MaxDamage}";
+        _effectsPlacer.SetEffects(infoContainer.CurrentEffects);
 
         if (infoContainer.MinDamage < 0f)
             _unusedIconsList.Add(UIMenuIcons.Damage);
         if (infoContainer.UpgradableStats.TryGetValue(StatType.Armor, out var armorReactiveValue))
         {
-            _disposableEntity = armorReactiveValue
-            .Subscribe(armor =>
-            {
-                SetArmor(armor);
-            }).AddTo(_disposable);
+            armorReactiveValue
+                .Subscribe(armor =>
+                {
+                    SetArmor(armor);
+                }).AddTo(_disposables);
         }
         else
         {
@@ -76,11 +125,11 @@ public class BottomGameMenu : MonoBehaviour
 
         if (infoContainer.UpgradableStats.TryGetValue(StatType.BonusAttackPower, out var bonusAttackReactiveValue))
         {
-            _disposableEntity = bonusAttackReactiveValue
+            bonusAttackReactiveValue
                 .Subscribe(attackBonus =>
                 {
                     SetAttackBonus((int)attackBonus);
-                }).AddTo(_disposable);
+                }).AddTo(_disposables);
         }
         else
         {
@@ -89,11 +138,11 @@ public class BottomGameMenu : MonoBehaviour
 
         if (infoContainer.UpgradableStats.TryGetValue(StatType.BonusAttackSpeed, out var bonusAttackSpeedReactiveValue))
         {
-            _disposableEntity = bonusAttackSpeedReactiveValue
+            bonusAttackSpeedReactiveValue
                 .Subscribe(attackSpeed =>
                 {
-                    SetAttackSpeed(infoContainer.AttackSpeed + attackSpeed);
-                }).AddTo(_disposable);
+                    SetAttackSpeed(infoContainer.AttackSpeed + attackSpeed, attackSpeed == 0 ? false : true);
+                }).AddTo(_disposables);
         }
         else
         {
@@ -102,24 +151,28 @@ public class BottomGameMenu : MonoBehaviour
 
         if (infoContainer.UpgradableStats.TryGetValue(StatType.Health, out var healthReactiveValue))
         {
-            _disposableEntity = healthReactiveValue
+            healthReactiveValue
                 .Subscribe(health =>
                 {
                     SetHp(health, infoContainer.MaxHealth);
-                }).AddTo(_disposable);
+                }).AddTo(_disposables);
         }
 
-        foreach (var item in _visualizedButtons)
+        foreach (var item in _upgradesList)
         {
-            item.SetActive(false);
+            item.gameObject.SetActive(false);
         }
 
         if (infoContainer.UpgradesList != null)
         {
             for (int i = 0; i < infoContainer.UpgradesList.Count; i++)
             {
-                _visualizedButtons[i].SetActive(true);
+                _upgradesList[i].gameObject.SetActive(true);
                 _upgradesList[i].SetButton(infoContainer.UpgradesList[i]);
+            }
+            if (!_upgradesWindowStatus)
+            {
+                _upgradesButtonAnimation.StartAnimation();
             }
         }
 
@@ -136,11 +189,11 @@ public class BottomGameMenu : MonoBehaviour
         _bonusDamage.text = value > 0 ? $"+ {value}" : "";
     }
 
-    private void SetAttackSpeed(float value)
+    private void SetAttackSpeed(float value, bool upgraded = false)
     {
-        Debug.Log($"AttackSpeed = {value}");
         string trim = string.Format("{0:f2}", 1f / (value / 100f));
         _attackSpeed.text = $"{trim}/sec";
+        _attackSpeed.color = upgraded == true ? new Color(0, 0.7f, 0.04f, 1) : new Color(0.87f, 0.87f, 0.87f, 1);
     }
 
     private void SetHp(float currentHealth, float maxHealth)

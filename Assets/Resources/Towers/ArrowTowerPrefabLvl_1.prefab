@@ -93,7 +93,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 409f8e1c22ee3114d8b64adca619f669, type: 2}
+  - {fileID: 2100000, guid: 8d08e06ea0ab8004892c990048a6d98a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -176,7 +176,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 409f8e1c22ee3114d8b64adca619f669, type: 2}
+  - {fileID: 2100000, guid: 8d08e06ea0ab8004892c990048a6d98a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -303,7 +303,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 409f8e1c22ee3114d8b64adca619f669, type: 2}
+  - {fileID: 2100000, guid: 8d08e06ea0ab8004892c990048a6d98a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -470,7 +470,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 409f8e1c22ee3114d8b64adca619f669, type: 2}
+  - {fileID: 2100000, guid: 8d08e06ea0ab8004892c990048a6d98a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -553,7 +553,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 409f8e1c22ee3114d8b64adca619f669, type: 2}
+  - {fileID: 2100000, guid: 8d08e06ea0ab8004892c990048a6d98a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -636,7 +636,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 409f8e1c22ee3114d8b64adca619f669, type: 2}
+  - {fileID: 2100000, guid: 8d08e06ea0ab8004892c990048a6d98a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -719,7 +719,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 409f8e1c22ee3114d8b64adca619f669, type: 2}
+  - {fileID: 2100000, guid: 8d08e06ea0ab8004892c990048a6d98a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -802,7 +802,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 409f8e1c22ee3114d8b64adca619f669, type: 2}
+  - {fileID: 2100000, guid: 8d08e06ea0ab8004892c990048a6d98a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -885,7 +885,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 409f8e1c22ee3114d8b64adca619f669, type: 2}
+  - {fileID: 2100000, guid: 8d08e06ea0ab8004892c990048a6d98a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -968,7 +968,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 409f8e1c22ee3114d8b64adca619f669, type: 2}
+  - {fileID: 2100000, guid: 8d08e06ea0ab8004892c990048a6d98a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1083,7 +1083,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6051901327362172692}
   - component: {fileID: 2828531714194891516}
-  - component: {fileID: 8198498840177003667}
   m_Layer: 10
   m_Name: ArrowTowerPrefabLvl_1
   m_TagString: Untagged
@@ -1121,7 +1120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f95393df3d4c9245a6a8bc11a709c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sphere: {fileID: 7394768565307774181}
   _shooter: {fileID: 5324208402193513569}
   _rangeBoarder: {fileID: 1380397637168956888}
   _buildingProgress: {fileID: 4767333501429954328}
@@ -1144,14 +1142,20 @@ MonoBehaviour:
     MaximumDamage: 0
     AttackSpeed: 0
     MaxHealth: 0
+    BulletType: 0
     BulletPrefab: {fileID: 0}
+    ImpactOnHit: {fileID: 0}
     UpgradeNumber: 0
+    BulletYCurvature: 0
     ProjectileSpeed: 0
+    ProjectileSpeedIncreacement: 0
+    OnTarget: 0
     ExplosionRadius: 0
     AttackRadius: 0
     TargetsCount: 0
     RicochetteCount: 0
     IsUpgradesAvailable: 0
+    Abilities: []
     BonusAttackPower:
       value: 0
     BonusAttackSpeed:
@@ -1161,19 +1165,6 @@ MonoBehaviour:
     UpgradablesList: []
   _fireBuff: {fileID: 5582224505666641249}
   _waterBuff: {fileID: 4335902914586951699}
---- !u!135 &8198498840177003667
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9131704160781932908}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &2133417487713173683
 PrefabInstance:
   m_ObjectHideFlags: 0

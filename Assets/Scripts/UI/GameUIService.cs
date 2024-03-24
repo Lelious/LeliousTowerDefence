@@ -8,12 +8,10 @@ public class GameUIService : MonoBehaviour
 	[SerializeField] private RectTransform _emptyCellMenuRect;
 	[SerializeField] private RectTransform _gameMenuRect;
 	[SerializeField] private List<UIButton> _emptyButtons = new List<UIButton>();
-	[SerializeField] private List<UIButton> _upgradablesButtons = new List<UIButton>();
 	[SerializeField] private List<TowerData> _startingTowers = new List<TowerData>();
 	[SerializeField] private BottomGameMenu _bottomMenuInformator;
 	[SerializeField] private GameObject _bottomBuildMenu;
-	[SerializeField] private GameObject _bottomGameMenu;
-
+	[SerializeField] private BottomGameMenu _bottomGameMenu;
 	private TapRegisterService _tapRegisterService;
 	private GameManager _gameManager;
 	private BuildingCell _buildingCell;
@@ -53,7 +51,7 @@ public class GameUIService : MonoBehaviour
 
 	public void ShowGameMenu()
 	{
-		_bottomGameMenu.SetActive(true);
+		_bottomGameMenu.gameObject.SetActive(true);
 		_gameMenuRect.DOAnchorPos(Vector2.zero, 0.25f);
 
 		HideEmptyCellMenu();
@@ -61,8 +59,15 @@ public class GameUIService : MonoBehaviour
 
 	public void HideGameMenu()
 	{
-		_gameMenuRect.DOAnchorPos(new Vector2(0f, -_gameMenuHeight), 0.25f).OnComplete(() => _bottomGameMenu.SetActive(false));
+		_bottomGameMenu.HideUpgradesWindow(false);
+		_bottomGameMenu.HideInfoBox();
+		_gameMenuRect.DOAnchorPos(new Vector2(0f, -_gameMenuHeight), 0.25f).OnComplete(() => _bottomGameMenu.gameObject.SetActive(false));
 	}
+
+	public void ShowInfoBox()
+    {
+
+    }
 
 	public void RegisterTapOnUI()
 	{

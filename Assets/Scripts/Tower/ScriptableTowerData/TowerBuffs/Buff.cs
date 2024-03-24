@@ -11,9 +11,10 @@ public class Buff : Effect
         _effectName = data.EffectName;
         _effectable = effectable;
         _type = data.EffectType;
-        _duration = data.EffectDuration;
+        _image = data.EffectImage;
+        CurrentDuration.Value = data.EffectDuration;
         _percentage = data.PercentageValue;
-        _currentDuration = _duration;
+        CurrentDuration.Value = CurrentDuration.Value;
 
         _description = BuildDescription(data.Description);
     }
@@ -22,7 +23,7 @@ public class Buff : Effect
     {
         _stringBuilder = new StringBuilder();
         _stringBuilder.Append(value);
-        _stringBuilder.Replace("{Effect Duration}", $"{_duration}");
+        _stringBuilder.Replace("{Effect Duration}", $"{CurrentDuration.Value}");
         _stringBuilder.Replace("{Percentage Value}", $"{_percentage * 100}");
 
         return _stringBuilder.ToString();

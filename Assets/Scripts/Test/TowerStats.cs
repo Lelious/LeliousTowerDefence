@@ -68,7 +68,7 @@ public class TowerStats : StatData
         }
     }
 
-    public override void InitializeInfoContainer()
+    public override void InitializeInfoContainer(ReactiveCollection<IEffect> currentEffects)
     {
         _container = new GamePannelUdaterInfoContainer
             (
@@ -78,7 +78,8 @@ public class TowerStats : StatData
                 MinimalDamage,
                 MaximumDamage,
                 AttackSpeed,
-                UpgradableStats
+                UpgradableStats,
+                currentEffects
             );
     }
 

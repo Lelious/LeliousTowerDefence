@@ -50,7 +50,7 @@ Shader "Unlit/FlagShader"
                 UNITY_SETUP_INSTANCE_ID(v);
                 UNITY_TRANSFER_INSTANCE_ID(v, o);
 
-				v.vertex.y += cos((v.vertex.x + _Rand + _Time.y * _Speed) * _Frequency) * _Amplitude * _DimensionX * v.vertex.x;
+				v.vertex.y += cos((v.vertex.x + UNITY_ACCESS_INSTANCED_PROP(Props, _Rand) + _Time.y * _Speed) * _Frequency) * _Amplitude * _DimensionX * v.vertex.x;
 				o.pos = UnityObjectToClipPos(v.vertex);
 				o.uv = TRANSFORM_TEX(v.texcoord, _MainTex);
 				return o;

@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: ChillAttack (Level 1)
   m_EditorClassIdentifier: 
   EffectName: Chill Attack
+  EffectImage: {fileID: 21300000, guid: 01572980309e9634dbf5229f440ccaf6, type: 3}
   EffectType: 3
   EffectDuration: 3
   Damage: 0
   DamageSource: 0
-  PercentageValue: 0.1
+  PercentageValue: 0.7
   IsPeriodical: 0
   TickTime: 0
-  Description: Decreaces speed by {Percentage Value}% for {Effect Duration} seconds.
+  Description: Decreace speed by {Percentage Value}% for {Effect Duration} seconds.

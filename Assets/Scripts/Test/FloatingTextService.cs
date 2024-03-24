@@ -6,11 +6,12 @@ using System;
 public class FloatingTextService : MonoBehaviour
 {
     [SerializeField] private FloatingTextColorPalette _palette;
-    [SerializeField] private TextMeshProUGUI _textPrefab;
+    [SerializeField] private TextMeshPro _textPrefab;
     [SerializeField] private int _poolSize;
     [SerializeField] private float _scrollSpeed;
     [SerializeField] private float _lifeTime;
     [SerializeField] private float _horizontalOffset;
+    [SerializeField] private float _initialSize = 0.04f;
 
     private bool _initialized;
     private Queue<FloatingText> _floatingTextPool = new Queue<FloatingText>();
@@ -27,7 +28,7 @@ public class FloatingTextService : MonoBehaviour
 
     public void AddFloatingText(string value, Vector3 position, DamageSource source)
     {
-        var text = _floatingTextPool.Dequeue();
+        _floatingTextPool.TryDequeue(out var text);
 
         if (text == null)        
             text = CreateFloatingText();       
@@ -40,14 +41,14 @@ public class FloatingTextService : MonoBehaviour
         switch (source)
         {
             case DamageSource.Normal:
-                text.Object.transform.localScale = Vector3.one;
+                text.Object.transform.localScale = Vector3.one * _initialSize;
                 break;
             case DamageSource.Critical:
-                text.Object.transform.localScale = Vector3.one * 1.2f;
+                text.Object.transform.localScale = Vector3.one * 1.2f * _initialSize;
                 value += "!";
                 break;
             default:
-                text.Object.transform.localScale = Vector3.one * 0.8f;
+                text.Object.transform.localScale = Vector3.one * 0.8f * _initialSize;
                 break;
         };
         text.Text.text = value;
@@ -79,7 +80,6 @@ public class FloatingTextService : MonoBehaviour
         for (int i = 0; i < _activePool.Count; i++)
         {
             _activePool[i].ProcessPosition(Time.deltaTime);
-
             if (_activePool[i].Lifetime <= 0)
             {
                 _floatingTextPool.Enqueue(_activePool[i]);

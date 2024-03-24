@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AttackPower
   m_EditorClassIdentifier: 
   EffectName: Might
+  EffectImage: {fileID: 21300000, guid: 89c8a0fc2f595684b8c0c98c2c6793f5, type: 3}
   EffectType: 0
   EffectDuration: 10
   Damage: 0
@@ -20,4 +21,5 @@ MonoBehaviour:
   PercentageValue: 1
   IsPeriodical: 0
   TickTime: 0
-  Description: Increace attack power by {Percentage Value} for {Buff Duration} seconds.
+  Description: Increace attack power by {Percentage Value}% for {Effect Duration}
+    seconds.

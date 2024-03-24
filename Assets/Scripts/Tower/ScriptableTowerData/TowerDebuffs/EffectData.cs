@@ -4,6 +4,7 @@ using UnityEngine;
 public class EffectData : ScriptableObject
 {
     public string EffectName;
+    public Sprite EffectImage;
     public EffectType EffectType;
     public float EffectDuration;
     public int Damage;

@@ -38,7 +38,7 @@ public class BuildingCell : MonoBehaviour, ITouchable
 		{
 			_placedTower.ShowRange();
 			_gameInformationMenu.ShowGameMenu();
-			_bottomMenuInformator.SetEntityToPannelUpdate(_containerInfo);
+			_bottomMenuInformator.SetEntityToPannelUpdate(_containerInfo, TouchableType.Tower);
 		}
 		else
 		{
@@ -106,7 +106,7 @@ public class BuildingCell : MonoBehaviour, ITouchable
 
 	private void InitializeInfoContainer()
 	{
-		_towerStats.InitializeInfoContainer();
+		_towerStats.InitializeInfoContainer(_placedTower.GetEffects());
 		_containerInfo = _towerStats.GetContainer();
 		_containerInfo.Touchable = this;
     }

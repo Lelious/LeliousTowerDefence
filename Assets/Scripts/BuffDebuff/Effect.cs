@@ -1,26 +1,34 @@
+using UniRx;
+using UnityEngine;
+
 public abstract class Effect : IEffect
 {
-    protected string _effectName;
+    protected FloatReactiveProperty CurrentDuration = new();
+    
+    protected DamageSource _damageSource;
     protected IEffectable _effectable;
-    protected float _duration;
-    protected float _tick;
-    protected float _currentDuration;
-    protected float _percentage;
+    protected EffectType _type;
+    protected Sprite _image;
+
+    protected string _description;
     protected int _damagePerTick;
     protected float _currentTick;
+    protected string _effectName;
+    protected float _percentage;
     protected bool _periodical;
-    protected string _description;
-    protected EffectType _type;
-    protected DamageSource _damageSource;
+    protected float _tick;
 
+    public EffectInfo GetEffectInfo() => new EffectInfo(_effectName, _description, _image);
+    public DamageSource GetDamageSource() => _damageSource;
+    public float GetDuration() => CurrentDuration.Value;
     public float GetPercentage() => _percentage;
     public EffectType GetEffectType() => _type;
-    public float GetDuration() => _duration;
-    public bool IsTickable() => _periodical;
+    public int GetDamage() => _damagePerTick;
+    public bool IsTickable() => _periodical;  
 
     public bool Tick(float delta)
     {
-        _currentDuration -= delta;
+        CurrentDuration.Value -= delta;
 
         if (_periodical)
         {
@@ -33,19 +41,29 @@ public abstract class Effect : IEffect
             }
         }
 
-        if (_currentDuration <= 0) return true;
+        if (CurrentDuration.Value <= 0) return true;
 
         else return false;
     }
 
     public void RefreshEffect(IEffect effect)
     {
-        _currentDuration = effect.GetDuration();
+        CurrentDuration.Value = effect.GetDuration();
         _percentage = effect.GetPercentage();
         _periodical = effect.IsTickable();
         _effectable.RefreshEffectValues();
     }
+}
 
-    public DamageSource GetDamageSource() => _damageSource;
-    public int GetDamage() => _damagePerTick;
+public struct EffectInfo
+{
+    public string Name;
+    public string Description;
+    public Sprite Image;
+    public EffectInfo(string name, string description, Sprite image)
+    {
+        Name = name;
+        Description = description;
+        Image = image;
+    }
 }

@@ -46,8 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f95393df3d4c9245a6a8bc11a709c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health:
-    value: 0
   _shooter: {fileID: 3886034642394612939}
   _rangeBoarder: {fileID: 8009296693722971506}
   _buildingProgress: {fileID: 4478385839602323378}
@@ -61,6 +59,37 @@ MonoBehaviour:
   - {fileID: 1085958858218444517}
   - {fileID: 9014237248126862159}
   - {fileID: 6559990617732907713}
+  - {fileID: 1690424431875093997}
+  _stats:
+    MainImage: {fileID: 0}
+    Name: 
+    MinimalDamage: 0
+    MaximumDamage: 0
+    AttackSpeed: 0
+    MaxHealth: 0
+    BulletType: 0
+    BulletPrefab: {fileID: 0}
+    ImpactOnHit: {fileID: 0}
+    UpgradeNumber: 0
+    BulletYCurvature: 0
+    ProjectileSpeed: 0
+    ProjectileSpeedIncreacement: 0
+    OnTarget: 0
+    ExplosionRadius: 0
+    AttackRadius: 0
+    TargetsCount: 0
+    RicochetteCount: 0
+    IsUpgradesAvailable: 0
+    Abilities: []
+    BonusAttackPower:
+      value: 0
+    BonusAttackSpeed:
+      value: 0
+    Health:
+      value: 0
+    UpgradablesList: []
+  _fireBuff: {fileID: 0}
+  _waterBuff: {fileID: 0}
 --- !u!1 &1085958858218444517
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +187,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: -0.5
+--- !u!1 &1690424431875093997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8617148445572554200}
+  m_Layer: 10
+  m_Name: Level_9
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8617148445572554200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690424431875093997}
+  m_LocalRotation: {x: -0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.09401316, z: 0}
+  m_LocalScale: {x: 0.032894738, y: 0.032894738, z: 0.032894738}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7148019836937412925}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1768957154389324563
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +377,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8508493400916217265, guid: 2f2e9e78a1512284381d0c42e652d1f1, type: 3}
+  - {fileID: 2100000, guid: 8d08e06ea0ab8004892c990048a6d98a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -400,7 +460,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8508493400916217265, guid: 2f2e9e78a1512284381d0c42e652d1f1, type: 3}
+  - {fileID: 2100000, guid: 8d08e06ea0ab8004892c990048a6d98a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5446,7 +5506,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8508493400916217265, guid: 2f2e9e78a1512284381d0c42e652d1f1, type: 3}
+  - {fileID: 2100000, guid: 8d08e06ea0ab8004892c990048a6d98a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5617,7 +5677,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6559990617732907714
 Transform:
   m_ObjectHideFlags: 0
@@ -5707,7 +5767,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -6898,7 +6958,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 0
+    enabled: 1
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -6907,7 +6967,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 1, g: 1, b: 1, a: 1}
+        key1: {r: 1, g: 1, b: 1, a: 0}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -7785,7 +7845,7 @@ ParticleSystem:
         m_RotationOrder: 4
     m_Range: {x: 0, y: 1}
   ForceModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 0
@@ -10394,7 +10454,7 @@ ParticleSystemRenderer:
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
-  m_RenderAlignment: 1
+  m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
   m_UseCustomVertexStreams: 0
@@ -10477,7 +10537,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 409f8e1c22ee3114d8b64adca619f669, type: 2}
+  - {fileID: 2100000, guid: 599c09b7c4cae454891d67b5821d6de6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10547,6 +10607,7 @@ Transform:
   - {fileID: 7380796224137155423}
   - {fileID: 2790858343218394049}
   - {fileID: 830484257359798928}
+  - {fileID: 8617148445572554200}
   m_Father: {fileID: 3454886052438532030}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10578,7 +10639,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 409f8e1c22ee3114d8b64adca619f669, type: 2}
+  - {fileID: 2100000, guid: 8d08e06ea0ab8004892c990048a6d98a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -10662,7 +10723,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a2ff6044b48ba174e987bcd10679b1f2, type: 2}
+  - {fileID: 2100000, guid: a43c8eeddd54a2d4981a98b95e476816, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

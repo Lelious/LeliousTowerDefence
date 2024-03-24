@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class FloatingText
 {
-    public TextMeshProUGUI Text;
+    public TextMeshPro Text;
     public Vector3 CurrentVector;
     public float OffsetX;
     public Color Color;
@@ -26,7 +26,8 @@ public class FloatingText
             OffsetX = OffsetX > 0 ? OffsetX -= delta * 0.2f : OffsetX += delta * 0.2f;
         }
 
-        Text.rectTransform.position = Camera.main.WorldToScreenPoint(CurrentVector);
+        Text.rectTransform.position = CurrentVector;
+        Text.rectTransform.LookAt(Text.rectTransform.position + Camera.main.transform.forward);
         Text.color = new Color(Text.color.r, Text.color.g, Text.color.b, Lifetime);
     }
 }

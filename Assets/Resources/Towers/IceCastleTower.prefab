@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2320698802995160494}
   - component: {fileID: 6091292145750319174}
-  - component: {fileID: 1033367760020383884}
   m_Layer: 10
   m_Name: IceCastleTower
   m_TagString: Untagged
@@ -68,14 +67,20 @@ MonoBehaviour:
     MaximumDamage: 0
     AttackSpeed: 0
     MaxHealth: 0
+    BulletType: 0
     BulletPrefab: {fileID: 0}
+    ImpactOnHit: {fileID: 0}
     UpgradeNumber: 0
+    BulletYCurvature: 0
     ProjectileSpeed: 0
+    ProjectileSpeedIncreacement: 0
+    OnTarget: 0
     ExplosionRadius: 0
     AttackRadius: 0
     TargetsCount: 0
     RicochetteCount: 0
     IsUpgradesAvailable: 0
+    Abilities: []
     BonusAttackPower:
       value: 0
     BonusAttackSpeed:
@@ -85,19 +90,6 @@ MonoBehaviour:
     UpgradablesList: []
   _fireBuff: {fileID: 0}
   _waterBuff: {fileID: 0}
---- !u!135 &1033367760020383884
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 968907204479245270}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1811411308395904944
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,7 +151,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -461719863951367103, guid: 0bb14ba72823f6f46903588c5b78d3c1, type: 3}
+  - {fileID: 2100000, guid: 11f71949d98dfa64bb2bea914f67db0a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -249,7 +241,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -461719863951367103, guid: 0bb14ba72823f6f46903588c5b78d3c1, type: 3}
+  - {fileID: 2100000, guid: 11f71949d98dfa64bb2bea914f67db0a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -332,7 +324,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -461719863951367103, guid: 0bb14ba72823f6f46903588c5b78d3c1, type: 3}
+  - {fileID: 2100000, guid: 11f71949d98dfa64bb2bea914f67db0a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -415,7 +407,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -461719863951367103, guid: 0bb14ba72823f6f46903588c5b78d3c1, type: 3}
+  - {fileID: 2100000, guid: 11f71949d98dfa64bb2bea914f67db0a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -498,7 +490,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -461719863951367103, guid: 0bb14ba72823f6f46903588c5b78d3c1, type: 3}
+  - {fileID: 2100000, guid: 11f71949d98dfa64bb2bea914f67db0a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -581,7 +573,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -461719863951367103, guid: 0bb14ba72823f6f46903588c5b78d3c1, type: 3}
+  - {fileID: 2100000, guid: 11f71949d98dfa64bb2bea914f67db0a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -664,7 +656,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -461719863951367103, guid: 0bb14ba72823f6f46903588c5b78d3c1, type: 3}
+  - {fileID: 2100000, guid: 11f71949d98dfa64bb2bea914f67db0a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -747,7 +739,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8508493400916217265, guid: 0bb14ba72823f6f46903588c5b78d3c1, type: 3}
+  - {fileID: 2100000, guid: 599c09b7c4cae454891d67b5821d6de6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

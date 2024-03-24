@@ -2,19 +2,20 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
+using TMPro;
 
 public class UIButton : MonoBehaviour
 {
 	[SerializeField] private Image _image;
-	[SerializeField] private Text _name;
+	[SerializeField] private TextMeshProUGUI _name;
 
     [Space]
     [Header("Tower Button Parameters")]
-    [SerializeField] private Text _attackDamage;
-    [SerializeField] private Text _attackRange;
-    [SerializeField] private Text _attackSpeed;
-    [SerializeField] private Text _buildingTime;
-    [SerializeField] private Text _goldCost;	
+    [SerializeField] private TextMeshProUGUI _attackDamage,
+                                             _attackRange,
+                                             _attackSpeed,
+                                             _buildingTime,
+                                             _goldCost;	
 
     [Inject] private GameUIService _gameInformationMenu;
     [Inject] private GameManager _gameManager;

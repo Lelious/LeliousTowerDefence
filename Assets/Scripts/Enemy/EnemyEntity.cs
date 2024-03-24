@@ -23,7 +23,7 @@ public class EnemyEntity : MonoBehaviour, ITouchable, IDamagable, IEffectable
     private GameManager _gameManager;
     private EnemyPool _enemyPool;
     private bool _isTouched;
-    [SerializeField] private List<IEffect> _effects = new List<IEffect>();
+    private ReactiveCollection<IEffect> _effects = new ReactiveCollection<IEffect>();
 
     GameObject ITouchable.gameObject { get => gameObject; }
 
@@ -42,7 +42,18 @@ public class EnemyEntity : MonoBehaviour, ITouchable, IDamagable, IEffectable
 
     public FloatReactiveProperty GetReactiveHealthProperty() => _enemyStats.Health;
     public IEffectable GetEffectable() => _effectable;
-    public IEffect GetEffect(EffectType type) => _effects.Find(x => x.GetEffectType() == type);
+    public IEffect GetEffect(EffectType type)
+    {
+        foreach (var eff in _effects)
+        {
+            if (eff.GetEffectType() == type)
+            {
+                return eff;
+            }
+        }
+        return null;
+    }
+
     public bool CanBeAttacked() => _enemyStats.Health.Value > 0 ? true : false;
     public EnemyHitPoint HitPoint() => _hitPoint;
     public Transform GetOrigin() => transform;
@@ -53,7 +64,7 @@ public class EnemyEntity : MonoBehaviour, ITouchable, IDamagable, IEffectable
     {
         _enemyStats = new EnemyStats();
         _enemyStats.InitializeStats(_enemyData);
-        _enemyStats.InitializeInfoContainer();
+        _enemyStats.InitializeInfoContainer(_effects);
         _containerInfo = _enemyStats.GetContainer();
         _enemyHealth.InitializeHealth(_enemyStats.MaxHealth, _enemyStats.Health);
         _enemyMovement.SetEnemyStats(_enemyStats);
@@ -78,7 +89,7 @@ public class EnemyEntity : MonoBehaviour, ITouchable, IDamagable, IEffectable
     {
         _isTouched = true;
         _gameInformationMenu.ShowGameMenu();
-        _bottomMenuInformator.SetEntityToPannelUpdate(_containerInfo);
+        _bottomMenuInformator.SetEntityToPannelUpdate(_containerInfo, TouchableType.Enemy);
         _selectedFrame.DisableFrame();
         _selection.SetActive(_isTouched);
     }
@@ -134,10 +145,7 @@ public class EnemyEntity : MonoBehaviour, ITouchable, IDamagable, IEffectable
         RecalculateStats();
     }
 
-    public List<IEffect> GetEffects()
-    {
-        return _effects;
-    }
+    public ReactiveCollection<IEffect> GetEffects() => _effects;
 
     public void TickAction()
     {

@@ -13,6 +13,6 @@ public abstract class StatData
     public Dictionary<StatType, FloatReactiveProperty> UpgradableStats = new();
 
     public abstract void UpgradeStat(StatType type, float value);
-    public abstract void InitializeInfoContainer();
+    public abstract void InitializeInfoContainer(ReactiveCollection<IEffect> currentEffects);
     public abstract GamePannelUdaterInfoContainer GetContainer();
 }

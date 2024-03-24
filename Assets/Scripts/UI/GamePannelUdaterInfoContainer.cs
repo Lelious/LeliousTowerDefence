@@ -11,6 +11,7 @@ public class GamePannelUdaterInfoContainer
     public float MinDamage { get; private set; }
     public float MaxDamage { get; private set; }
     public float AttackSpeed { get; private set; }
+    public ReactiveCollection<IEffect> CurrentEffects { get; private set; }
 
     public Dictionary<StatType, FloatReactiveProperty> UpgradableStats = new Dictionary<StatType, FloatReactiveProperty>();
     public List<TowerData> UpgradesList;
@@ -20,7 +21,8 @@ public class GamePannelUdaterInfoContainer
                                          float minDamage, 
                                          float maxDamage, 
                                          float attackSpeed,
-                                         Dictionary<StatType, FloatReactiveProperty> upgradableStats)
+                                         Dictionary<StatType, FloatReactiveProperty> upgradableStats,
+                                         ReactiveCollection<IEffect> effects)
     {
         PreviewImage = previewImage;
         Name = name;
@@ -29,5 +31,6 @@ public class GamePannelUdaterInfoContainer
         MaxDamage = maxDamage;
         AttackSpeed = attackSpeed;
         UpgradableStats = upgradableStats;
+        CurrentEffects = effects;
     }
 }

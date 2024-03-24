@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
+using UniRx;
 
 public class Tower : MonoBehaviour, IEffectable
 {
@@ -14,7 +15,7 @@ public class Tower : MonoBehaviour, IEffectable
 	[SerializeField] private TowerStats _stats;
 	[SerializeField] private ObjectInstanceFromNull _fireBuff, _waterBuff;
 
-	private List<IEffect> _effects = new();
+	private ReactiveCollection<IEffect> _effects = new();
 	private ParticleSystem _dustPatricles;
 	private BuildingCell _buildingCell;
 	private float _buildProgress = 0.01f;
@@ -112,21 +113,30 @@ public class Tower : MonoBehaviour, IEffectable
         }
 	}
 
-	public List<IEffect> GetTickableEffects() => _effects.FindAll(x => x.IsTickable());
 	public Transform GetOrigin() => transform;
-	public List<IEffect> GetEffects() => _effects;
-	public IEffect GetEffect(EffectType type) => _effects.Find(x => x.GetEffectType() == type);
+	public ReactiveCollection<IEffect> GetEffects() => _effects;
+	public IEffect GetEffect(EffectType type)
+	{
+		foreach (var eff in _effects)
+		{
+			if (eff.GetEffectType() == type)
+			{
+				return eff;
+			}
+		}
+		return null;
+	}
 
 	public void ApplyEffect(IEffect effect)
     {
         if (effect.GetEffectType() == EffectType.IncreaceAttackPower)
         {
-			_waterBuff.EnableEffect();
+			_waterBuff?.EnableEffect();
         }
 
         if (effect.GetEffectType() == EffectType.IncreaceAttackSpeed)
         {
-			_fireBuff.EnableEffect();
+			_fireBuff?.EnableEffect();
         }
 
 		_effects.Add(effect);
@@ -137,13 +147,13 @@ public class Tower : MonoBehaviour, IEffectable
     {
 		if (effect.GetEffectType() == EffectType.IncreaceAttackPower)
 		{
-			_waterBuff.DisableEffect();
+			_waterBuff?.DisableEffect();
 			_stats.UpgradeStat(StatType.BonusAttackPower, 0f);
 		}
 
 		if (effect.GetEffectType() == EffectType.IncreaceAttackSpeed)
 		{
-			_fireBuff.DisableEffect();
+			_fireBuff?.DisableEffect();
 			_stats.UpgradeStat(StatType.BonusAttackSpeed, 0f);
 		}
 

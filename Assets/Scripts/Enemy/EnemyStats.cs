@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UniRx;
 
 public class EnemyStats : StatData
@@ -23,7 +24,7 @@ public class EnemyStats : StatData
         InitializeUpgradableStats();      
     }
 
-    public override void InitializeInfoContainer()
+    public override void InitializeInfoContainer(ReactiveCollection<IEffect> currentEffects)
     {
         _container = new GamePannelUdaterInfoContainer
             (
@@ -33,7 +34,8 @@ public class EnemyStats : StatData
                 MinimalDamage,
                 MaximumDamage,
                 AttackSpeed,
-                UpgradableStats
+                UpgradableStats,
+                currentEffects
             );
     }
 

@@ -35,7 +35,7 @@ Shader "Lelious/HealthBarShader" {
             sampler2D _MainTex;
 
             UNITY_INSTANCING_BUFFER_START(Props)
-            UNITY_DEFINE_INSTANCED_PROP(half, _Fill)
+                UNITY_DEFINE_INSTANCED_PROP(half, _Fill)
             UNITY_INSTANCING_BUFFER_END(Props)
 
             v2f vert(appdata v) 
@@ -50,8 +50,9 @@ Shader "Lelious/HealthBarShader" {
 
             fixed4 frag(v2f i) : SV_Target 
             {
-                half healthbarMask = _Fill > i.uv.x;
-                half3 healthbarColor = tex2D(_MainTex, half2(_Fill, i.uv.y));
+                half fill = UNITY_ACCESS_INSTANCED_PROP(Props, _Fill);
+                half healthbarMask = fill > i.uv.x;
+                half3 healthbarColor = tex2D(_MainTex, half2(fill, i.uv.y));
                 return half4(healthbarColor * healthbarMask, 1);
             }
             ENDCG
