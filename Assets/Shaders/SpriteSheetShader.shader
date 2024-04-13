@@ -1,98 +1,87 @@
 Shader "Unlit/SpriteSheetShader"
 {
-	Properties
-	{
-		[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
-		SpriteSheetAnimationUV_Size_1("SpriteSheetAnimationUV_Size_1", Range(2, 16)) = 4
-		SpriteSheetAnimationUV_Frame_1("SpriteSheetAnimationUV_Frame_1", Range(1, 120)) = 32
-		_NewTex_1("NewTex_1(RGB)", 2D) = "white" { }
-		_SpriteFade("SpriteFade", Range(0, 1)) = 1.0
+    Properties
+    {
+        _MainTex ("Texture", 2D) = "white" {}
+        _Columns("Columns", Float) = 1
+        _Rows("Rows", Float) = 1
+        _FramesPerSecond("FramesPerSecond", Float) = 0
+    }
+    SubShader
+    {
+        Tags {"Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent"}
+        ZWrite Off
+        ZTest Off
+        Blend One OneMinusSrcAlpha
+        ColorMask RGB
+        LOD 100
 
-		// required for UI.Mask
-		[HideInInspector]_StencilComp("Stencil Comparison", Float) = 8
-		[HideInInspector]_Stencil("Stencil ID", Float) = 0
-		[HideInInspector]_StencilOp("Stencil Operation", Float) = 0
-		[HideInInspector]_StencilWriteMask("Stencil Write Mask", Float) = 255
-		[HideInInspector]_StencilReadMask("Stencil Read Mask", Float) = 255
-		[HideInInspector]_ColorMask("Color Mask", Float) = 15
+        Pass
+        {
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
 
-	}
+            #include "UnityCG.cginc"
 
-	SubShader
-	{
+            struct appdata
+            {
+                float4 vertex : POSITION;
+                float2 uv : TEXCOORD0;
+                float2 uv1 : TEXCOORD1;
+            };
 
-		Tags {"Queue" = "Transparent" "IgnoreProjector" = "true" "RenderType" = "Transparent" "PreviewType"="Plane" "CanUseSpriteAtlas"="True"}
-		ZWrite On Blend SrcAlpha OneMinusSrcAlpha Cull Off ZTest Always
+            struct v2f
+            {
+                float4 vertex : SV_POSITION;
+                float2 uv : TEXCOORD0;
+                float2 uv1 : TEXCOORD1;
+            };
 
-		// required for UI.Mask
-		Stencil
-		{
-			Ref [_Stencil]
-			Comp [_StencilComp]
-			Pass [_StencilOp]
-			ReadMask [_StencilReadMask]
-			WriteMask [_StencilWriteMask]
-		}
+            sampler2D _MainTex;
+            half _Columns;
+            half _Rows;
+            half _FramesPerSecond;
 
-		Pass
-		{
+            half4 SetUvs(half4 uv)
+            {
+                half2 size = half2(1.0h / _Columns, 1.0h / _Rows);
+                half totalFrames = _Columns * _Rows;
+                half2 index;
 
-			CGPROGRAM
-			#pragma vertex vert
-			#pragma fragment frag
-			#pragma fragmentoption ARB_precision_hint_fastest
-			#include "UnityCG.cginc"
+                index.x = _Time.y * _FramesPerSecond;
+                index.y = _Time.y * _FramesPerSecond + 1.0h;
 
-			struct appdata_t{
-				float4 vertex   : POSITION;
-				float4 color    : COLOR;
-				float2 texcoord : TEXCOORD0;
-			};
+                uint2 indexX = index.xy % _Columns;
+				half2 indexY = floor((index.xy % totalFrames) / _Columns);
+                half4 offset = half4(size.x * indexX.x, -size.y * indexY.x, size.x * indexX.y, -size.y * indexY.y);
+                half4 newUV; 
 
-			struct v2f
-			{
-				float2 texcoord  : TEXCOORD0;
-				float4 vertex   : SV_POSITION;
-				float4 color    : COLOR;
-			};
+                newUV.xy = uv.xy * size;
+                newUV.zw = uv.zw * size;
+				newUV.yw += size.y * (_Rows - 1);
 
-			sampler2D _MainTex;
-			float _SpriteFade;
-			float SpriteSheetAnimationUV_Size_1;
-			float SpriteSheetAnimationUV_Frame_1;
-			sampler2D _NewTex_1;
+				return newUV + offset;
+            }
 
+            v2f vert (appdata v)
+            {
+                v2f o;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                half4 uvs = SetUvs(half4(v.uv.x, v.uv.y, v.uv1.x, v.uv1.y));
+				o.uv = uvs.xy;
+				o.uv1 = uvs.zw;
+                return o;
+            }
+            
 
-			v2f vert(appdata_t IN)
-			{
-				v2f OUT;
-				OUT.vertex = UnityObjectToClipPos(IN.vertex);
-				OUT.texcoord = IN.texcoord;
-				OUT.color = IN.color;
-				return OUT;
-			}
-
-
-			float2 SpriteSheetAnimationUV(float2 uv, float size, float speed)
-			{
-				uv /= size;
-				uv.x += floor(fmod(_Time * speed, 1.0) * size) / size;
-				uv.y -= 1/size;
-				uv.y += (1 - floor(fmod(_Time * speed / size, 1.0) * size) / size);
-				return uv;
-			}
-			float4 frag (v2f i) : COLOR
-			{
-				float2 SpriteSheetAnimationUV_1 = SpriteSheetAnimationUV(i.texcoord,SpriteSheetAnimationUV_Size_1,SpriteSheetAnimationUV_Frame_1);
-				float4 NewTex_1 = tex2D(_NewTex_1,SpriteSheetAnimationUV_1);
-				float4 FinalResult = NewTex_1;
-				FinalResult.rgb *= i.color.rgb;
-				FinalResult.a = FinalResult.a * _SpriteFade * i.color.a;
-				return FinalResult;
-			}
-
-			ENDCG
-		}
-	}
-	Fallback "Sprites/Default"
+            fixed4 frag (v2f i) : SV_Target
+            {
+                fixed4 col = tex2D(_MainTex, i.uv);
+                fixed4 col1 = tex2D(_MainTex, i.uv1);
+                return lerp(col, col1, (_Time.y * _FramesPerSecond) % 1);
+            }
+            ENDCG
+        }
+    }
 }

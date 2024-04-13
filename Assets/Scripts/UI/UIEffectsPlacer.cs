@@ -6,7 +6,6 @@ public class UIEffectsPlacer : MonoBehaviour
 {
     [SerializeField] private List<UIEffect> _effectsList = new List<UIEffect>();
     [SerializeField] private RectTransform _rect;
-    [SerializeField] private float _positionTower, _positionEnemy;
 
     private System.IDisposable _disposableEntity;
     private ReactiveCollection<IEffect> _effects;
@@ -27,6 +26,7 @@ public class UIEffectsPlacer : MonoBehaviour
 
         for (int i = 0; i < _effects.Count; i++)
         {
+            _effectsList[i].gameObject.SetActive(true);
             _effectsList[i].SetEffect(_effects[i]);
         }
     }
@@ -36,6 +36,7 @@ public class UIEffectsPlacer : MonoBehaviour
         for (int i = 0; i < _effectsList.Count; i++)
         {
             _effectsList[i].ClearEffect();
+            _effectsList[i].gameObject.SetActive(false);
         }
     }
 }

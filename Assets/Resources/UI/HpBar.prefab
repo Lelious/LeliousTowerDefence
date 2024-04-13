@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4551220303607562085}
   - component: {fileID: 4551220303607562084}
-  - component: {fileID: 5467101184579986128}
   m_Layer: 0
   m_Name: HpBar
   m_TagString: Untagged
@@ -48,19 +47,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshRenderer: {fileID: 4551220304095836906}
   _quad: {fileID: 4551220304095836917}
---- !u!114 &5467101184579986128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4551220303607562087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe70b25370a21784f837514c8ed33c39, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _quad: {fileID: 4551220304095836917}
 --- !u!1 &4551220304095836917
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,7 +64,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4551220304095836905
 Transform:
   m_ObjectHideFlags: 0
