@@ -77,7 +77,7 @@ Shader "Unlit/SpriteSheetShader"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 col = tex2D(_MainTex, i.uv);
+                fixed4 col = tex2D(_MainTex, i.uv.xy);
                 fixed4 col1 = tex2D(_MainTex, i.uv1);
                 return lerp(col, col1, (_Time.y * _FramesPerSecond) % 1);
             }

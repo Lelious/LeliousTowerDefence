@@ -1,4 +1,4 @@
-Shader "Unlit/SpriteSheetShaderOnCamera"
+Shader "Lelious/SpriteSheetShaderOnCamera"
 {
     Properties
     {
