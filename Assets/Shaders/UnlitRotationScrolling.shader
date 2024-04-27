@@ -4,7 +4,9 @@ Shader "Lelious/UnlitRotationScrolling"
     {
         _MainTex ("Texture", 2D) = "white" {}
         _ShadeTex("ShadeTex", 2D) = "white" {}
-        _Color ("Color", Color) = (1,1,1,1)
+        [HDR]_Color ("Color", Color) = (1,1,1,1)
+        [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("SrcBlend", Float) = 1
+        [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend ("DstBlend", Float) = 0
         _RotationSpeed("RotationSpeed", float) = 1.0
         _uvScrollSpeed("UV_Scroll_Speed", Vector) = (0, 0, 0, 0)
     }
@@ -14,7 +16,7 @@ Shader "Lelious/UnlitRotationScrolling"
         ZWrite Off
         //ZTest Off
         Cull Off
-        Blend One OneMinusSrcAlpha
+        Blend [_SrcBlend] [_DstBlend]
         ColorMask RGB
         LOD 100
 
@@ -23,6 +25,8 @@ Shader "Lelious/UnlitRotationScrolling"
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_instancing
+            #pragma shader_feature _ALPHABLEND_ON
 
             #include "UnityCG.cginc"
 
@@ -31,6 +35,7 @@ Shader "Lelious/UnlitRotationScrolling"
                 half4 vertex : POSITION;
                 half2 uv : TEXCOORD0;
                 half2 uv1 : TEXCOORD1;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct v2f
@@ -38,6 +43,7 @@ Shader "Lelious/UnlitRotationScrolling"
                 half4 vertex : SV_POSITION;
                 half2 uv : TEXCOORD0;
                 half2 uv1 : TEXCOORD1;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             sampler2D _MainTex;
@@ -50,6 +56,8 @@ Shader "Lelious/UnlitRotationScrolling"
             v2f vert (appdata v)
             {
                 v2f o;
+                UNITY_SETUP_INSTANCE_ID(v);
+                UNITY_TRANSFER_INSTANCE_ID(v, o);
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv.xy = TRANSFORM_TEX(v.uv.xy, _MainTex);
                 o.uv1 = o.uv;
@@ -68,6 +76,7 @@ Shader "Lelious/UnlitRotationScrolling"
 
             fixed4 frag (v2f i) : SV_Target
             {
+                UNITY_SETUP_INSTANCE_ID(i);
                 half4 color = _Color;
                 half offset = i.uv.y - frac(_Time.y * _uvScrollSpeed.y * _MainTex_ST.y);
                 half4 col = tex2D(_MainTex, i.uv) * color;

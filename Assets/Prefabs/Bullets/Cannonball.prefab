@@ -45,12 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29adb062beabf9642aa480f502ef2f7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosionPrefab: {fileID: 8397522090878695327, guid: 8369998fb847f4f4dbf250a09c88f86e, type: 3}
+  _trail: {fileID: 5555874156049175724}
+  _renderer: {fileID: 579663152952583161}
   _mask:
     serializedVersion: 2
     m_Bits: 8
-  _renderer: {fileID: 579663152952583161}
-  _trail: {fileID: 5555874156049175724}
 --- !u!1 &1372363002580337196
 GameObject:
   m_ObjectHideFlags: 0
@@ -114,7 +113,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 409f8e1c22ee3114d8b64adca619f669, type: 2}
+  - {fileID: 2100000, guid: 8d08e06ea0ab8004892c990048a6d98a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

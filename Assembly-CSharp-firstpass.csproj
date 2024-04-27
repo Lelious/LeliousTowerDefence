@@ -315,8 +315,23 @@
     <Reference Include="Zenject.ReflectionBaking.Mono.Cecil.Pdb">
       <HintPath>Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Mdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
+    </Reference>
     <Reference Include="Zenject.ReflectionBaking.Mono.Cecil.Rocks">
       <HintPath>Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Pdb">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Cecil.Rocks">
+      <HintPath>Library\PackageCache\com.unity.burst@1.7.3\Unity.Burst.CodeGen\Unity.Burst.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
@@ -718,25 +733,117 @@
       <Project>{4A8DC5F9-C7B7-2AD9-0E44-DC35E553A8BB}</Project>
       <Name>Unity.VSCode.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Universal.Shaders.csproj">
+      <Project>{04736515-DE87-2F33-0161-0B31D9FC80AB}</Project>
+      <Name>Unity.RenderPipelines.Universal.Shaders</Name>
+    </ProjectReference>
     <ProjectReference Include="LeanTouch.csproj">
       <Project>{68BF9F29-9328-2926-E744-1A1BC0E3512D}</Project>
       <Name>LeanTouch</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Recorder.Base.csproj">
-      <Project>{8037DDAD-9B82-338B-67C7-6BC26E1BC30C}</Project>
-      <Name>Unity.Recorder.Base</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
       <Project>{E991E8A2-3DE3-0AB8-1575-EB5A9288736D}</Project>
       <Name>Unity.TextMeshPro.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.VisualStudio.Editor.csproj">
-      <Project>{853BFB0F-FC1A-21D3-58BF-D3904F61416B}</Project>
-      <Name>Unity.VisualStudio.Editor</Name>
+    <ProjectReference Include="Unity.AdaptivePerformance.Samsung.Android.Editor.csproj">
+      <Project>{6C835B6D-7848-7B2E-8E6F-2D01F8254F2C}</Project>
+      <Name>Unity.AdaptivePerformance.Samsung.Android.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Searcher.Editor.csproj">
+      <Project>{9D05ACE1-4D38-CF6D-63EA-6BF448470A86}</Project>
+      <Name>Unity.Searcher.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.ProBuilder.csproj">
+      <Project>{83645F20-03D8-20F8-831C-06481C4C0726}</Project>
+      <Name>Unity.ProBuilder</Name>
+    </ProjectReference>
+    <ProjectReference Include="Zenject-Editor.csproj">
+      <Project>{2C0871B8-FC73-5EB1-AE1B-6DD2C284673F}</Project>
+      <Name>Zenject-Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{A4B15D7C-4954-CEE1-08C3-DFECC595E07D}</Project>
+      <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Rider.Editor.csproj">
+      <Project>{2D7FB0FB-DA7A-C045-176A-A2064C087469}</Project>
+      <Name>Unity.Rider.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Core.ShaderLibrary.csproj">
+      <Project>{5800D2F7-36C7-5E39-D311-7229F8B6721D}</Project>
+      <Name>Unity.RenderPipelines.Core.ShaderLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{42B09061-6548-55E5-5BFB-876D084C9ADA}</Project>
+      <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.ShaderGraph.Editor.csproj">
+      <Project>{0D7B09F6-2FAA-4C08-DB8E-B7556D01DFF2}</Project>
+      <Name>Unity.ShaderGraph.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Cinemachine.csproj">
+      <Project>{9C936E99-AFD2-1F2E-585A-7ED6D1E73824}</Project>
+      <Name>Cinemachine</Name>
+    </ProjectReference>
+    <ProjectReference Include="com.unity.cinemachine.editor.csproj">
+      <Project>{C4249920-0BCA-C37D-B83B-8C5B467ECA34}</Project>
+      <Name>com.unity.cinemachine.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.AdaptivePerformance.Editor.csproj">
+      <Project>{5BC89B93-B6E8-06A2-416B-57E9E19CB13F}</Project>
+      <Name>Unity.AdaptivePerformance.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Zenject-ReflectionBaking-Editor.csproj">
+      <Project>{6871F2D0-8E22-4E03-8FD7-AB832D42BAB2}</Project>
+      <Name>Zenject-ReflectionBaking-Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Zenject.csproj">
+      <Project>{61F74874-8BB2-E40B-89BD-86DCC828FEB1}</Project>
+      <Name>Zenject</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshComponentsEditor.csproj">
+      <Project>{288EB681-F7A1-4C53-972A-13EE5B1A216A}</Project>
+      <Name>NavMeshComponentsEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.csproj">
+      <Project>{E67F3DD4-985B-E5E4-8F8C-F8CF0D92BAB3}</Project>
+      <Name>Unity.RenderPipeline.Universal.ShaderLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Mathematics.Editor.csproj">
+      <Project>{A6EAE574-17D0-05A3-2CA1-CDE604C33100}</Project>
+      <Name>Unity.Mathematics.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="LeanCommon.csproj">
+      <Project>{2FA46F99-C6D8-C330-21B0-27EA326F3619}</Project>
+      <Name>LeanCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.AdaptivePerformance.csproj">
+      <Project>{AA7C556F-9B5C-CE6B-5FF6-219C15825A9D}</Project>
+      <Name>Unity.AdaptivePerformance</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.csproj">
+      <Project>{FD3D0DC2-4425-25A2-08CC-81A53474137F}</Project>
+      <Name>Unity.Recorder</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Recorder.Base.csproj">
+      <Project>{8037DDAD-9B82-338B-67C7-6BC26E1BC30C}</Project>
+      <Name>Unity.Recorder.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Universal.Runtime.csproj">
+      <Project>{926D249E-232F-6644-9328-A5BBED25CC91}</Project>
+      <Name>Unity.RenderPipelines.Universal.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="PPv2URPConverters.csproj">
+      <Project>{5A07ECE4-169B-D6A7-38B9-239D45E0AB07}</Project>
+      <Name>PPv2URPConverters</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.ProBuilder.AddOns.Editor.csproj">
       <Project>{9738E995-1087-F9D7-B806-C13CD5329422}</Project>
       <Name>Unity.ProBuilder.AddOns.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.VisualStudio.Editor.csproj">
+      <Project>{853BFB0F-FC1A-21D3-58BF-D3904F61416B}</Project>
+      <Name>Unity.VisualStudio.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Profiling.Core.csproj">
       <Project>{518E0CF5-2017-AD06-4BC6-FC36EDCEDB1C}</Project>
@@ -758,113 +865,85 @@
       <Project>{A1B4F464-02A2-5DFE-86AC-22889E6FAA85}</Project>
       <Name>Unity.AdaptivePerformance.Simulator.Extension</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.AdaptivePerformance.Samsung.Android.Editor.csproj">
-      <Project>{6C835B6D-7848-7B2E-8E6F-2D01F8254F2C}</Project>
-      <Name>Unity.AdaptivePerformance.Samsung.Android.Editor</Name>
+    <ProjectReference Include="Unity.Burst.Editor.csproj">
+      <Project>{07D7980C-EE69-68A8-B8EF-25D8671BBD38}</Project>
+      <Name>Unity.Burst.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.2D.Sprite.Editor.csproj">
       <Project>{AD1E5339-C7DD-9EB3-62BE-885AE9021549}</Project>
       <Name>Unity.2D.Sprite.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.csproj">
-      <Project>{83645F20-03D8-20F8-831C-06481C4C0726}</Project>
-      <Name>Unity.ProBuilder</Name>
+    <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.csproj">
+      <Project>{3D606BAB-BB9C-01A1-B105-2DA18BEC28F1}</Project>
+      <Name>Unity.RenderPipelines.Core.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Subsystem.Registration.csproj">
       <Project>{4298E108-715D-898B-2BF7-DDF0A10A1DEC}</Project>
       <Name>Unity.Subsystem.Registration</Name>
     </ProjectReference>
-    <ProjectReference Include="Zenject-Editor.csproj">
-      <Project>{2C0871B8-FC73-5EB1-AE1B-6DD2C284673F}</Project>
-      <Name>Zenject-Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.ProBuilder.Editor.csproj">
       <Project>{1D75484E-C05C-2286-361E-FA86742F461F}</Project>
       <Name>Unity.ProBuilder.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{A4B15D7C-4954-CEE1-08C3-DFECC595E07D}</Project>
-      <Name>UnityEditor.UI</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Postprocessing.Editor.csproj">
       <Project>{3E8366DA-2FD8-27C1-C7D9-9872E76E254D}</Project>
       <Name>Unity.Postprocessing.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Rider.Editor.csproj">
-      <Project>{2D7FB0FB-DA7A-C045-176A-A2064C087469}</Project>
-      <Name>Unity.Rider.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{42B09061-6548-55E5-5BFB-876D084C9ADA}</Project>
-      <Name>UnityEngine.UI</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.PlasticSCM.Editor.csproj">
       <Project>{0D9BFE29-906D-FA67-1052-543CF0B97507}</Project>
       <Name>Unity.PlasticSCM.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.AdaptivePerformance.UI.Editor.csproj">
-      <Project>{93C83D97-8B24-03C8-3C23-21F61757FE19}</Project>
-      <Name>Unity.AdaptivePerformance.UI.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Zenject-PoolMonitor-Editor.csproj">
       <Project>{D0AF9C81-E0FA-4FCA-5A8D-3F76758182BF}</Project>
       <Name>Zenject-PoolMonitor-Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.AdaptivePerformance.UI.Editor.csproj">
+      <Project>{93C83D97-8B24-03C8-3C23-21F61757FE19}</Project>
+      <Name>Unity.AdaptivePerformance.UI.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Mathematics.csproj">
+      <Project>{ECE166AA-C56C-814C-960B-5618F5046FD5}</Project>
+      <Name>Unity.Mathematics</Name>
+    </ProjectReference>
     <ProjectReference Include="UniRx.csproj">
       <Project>{71C4E152-1959-E320-CB59-92F5646A6C74}</Project>
       <Name>UniRx</Name>
-    </ProjectReference>
-    <ProjectReference Include="Cinemachine.csproj">
-      <Project>{9C936E99-AFD2-1F2E-585A-7ED6D1E73824}</Project>
-      <Name>Cinemachine</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.AdaptivePerformance.Simulator.Editor.csproj">
       <Project>{F1A03CAE-5968-D119-B821-F29B64605FF4}</Project>
       <Name>Unity.AdaptivePerformance.Simulator.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="com.unity.cinemachine.editor.csproj">
-      <Project>{C4249920-0BCA-C37D-B83B-8C5B467ECA34}</Project>
-      <Name>com.unity.cinemachine.editor</Name>
+    <ProjectReference Include="Unity.Burst.csproj">
+      <Project>{22BF85B6-8C18-BF0A-C818-D3B577E6A43F}</Project>
+      <Name>Unity.Burst</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Postprocessing.Runtime.csproj">
       <Project>{D135B5B6-0AD6-EFD5-A4D5-3EC3ADB18648}</Project>
       <Name>Unity.Postprocessing.Runtime</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.AdaptivePerformance.Editor.csproj">
-      <Project>{5BC89B93-B6E8-06A2-416B-57E9E19CB13F}</Project>
-      <Name>Unity.AdaptivePerformance.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Zenject-ReflectionBaking-Editor.csproj">
-      <Project>{6871F2D0-8E22-4E03-8FD7-AB832D42BAB2}</Project>
-      <Name>Zenject-ReflectionBaking-Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Zenject.csproj">
-      <Project>{61F74874-8BB2-E40B-89BD-86DCC828FEB1}</Project>
-      <Name>Zenject</Name>
+    <ProjectReference Include="Unity.RenderPipelines.Universal.Editor.csproj">
+      <Project>{0E5E06EA-6615-15AB-C372-13F07E332DBD}</Project>
+      <Name>Unity.RenderPipelines.Universal.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.ProBuilder.AssetIdRemapUtility.csproj">
       <Project>{63AC6561-F5B5-E0DE-9157-696615DBE8C2}</Project>
       <Name>Unity.ProBuilder.AssetIdRemapUtility</Name>
     </ProjectReference>
-    <ProjectReference Include="NavMeshComponentsEditor.csproj">
-      <Project>{288EB681-F7A1-4C53-972A-13EE5B1A216A}</Project>
-      <Name>NavMeshComponentsEditor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.Editor.csproj">
       <Project>{0A0C4FF6-6B78-BCD4-F4A9-90FA1432B1DA}</Project>
       <Name>Unity.Timeline.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="LeanCommon.csproj">
-      <Project>{2FA46F99-C6D8-C330-21B0-27EA326F3619}</Project>
-      <Name>LeanCommon</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.AdaptivePerformance.csproj">
-      <Project>{AA7C556F-9B5C-CE6B-5FF6-219C15825A9D}</Project>
-      <Name>Unity.AdaptivePerformance</Name>
+    <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.csproj">
+      <Project>{851898FB-FC91-A8D0-8B4E-D8300465E255}</Project>
+      <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.AdaptivePerformance.Profiler.Editor.csproj">
       <Project>{64FE1118-516D-1D46-31E9-12AAEC0C1CE6}</Project>
       <Name>Unity.AdaptivePerformance.Profiler.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Core.Editor.csproj">
+      <Project>{C01BC68D-260B-F47B-688E-E229BE20F583}</Project>
+      <Name>Unity.RenderPipelines.Core.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.AdaptivePerformance.Simulator.VRR.Extension.csproj">
       <Project>{4D1489B5-34F8-0587-A7FA-8B2CF5A5B837}</Project>
@@ -873,10 +952,6 @@
     <ProjectReference Include="Unity.AdaptivePerformance.Samsung.Android.csproj">
       <Project>{B82B7F3A-1811-AA5D-D92B-1A7A61430D93}</Project>
       <Name>Unity.AdaptivePerformance.Samsung.Android</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Recorder.csproj">
-      <Project>{FD3D0DC2-4425-25A2-08CC-81A53474137F}</Project>
-      <Name>Unity.Recorder</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

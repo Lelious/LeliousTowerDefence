@@ -11,7 +11,9 @@ public class HealthBar : MonoBehaviour
     private bool _canBeAttacked = true;
 
     private void Awake()
-    {       
+    {
+        _matBlock = new MaterialPropertyBlock();
+
         UpdateShaderParams();
     }
 
@@ -39,11 +41,6 @@ public class HealthBar : MonoBehaviour
 
     private void UpdateShaderParams()
     {
-        if (_matBlock == null)
-        {
-            _matBlock = new MaterialPropertyBlock();
-        }
-
         _meshRenderer.GetPropertyBlock(_matBlock);
         _matBlock.SetFloat("_Fill", _currentHealth / _maxHealth);
         _meshRenderer.SetPropertyBlock(_matBlock);
