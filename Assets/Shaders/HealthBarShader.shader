@@ -1,14 +1,17 @@
 Shader "Lelious/HealthBarShader" {
-    Properties{
+    Properties
+    {
         _MainTex("MainTex", 2D) = "white" {}
         _Fill("Fill", float) = 0
         _ScaleX ("Scale X", Float) = 1.0
         _ScaleY ("Scale Y", Float) = 1.0
     }
-        SubShader{
+        SubShader
+        {
             Tags { "Queue" = "Overlay" }
             LOD 100
-            Pass {
+            Pass 
+            {
 
             ZTest Off
 
@@ -49,9 +52,9 @@ Shader "Lelious/HealthBarShader" {
                 o.vertex = UnityObjectToClipPos(v.vertex);
 
                 o.vertex = mul(UNITY_MATRIX_P, 
-                           mul(UNITY_MATRIX_MV, float4(0.0, 0.0, 0.0, 1.0))
-                         + float4(v.vertex.x, v.vertex.y, 0.0, 0.0)
-                         * float4(_ScaleX, _ScaleY, 1.0, 1.0));
+                           mul(UNITY_MATRIX_MV, half4(0.0, 0.0, 0.0, 1.0))
+                         + half4(v.vertex.x, v.vertex.y, 0.0, 0.0)
+                         * half4(_ScaleX, _ScaleY, 1.0, 1.0));
                 o.uv = v.uv;
 
                 return o;

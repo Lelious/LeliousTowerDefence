@@ -17,7 +17,7 @@ Shader "Lelious/TransparentTilingShader"
                     ZWrite [_ZWrite]
                     Blend [_SrcBlend] [_DstBlend]
         LOD 100
-        Cull off
+        Cull Off
         Pass
         {
             CGPROGRAM
