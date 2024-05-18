@@ -8,8 +8,7 @@ public sealed class EnemyFactory : IInitializable, IEnemyFactory
     private EnemyPool _enemyPool;
     private Object _enemyPrefab;
     private EndPoint _endPoint;
-
-    private int _counter = 1;
+    private int _counter = 0;
 
     [Inject]
     readonly DiContainer _container = null;
@@ -40,6 +39,16 @@ public sealed class EnemyFactory : IInitializable, IEnemyFactory
     }
 
     public EnemyEntity GetEnemy() => _enemyPool.GetEnemyFromPool();
-    public void IncreaceCounter() => _counter++;
-    public void Initialize() => _enemyPrefab = _enemyLoadService.LoadNextEnemyPrefab(_counter);
+    public void IncreaceWaveCounter()
+    {
+        _counter++;
+        _enemyPrefab = InitializeNextEnemy();
+    }
+
+    public void Initialize() { }
+
+    private Object InitializeNextEnemy()
+    {
+        return _enemyLoadService.LoadNextEnemyPrefab(_counter);
+    }
 }

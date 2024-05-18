@@ -13,6 +13,8 @@ public class TowerAbility
     public EffectData Data;
     public int AttacksToTrigger;
     public float MaxDistance;
+    public Bullet BuffBullet;
+    public BulletType BuffBulletType;
 }
 public enum AppliedTarget
 {

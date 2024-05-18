@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14aed6a526ad91249a07d8531aaccec6, type: 3}
+  m_Name: Wave_2_Ogres
+  m_EditorClassIdentifier: 
+  MainImage: {fileID: 21300000, guid: dd8c88222c88bec429aa5c2afea8d6be, type: 3}
+  Name: Ogre
+  MaxHP: 50
+  MinimalDamage: -1
+  MaximumDamage: -1
+  EnemyPrefab: {fileID: 7183461482400492353, guid: af74e4f641db7384689c2bcd897fabdf, type: 3}
+  Worth: 2
+  Speed: 0.7
+  Armor: 0

@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\Enemy\EnemyData\EnemyData.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameState.cs" />
     <Compile Include="Assets\Scripts\Tower\Bullets\ArrowBullet.cs" />
+    <Compile Include="Assets\Scripts\BuffDebuff\BuffProjectile.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IEnemyFactory.cs" />
     <Compile Include="Assets\Scripts\Tower\TowerRangeRotation.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemySpawnService.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Assets\Scripts\Tower\Bullets\FireBullet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\Scripts\UI\BottomMenuIconsContainer.cs" />
+    <Compile Include="Assets\Scripts\Tower\Bullets\BuffBullet.cs" />
     <Compile Include="Assets\Scripts\Tower\VisualEffects\IPoollableEffect.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Services\InputService.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameWinState.cs" />
@@ -223,6 +225,7 @@
     <None Include="Assets\Shaders\SpriteSheetShaderOnCamera.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\Shaders\TestURP_SRP_UnlitShader.shader" />
     <None Include="Assets\Lean\READ ME.txt" />
     <None Include="Assets\Shaders\FlagShader.shader" />
     <None Include="Assets\Shaders\UnlitRotatorToCamera.shader" />

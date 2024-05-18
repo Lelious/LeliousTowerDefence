@@ -3,8 +3,7 @@ Shader "Lelious/UnlitTransparentCameraSpace"
    Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _ScaleX ("Scale X", Float) = 1.0
-        _ScaleY ("Scale Y", Float) = 1.0
+        _Scale ("_Scale", Vector) = (1,1,0,0)
         [HDR] _Color("Color", Color) = (1,1,1)
         [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("SrcBlend", Float) = 1
         [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend ("DstBlend", Float) = 0
@@ -35,7 +34,6 @@ Shader "Lelious/UnlitTransparentCameraSpace"
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
-                float2 uv1 : TEXCOORD1;
                 UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
@@ -43,25 +41,28 @@ Shader "Lelious/UnlitTransparentCameraSpace"
             {
                 float4 vertex : SV_POSITION;
                 float2 uv : TEXCOORD0;
-                float2 uv1 : TEXCOORD1;
+                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             sampler2D _MainTex;
             half4 _Color;
-            half _ScaleX;
-            half _ScaleY;
+
+            UNITY_INSTANCING_BUFFER_START(Props)
+                UNITY_DEFINE_INSTANCED_PROP(half4, _Scale)
+            UNITY_INSTANCING_BUFFER_END(Props)
 
             v2f vert (appdata v)
             {
                 v2f o;
-                UNITY_SETUP_INSTANCE_ID(v);
+                 UNITY_SETUP_INSTANCE_ID(v);
+                UNITY_TRANSFER_INSTANCE_ID(v, o);
                 o.vertex = UnityObjectToClipPos(v.vertex);
 
                 o.vertex = mul(UNITY_MATRIX_P, 
-                           mul(UNITY_MATRIX_MV, float4(0.0, 0.0, 0.0, 1.0))
-                         + float4(v.vertex.x, v.vertex.y, 0.0, 0.0)
-                         * float4(_ScaleX + sin(_Time.y * 3), _ScaleY + sin(_Time.y * 3), 1.0, 1.0));
-                //
+                           mul(UNITY_MATRIX_MV, half4(0.0h, 0.0h, 0.0h, 1.0h))
+                         + half4(v.vertex.x, v.vertex.y, 0.0h, 0.0h)
+                         * half4(UNITY_ACCESS_INSTANCED_PROP(Props, _Scale.x), UNITY_ACCESS_INSTANCED_PROP(Props, _Scale.y), 1.0h, 1.0h));
+                
 				o.uv = v.uv;
                 return o;
             }
@@ -69,6 +70,7 @@ Shader "Lelious/UnlitTransparentCameraSpace"
 
             fixed4 frag (v2f i) : SV_Target
             {
+                UNITY_SETUP_INSTANCE_ID(i);
                 fixed4 col = tex2D(_MainTex, i.uv) * _Color;
                 return col;
             }

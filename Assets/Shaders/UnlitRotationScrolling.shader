@@ -4,7 +4,7 @@ Shader "Lelious/UnlitRotationScrolling"
     {
         _MainTex ("Texture", 2D) = "white" {}
         _ShadeTex("ShadeTex", 2D) = "white" {}
-        [HDR]_Color ("Color", Color) = (1,1,1,1)
+        [HDR] _Color("Color", Color) = (1,1,1,1)
         [Enum(UnityEngine.Rendering.BlendMode)] _SrcBlend ("SrcBlend", Float) = 1
         [Enum(UnityEngine.Rendering.BlendMode)] _DstBlend ("DstBlend", Float) = 0
         _RotationSpeed("RotationSpeed", float) = 1.0
@@ -25,7 +25,7 @@ Shader "Lelious/UnlitRotationScrolling"
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #pragma multi_compile_instancing
+            #pragma multi_compile_instancing           
             #pragma shader_feature _ALPHABLEND_ON
 
             #include "UnityCG.cginc"
@@ -49,7 +49,9 @@ Shader "Lelious/UnlitRotationScrolling"
             sampler2D _MainTex;
             sampler2D _ShadeTex;
             half4 _MainTex_ST;
-            half4 _Color;
+            UNITY_INSTANCING_BUFFER_START(Props)
+                UNITY_DEFINE_INSTANCED_PROP(half4, _Color)
+            UNITY_INSTANCING_BUFFER_END(Props)
             half2 _uvScrollSpeed;
             half _RotationSpeed;
 
@@ -77,9 +79,9 @@ Shader "Lelious/UnlitRotationScrolling"
             fixed4 frag (v2f i) : SV_Target
             {
                 UNITY_SETUP_INSTANCE_ID(i);
-                half4 color = _Color;
                 half offset = i.uv.y - frac(_Time.y * _uvScrollSpeed.y * _MainTex_ST.y);
-                half4 col = tex2D(_MainTex, i.uv) * color;
+                half4 col = tex2D(_MainTex, i.uv) * UNITY_ACCESS_INSTANCED_PROP(Props, _Color);
+                col.a = i.vertex.z;
                 half4 col1 = tex2D(_ShadeTex, i.uv1);
                 return col * col1;
             }

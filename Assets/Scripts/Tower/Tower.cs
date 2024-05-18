@@ -12,15 +12,15 @@ public class Tower : MonoBehaviour, IEffectable
 	[SerializeField] private Transform _towerObject;
 	[SerializeField] private float _endOffsetY = -0.6f;
 	[SerializeField] private List<GameObject> _upgradablesList = new();	
-	[SerializeField] private TowerStats _stats;
-	[SerializeField] private ObjectInstanceFromNull _fireBuff, _waterBuff;
 
+	private TowerStats _stats;
 	private ReactiveCollection<IEffect> _effects = new();
 	private ParticleSystem _dustPatricles;
 	private BuildingCell _buildingCell;
 	private float _buildProgress = 0.01f;
 	private float _startOffsetY;
 	private int _currentUpgrade = 0;
+	private bool _onBuffProcessState;
 
     private void Awake() => _startOffsetY = _towerObject.position.y;	
 
@@ -129,16 +129,6 @@ public class Tower : MonoBehaviour, IEffectable
 
 	public void ApplyEffect(IEffect effect)
     {
-        if (effect.GetEffectType() == EffectType.IncreaceAttackPower)
-        {
-			_waterBuff?.EnableEffect();
-        }
-
-        if (effect.GetEffectType() == EffectType.IncreaceAttackSpeed)
-        {
-			_fireBuff?.EnableEffect();
-        }
-
 		_effects.Add(effect);
 		RecalculateStats();
 	}
@@ -147,23 +137,16 @@ public class Tower : MonoBehaviour, IEffectable
     {
 		if (effect.GetEffectType() == EffectType.IncreaceAttackPower)
 		{
-			_waterBuff?.DisableEffect();
 			_stats.UpgradeStat(StatType.BonusAttackPower, 0f);
 		}
 
 		if (effect.GetEffectType() == EffectType.IncreaceAttackSpeed)
 		{
-			_fireBuff?.DisableEffect();
 			_stats.UpgradeStat(StatType.BonusAttackSpeed, 0f);
 		}
 
 		_effects.Remove(effect);
 	}
-
-	public void TickAction()
-    {
-		Debug.Log("Tick");
-    }
 
     public void RefreshEffectValues()
     {
@@ -171,4 +154,8 @@ public class Tower : MonoBehaviour, IEffectable
 	}
 
 	public void RemoveAllEffects() => _effects.Clear();
+
+	public void SetOnBuffProcessState(bool state) => _onBuffProcessState = state;
+
+	public bool GetProcessStatus() => _onBuffProcessState;
 }

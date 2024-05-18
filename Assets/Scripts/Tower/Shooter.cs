@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using Zenject;
-using System.Linq;
 
 public class Shooter : MonoBehaviour, IShoot
 {
@@ -11,20 +10,29 @@ public class Shooter : MonoBehaviour, IShoot
     [SerializeField, Range(1, 100)] private int _poolSize;
     [SerializeField] private Transform _shootingPoint;
     [SerializeField] private Transform _cannonToRotate;
+    [SerializeField] private TowerStats _towerStats;
+
     [Inject] private PoolService _poolService;
     [Inject] private EnemyPool _enemyPool;
     [Inject] private BuffService _buffService;
     [Inject] private TowerFactory _towerFactory;
-    [SerializeField] private TowerStats _towerStats;
 
     private TowerAbility _buffAbility;
-    private int _aimCounter;
     private bool _isPoolCreated;
+    private int _aimCounter;
 
     public void SetTowerData(TowerStats stats)
     {
         _towerStats = stats;
-        _buffAbility = _towerStats.Abilities.Find(x => x.AppliedTarget == AppliedTarget.Tower);
+
+        for (int i = 0; i < _towerStats.Abilities.Count; i++)
+        {
+            if (_towerStats.Abilities[i].AppliedTarget == AppliedTarget.Tower)
+            {
+                _buffAbility = _towerStats.Abilities[i];               
+                break;
+            }
+        }
     }
 
     public void ClearAmmo() => _poolService.RemoveBulletsFromPool(_towerStats.BulletType, _poolSize);  
@@ -79,7 +87,7 @@ public class Shooter : MonoBehaviour, IShoot
                     }
                 }
             }
-                return true;          
+            return true;          
         }
         return false;       
     }
@@ -95,7 +103,8 @@ public class Shooter : MonoBehaviour, IShoot
             bullet.SetBulletPool(_poolService, false);
         }
 
-        bullet.SetBulletParameters(_towerStats, _enemyPool, _buffService, _shootingPoint.position, this, _buffAbility == null ? false : true);
+        bullet.SetBulletParameters(_towerStats, _enemyPool, _shootingPoint.position, this, _buffAbility == null ? false : true);
+        bullet.SetBuffService(_buffService);
         bullet.SetTarget(damagable);
         bullet.SetActive();
     }       
@@ -109,6 +118,14 @@ public class Shooter : MonoBehaviour, IShoot
             _aimCounter = 0;
             var towers = _towerFactory.GetEffectableTower(transform.position, _buffAbility.MaxDistance);
 
+            for (int i = 0; i < towers.Count; i++)
+            {
+                if (towers[i].GetProcessStatus())
+                {
+                    towers.Remove(towers[i]);
+                }
+            }
+
             if (towers.Count > 0)
             {
                 List<IEffectable> priorityList = new();
@@ -117,7 +134,7 @@ public class Shooter : MonoBehaviour, IShoot
                 {
                     if (towers[i].GetEffect(_buffAbility.Data.EffectType) == null)
                     {
-                        _buffService.ApplyEffect(towers[i], new Buff(towers[i], _buffAbility.Data));
+                        ApplyBuffToTower(towers[i]);
                         return;
                     }
                     else
@@ -126,12 +143,45 @@ public class Shooter : MonoBehaviour, IShoot
                     }
                 }
 
-                priorityList.OrderBy(x => x.GetEffect(_buffAbility.Data.EffectType).GetDuration());
-                _buffService.ApplyEffect(priorityList[0], new Buff(priorityList[0], _buffAbility.Data));
+                IEffectable effectable = towers[0];
 
-                return;
+                for (int i = 1; i < priorityList.Count; i++)
+                {
+                    if(priorityList[i].GetEffect(_buffAbility.Data.EffectType).GetDuration() < towers[0].GetEffect(_buffAbility.Data.EffectType).GetDuration())
+                    {
+                        effectable = priorityList[i];
+                    }
+                }
+
+                ApplyBuffToTower(effectable);
             }
         }
+    }
+
+    private void ApplyBuffToTower(IEffectable effectable)
+    {
+        ShootBuff(effectable);
+    }
+
+    private void ShootBuff(IEffectable effectable)
+    {
+        effectable.SetOnBuffProcessState(true);
+
+        var bullet = _poolService.GetBulletFromPool(_buffAbility.BuffBulletType);
+
+        if (bullet == null)
+        {
+            bullet = CreateBuffBullet();
+            bullet.SetBulletType(_buffAbility.BuffBulletType);
+            bullet.SetBulletPool(_poolService, false);
+        }
+
+        bullet.SetBuffService(_buffService);
+        bullet.SetEndPoint(effectable.GetOrigin().position);
+        bullet.ResetPath(_shootingPoint.position);
+        bullet.SetEffectable(effectable);
+        bullet.SetEffectData(_buffAbility.Data);
+        bullet.SetActive();
     }
 
     private IEnumerator ShootingRoutine()
@@ -151,6 +201,7 @@ public class Shooter : MonoBehaviour, IShoot
     }
 
     private Bullet CreateBullet() => Instantiate(_towerStats.BulletPrefab);
+    private Bullet CreateBuffBullet() => Instantiate(_buffAbility.BuffBullet);
 
     private protected void OnEnable()
     {
@@ -166,6 +217,16 @@ public class Shooter : MonoBehaviour, IShoot
                 bullet.SetBulletType(_towerStats.BulletType);
                 bullet.SetBulletPool(_poolService);
                 _poolService.AddBulletToPool(bullet.GetBulletType(), bullet);
+            }
+            if (_buffAbility != null)
+            {
+                for (int i = 0; i < _poolSize; i++)
+                {
+                    var buffBullet = CreateBuffBullet();
+                    buffBullet.SetBulletPool(_poolService);
+                    buffBullet.SetBulletType(_buffAbility.BuffBulletType);
+                    _poolService.AddBulletToPool(buffBullet.GetBulletType(), buffBullet);
+                }
             }
             _isPoolCreated = !_isPoolCreated;
         }

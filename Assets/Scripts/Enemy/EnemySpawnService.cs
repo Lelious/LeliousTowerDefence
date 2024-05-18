@@ -19,7 +19,6 @@ public class EnemySpawnService : MonoBehaviour
 	private protected void Awake()
 	{
 		InitializeEnemyPool();
-		//StartCoroutine(ShootingRoutine());
 	}
 
 	public int GetWaveCount()

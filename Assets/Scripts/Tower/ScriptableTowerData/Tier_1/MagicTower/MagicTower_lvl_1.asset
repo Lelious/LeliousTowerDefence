@@ -48,3 +48,5 @@ MonoBehaviour:
     Data: {fileID: 11400000, guid: 8be4f70467a0b3841936ad3ba5dc231e, type: 2}
     AttacksToTrigger: 5
     MaxDistance: 500
+    BuffBullet: {fileID: 6404356592612799845, guid: 134ce88af313f7e47b76a9caa22d6651, type: 3}
+    BuffBulletType: 11

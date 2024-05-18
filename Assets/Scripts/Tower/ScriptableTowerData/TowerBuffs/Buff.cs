@@ -9,9 +9,9 @@ public class Buff : Effect
     public Buff(IEffectable effectable, EffectData data)
     {
         _effectName = data.EffectName;
-        _effectable = effectable;
         _type = data.EffectType;
         _image = data.EffectImage;
+        _effectable = effectable;
         CurrentDuration.Value = data.EffectDuration;
         _percentage = data.PercentageValue;
         CurrentDuration.Value = CurrentDuration.Value;

@@ -1,6 +1,5 @@
-using System.Collections.Generic;
-using UniRx;
 using UnityEngine;
+using UniRx;
 
 public interface IEffectable 
 {
@@ -11,5 +10,7 @@ public interface IEffectable
     public ReactiveCollection<IEffect> GetEffects();
     public IEffect GetEffect(EffectType type);
     public Transform GetOrigin();
-    public void TickAction();
+    public virtual void SetOnBuffProcessState(bool state) { }
+    public bool GetProcessStatus();
+    public virtual void TickAction() { }
 }

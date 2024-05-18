@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GlowSphere
-  m_Shader: {fileID: 4800000, guid: c7e064cdc469e594cb227e5da27871f6, type: 3}
+  m_Shader: {fileID: 4800000, guid: b52ec4353b4ed144a821915644bc29a6, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _EMISSION

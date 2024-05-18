@@ -159,4 +159,6 @@ public class EnemyEntity : MonoBehaviour, ITouchable, IDamagable, IEffectable
     }
 
     public void RemoveAllEffects() => _effects.Clear();
+
+    public bool GetProcessStatus() => false;
 }

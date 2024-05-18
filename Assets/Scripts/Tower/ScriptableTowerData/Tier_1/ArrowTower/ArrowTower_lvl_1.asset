@@ -39,11 +39,25 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4ecd7ded5aac02747afb933a8d842aa2, type: 2}
   - {fileID: 11400000, guid: d2918a970dd881044824f9af1443502d, type: 2}
   Abilities:
-  - AbilityName: CriticalStrike
-    AttackModifier: 1
+  - AttackModifier: 1
+    AppliedTarget: 0
     DamageSource: 1
-    Type: 0
     Icon: {fileID: 21300000, guid: 6abce3e5418760e4892d57e7f71dc61e, type: 3}
     Chance: 0.5
     DamageMultiplier: 2
     Data: {fileID: 11400000, guid: 87b7c78114189a1428d9f6dba3d131bd, type: 2}
+    AttacksToTrigger: 0
+    MaxDistance: 0
+    BuffBullet: {fileID: 0}
+    BuffBulletType: 0
+  - AttackModifier: 0
+    AppliedTarget: 1
+    DamageSource: 1
+    Icon: {fileID: 21300000, guid: 6abce3e5418760e4892d57e7f71dc61e, type: 3}
+    Chance: 0.5
+    DamageMultiplier: 2
+    Data: {fileID: 11400000, guid: aa2e95844a8647149a72f5901f8f1c9b, type: 2}
+    AttacksToTrigger: 6
+    MaxDistance: 500
+    BuffBullet: {fileID: 4589435896935665010, guid: 26e9622a97c8eac48b0bcd1b317fa832, type: 3}
+    BuffBulletType: 10

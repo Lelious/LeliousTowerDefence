@@ -23,8 +23,8 @@ public class GameSpawnState : State
 	public override void Enter()
 	{
 		_disposableEntity?.Dispose();
+		_enemyFactory.IncreaceWaveCounter();
 		_enemyFactory.CreateEnemy(EnemyPool.PoolCapasity);
-
 		_disposableEntity = Observable
 			.FromCoroutine(SpawningRoutine)
 			.Subscribe()
@@ -33,7 +33,7 @@ public class GameSpawnState : State
 
 	public override void Exit()
 	{
-		_disposables.Clear();
+		_disposables.Clear();		
 	}
 
 	private IEnumerator SpawningRoutine()

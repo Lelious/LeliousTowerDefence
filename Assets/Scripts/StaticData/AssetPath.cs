@@ -8,4 +8,8 @@ public static class AssetPath
     public const string GameManager = "UI/GameManager";
     public const string EnemyPrefabPath = "Waves/Wave/Wave";
     public const string FloatingTextService = "UI/FloatingTextService";
+    public const string BuffProjectileFire = "BuffProjectiles/BuffProjectileFire";
+    public const string BuffProjectileIce = "BuffProjectiles/BuffProjectileIce";
+    public const string BuffFire = "BuffProjectiles/FireBuff";
+    public const string BuffIce = "BuffProjectiles/IceBuff";
 }

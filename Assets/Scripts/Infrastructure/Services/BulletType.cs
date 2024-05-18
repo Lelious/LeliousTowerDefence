@@ -9,5 +9,7 @@ public enum BulletType
     Shuriken,
     Decay,
     Snipe,
-    Rapid
+    Rapid,
+    BuffIce,
+    BuffFire
 }

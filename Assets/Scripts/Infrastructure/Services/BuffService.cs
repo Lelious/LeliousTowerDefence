@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 using Zenject;
 
 public sealed class BuffService : ITickable
@@ -8,24 +9,7 @@ public sealed class BuffService : ITickable
 
     public void ApplyEffect(IEffectable effectable, IEffect effect)
     {
-        var currentEffectable = _effectableList.Find(x => x == effectable);
-
-        if (currentEffectable == null)
-        {
-            _effectableList.Add(effectable);
-        }
-
-        var type = effect.GetEffectType();
-        var sameEffect = effectable.GetEffect(type);
-
-        if (sameEffect == null)
-        {
-            effectable.ApplyEffect(effect);
-        }
-        else
-        {
-            sameEffect.RefreshEffect(effect);
-        }
+        ApplyBuff(effectable, effect);
     }
 
     public void RemoveEffectableFromList(IEffectable effectable)
@@ -56,6 +40,36 @@ public sealed class BuffService : ITickable
                     RemoveEffectableFromList(_effectableList[i]);
                 }
             }
+        }
+    }
+
+    private void ApplyBuff(IEffectable effectable, IEffect effect)
+    {
+        IEffectable currentEffectable = null;
+
+        for (int i = 0; i < _effectableList.Count; i++)
+        {
+            if (_effectableList[i] == effectable)
+            {
+                currentEffectable = _effectableList[i];
+                break;
+            }
+        }
+
+        if (currentEffectable == null)
+        {
+            _effectableList.Add(effectable);
+        }
+
+        var sameEffect = effectable.GetEffect(effect.GetEffectType());
+
+        if (sameEffect == null)
+        {
+            effectable.ApplyEffect(effect);
+        }
+        else
+        {
+            sameEffect.RefreshEffect(effect);
         }
     }
 }
