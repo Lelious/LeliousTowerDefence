@@ -12,6 +12,7 @@ public class Buff : Effect
         _type = data.EffectType;
         _image = data.EffectImage;
         _effectable = effectable;
+        _poollableType = data.PoollableType;
         CurrentDuration.Value = data.EffectDuration;
         _percentage = data.PercentageValue;
         CurrentDuration.Value = CurrentDuration.Value;

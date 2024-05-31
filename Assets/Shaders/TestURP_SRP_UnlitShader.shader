@@ -63,6 +63,7 @@ Shader "Lelious/URPUnlitShaderTextureScrolling"
                 half4 _Color;
                 half4 _MainTex_ST;
                 half4 _ShadeTex_ST;
+                half4 _BackTex_ST;
             CBUFFER_END
 
             Varyings vert(Attributes IN)

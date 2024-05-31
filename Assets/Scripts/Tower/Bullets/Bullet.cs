@@ -17,9 +17,9 @@ public abstract class Bullet : MonoBehaviour, IPoollableBullet
     protected EffectData _effectData;
     protected float _flyingSpeed;
     protected float _curvature;
+    protected PoolService _poolService;
 
     private EnemyHitPoint _enemyHitPoint;
-    private PoolService _poolService;
     private Shooter _shooter;
     private bool _callback;
     private IPoollableBullet _iPoollable;
@@ -35,19 +35,19 @@ public abstract class Bullet : MonoBehaviour, IPoollableBullet
     private List<TowerAbility> _abilitiesList;
 
     public void ReturnToPool() => _poolService.AddBulletToPool(_type, _iPoollable);
+    public void SetEffectable(IEffectable effectable) => _effectable = effectable;
+    public void SetBuffService(BuffService service) => _buffService = service;
+    public int CalculateDamage() => Random.Range(_minDamage, _maxDamage + 1);
+    public void SetEndPoint(Vector3 position) => _endPoint = position;
+    public void SetEffectData(EffectData data) => _effectData = data;
     public void SetBulletType(BulletType type) => _type = type;
     public void SetInnactive() => gameObject.SetActive(false);
     public void SetActive() => gameObject.SetActive(true);
     public void DestroyBullet() => Destroy(gameObject);
-    public BulletType GetBulletType() => _type;
-    public virtual void BulletAchieveTarget() { }
-    public virtual void BulletReadyToFly() { }
     public virtual void ApplySpecialEffects() { }
-    public int CalculateDamage() => Random.Range(_minDamage, _maxDamage + 1);
-    public void SetEndPoint(Vector3 position) => _endPoint = position;
-    public void SetEffectable(IEffectable effectable) => _effectable = effectable;
-    public void SetEffectData(EffectData data) => _effectData = data;
-    public void SetBuffService(BuffService service) => _buffService = service;
+    public virtual void BulletAchieveTarget() { }
+    public BulletType GetBulletType() => _type;
+    public virtual void BulletReadyToFly() { }
 
     public void ResetPath(Vector3 startPoint)
     {
@@ -79,9 +79,11 @@ public abstract class Bullet : MonoBehaviour, IPoollableBullet
         _callback = callback;
         _abilitiesList = data.Abilities;
 
-        if (_impactOnHit == null)      
+        if (_impactOnHit == null)
+        {
             _impactOnHit = Instantiate(data.ImpactOnHit);
-        _impactOnHit.SetActive(false);
+            _impactOnHit.SetActive(false);
+        }
 
         ResetPath(startPosition);
         BulletReadyToFly();
@@ -137,6 +139,7 @@ public abstract class Bullet : MonoBehaviour, IPoollableBullet
     protected void CreateHitImpact(Vector3 upScale)
     {
         Vector3 position = _effectable == null ? transform.position + upScale : _effectable.GetOrigin().position + upScale;
+        _impactOnHit.SetActive(false);
         _impactOnHit.transform.position = position;
         _impactOnHit.SetActive(true);
     }
@@ -165,7 +168,7 @@ public abstract class Bullet : MonoBehaviour, IPoollableBullet
 
         _middlePoint = new Vector3(
             (_startPoint.x + _endPoint.x) / 2,
-            (_startPoint.y + _endPoint.y) / 2 + Vector3.SqrMagnitude(_startPoint - _endPoint) * _curvature,
+            (_startPoint.y + _endPoint.y) / 2 + Vector3.Distance(_startPoint, _endPoint) * _curvature,
             (_startPoint.z + _endPoint.z) / 2);
 
         if (_flyingProgress < 0.99f)

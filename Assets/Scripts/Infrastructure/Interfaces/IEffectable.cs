@@ -5,7 +5,7 @@ public interface IEffectable
 {
     public void ApplyEffect(IEffect effect);
     public void RemoveEffect(IEffect effect);
-    public void RefreshEffectValues();
+    public void RefreshEffectValues(IEffect effect);
     public void RemoveAllEffects();
     public ReactiveCollection<IEffect> GetEffects();
     public IEffect GetEffect(EffectType type);

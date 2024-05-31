@@ -134,7 +134,7 @@ public class Shooter : MonoBehaviour, IShoot
                 {
                     if (towers[i].GetEffect(_buffAbility.Data.EffectType) == null)
                     {
-                        ApplyBuffToTower(towers[i]);
+                        ShootBuff(towers[i]);
                         return;
                     }
                     else
@@ -153,14 +153,9 @@ public class Shooter : MonoBehaviour, IShoot
                     }
                 }
 
-                ApplyBuffToTower(effectable);
+                ShootBuff(effectable);
             }
         }
-    }
-
-    private void ApplyBuffToTower(IEffectable effectable)
-    {
-        ShootBuff(effectable);
     }
 
     private void ShootBuff(IEffectable effectable)
@@ -178,10 +173,9 @@ public class Shooter : MonoBehaviour, IShoot
 
         bullet.SetBuffService(_buffService);
         bullet.SetEndPoint(effectable.GetOrigin().position);
-        bullet.ResetPath(_shootingPoint.position);
         bullet.SetEffectable(effectable);
         bullet.SetEffectData(_buffAbility.Data);
-        bullet.SetActive();
+        bullet.ResetPath(_shootingPoint.position);
     }
 
     private IEnumerator ShootingRoutine()
@@ -202,6 +196,7 @@ public class Shooter : MonoBehaviour, IShoot
 
     private Bullet CreateBullet() => Instantiate(_towerStats.BulletPrefab);
     private Bullet CreateBuffBullet() => Instantiate(_buffAbility.BuffBullet);
+    private VisualBuff CreateVisual() => Instantiate(_buffAbility.Data.VisualBuff);
 
     private protected void OnEnable()
     {
@@ -225,6 +220,8 @@ public class Shooter : MonoBehaviour, IShoot
                     var buffBullet = CreateBuffBullet();
                     buffBullet.SetBulletPool(_poolService);
                     buffBullet.SetBulletType(_buffAbility.BuffBulletType);
+                    var visual = CreateVisual();
+                    visual.SetBulletPool(_poolService);
                     _poolService.AddBulletToPool(buffBullet.GetBulletType(), buffBullet);
                 }
             }

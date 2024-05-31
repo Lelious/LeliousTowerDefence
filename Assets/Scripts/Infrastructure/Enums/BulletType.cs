@@ -11,5 +11,7 @@ public enum BulletType
     Snipe,
     Rapid,
     BuffIce,
-    BuffFire
+    BuffFire,
+    VisualIce,
+    VisualFire
 }

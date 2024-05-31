@@ -3,6 +3,7 @@ using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
 using UniRx;
+using Zenject;
 
 public class Tower : MonoBehaviour, IEffectable
 {
@@ -11,10 +12,12 @@ public class Tower : MonoBehaviour, IEffectable
 	[SerializeField] private HealthBar _buildingProgress;
 	[SerializeField] private Transform _towerObject;
 	[SerializeField] private float _endOffsetY = -0.6f;
-	[SerializeField] private List<GameObject> _upgradablesList = new();	
+	[SerializeField] private List<GameObject> _upgradablesList = new();
 
+	[Inject] private PoolService _poolService;
 	private TowerStats _stats;
 	private ReactiveCollection<IEffect> _effects = new();
+	[SerializeField] private List<VisualBuff> _visualBuffsList = new();
 	private ParticleSystem _dustPatricles;
 	private BuildingCell _buildingCell;
 	private float _buildProgress = 0.01f;
@@ -22,8 +25,8 @@ public class Tower : MonoBehaviour, IEffectable
 	private int _currentUpgrade = 0;
 	private bool _onBuffProcessState;
 
-    private void Awake() => _startOffsetY = _towerObject.position.y;	
-
+    private void Awake() => _startOffsetY = _towerObject.position.y;
+	public void SetupPoolService(PoolService poolService) => _poolService = poolService; 
     public void TowerBuild(BuildingCell cell)
 	{
 		_buildingCell = cell;
@@ -131,26 +134,63 @@ public class Tower : MonoBehaviour, IEffectable
     {
 		_effects.Add(effect);
 		RecalculateStats();
+
+        if (effect.GetVisualBuff() != null)
+        {
+			ApplyVisual(effect);
+		}
 	}
+
+	public void ApplyVisual(IEffect effect)
+    {
+		var visual = effect.GetVisualBuff();		
+		visual.SetupVisualBuff(effect.GetDuration(), true);
+		visual.transform.position = transform.position;
+		_visualBuffsList.Add(visual);
+	}
+
+	
 
     public void RemoveEffect(IEffect effect)
     {
-		if (effect.GetEffectType() == EffectType.IncreaceAttackPower)
+		if (effect.GetEffectType().Equals(EffectType.IncreaceAttackPower))
 		{
 			_stats.UpgradeStat(StatType.BonusAttackPower, 0f);
 		}
 
-		if (effect.GetEffectType() == EffectType.IncreaceAttackSpeed)
+		if (effect.GetEffectType().Equals(EffectType.IncreaceAttackSpeed))
 		{
 			_stats.UpgradeStat(StatType.BonusAttackSpeed, 0f);
+		}
+
+		VisualBuff buff;
+
+		for (int i = 0; i < _visualBuffsList.Count; i++)
+		{
+			buff = effect.GetVisualBuff();
+
+			if (_visualBuffsList[i].GetPoolableType().Equals(buff.GetPoolableType()))
+			{
+				_visualBuffsList[i].ReturnToPool();
+				_visualBuffsList.Remove(_visualBuffsList[i]);
+			}
 		}
 
 		_effects.Remove(effect);
 	}
 
-    public void RefreshEffectValues()
+	public void RefreshEffectValues(IEffect effect)
     {
 		RecalculateStats();
+
+        for (int i = 0; i < _visualBuffsList.Count; i++)
+        {
+            if (_visualBuffsList[i].GetPoolableType().Equals(effect.GetPoollableType()))
+            {
+				_visualBuffsList[i].SetupVisualBuff(effect.GetDuration(), false);
+				effect.GetVisualBuff().ReturnToPool();
+			}
+        }
 	}
 
 	public void RemoveAllEffects() => _effects.Clear();

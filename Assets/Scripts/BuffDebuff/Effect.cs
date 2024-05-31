@@ -8,8 +8,9 @@ public abstract class Effect : IEffect
     protected DamageSource _damageSource;
     protected IEffectable _effectable;
     protected EffectType _type;
+    protected PoollableType _poollableType;
     protected Sprite _image;
-
+    protected VisualBuff _visualBuff;
     protected string _description;
     protected int _damagePerTick;
     protected float _currentTick;
@@ -19,8 +20,11 @@ public abstract class Effect : IEffect
     protected float _tick;
 
     public EffectInfo GetEffectInfo() => new EffectInfo(_effectName, _description, _image);
+    public void SetVisual(VisualBuff visualBuff) => _visualBuff = visualBuff;
+    public PoollableType GetPoollableType() => _poollableType;
     public DamageSource GetDamageSource() => _damageSource;
     public float GetDuration() => CurrentDuration.Value;
+    public VisualBuff GetVisualBuff() => _visualBuff;
     public float GetPercentage() => _percentage;
     public EffectType GetEffectType() => _type;
     public int GetDamage() => _damagePerTick;
@@ -51,7 +55,12 @@ public abstract class Effect : IEffect
         CurrentDuration.Value = effect.GetDuration();
         _percentage = effect.GetPercentage();
         _periodical = effect.IsTickable();
-        _effectable.RefreshEffectValues();
+        _effectable.RefreshEffectValues(effect);
+
+        if (_visualBuff != null)
+        {
+            _visualBuff.SetupVisualBuff(CurrentDuration.Value, false);
+        }
     }
 }
 

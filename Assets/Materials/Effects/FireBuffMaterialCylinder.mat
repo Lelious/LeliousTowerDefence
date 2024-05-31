@@ -106,7 +106,7 @@ Material:
     - _DistortionStrength: 1
     - _DistortionStrengthScaled: 0
     - _DownUvThreshold: -0.22
-    - _DstBlend: 6
+    - _DstBlend: 10
     - _EmissionEnabled: 0
     - _EnvironmentReflections: 1
     - _FirstNum: 0
@@ -143,7 +143,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 1, g: 0.6637866, b: 0.36320752, a: 0.56078434}
+    - _Color: {r: 6.4222345, g: 1.5738692, b: 0.60523677, a: 0.56078434}
     - _ColorAddSubDiff: {r: -1, g: 1, b: 0, a: 0}
     - _EmisColor: {r: 1, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 11.835741, g: 0, b: 0, a: 1}

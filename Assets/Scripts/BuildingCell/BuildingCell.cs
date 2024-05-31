@@ -10,6 +10,7 @@ public class BuildingCell : MonoBehaviour, ITouchable
 	private GameUIService _gameInformationMenu;
 	private SelectedFrame _selectedFrame;
 	private TowerFactory _towerFactory;
+	private PoolService _poolService;
 	private Tower _placedTower;
 	private TowerData _towerData;
 	private TowerStats _towerStats;
@@ -19,11 +20,12 @@ public class BuildingCell : MonoBehaviour, ITouchable
     GameObject ITouchable.gameObject { get => gameObject;}
 
     [Inject]
-	private void Construct(GameUIService gameInformationMenu, TowerFactory towerFactory, SelectedFrame selectedFrame)
+	private void Construct(GameUIService gameInformationMenu, TowerFactory towerFactory, SelectedFrame selectedFrame, PoolService poolService)
 	{
 		_gameInformationMenu = gameInformationMenu;
 		_towerFactory = towerFactory;
 		_selectedFrame = selectedFrame;
+		_poolService = poolService;
 		_bottomMenuInformator = _gameInformationMenu.GetBottomMenuInformator();		
 	}
 
@@ -58,6 +60,7 @@ public class BuildingCell : MonoBehaviour, ITouchable
 				_placedTower.ClearAllUnusedBullets();
 				_towerFactory.ClearTowerData(_placedTower);
 				_placedTower = _towerFactory.CreateNewTower(data, transform.position);
+				_placedTower.SetupPoolService(_poolService);
 				_placedTower.SetStats(_towerStats);
 				_placedTower.TowerBuild(this);
 				_placedTower.SetUpgradeLevel(data.UpgradeNumber);

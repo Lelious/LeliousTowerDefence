@@ -49,7 +49,7 @@ public sealed class BuffService : ITickable
 
         for (int i = 0; i < _effectableList.Count; i++)
         {
-            if (_effectableList[i] == effectable)
+            if (_effectableList[i].Equals(effectable))
             {
                 currentEffectable = _effectableList[i];
                 break;

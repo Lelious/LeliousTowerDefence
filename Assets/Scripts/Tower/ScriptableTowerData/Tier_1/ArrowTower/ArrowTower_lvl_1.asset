@@ -57,7 +57,7 @@ MonoBehaviour:
     Chance: 0.5
     DamageMultiplier: 2
     Data: {fileID: 11400000, guid: aa2e95844a8647149a72f5901f8f1c9b, type: 2}
-    AttacksToTrigger: 6
+    AttacksToTrigger: 1
     MaxDistance: 500
     BuffBullet: {fileID: 4589435896935665010, guid: 26e9622a97c8eac48b0bcd1b317fa832, type: 3}
     BuffBulletType: 10

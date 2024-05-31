@@ -6,6 +6,8 @@ public class EffectData : ScriptableObject
     public string EffectName;
     public Sprite EffectImage;
     public EffectType EffectType;
+    public PoollableType PoollableType;
+    public VisualBuff VisualBuff;
     public float EffectDuration;
     public int Damage;
     public DamageSource DamageSource;

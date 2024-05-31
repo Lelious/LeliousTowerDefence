@@ -140,7 +140,7 @@ public class EnemyEntity : MonoBehaviour, ITouchable, IDamagable, IEffectable
         RecalculateStats();
     }
 
-    public void RefreshEffectValues()
+    public void RefreshEffectValues(IEffect effect)
     {
         RecalculateStats();
     }

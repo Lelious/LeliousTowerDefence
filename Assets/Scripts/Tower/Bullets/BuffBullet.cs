@@ -5,10 +5,10 @@ public class BuffBullet : Bullet
 {
     [SerializeField] private float _flySpeed = 1f;
     [SerializeField] private float _flyCurve = 0.1f;
-    [SerializeField] private ParticleSystem _hitImpact, _buffFx;
+    [SerializeField] private ParticleSystem _hitImpact;
     [SerializeField] private float _appearTime = 0.5f;
 
-    private GameObject _buffObj;
+    public VisualBuff buff;
     private Tween _scaleTween;
 
     private void Awake()
@@ -17,20 +17,23 @@ public class BuffBullet : Bullet
         _curvature = _flyCurve;
         _impactOnHit = _hitImpact.gameObject;
         _hitImpact.transform.SetParent(null);
-        _buffObj = _buffFx.gameObject;
-        _buffObj.transform.SetParent(null);
     }
 
     public override void BulletAchieveTarget()
     {
         _effectable.SetOnBuffProcessState(false);
-        _buffService.ApplyEffect(_effectable, new Buff(_effectable, _effectData));
-        var buffFx = _buffFx.main;
-        var buffFxSub = _buffFx.GetComponentInChildren<ParticleSystem>().main;
-        buffFx.duration = _effectData.EffectDuration;
-        buffFxSub.duration = _effectData.EffectDuration;
-        _buffObj.transform.position = _effectable.GetOrigin().position;
-        _buffObj.SetActive(true);
+        IEffect newEffect = new Buff(_effectable, _effectData);
+        var visual = _poolService.GetObjectFromPool(_effectData.PoollableType);
+
+        if (visual == null)
+        {
+            visual = Instantiate(_effectData.VisualBuff);
+            visual.SetBulletPool(_poolService, false);
+        }
+
+        buff = visual as VisualBuff;
+        newEffect.SetVisual(buff);
+        _buffService.ApplyEffect(_effectable, newEffect);
 
         CreateHitImpact(Vector3.up);
         ReturnToPool();
@@ -46,10 +49,8 @@ public class BuffBullet : Bullet
         {
             transform.localScale = Vector3.one * time;
         });
-
-        _impactOnHit.SetActive(false);
-        _buffObj.SetActive(false);
     }
+
     private void OnEnable()
     {
         ReInitProjectile();
