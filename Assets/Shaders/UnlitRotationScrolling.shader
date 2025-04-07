@@ -26,7 +26,6 @@ Shader "Lelious/UnlitRotationScrolling"
             #pragma vertex vert
             #pragma fragment frag
             #pragma multi_compile_instancing           
-            #pragma shader_feature _ALPHABLEND_ON
 
             #include "UnityCG.cginc"
 
@@ -71,6 +70,7 @@ Shader "Lelious/UnlitRotationScrolling"
                 o.uv.xy = mul(mat, o.uv.xy);
                 o.uv.xy = o.uv * 0.5 + 0.5;
                 o.uv.xy += frac(_Time.yy * _uvScrollSpeed.xy * _MainTex_ST.xy);
+
                 o.uv1.x = o.uv.x;
                 return o;
             }

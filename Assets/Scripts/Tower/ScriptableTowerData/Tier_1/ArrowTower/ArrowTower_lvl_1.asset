@@ -23,7 +23,7 @@ MonoBehaviour:
   UpgradeNumber: 0
   BulletType: 0
   BulletPrefab: {fileID: 8678665231522438485, guid: 727d776442af66448b538a71897e39b7, type: 3}
-  FlyCurvature: 0.05
+  FlyCurvature: 0.7
   OnTarget: 1
   ImpactOnHit: {fileID: 3461587258431744119, guid: e9fa4051eb76bf140bd0f89e81af09b7, type: 3}
   Cost: 3
@@ -50,14 +50,3 @@ MonoBehaviour:
     MaxDistance: 0
     BuffBullet: {fileID: 0}
     BuffBulletType: 0
-  - AttackModifier: 0
-    AppliedTarget: 1
-    DamageSource: 1
-    Icon: {fileID: 21300000, guid: 6abce3e5418760e4892d57e7f71dc61e, type: 3}
-    Chance: 0.5
-    DamageMultiplier: 2
-    Data: {fileID: 11400000, guid: aa2e95844a8647149a72f5901f8f1c9b, type: 2}
-    AttacksToTrigger: 1
-    MaxDistance: 500
-    BuffBullet: {fileID: 4589435896935665010, guid: 26e9622a97c8eac48b0bcd1b317fa832, type: 3}
-    BuffBulletType: 10

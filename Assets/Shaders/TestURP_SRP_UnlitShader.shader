@@ -30,7 +30,7 @@ Shader "Lelious/URPUnlitShaderTextureScrolling"
             #pragma vertex vert
             #pragma fragment frag
             #pragma prefer_hlslcc gles
-            #pragma exclude_renderers d3d11_9x
+            //#pragma exclude_renderers d3d11_9x
             #pragma multicompile_instancing
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 

@@ -118,6 +118,7 @@ public class Shooter : MonoBehaviour, IShoot
             _aimCounter = 0;
             var towers = _towerFactory.GetEffectableTower(transform.position, _buffAbility.MaxDistance);
 
+
             for (int i = 0; i < towers.Count; i++)
             {
                 if (towers[i].GetProcessStatus())

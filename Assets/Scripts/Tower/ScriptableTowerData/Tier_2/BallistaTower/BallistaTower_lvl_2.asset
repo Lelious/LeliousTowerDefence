@@ -23,7 +23,7 @@ MonoBehaviour:
   UpgradeNumber: 1
   BulletType: 0
   BulletPrefab: {fileID: 8678665231522438485, guid: 727d776442af66448b538a71897e39b7, type: 3}
-  FlyCurvature: 0.05
+  FlyCurvature: 0.7
   OnTarget: 1
   ImpactOnHit: {fileID: 3461587258431744119, guid: e9fa4051eb76bf140bd0f89e81af09b7, type: 3}
   Cost: 10
@@ -38,3 +38,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2a1e6350b76002a428e8650e366f6728, type: 2}
   - {fileID: 11400000, guid: c33aac6107f31df46a49876291251d8c, type: 2}
   - {fileID: 11400000, guid: 8b8c3a6ceee2b3c45ba4a03ce29dc7ef, type: 2}
+  Abilities: []

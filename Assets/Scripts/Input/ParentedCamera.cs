@@ -14,10 +14,12 @@ public class ParentedCamera : MonoBehaviour
 
 	private CameraLimiter _cameraLimiter;
 	private Vector4 _limitsVector;
+	private Camera _camera;
 
 	private void Awake()
 	{
 		_cameraLimiter = FindObjectOfType<CameraLimiter>();
+		_camera = Camera.main;
 	}
 
 	public void MoveCamera(Vector3 direction)
@@ -37,15 +39,17 @@ public class ParentedCamera : MonoBehaviour
 		CheckForClampedValue(5, 30, transform.position.y);
 	}
 
-	public void ZoomCamera(Vector3 zoomVector)
+	public void ZoomCamera(float value)
 	{
-		if (zoomVector.y > 0 && transform.position.y < 30f)
+		if (value > 0 && transform.position.y < 30f)
 		{
-			transform.position += zoomVector;
+			Vector3 dir = _camera.transform.forward;
+			transform.position += dir * value;
 		}
-		else if (zoomVector.y < 0 && transform.position.y > 5f)
+		else if (value < 0 && transform.position.y > 5f)
 		{
-			transform.position += zoomVector;
+			Vector3 dir = _camera.transform.forward;
+			transform.position += dir * value;
 		}
 
 		CheckForClampedValue(5, 30, transform.position.y);

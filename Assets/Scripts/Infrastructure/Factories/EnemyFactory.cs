@@ -8,7 +8,7 @@ public sealed class EnemyFactory : IInitializable, IEnemyFactory
     private EnemyPool _enemyPool;
     private Object _enemyPrefab;
     private EndPoint _endPoint;
-    private int _counter = 0;
+    private int _counter = 2;
 
     [Inject]
     readonly DiContainer _container = null;
@@ -41,7 +41,7 @@ public sealed class EnemyFactory : IInitializable, IEnemyFactory
     public EnemyEntity GetEnemy() => _enemyPool.GetEnemyFromPool();
     public void IncreaceWaveCounter()
     {
-        _counter++;
+        _counter = 2; //Debug Vertex Animation Section
         _enemyPrefab = InitializeNextEnemy();
     }
 

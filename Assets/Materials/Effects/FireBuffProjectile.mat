@@ -16,7 +16,7 @@ Material:
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2001
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses:
   - DepthOnly
@@ -155,7 +155,7 @@ Material:
     - _BaseColor: {r: 1, g: 0.48956716, b: 0, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
-    - _Color: {r: 2, g: 0.98039216, b: 0, a: 1}
+    - _Color: {r: 0.8603976, g: 0.42344174, b: 0, a: 1}
     - _Color1: {r: 1, g: 1, b: 1, a: 1}
     - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _EmisColor: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}

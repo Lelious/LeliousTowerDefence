@@ -6,7 +6,7 @@ public sealed class InputService : MonoBehaviour
     private TapRegisterService _tapRegisterService;
     private ParentedCamera _cameraParent;
     private Vector3 _touchStart;
-    private float _sensibility = 0.1f;
+    private float _sensibility = 0.02f;
     private float _groundZ = 0;
     private float _touchTime = 0.2f;
     private float _touchTimeTimer;
@@ -48,6 +48,15 @@ public sealed class InputService : MonoBehaviour
                 }
             }
 
+            if(Input.GetKey(KeyCode.A))
+            {
+                _cameraParent.ZoomCamera(-3f * _sensibility);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                _cameraParent.ZoomCamera(3f * _sensibility);
+            }
+
             if (_touchCount >= 2)
             {
                 Touch touch0 = Input.GetTouch(0);
@@ -59,7 +68,7 @@ public sealed class InputService : MonoBehaviour
                 float touchDeltaMag = (touch0.position - touch1.position).magnitude;
                 float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
 
-                _cameraParent.ZoomCamera(new Vector3(0, deltaMagnitudeDiff * _sensibility, 0));
+                _cameraParent.ZoomCamera(deltaMagnitudeDiff * _sensibility);
             }
 
             if (Input.GetMouseButtonUp(0))

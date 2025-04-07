@@ -23,7 +23,7 @@ MonoBehaviour:
   UpgradeNumber: 4
   BulletType: 0
   BulletPrefab: {fileID: 8678665231522438485, guid: 727d776442af66448b538a71897e39b7, type: 3}
-  FlyCurvature: 0.05
+  FlyCurvature: 0.7
   OnTarget: 1
   ImpactOnHit: {fileID: 3461587258431744119, guid: e9fa4051eb76bf140bd0f89e81af09b7, type: 3}
   Cost: 12
@@ -39,18 +39,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 450082006c1f7314fa151fbd4452e2cd, type: 2}
   - {fileID: 11400000, guid: 21fca117dfbced2478f92f1a402ec592, type: 2}
   Abilities:
-  - AbilityName: CriticalStrike
-    AttackModifier: 1
+  - AttackModifier: 1
+    AppliedTarget: 0
     DamageSource: 1
-    Type: 0
     Icon: {fileID: 21300000, guid: 6abce3e5418760e4892d57e7f71dc61e, type: 3}
     Chance: 0.5
     DamageMultiplier: 2
-    Effect:
-      _effectType: 0
-      _debuffTime: 0
-      _damage: 0
-      _percentageValue: 0
-      _isPeriodical: 0
-      _tickTime: 0
-      _description: 
+    Data: {fileID: 0}
+    AttacksToTrigger: 0
+    MaxDistance: 0
+    BuffBullet: {fileID: 0}
+    BuffBulletType: 0

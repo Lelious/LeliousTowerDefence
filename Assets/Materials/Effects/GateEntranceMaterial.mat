@@ -8,13 +8,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: GateEntranceMaterial
-  m_Shader: {fileID: 4800000, guid: b52ec4353b4ed144a821915644bc29a6, type: 3}
+  m_Shader: {fileID: 4800000, guid: b5ca67ea97f5c4040bcdf577b3570b65, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2002
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -49,8 +49,8 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f4e5943fa02f7304690db9fe722a5418, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 94e04c2978a9eec42bfddb44be173dd1, type: 3}
+        m_Scale: {x: 0.3, y: 1.2}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
@@ -105,7 +105,7 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RotationSpeed: 0.27
+    - _RotationSpeed: 0
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -115,11 +115,11 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 8.000394, g: 2.344383, b: 19.468573, a: 1}
+    - _Color: {r: 7.999999, g: 1.1780504, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _SpeedScroll: {r: 0.1, g: 0.5, b: 0, a: 1}
-    - _uvScrollSpeed: {r: 0, g: -0.2, b: 0, a: 0}
+    - _uvScrollSpeed: {r: 0.07, g: 0.1, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &3092812338142989807
 MonoBehaviour:
