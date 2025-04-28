@@ -19,8 +19,6 @@ public class BottomGameMenu : MonoBehaviour
     [SerializeField] private Gradient _hpColorGradient;
     [SerializeField] private List<UIButton> _upgradesList = new List<UIButton>();
     [SerializeField] private UIEffectsPlacer _effectsPlacer;
-    [SerializeField] private GameObject _upgradesWindow;
-    [SerializeField] private ButtonSpriteSwapper _upgradesButtonAnimation;
     [SerializeField] private UIInfobox _infoBox;
     [Inject] private GameUIService _gameInformationMenu;
 
@@ -56,18 +54,12 @@ public class BottomGameMenu : MonoBehaviour
                 _upgradesList[i].gameObject.SetActive(true);
                 _upgradesList[i].SetButton(infoContainer.UpgradesList[i]);
             }
-
-            if (!_upgradesWindowStatus)
-            {
-                _upgradesButtonAnimation.StartAnimation();
-            }
         }
     }
 
     public void ShowUpgradesWindow()
     {
         _upgradesWindowStatus = true;
-        _upgradesWindow.SetActive(_upgradesWindowStatus);
 
         HideInfoBox();
     }
@@ -75,13 +67,6 @@ public class BottomGameMenu : MonoBehaviour
     public void HideUpgradesWindow(bool needPlayAnim = true)
     {
         _upgradesWindowStatus = false;
-        _upgradesWindow.SetActive(_upgradesWindowStatus);
-        _upgradesButtonAnimation.gameObject.SetActive(true);
-
-        if (needPlayAnim)
-        {
-            _upgradesButtonAnimation.StartAnimation();
-        }
     }
 
     public void ShowInfoBox(string name, string description)
@@ -169,10 +154,6 @@ public class BottomGameMenu : MonoBehaviour
             {
                 _upgradesList[i].gameObject.SetActive(true);
                 _upgradesList[i].SetButton(infoContainer.UpgradesList[i]);
-            }
-            if (!_upgradesWindowStatus)
-            {
-                _upgradesButtonAnimation.StartAnimation();
             }
         }
 
