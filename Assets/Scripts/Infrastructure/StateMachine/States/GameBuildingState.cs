@@ -23,11 +23,11 @@ public class GameBuildingState : State
 	public override void Enter()
 	{
 		_topMenuInformator.EnableDisableCounter();
-		_timerRoutine = Observable
-							.FromCoroutine(TimerBeforeSpawnRoutine)
-							.Subscribe()
-							.AddTo(_disposables);
-	}
+        _timerRoutine = Observable
+                            .FromCoroutine(TimerBeforeSpawnRoutine)
+                            .Subscribe()
+                            .AddTo(_disposables);
+    }
 
 	public override void Exit()
 	{

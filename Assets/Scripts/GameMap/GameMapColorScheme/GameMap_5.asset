@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8c03c9a980e88b4bbed33aed8d35b74, type: 3}
+  m_Name: GameMap_5
+  m_EditorClassIdentifier: 
+  MaskTexture: {fileID: 2800000, guid: db84a96ed2870ae4e9fd4595ebacd132, type: 3}
+  BuildPlaneTexture: {fileID: 0}
+  CliffTexture: {fileID: 0}
+  RoadTexture: {fileID: 0}
+  FloorEmissionTexture: {fileID: 0}
+  FogColor: {r: 0, g: 0, b: 0, a: 0}
+  IsGlowingFloor: 0
+  InnerFloorGlow: {r: 0, g: 0, b: 0, a: 0}
+  OuterFloorGlow: {r: 0, g: 0, b: 0, a: 0}
+  TreeColor: {r: 0, g: 0, b: 0, a: 0}
+  TreeLeaf: 0

@@ -8,7 +8,7 @@ using Infrastructure.StateMachine;
 public class EnemyPool : IInitializable
 {
     public readonly IntReactiveProperty EnemiesWaveCount = new IntReactiveProperty(0);
-    public const int PoolCapasity = 30;
+    public const int PoolCapasity = 500;
 
     private GameLoopStateMachine _gameLoopStateMachine;
     private EnemyEntity _lastDefeatedEnemy;
@@ -82,7 +82,7 @@ public class EnemyPool : IInitializable
             return false;
     }
 
-    private void ClearEnemyPool()
+    public void ClearEnemyPool()
     {
         for (int i = 0; i < _defeatedEnemiesList.Count; i++)
         {
@@ -92,10 +92,14 @@ public class EnemyPool : IInitializable
                 Object.Destroy(_lastDefeatedEnemy.gameObject, 2f);
         }
 
+        for (int i = 0; i < _enemyList.Count; i++)
+        {
+            Object.Destroy(_enemyList[i].gameObject);
+        }
+
         _enemyList.Clear();
         _damageables.Clear();
         _defeatedEnemiesList.Clear();
         EnemiesWaveCount.Value = _enemyList.Count();
-        _gameLoopStateMachine.Enter<GameBuildingState>();
     }
 }

@@ -9,7 +9,6 @@ public class TapRegisterService : IInputService
 
     private SelectedFrame _selectedFrame;
     private ITouchable _touchedObj;
-    private Camera _camera;
     private int _layerMask = 1 << 10;
     private bool _canTouch;
     private bool _canRegisterWorldTap = true;
@@ -17,19 +16,17 @@ public class TapRegisterService : IInputService
     [Inject]
     private void Construct(SelectedFrame selectedFrame)
     {
-        _camera = Camera.main;
         _layerMask = ~_layerMask;
         _selectedFrame = selectedFrame;
     }
 
    public void RegisterWorldTap(Vector3 mousePosition)
    {
-
         if (_canRegisterWorldTap)
         {
-            Ray ray = _camera.ScreenPointToRay(mousePosition);
+            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
 
-            if (Physics.Raycast(_camera.transform.position, ray.direction, out var hit, 100f, _layerMask))
+            if (Physics.Raycast(Camera.main.transform.position, ray.direction, out var hit, 100f, _layerMask))
             {
                 if ((Component)_touchedObj != null)
                 {
@@ -65,7 +62,7 @@ public class TapRegisterService : IInputService
 
     public Vector3 GetMovementDirection(float z)
     {
-        Ray mousePos = _camera.ScreenPointToRay(Input.mousePosition);
+        Ray mousePos = Camera.main.ScreenPointToRay(Input.mousePosition);
         Plane ground = new Plane(Vector3.up, new Vector3(0, 0, z));
         float distance;
         ground.Raycast(mousePos, out distance);

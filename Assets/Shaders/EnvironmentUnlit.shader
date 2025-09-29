@@ -2,13 +2,13 @@ Shader "Lelious/EnvironmentUnlit"
 {
     Properties
     {
-        _MaskTex ("MaskTexture", 2D) = "black" {}
+        _Mask ("MaskTexture", 2D) = "black" {}
         _Tex1 ("GrassTex", 2D) = "black" {}
         _Tex2 ("CliffTex", 2D) = "black" {}
         _Tex3 ("FloorTex", 2D) = "black" {}
         _TexEmission ("FloorEmission", 2D) = "black" {}
-        [HDR] _EmissionColorH ("Emission Color High", Color) = (0,0,0,0)
-        [HDR] _EmissionColorL ("Emission Color Low", Color) = (0,0,0,0)
+        [HDR] _EmissionColorH ("Inner Emission", Color) = (0,0,0,0)
+        [HDR] _EmissionColorL ("Outer Emission", Color) = (0,0,0,0)
         _Saturation ("Saturation", float) = 0.0
     }
     SubShader
@@ -42,8 +42,8 @@ Shader "Lelious/EnvironmentUnlit"
                 float4 vertex : SV_POSITION;
             };
 
-            sampler2D _MaskTex, _Tex1, _Tex2, _Tex3, _TexEmission;
-            half4 _MaskTex_ST, _Tex1_ST, _Tex2_ST, _Tex3_ST, _TexEmission_ST;
+            sampler2D _Mask, _Tex1, _Tex2, _Tex3, _TexEmission;
+            half4 _Mask_ST, _Tex1_ST, _Tex2_ST, _Tex3_ST, _TexEmission_ST;
             half _Saturation;
             fixed4 _EmissionColorH, _EmissionColorL;
 
@@ -51,7 +51,7 @@ Shader "Lelious/EnvironmentUnlit"
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MaskTex);
+                o.uv = TRANSFORM_TEX(v.uv, _Mask);
                 o.uv1 = TRANSFORM_TEX(v.uv1, _Tex1);
                 o.uv2 = TRANSFORM_TEX(v.uv2, _Tex2);
                 o.uv3 = TRANSFORM_TEX(v.uv3, _Tex3);
@@ -60,7 +60,7 @@ Shader "Lelious/EnvironmentUnlit"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed3 mask = tex2D(_MaskTex, i.uv);
+                fixed3 mask = tex2D(_Mask, i.uv);
                 fixed4 col = tex2D(_Tex1, i.uv1) * mask.r;
                 fixed4 emission = tex2D(_TexEmission, i.uv3);
                 emission *= mask.b * lerp(_EmissionColorL, _EmissionColorH, emission.r);

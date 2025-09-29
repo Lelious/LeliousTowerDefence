@@ -33,7 +33,8 @@ public class GameSpawnState : State
 
 	public override void Exit()
 	{
-		_disposables.Clear();		
+		_disposables.Clear();
+		_enemyPool.ClearEnemyPool();
 	}
 
 	private IEnumerator SpawningRoutine()

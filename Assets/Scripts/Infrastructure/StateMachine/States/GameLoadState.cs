@@ -9,7 +9,7 @@ namespace Infrastructure.StateMachine.States
 
         public override void Enter()
         {
-            _gameLoopStateMachine.Enter<GameBuildingState>();
+            //_gameLoopStateMachine.Enter<GameBuildingState>();
         }
 
         public override void Exit()

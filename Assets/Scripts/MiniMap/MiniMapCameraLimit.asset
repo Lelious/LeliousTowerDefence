@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82347cea3110ef49bcc69dd23a8eda8, type: 3}
+  m_Name: MiniMapCameraLimit
+  m_EditorClassIdentifier: 
+  LeftBoarderMin: 63
+  LeftBoarderMax: 33
+  RightBoarderMin: -66
+  RightBoarderMax: -62
+  UpLimitMin: -40
+  UpLimitMax: -25
+  DownLimitMin: 54
+  DownLimitMax: 63
+  HeightMin: 22
+  HeightMax: 62
+  InitialCameraPos: {x: 1.5, y: 62, z: 32.5}

@@ -9,14 +9,17 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: TreeMat
   m_Shader: {fileID: 4800000, guid: 3287786bcf98bd1409ec22a1a30fd97a, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -26,10 +29,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Cutoff: 1
-    - _WaveSpeed: 1.58
-    - _WaveStrength: 2
+    - _Cutoff: 0.5
+    - _RenderLeaf: 1
+    - _WaveSpeed: 0.9
+    - _WaveStrength: 2.71
     - _XOfsetMask: 0.011
+    - _YAffection: 0
     m_Colors:
-    - _Color: {r: 0.7117852, g: 1, b: 0, a: 1}
+    - _Color: {r: 1, g: 0.97981775, b: 0, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

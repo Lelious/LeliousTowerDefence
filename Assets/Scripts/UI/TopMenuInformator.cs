@@ -12,15 +12,19 @@ public class TopMenuInformator : MonoBehaviour
 	[SerializeField] private GameObject _waveInTexts, _spawningText;
 	[SerializeField] private Button _spawnNowButton;
 	[SerializeField] private GameObject _disabledSpawnButton;
+	[SerializeField] private MiniMapPointInfoField _miniMapInfoField;
+
 	private GameLoopStateMachine _gameLoopStateMachine;
 	private EnemyPool _enemyPool;
+	private GameManager _gameManager;
 	private bool _isSpawning = false;
 
 	[Inject]
-	private void Construct(EnemyPool enemyPool, GameLoopStateMachine stateMachine)
+	private void Construct(EnemyPool enemyPool, GameLoopStateMachine stateMachine, GameManager gameManager)
 	{
 		_gameLoopStateMachine = stateMachine;
         _enemyPool = enemyPool;
+		_gameManager = gameManager;
 	}
 
 	private void Awake()
@@ -31,10 +35,12 @@ public class TopMenuInformator : MonoBehaviour
 			.AddTo(this);
 	}
 
+	public MiniMapPointInfoField GetInfoField() => _miniMapInfoField;
+
 	public void SetSpawnTime(int value)
 	{
 		if (value > 0)
-			_timeBeforeSpawn.text = $"Wave in : {CachedStringValues.cachedStringValues[value]}";
+			_timeBeforeSpawn.text = $"Wave in : {value}";
 		else
 			EnterSpawnState();
     }
@@ -60,8 +66,14 @@ public class TopMenuInformator : MonoBehaviour
         _timeBeforeSpawn.text = $"Spawning Enemy!";
     }
 
+	public async void StartGameState(PointDescriptionData data)
+    {
+		_miniMapInfoField.HideInfoField();
+		await _gameManager.SwitchToGameMap(data);
+	}
+
 	private void SetEnemiesValue(int value)
 	{
-		_waveCount.text = CachedStringValues.cachedStringValues[value];
+		_waveCount.text = $"{value}";
 	}
 }

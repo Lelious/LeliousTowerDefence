@@ -1,3 +1,4 @@
+using BezierSolution;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -60,13 +61,14 @@ public class EnemyEntity : MonoBehaviour, ITouchable, IDamagable, IEffectable
     public Vector3 GetPosition() => transform.position;
     public bool IsTouched() => _isTouched;
 
-    public void InitializeEnemy()
+    public void InitializeEnemy(BezierSpline path)
     {
         _enemyStats = new EnemyStats();
         _enemyStats.InitializeStats(_enemyData);
         _enemyStats.InitializeInfoContainer(_effects);
         _containerInfo = _enemyStats.GetContainer();
         _enemyHealth.InitializeHealth(_enemyStats.MaxHealth, _enemyStats.Health);
+        _enemyMovement.SetPath(path);
         _enemyMovement.SetEnemyStats(_enemyStats);
         _enemyMovement.UpdateSpeed();
     }

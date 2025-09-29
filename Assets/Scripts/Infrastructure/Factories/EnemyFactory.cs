@@ -1,24 +1,22 @@
+using BezierSolution;
 using UnityEngine;
 using Zenject;
 
 public sealed class EnemyFactory : IInitializable, IEnemyFactory
 {
     private EnemyLoadService _enemyLoadService;
-    private StartPoint _startPoint;
+    private BezierSpline _path;
     private EnemyPool _enemyPool;
     private Object _enemyPrefab;
-    private EndPoint _endPoint;
     private int _counter = 2;
 
     [Inject]
     readonly DiContainer _container = null;
 
     [Inject]
-    private void Construct(EnemyPool enemyPool, StartPoint startPoint, EndPoint endPoint, EnemyLoadService enemyLoadService)
+    private void Construct(EnemyPool enemyPool, EnemyLoadService enemyLoadService)
     {
         _enemyPool = enemyPool;
-        _startPoint = startPoint;
-        _endPoint = endPoint;
         _enemyLoadService = enemyLoadService;
     }
 
@@ -31,12 +29,14 @@ public sealed class EnemyFactory : IInitializable, IEnemyFactory
     {
         for (int i = 0; i < count; i++)
         {
-            var enemy = _container.InstantiatePrefabForComponent<EnemyEntity>(_enemyPrefab, _startPoint.transform.position, Quaternion.identity, parent);
-            enemy.InitializeEnemy();
+            var enemy = _container.InstantiatePrefabForComponent<EnemyEntity>(_enemyPrefab, Vector3.zero, Quaternion.identity, parent);
+            enemy.InitializeEnemy(_path);
             enemy.gameObject.SetActive(false);
             _enemyPool.AddEnemyToPool(enemy);
         }    
     }
+
+    public void SetMapPath(BezierSpline spline) => _path = spline;
 
     public EnemyEntity GetEnemy() => _enemyPool.GetEnemyFromPool();
     public void IncreaceWaveCounter()

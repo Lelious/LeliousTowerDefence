@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4709d5635ad3e4742aec5385b8852fcf, type: 3}
+  m_Name: MiniMapData
+  m_EditorClassIdentifier: 
+  PathDataValue:
+  - 0
+  - 0.021
+  - 0.0521
+  - 0.0766
+  - 0.0956
+  - 0.1205
+  - 0.1496
+  - 0.1933
+  - 0.2232
+  - 0.2403
+  - 0.2815
+  - 0.3317
+  - 0.3665
+  - 0.3955
+  - 0.4337
+  - 0.4652
+  - 0.5004
+  - 0.5504
+  - 0.6101
+  - 0.6553
+  - 0.694
+  - 0.732
+  - 0.7721
+  - 0.8159
+  - 0.8489
+  - 0.899
+  - 0.9594
+  - 1

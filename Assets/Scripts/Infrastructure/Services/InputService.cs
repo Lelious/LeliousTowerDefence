@@ -14,14 +14,10 @@ public sealed class InputService : MonoBehaviour
     private int _touchCount = 0;
 
     [Inject]
-    private void Construct(TapRegisterService tapRegistrator)
+    private void Construct(TapRegisterService tapRegistrator, ParentedCamera camera)
     {
         _tapRegisterService = tapRegistrator;
-    }
-
-    private void Awake()
-    {
-        _cameraParent = FindObjectOfType<ParentedCamera>();
+        _cameraParent = camera;
     }
 
     private void Update()
@@ -68,7 +64,7 @@ public sealed class InputService : MonoBehaviour
                 float touchDeltaMag = (touch0.position - touch1.position).magnitude;
                 float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
 
-                _cameraParent.ZoomCamera(deltaMagnitudeDiff * _sensibility);
+                _cameraParent.ZoomCamera(-deltaMagnitudeDiff * _sensibility);
             }
 
             if (Input.GetMouseButtonUp(0))
@@ -76,6 +72,9 @@ public sealed class InputService : MonoBehaviour
                 var currentMousePos = Input.mousePosition;
                 if (_touchTimeTimer > 0)
                     _tapRegisterService.RegisterWorldTap(currentMousePos);
+
+                if(_touchCount > 0)
+                    _touchStart = _tapRegisterService.GetMovementDirection(_groundZ);
             }
         }       
     }

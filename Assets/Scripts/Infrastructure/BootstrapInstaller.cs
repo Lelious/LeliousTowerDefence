@@ -1,13 +1,11 @@
 using Infrastructure.StateMachine;
 using System;
 using UnityEngine;
-using UnityEngine.AI;
 using Zenject;
 
 public class BootstrapInstaller : MonoInstaller
 {
-    [SerializeField] private StartPoint _startPoint;
-    [SerializeField] private EndPoint _endPoint;
+    [SerializeField] private ParentedCamera _camera;
 
     public override void InstallBindings()
     {
@@ -16,13 +14,29 @@ public class BootstrapInstaller : MonoInstaller
         BindGameManager();
         BindStateMachine();
         BindTowerFactory();
-        BindStartPoint();
-        BindEndPoint();
         BindEnemyPool();
         BindTapRegistrator();
         BindSelectedFrame();
         BindPool();
         BindBuffService();
+        BindGameBootstraper();
+        BindCamera();
+    }
+
+    private void BindCamera()
+    {
+        Container.
+            Bind<ParentedCamera>().
+            FromInstance(_camera).
+            AsSingle().
+            NonLazy();
+    }
+
+    private void BindGameBootstraper()
+    {
+        Container.
+            BindInterfacesAndSelfTo<GameBootstrapper>().
+            AsSingle();
     }
 
     private void BindTapRegistrator()
@@ -36,21 +50,6 @@ public class BootstrapInstaller : MonoInstaller
     {
         Container.
             BindInterfacesAndSelfTo<EnemyPool>().
-            AsSingle();
-    }
-
-    private void BindStartPoint()
-    {
-        Container.
-            Bind<StartPoint>().
-            FromInstance(_startPoint).
-            AsSingle();
-    }
-    private void BindEndPoint()
-    {
-        Container.
-            Bind<EndPoint>().
-            FromInstance(_endPoint).
             AsSingle();
     }
 

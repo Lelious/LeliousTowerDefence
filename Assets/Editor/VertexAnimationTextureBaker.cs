@@ -9,17 +9,17 @@ using System.Diagnostics.Contracts;
 [ExecuteInEditMode]
 public class VertexAnimationTextureBaker : EditorWindow
 {
+    private SkinnedMeshRenderer context;
+    private AnimationClip clip;
+    private static int frameRate = 24;
+
     [MenuItem("CONTEXT/SkinnedMeshRenderer/Bake Animation")]
     private static void Open(MenuCommand command)
     {
         var window = GetWindow<VertexAnimationTextureBaker>();
         window.context = (SkinnedMeshRenderer)command.context;
         window.ShowModalUtility();
-    }
-
-    private SkinnedMeshRenderer context;
-    private AnimationClip clip;
-    private static int frameRate = 24;
+    }    
 
     private void CreateGUI()
     {
