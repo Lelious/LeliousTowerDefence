@@ -8,13 +8,11 @@ public class GameSpawnState : State
 {
 	private readonly CompositeDisposable _disposables = new CompositeDisposable();
 	private System.IDisposable _disposableEntity;
-	private EnemyFactory _enemyFactory;
 	private EnemyPool _enemyPool;
 
 	[Inject]
-	private void Construct(EnemyFactory enemyFactory, EnemyPool enemyPool)
+	private void Construct(EnemyPool enemyPool)
 	{
-		_enemyFactory = enemyFactory;
 		_enemyPool = enemyPool;
 	}
 
@@ -22,33 +20,18 @@ public class GameSpawnState : State
 
 	public override void Enter()
 	{
-		_disposableEntity?.Dispose();
-		_enemyFactory.IncreaceWaveCounter();
-		_enemyFactory.CreateEnemy(EnemyPool.PoolCapasity);
-		_disposableEntity = Observable
-			.FromCoroutine(SpawningRoutine)
-			.Subscribe()
-			.AddTo(_disposables);
+		//_disposableEntity?.Dispose();
+		//_enemyFactory.IncreaceWaveCounter();
+		//_enemyFactory.CreateEnemy(EnemyPool.PoolCapasity);
+		//_disposableEntity = Observable
+		//	.FromCoroutine(SpawningRoutine)
+		//	.Subscribe()
+		//	.AddTo(_disposables);
 	}
 
 	public override void Exit()
 	{
 		_disposables.Clear();
 		_enemyPool.ClearEnemyPool();
-	}
-
-	private IEnumerator SpawningRoutine()
-	{
-		int iterator = 0;
-
-		yield return new WaitForSeconds(1f);
-
-		while (iterator < EnemyPool.PoolCapasity)
-		{
-			var enemy = _enemyPool.GetEnemyFromPool();
-			enemy.gameObject.SetActive(true);
-			iterator++;
-			yield return new WaitForSeconds(0.7f);
-		}
 	}
 }

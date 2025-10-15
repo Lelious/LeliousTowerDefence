@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public interface IEnemyFactory
 {
-    public void CreateEnemy(int count = 1, Transform parent = null);
+    public async void CreateEnemy(SpawnScheme spawnScheme, Transform parent = null) { }
     public EnemyEntity GetEnemy();    
 }

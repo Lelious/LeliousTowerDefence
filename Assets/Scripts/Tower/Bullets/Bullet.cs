@@ -198,4 +198,6 @@ public abstract class Bullet : MonoBehaviour, IPoollableBullet
                _endPoint,
                _flyingProgress));
     }
+
+    public void Destroy() => Destroy(gameObject);
 }

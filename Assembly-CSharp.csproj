@@ -86,7 +86,7 @@
     <Compile Include="Assets\Scripts\Tower\VisualEffects\EffectsPool.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Scripts\Tower\Bullets\FireBullet.cs" />
-    <Compile Include="Assets\Scripts\BuildingCell\BuildingCell.cs" />
+    <Compile Include="Assets\Scripts\GameMap\AlchemyMap.cs" />
     <Compile Include="Assets\Scripts\UI\BottomMenuIconsContainer.cs" />
     <Compile Include="Assets\Scripts\Test\TestVATShaderSetProperties.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IShoot.cs" />
@@ -102,8 +102,8 @@
     <Compile Include="Assets\Scripts\MiniMap\MiniMap.cs" />
     <Compile Include="Assets\Scripts\UI\MiniMapPointInfoField.cs" />
     <Compile Include="Assets\Scripts\Tower\TowerAbilities\TowerAbility.cs" />
-    <Compile Include="Assets\Scripts\Infrastructure\Services\MapChangeService.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameWinState.cs" />
+    <Compile Include="Assets\Scripts\GameMap\GameMapSpawnScheme\SpawnScheme.cs" />
     <Compile Include="Assets\Scripts\Tower\ScriptableTowerData\TowerBuffs\BuffData.cs" />
     <Compile Include="Assets\Scripts\Test\YRotator.cs" />
     <Compile Include="Assets\Scripts\Tower\Bullets\IceBullet.cs" />
@@ -115,6 +115,7 @@
     <Compile Include="Assets\Scripts\Infrastructure\StateMachine\States\GameLoadState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyData\EnemyData.cs" />
+    <Compile Include="Assets\Scripts\Building\BuildingGround.cs" />
     <Compile Include="Assets\Scripts\Tower\Bullets\Bullet.cs" />
     <Compile Include="Assets\Scripts\Test\EffectType.cs" />
     <Compile Include="Assets\Scripts\Tower\Tower.cs" />
@@ -140,7 +141,6 @@
     <Compile Include="Assets\Scripts\Tower\Bullets\CannonBullet.cs" />
     <Compile Include="Assets\Scripts\UI\GameUIService.cs" />
     <Compile Include="Assets\Scripts\Debug\FPSCounter\FPSCounter.cs" />
-    <Compile Include="Assets\Scripts\StaticData\EndPoint.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Services\GameMap.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Pools\EnemyPool.cs" />
     <Compile Include="Assets\Scripts\UI\UITapRegistrator.cs" />
@@ -152,7 +152,6 @@
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IControllFromState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Interfaces\IState.cs" />
-    <Compile Include="Assets\Scripts\StaticData\StartPoint.cs" />
     <Compile Include="Assets\Scripts\Test\VertexColorsCopier.cs" />
     <Compile Include="Assets\Scripts\GameMap\JarEffectService.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyMovement.cs" />
@@ -235,13 +234,16 @@
     <Compile Include="Assets\Scripts\UI\UIEffectsPlacer.cs" />
     <Compile Include="Assets\Scripts\UI\GamePannelUdaterInfoContainer.cs" />
     <Compile Include="Assets\Scripts\Test\StatType.cs" />
+    <Compile Include="Assets\Scripts\GameMap\GameForestMap.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\Scripts\Tower\VisualEffects\IPoollableEffect.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Services\EnemyLoadService.cs" />
     <Compile Include="Assets\Scripts\Tower\Shooter.cs" />
     <Compile Include="Assets\Scripts\UI\TopMenuInformator.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\GameBootstrapper.cs" />
+    <Compile Include="Assets\Scripts\Building\BuildingCell.cs" />
     <Compile Include="Assets\Scripts\UI\UIMenuIcons.cs" />
+    <Compile Include="Assets\Scripts\GameMap\GameMapSpawnScheme\SpawnPattern.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

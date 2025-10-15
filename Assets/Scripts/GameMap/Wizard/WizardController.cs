@@ -8,8 +8,6 @@ public class WizardController : MonoBehaviour
     [SerializeField] private Animator _wizardAnim;
     [SerializeField] private BezierWalkerWithSpeed _wizardWalker;
     [SerializeField] private JarEffectService _effectService;
-    [SerializeField] private BezierSpline _leftIn;
-    [SerializeField] private BezierSpline _leftOut;
     [SerializeField] private GameObject _bottle;
     [SerializeField] private WizardPath _path;
 
@@ -90,7 +88,6 @@ public class WizardController : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             await UniTask.WaitForSeconds(Random.Range(4, 8));
-            _effectService.EmitWalker();
             _wizardAnim.SetTrigger(_knockAnim);
         }
 

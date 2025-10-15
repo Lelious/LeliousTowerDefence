@@ -39,6 +39,16 @@ public class TowerFactory : IInitializable
 		Object.Destroy(tower.gameObject);
 	}
 
+	public void ClearTowers()
+    {
+        for (int i = 0; i < _towers.Count; i++)
+        {
+			var tower = _towers[i];
+			tower.ReleaseTower();
+		}
+		_towers.Clear();
+    }
+
 	public List<IEffectable> GetEffectableTower(Vector3 position, float distance)
     {
 		return _effectablesList.FindAll(x => Vector3.SqrMagnitude(position - x.GetOrigin().position) < distance * distance);

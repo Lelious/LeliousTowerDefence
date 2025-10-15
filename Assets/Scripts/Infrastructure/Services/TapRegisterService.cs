@@ -20,44 +20,48 @@ public class TapRegisterService : IInputService
         _selectedFrame = selectedFrame;
     }
 
-   public void RegisterWorldTap(Vector3 mousePosition)
-   {
+    public void RegisterWorldTap(Vector3 mousePosition)
+    {
         if (_canRegisterWorldTap)
         {
             Ray ray = Camera.main.ScreenPointToRay(mousePosition);
 
             if (Physics.Raycast(Camera.main.transform.position, ray.direction, out var hit, 100f, _layerMask))
             {
-                if ((Component)_touchedObj != null)
+                if (hit.collider.TryGetComponent(out ITouchable touched))
                 {
-                    _touchedObj.Untouch();
+                    if (_touchedObj != touched)
+                    {
+                        if (_touchedObj is Component oldComp && oldComp != null)
+                        {
+                            _touchedObj.Untouch();
+                        }
+                    }
+                    _touchedObj = touched;
+                    _touchedObj.Touch(hit.point);
                 }
-
-                hit.collider.gameObject.TryGetComponent(out _touchedObj);
-
-                if (_touchedObj != null)
-                {
-                    _touchedObj.Touch();
-                }
-
                 else
                 {
-                    _selectedFrame.DisableFrame();
-                    OnEmptyTapRegistered?.Invoke();
+                    ClearTouch();
                 }
             }
-
             else
             {
-                if ((Component)_touchedObj != null)
-                {
-                    _touchedObj.Untouch();
-                }
-                _selectedFrame.DisableFrame();
-                OnEmptyTapRegistered?.Invoke();
+                ClearTouch();
             }
         }
         _canRegisterWorldTap = true;
+    }
+
+    private void ClearTouch()
+    {
+        if (_touchedObj is Component oldComp && oldComp != null)
+        {
+            _touchedObj.Untouch();
+        }
+        _touchedObj = null;
+        _selectedFrame.DisableFrame();
+        OnEmptyTapRegistered?.Invoke();
     }
 
     public Vector3 GetMovementDirection(float z)

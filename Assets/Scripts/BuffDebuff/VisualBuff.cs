@@ -51,4 +51,9 @@ public class VisualBuff : MonoBehaviour, IPoollableObject
             ReturnToPool();
         }
     }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
+    }
 }

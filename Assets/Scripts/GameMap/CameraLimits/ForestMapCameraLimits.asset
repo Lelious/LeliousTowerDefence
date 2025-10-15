@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e82347cea3110ef49bcc69dd23a8eda8, type: 3}
+  m_Name: ForestMapCameraLimits
+  m_EditorClassIdentifier: 
+  LeftBoarderMin: -11
+  LeftBoarderMax: 15
+  RightBoarderMin: -87.3
+  RightBoarderMax: -58
+  UpLimitMin: -2.2
+  UpLimitMax: 17
+  DownLimitMin: 42.9
+  DownLimitMax: 51.43
+  HeightMin: 2.5
+  HeightMax: 30
+  InitialCameraPos: {x: -14.6, y: 20, z: 20.9}

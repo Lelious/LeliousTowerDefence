@@ -57,7 +57,7 @@ public class BootstrapInstaller : MonoInstaller
     {
         Container.
             BindInterfacesAndSelfTo<TowerFactory>().
-            AsSingle();
+            AsSingle().NonLazy();
     }
 
     private void BindStateMachine()

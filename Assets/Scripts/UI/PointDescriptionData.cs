@@ -8,7 +8,9 @@ public class PointDescriptionData : ScriptableObject
     public string WaveName;
     public int Count;
     public int Health;
-    public int Reward;
+    public string Reward;
+    public int StartGold;
     public string GameMapName;
     public GameMapColorScheme ColorScheme;
+    public SpawnScheme SpawnScheme;
 }

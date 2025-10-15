@@ -6,6 +6,7 @@ public class PoolService : IInitializable
 {
     private Dictionary<BulletType, Queue<IPoollableBullet>> _bulletPool;
     private Dictionary<PoollableType, Queue<IPoollableObject>> _commonPool;
+
     public void Initialize() 
     {
         _bulletPool = new Dictionary<BulletType, Queue<IPoollableBullet>>();
@@ -49,6 +50,29 @@ public class PoolService : IInitializable
         }
     }
 
+    public void RemoveAllBulletsFromPool()
+    {
+        foreach (var item in _bulletPool)
+        {
+            var queue = _bulletPool[item.Key];
+            for (int i = 0; i < queue.Count; i++)
+            {
+                var bullet = queue.Dequeue();
+                bullet.DestroyBullet();
+            }
+        }
+
+        foreach (var item in _commonPool)
+        {
+            var queue = _commonPool[item.Key];
+            for (int i = 0; i < queue.Count; i++)
+            {
+                var obj = queue.Dequeue();
+                obj.Destroy();
+            }
+        }
+    }
+
     public IPoollableObject GetObjectFromPool(PoollableType type)
     {
         if (Validate(type))
@@ -65,8 +89,7 @@ public class PoolService : IInitializable
                 return null;          
         }
         else        
-            return null;
-        
+            return null;       
     }
 
     public IPoollableBullet GetBulletFromPool(BulletType type)

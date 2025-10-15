@@ -54,6 +54,9 @@ SpriteAtlas:
     cachedData: {fileID: 0}
     packedSpriteRenderDataKeys:
     - dd8c88222c88bec429aa5c2afea8d6be: 21300000
+    - c5dff68285486bd4d9d0ff12cee16438: 300226353
+    - c5dff68285486bd4d9d0ff12cee16438: -528919229
+    - c5dff68285486bd4d9d0ff12cee16438: -1167424961
     - 307e099458d81e04e9f7b4e0479a1afa: 21300000
     - 84e7eaa476e753a469a73379813d308e: 21300000
     - 6abce3e5418760e4892d57e7f71dc61e: 21300000
@@ -70,6 +73,9 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: dd8c88222c88bec429aa5c2afea8d6be, type: 3}
+  - {fileID: 300226353, guid: c5dff68285486bd4d9d0ff12cee16438, type: 3}
+  - {fileID: -528919229, guid: c5dff68285486bd4d9d0ff12cee16438, type: 3}
+  - {fileID: -1167424961, guid: c5dff68285486bd4d9d0ff12cee16438, type: 3}
   - {fileID: 21300000, guid: 307e099458d81e04e9f7b4e0479a1afa, type: 3}
   - {fileID: 21300000, guid: 84e7eaa476e753a469a73379813d308e, type: 3}
   - {fileID: 21300000, guid: 6abce3e5418760e4892d57e7f71dc61e, type: 3}
@@ -85,6 +91,9 @@ SpriteAtlas:
   - {fileID: 21300000, guid: be620d5da5bbc2e4ea8fdc5e7e537b71, type: 3}
   m_PackedSpriteNamesToIndex:
   - Skeleton
+  - Resources_2
+  - Resources_1
+  - Resources_0
   - MagicTower
   - ArmorIcon
   - AttackSpeed.png

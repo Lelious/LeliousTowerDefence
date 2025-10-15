@@ -4,8 +4,9 @@ using UnityEngine;
 using Zenject;
 using UniRx;
 using Infrastructure.StateMachine;
+using UnityEngine.AddressableAssets;
 
-public class EnemyPool : IInitializable
+public class EnemyPool
 {
     public readonly IntReactiveProperty EnemiesWaveCount = new IntReactiveProperty(0);
     public const int PoolCapasity = 500;
@@ -66,10 +67,6 @@ public class EnemyPool : IInitializable
         CheckForEmptyPool();
     }
 
-    public void Initialize()
-    {
-    }
-
     private bool CheckForEmptyPool()
     {
         if (_enemyList.Count == 0)
@@ -87,14 +84,14 @@ public class EnemyPool : IInitializable
         for (int i = 0; i < _defeatedEnemiesList.Count; i++)
         {
             if (_defeatedEnemiesList[i] != _lastDefeatedEnemy)
-                Object.Destroy(_defeatedEnemiesList[i].gameObject);
+                Addressables.ReleaseInstance(_defeatedEnemiesList[i].gameObject);
             else
-                Object.Destroy(_lastDefeatedEnemy.gameObject, 2f);
+                Addressables.ReleaseInstance(_lastDefeatedEnemy.gameObject);
         }
 
         for (int i = 0; i < _enemyList.Count; i++)
         {
-            Object.Destroy(_enemyList[i].gameObject);
+            Addressables.ReleaseInstance(_enemyList[i].gameObject);
         }
 
         _enemyList.Clear();

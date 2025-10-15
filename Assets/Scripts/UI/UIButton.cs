@@ -45,7 +45,7 @@ public class UIButton : MonoBehaviour
 		{
 			var buildingCell = _gameInformationMenu.GetLastTouchedBuildingCell();
 
-			if (buildingCell)
+			if (buildingCell != null)
 				buildingCell.BuildTowerOnPlace(_towerData);
 
 			_gameInformationMenu.HideEmptyCellMenu();

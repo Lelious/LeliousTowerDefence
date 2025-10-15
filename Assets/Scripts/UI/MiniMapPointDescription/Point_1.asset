@@ -17,6 +17,8 @@ MonoBehaviour:
   WaveName: Rabbits
   Count: 100
   Health: 1
-  Reward: 123
+  Reward: <sprite=0>100
+  StartGold: 999
   GameMapName: GameLevel
   ColorScheme: {fileID: 11400000, guid: d919772c78edd1e43b315f4ea40cf3ce, type: 2}
+  SpawnScheme: {fileID: 11400000, guid: a785104dbadebb64d848886eb2486534, type: 2}

@@ -22,29 +22,28 @@ public class TimeBeforeSpawn : MonoBehaviour
 
     private protected void Awake()
     {
-        _remainingTime = _timeBeforeSpawn;
+        //_remainingTime = _timeBeforeSpawn;
     }
 
     private protected void FixedUpdate()
     {
+        //if (_remainingTime > 1f)
+        //{
+        //    _spawnTimer = (int)(_remainingTime -= Time.unscaledDeltaTime);
 
-        if (_remainingTime > 1f)
-        {
-            _spawnTimer = (int)(_remainingTime -= Time.unscaledDeltaTime);
+        //    if (_spawnTimer >= 0 && _spawnTimer <= 99)
+        //    {
+        //        _timeBeforeSpawnText.text = $"Wave in : {CachedStringValues.cachedStringValues[_spawnTimer]}";
+        //    }
+        //}
 
-            if (_spawnTimer >= 0 && _spawnTimer <= 99)
-            {
-                _timeBeforeSpawnText.text = $"Wave in : {CachedStringValues.cachedStringValues[_spawnTimer]}";
-            }
-        }
-
-        else
-        {
-            if (!_onSpawning)
-            {
-                StartSpawn();
-            }
-        }
+        //else
+        //{
+        //    if (!_onSpawning)
+        //    {
+        //        StartSpawn();
+        //    }
+        //}
     }
 
     public void StartSpawn()

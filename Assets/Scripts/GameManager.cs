@@ -6,6 +6,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 using Cysharp.Threading.Tasks;
 using Infrastructure.StateMachine;
 using Infrastructure.StateMachine.States;
+using System.Threading;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AssetReferenceGameObject _miniMapAsset;
     [SerializeField] private AssetReferenceGameObject _gameMapAsset;
 
+    private SelectedFrame _selectedFrame;
+    private GameUIService _gameUIService;
+    private TowerFactory _towerFactory;
+    private PoolService _poolService;
     private EnemyFactory _enemyFactory;
     private ParentedCamera _camera;
     private GameLoopStateMachine _gameLoopStateMachine;
@@ -25,20 +30,23 @@ public class GameManager : MonoBehaviour
     private GameMap _gameMap;
     private MiniMap _miniMap;
 
-    private int _playerGold = 50;
+    private int _playerGold;
 
     private void OnEnable()
     {
-        SwitchToMiniMap(true);
+        SwitchToMiniMap(true).Forget();
     }
 
     [Inject]
-    private void Construct(TopMenuInformator topMenuInformator, GameLoopStateMachine stateMachine, ParentedCamera camera, EnemyFactory enemyFactory)
+    private void Construct(TopMenuInformator topMenuInformator, GameLoopStateMachine stateMachine, ParentedCamera camera, EnemyFactory enemyFactory, SelectedFrame selectedFrame, GameUIService gameUIService, TowerFactory towerFactory, PoolService poolService)
     {
         _topMenuInformator = topMenuInformator;
         _camera = camera;
         _gameLoopStateMachine = stateMachine;
         _enemyFactory = enemyFactory;
+        _selectedFrame = selectedFrame;
+        _gameUIService = gameUIService;
+        _towerFactory = towerFactory;
         //_topMenuInformator.SetMoney(_playerGold);
     }
 
@@ -47,9 +55,18 @@ public class GameManager : MonoBehaviour
         await SwitchToMiniMap();
     }
 
+    public void ForceSpawn()
+    {
+        if(_gameMap != null)
+        {
+            _gameMap.ForceSpawn();
+        }
+    }
+
     public async UniTask SwitchToMiniMap(bool startInitializing = false)
     {
         if (_miniMap != null) return;
+
         _fadeHandle = _fadeCanvas.DOFade(1f, startInitializing == false ? 1f : 0f).AsyncWaitForCompletion().AsUniTask();
         await _fadeHandle.AsAsyncUnitUniTask();
         _miniMapHandle = _miniMapAsset.InstantiateAsync();
@@ -58,7 +75,7 @@ public class GameManager : MonoBehaviour
         _miniMap = _miniMapHandle.Result.GetComponent<MiniMap>();
         _miniMap.InitializePath(_topMenuInformator.GetInfoField());
         _camera.SetNewLimits(_miniMap.GetCameraLimits());
-
+        _topMenuInformator.SwitchToMiniMapInformator();
         if (_gameMapHandle.IsValid() && _gameMapHandle.Status == AsyncOperationStatus.Succeeded)
             Addressables.ReleaseInstance(_gameMapHandle);
 
@@ -77,9 +94,10 @@ public class GameManager : MonoBehaviour
         await _gameMapHandle.ToUniTask();
 
         _gameMap = _gameMapHandle.Result.GetComponent<GameMap>();
-        await _gameMap.SetColorScheme(data.ColorScheme);
-        _enemyFactory.SetMapPath(_gameMap.GetPath());
+        _gameMap.ConstructGameMap(_gameLoopStateMachine, _enemyFactory, _topMenuInformator, data, _selectedFrame, _gameUIService, _towerFactory, _poolService);
         _camera.SetNewLimits(_gameMap.GetCameraLimits());
+        _topMenuInformator.SwitchToGameInformator(data);
+        _playerGold = data.StartGold;
 
         if (_miniMapHandle.IsValid() && _miniMapHandle.Status == AsyncOperationStatus.Succeeded)
             Addressables.ReleaseInstance(_miniMapHandle);
@@ -87,6 +105,7 @@ public class GameManager : MonoBehaviour
         await UniTask.WaitUntil(() => _fadeHandle.Status.IsCompleted() == true);
         _fadeHandle = _fadeCanvas.DOFade(0f, 1f).AsyncWaitForCompletion().AsUniTask();
         _gameLoopStateMachine.Enter<GameBuildingState>();
+        _gameMap.StartSpawnPattern();
     }
 
     public bool CheckForGoldAvalability(int cost)
@@ -119,7 +138,7 @@ public class GameManager : MonoBehaviour
     {
         _playerGold += amount;
         _topMenuInformator.SetMoney(_playerGold);
-    }
+    }   
 
     private void NotEnoughGold()
     {

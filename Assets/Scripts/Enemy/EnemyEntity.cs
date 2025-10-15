@@ -21,18 +21,14 @@ public class EnemyEntity : MonoBehaviour, ITouchable, IDamagable, IEffectable
     private GameUIService _gameInformationMenu;
     private BottomGameMenu _bottomMenuInformator;
     private SelectedFrame _selectedFrame;
-    private GameManager _gameManager;
     private EnemyPool _enemyPool;
     private bool _isTouched;
     private ReactiveCollection<IEffect> _effects = new ReactiveCollection<IEffect>();
 
-    GameObject ITouchable.gameObject { get => gameObject; }
-
     [Inject]
-    private void Construct(EnemyPool enemyPool, GameManager gameManager, GameUIService gameInformationMenu, SelectedFrame selectedFrame, FloatingTextService floatingTextService)
+    private void Construct(EnemyPool enemyPool, GameUIService gameInformationMenu, SelectedFrame selectedFrame, FloatingTextService floatingTextService)
     {
         _enemyPool = enemyPool;
-        _gameManager = gameManager;
         _gameInformationMenu = gameInformationMenu;
         _bottomMenuInformator = _gameInformationMenu.GetBottomMenuInformator();
         _floatingTextService = floatingTextService;
@@ -61,17 +57,18 @@ public class EnemyEntity : MonoBehaviour, ITouchable, IDamagable, IEffectable
     public Vector3 GetPosition() => transform.position;
     public bool IsTouched() => _isTouched;
 
-    public void InitializeEnemy(BezierSpline path)
+    public void InitializeEnemy(EnemyData data)
     {
         _enemyStats = new EnemyStats();
-        _enemyStats.InitializeStats(_enemyData);
+        _enemyStats.InitializeStats(data);
         _enemyStats.InitializeInfoContainer(_effects);
         _containerInfo = _enemyStats.GetContainer();
-        _enemyHealth.InitializeHealth(_enemyStats.MaxHealth, _enemyStats.Health);
-        _enemyMovement.SetPath(path);
+        _enemyHealth.InitializeHealth(_enemyStats.MaxHealth, _enemyStats.Health);        
         _enemyMovement.SetEnemyStats(_enemyStats);
         _enemyMovement.UpdateSpeed();
     }
+
+    public void SetMovePath(BezierSpline path) => _enemyMovement.SetPath(path);
 
     public void ReturnToEnemyPool()
     {
@@ -81,13 +78,13 @@ public class EnemyEntity : MonoBehaviour, ITouchable, IDamagable, IEffectable
             Untouch();
         }
         _enemyPool.ReturnToPool(this);
-        _gameManager.AddGold(_enemyData.Worth);
+        //_gameManager.AddGold(_enemyData.Worth);
 
         RemoveAllEffects();
         StartCoroutine(DelayedDisableRoutine());
     }
 
-    public void Touch()
+    public void Touch(Vector3 touchPos)
     {
         _isTouched = true;
         _gameInformationMenu.ShowGameMenu();

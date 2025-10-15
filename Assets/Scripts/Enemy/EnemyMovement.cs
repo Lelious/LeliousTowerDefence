@@ -8,15 +8,14 @@ public class EnemyMovement : MonoBehaviour
 	[SerializeField] private EnemyVertexAnimator _animator;
 
 	private EnemyStats _enemyStats;
-	private const float _navMeshSpeedConst = 2f;
 	private bool _isDead;
 
 	public void SetEnemyStats(EnemyStats stats) => _enemyStats = stats;
 
 	public void UpdateSpeed()
 	{
-		_animator.SetAnimationSpeed(_enemyStats.Speed * _enemyStats.BonusSpeed.Value);
-		_walker.speed = _navMeshSpeedConst * _enemyStats.Speed * _enemyStats.BonusSpeed.Value;
+		_animator.SetAnimationSpeed(1f * _enemyStats.BonusSpeed.Value);
+		_walker.speed = _enemyStats.Speed * _enemyStats.BonusSpeed.Value;
 		if(_enemyStats.Speed * _enemyStats.BonusSpeed.Value < 0.7f)
         {
 			_animator.SetColor(new Color(0.0f, 0.73f, 1.0f));

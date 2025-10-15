@@ -1,23 +1,21 @@
 using BezierSolution;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Zenject;
 
-public sealed class EnemyFactory : IInitializable, IEnemyFactory
+public sealed class EnemyFactory : IEnemyFactory
 {
-    private EnemyLoadService _enemyLoadService;
-    private BezierSpline _path;
+    private AssetReferenceGameObject _waveAsset;
     private EnemyPool _enemyPool;
-    private Object _enemyPrefab;
-    private int _counter = 2;
 
     [Inject]
     readonly DiContainer _container = null;
 
     [Inject]
-    private void Construct(EnemyPool enemyPool, EnemyLoadService enemyLoadService)
+    private void Construct(EnemyPool enemyPool)
     {
         _enemyPool = enemyPool;
-        _enemyLoadService = enemyLoadService;
     }
 
     public DiContainer Container
@@ -25,30 +23,26 @@ public sealed class EnemyFactory : IInitializable, IEnemyFactory
         get { return _container; }
     }
 
-    public void CreateEnemy(int count = 1, Transform parent = null)
+    public async UniTaskVoid CreateEnemy(SpawnScheme spawnScheme, Transform parent = null)
     {
-        for (int i = 0; i < count; i++)
+        _waveAsset = spawnScheme.EnemyBasePrefab;
+
+        for (int i = 0; i < spawnScheme.Count; i++)
         {
-            var enemy = _container.InstantiatePrefabForComponent<EnemyEntity>(_enemyPrefab, Vector3.zero, Quaternion.identity, parent);
-            enemy.InitializeEnemy(_path);
+            var handle = Addressables.InstantiateAsync(_waveAsset, parent);
+            await handle.ToUniTask();
+            var enemy = handle.Result.GetComponent<EnemyEntity>();
+            _container.Inject(enemy);
+            enemy.InitializeEnemy(spawnScheme.EnemyDataStats);
             enemy.gameObject.SetActive(false);
             _enemyPool.AddEnemyToPool(enemy);
         }    
     }
 
-    public void SetMapPath(BezierSpline spline) => _path = spline;
+    public void ReleaseEnemiesWave()
+    {
+        _enemyPool.ClearEnemyPool();
+    }
 
     public EnemyEntity GetEnemy() => _enemyPool.GetEnemyFromPool();
-    public void IncreaceWaveCounter()
-    {
-        _counter = 2; //Debug Vertex Animation Section
-        _enemyPrefab = InitializeNextEnemy();
-    }
-
-    public void Initialize() { }
-
-    private Object InitializeNextEnemy()
-    {
-        return _enemyLoadService.LoadNextEnemyPrefab(_counter);
-    }
 }

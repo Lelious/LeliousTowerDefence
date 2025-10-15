@@ -10,7 +10,7 @@ public class UICustomIcon : MonoBehaviour, ITouchable
         throw new System.NotImplementedException();
     }
 
-    public void Touch()
+    public void Touch(Vector3 touchPos)
     {
         throw new System.NotImplementedException();
     }

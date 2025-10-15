@@ -44,19 +44,29 @@ Shader "Lelious/HealthBarShader" {
                 UNITY_DEFINE_INSTANCED_PROP(half, _Fill)
             UNITY_INSTANCING_BUFFER_END(Props)
 
-            v2f vert(appdata v) 
-            {
+            v2f vert(appdata v)
+{
                 v2f o;
                 UNITY_SETUP_INSTANCE_ID(v);
                 UNITY_TRANSFER_INSTANCE_ID(v, o);
-                o.vertex = UnityObjectToClipPos(v.vertex);
 
-                o.vertex = mul(UNITY_MATRIX_P, 
-                           mul(UNITY_MATRIX_MV, half4(0.0, 0.0, 0.0, 1.0))
-                         + half4(v.vertex.x, v.vertex.y, 0.0, 0.0)
-                         * half4(_ScaleX, _ScaleY, 1.0, 1.0));
+                float3 worldScale = float3(
+                    length(unity_ObjectToWorld._m00_m01_m02), // X scale
+                    length(unity_ObjectToWorld._m10_m11_m12), // Y scale
+                    length(unity_ObjectToWorld._m20_m21_m22)  // Z scale
+                );
+
+                float4 objCenter = mul(UNITY_MATRIX_MV, float4(0,0,0,1));
+
+
+                float4 offset = float4(v.vertex.x * worldScale.x,
+                                        v.vertex.y * worldScale.y,
+                                        0.0,
+                                        0.0);
+
+                o.vertex = mul(UNITY_MATRIX_P, objCenter + offset);
+
                 o.uv = v.uv;
-
                 return o;
             }
 

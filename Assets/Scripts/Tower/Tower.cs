@@ -52,7 +52,7 @@ public class Tower : MonoBehaviour, IEffectable
 					_shooter.gameObject.SetActive(true);
 					_buildingCell.EnableUpgrades(_stats.UpgradablesList);
 
-					if (_buildingCell.IsTouched())
+					if (_buildingCell.IsActive())
                     {
 						ShowRange();						
 					}
@@ -65,6 +65,12 @@ public class Tower : MonoBehaviour, IEffectable
 	{
 		_stats = stats;
 		_shooter.SetTowerData(stats);
+	}
+
+	public void ReleaseTower()
+    {
+		_shooter.ClearAmmo();
+		Destroy(gameObject);
 	}
 
 	public void ClearAllUnusedBullets() => _shooter.ClearAmmo();

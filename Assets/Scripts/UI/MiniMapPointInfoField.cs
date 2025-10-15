@@ -21,8 +21,8 @@ public class MiniMapPointInfoField : MonoBehaviour
         _pointName.text = _data.PointName;
         _waveImage.sprite = _data.WaveImage;
         _waveName.text = $"Creature: {_data.WaveName}";
-        _waveCount.text = $"Count: {_data.Count}";
-        _waveHealth.text = $"Health: {_data.Health}";
+        _waveCount.text = $"Count: {_data.SpawnScheme.Count}";
+        _waveHealth.text = $"Health: {_data.SpawnScheme.EnemyDataStats.MaxHP}";
         _waveReward.text = $"Reward: {_data.Reward}";
 
         _infoField.SetActive(true);

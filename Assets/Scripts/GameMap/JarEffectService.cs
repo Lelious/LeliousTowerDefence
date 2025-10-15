@@ -6,9 +6,8 @@ using UnityEngine;
 public class JarEffectService : MonoBehaviour
 {
     [SerializeField] private BezierWalkerWithTime _walker;
-    [SerializeField] private List<BezierSpline> _pathsList = new();
-
-    private bool _canEmit = true;
+    [SerializeField] private List<BezierSpline> _rightPaths = new();
+    [SerializeField] private List<BezierSpline> _leftPaths = new();
 
     private void Awake()
     {
@@ -18,34 +17,24 @@ public class JarEffectService : MonoBehaviour
         _walker.onPathCompleted.AddListener(delegate { OnPathSucessfulyReached();});
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            EmitWalker();
-        }
-    }
+    public BezierWalkerWithTime GetEffectWalker() => _walker;
 
     [ContextMenu("EmitWalker")]
-    public void EmitWalker()
+    public void EmitWalker(int side)
     {
-        if(_canEmit)
-        {
-            _canEmit = !_canEmit;
-            var path = _pathsList[Random.Range(0, _pathsList.Count)];
-            _walker.NormalizedT = 0f;
-            _walker.gameObject.SetActive(true);
-            _walker.spline = path;
-            _walker.enabled = true;
-        }
+        var path = side == 0 ? _leftPaths[Random.Range(0, _leftPaths.Count)] : _rightPaths[Random.Range(0, _rightPaths.Count)];
+        _walker.NormalizedT = 0f;
+        _walker.gameObject.SetActive(true);
+        _walker.spline = path;
+        _walker.enabled = true;
     }
 
     private async UniTaskVoid OnPathSucessfulyReached()
     {
         await UniTask.WaitForSeconds(1f);
         _walker.enabled = false;
+        _walker.NormalizedT = 0f;
         _walker.gameObject.SetActive(false);
         _walker.transform.position = transform.position;
-        _canEmit = true;
     }
 }

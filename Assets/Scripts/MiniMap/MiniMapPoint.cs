@@ -18,7 +18,7 @@ public class MiniMapPoint : MonoBehaviour, ITouchable
     public bool IsTouched() => false;
     public MeshRenderer GetMeshRenderer() => _renderer;
 
-    public void Touch()
+    public void Touch(Vector3 touchPos)
     {
         _renderer.GetPropertyBlock(_block);
         _block.SetFloat("_IsTouched", 1f);

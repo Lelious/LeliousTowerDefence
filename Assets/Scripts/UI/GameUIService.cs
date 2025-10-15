@@ -74,7 +74,12 @@ public class GameUIService : MonoBehaviour
 		_tapRegisterService.RegisterUITap();
 	}
 
-	public void SetBuildingCell(BuildingCell cell) => _buildingCell = cell;
+	public void SetBuildingCell(BuildingCell cell)
+	{
+		_buildingCell = cell;
+		Debug.Log(_buildingCell);
+	}
+
 	public BuildingCell GetLastTouchedBuildingCell() => _buildingCell;
 	public BottomGameMenu GetBottomMenuInformator() => _bottomMenuInformator;
 

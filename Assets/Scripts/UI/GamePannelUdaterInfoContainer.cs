@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class GamePannelUdaterInfoContainer
 {
-    public ITouchable Touchable;
+    //public ITouchable Touchable;
     public Sprite PreviewImage { get; private set; }
     public string Name { get; private set; }
     public int MaxHealth { get; private set; }

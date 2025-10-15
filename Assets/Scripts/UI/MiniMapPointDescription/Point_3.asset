@@ -18,5 +18,6 @@ MonoBehaviour:
   Count: 100
   Health: 1
   Reward: 123
-  GameMapName: GameLevel
+  GameMapName: AlchemistMap
   ColorScheme: {fileID: 11400000, guid: 1a13d4ab15571e245aed550c4bc0da29, type: 2}
+  SpawnScheme: {fileID: 11400000, guid: 82aa7ba6d6e579647a674b0a85da3ef2, type: 2}
