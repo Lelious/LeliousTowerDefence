@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class BuildingCell	
 {
@@ -15,6 +16,7 @@ public class BuildingCell
 	private TowerType _type;
 	private Vector3 _position;
 
+	[Inject]
 	public void Construct(GameUIService gameUIService, TowerFactory towerFactory, PoolService poolService)
 	{
 		_gameInformationMenu = gameUIService;
